@@ -1,0 +1,76 @@
+import React, {Component} from 'react';
+import {Navbar, Nav, NavItem, Glyphicon} from 'react-bootstrap';
+import {LinkContainer} from 'react-router-bootstrap';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+
+import * as userActions from '../actions/userActions';
+
+class Navigation extends Component {
+    onLogOut() {
+        this.props.actions.logOut();
+    }
+
+    render() {
+        let user = this.props.user;
+
+        let userFullName = '';
+
+        if (user && user.profile && user.profile.local) {
+            let local = user.profile.local;
+
+            userFullName = `${local.firstName} ${local.lastName}`;
+        }
+
+        return (
+            <Navbar collapseOnSelect fluid>
+                <Navbar.Header>
+                    <Navbar.Brand>
+                        <a href="#">Expense Manager</a>
+                    </Navbar.Brand>
+                    <Navbar.Toggle />
+                </Navbar.Header>
+
+                <Navbar.Collapse>
+                    <Nav>
+                        <LinkContainer key={1} to={'/records'}>
+                            <NavItem>Records</NavItem>
+                        </LinkContainer>
+
+                        <LinkContainer key={2} to={'/categories'}>
+                            <NavItem>Categories</NavItem>
+                        </LinkContainer>
+
+                        <LinkContainer key={3} to={'/settings'}>
+                            <NavItem>Settings</NavItem>
+                        </LinkContainer>
+                    </Nav>
+
+                    <Nav pullRight>
+                        <NavItem eventKey={1} href="#">
+                            Logged as: <b>{userFullName}</b>
+                        </NavItem>
+
+                        <NavItem eventKey={2} onClick={() => this.onLogOut()}>
+                            LogOut <Glyphicon glyph="log-out" />
+                        </NavItem>
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
+        );
+    }
+}
+
+function mapStateToProps(state) {
+    return {
+        user: state.user.current
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(userActions, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
