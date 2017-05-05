@@ -1,0 +1,15 @@
+export const BEGIN_AJAX_CALL = 'BEGIN_AJAX_CALL';
+export const END_AJAX_CALL = 'END_AJAX_CALL';
+
+export const LOAD_RECORDS = 'LOAD_RECORDS';
+export const CHANGE_SORT_ORDER = 'CHANGE_SORT_ORDER';
+export const ADD_RECORD = 'ADD_RECORD';
+export const EDIT_RECORD = 'EDIT_RECORD';
+export const DELETE_RECORD = 'DELETE_RECORD';
+
+export const LOAD_CATEGORIES = 'LOAD_CATEGORIES';
+export const ADD_CATEGORY = 'ADD_CATEGORY';
+export const EDIT_CATEGORY = 'EDIT_CATEGORY';
+export const DELETE_CATEGORY = 'DELETE_CATEGORY';
+
+export const LOAD_CURRENT_USER = 'LOAD_CURRENT_USER';
