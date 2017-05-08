@@ -40,10 +40,6 @@ class Navigation extends Component {
                         <LinkContainer key={2} to={'/categories'}>
                             <NavItem>Categories</NavItem>
                         </LinkContainer>
-
-                        <LinkContainer key={3} to={'/settings'}>
-                            <NavItem>Settings</NavItem>
-                        </LinkContainer>
                     </Nav>
 
                     <Nav pullRight>
