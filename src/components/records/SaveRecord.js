@@ -7,7 +7,7 @@ import NumberInput from '../common/NumbertInput';
 import TextAreaInput from '../common/TextAreaInput';
 import SelectInput from '../common/SelectInput';
 
-let config = require('./../../../config/config.json');
+let config = require('../../config/config.json');
 
 class SaveRecord extends Component {
     static propTypes = {

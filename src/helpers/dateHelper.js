@@ -1,6 +1,6 @@
 import * as dateFns from 'date-fns';
 
-let config = require('../../config/config.json');
+let config = require('../config/config.json');
 
 export default {
     displayDate
