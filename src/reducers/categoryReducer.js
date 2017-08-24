@@ -15,13 +15,13 @@ export default function categoryReducer(state = initialState.category, action) {
 
         case types.UPDATE_CATEGORY_SUCCESS:
             return _.assign({}, state, {list: [
-                ...state.list.filter(category => category._id !== action.category._id),
+                ...state.list.filter(category => category.id !== action.category.id),
                 _.assign({}, action.category)
             ]});
 
         case types.DELETE_CATEGORY_SUCCESS:
             return _.assign({}, state, {list: [
-                ...state.list.filter(category => category._id !== action.id)
+                ...state.list.filter(category => category.id !== action.id)
             ]});
 
         default:

@@ -52,8 +52,6 @@ export function logOut() {
                 dispatch(loadCurrentUserSuccess(null));
 
                 dispatch(endAjaxCall());
-
-                authService.redirectToLogin();
             }).catch(error => {
                 dispatch(endAjaxCall());
 
@@ -86,13 +84,9 @@ export function resetPassword(userData) {
 
         return authService.resetPassword(userData)
             .then((data) => {
-                if (data && data.message) {
-                    authService.redirectToLogin();
-
-                    toastr.success(data.message);
-                }
-
                 dispatch(endAjaxCall());
+
+                return data;
             })
             .catch(error => {
                 dispatch(endAjaxCall());
@@ -126,13 +120,9 @@ export function signUp(user) {
 
         return authService.signUp(user)
             .then((data) => {
-                if (data && data.message) {
-                    authService.redirectToLogin();
-
-                    toastr.success(data.message);
-                }
-
                 dispatch(endAjaxCall());
+
+                return data;
             })
             .catch(error => {
                 dispatch(endAjaxCall());

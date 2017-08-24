@@ -15,13 +15,13 @@ export default function recordReducer(state = initialState.record, action) {
 
         case types.UPDATE_RECORD_SUCCESS:
             return _.assign({}, state, {list: [
-                ...state.list.filter(record => record._id !== action.record._id),
+                ...state.list.filter(record => record.id !== action.record.id),
                 _.assign({}, action.record)
             ]});
 
         case types.DELETE_RECORD_SUCCESS:
             return _.assign({}, state, {list: [
-                ...state.list.filter(record => record._id !== action.id)
+                ...state.list.filter(record => record.id !== action.id)
             ]});
 
         default:

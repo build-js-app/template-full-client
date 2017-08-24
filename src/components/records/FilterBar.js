@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import autoBind from 'react-autobind';
 import {Button, Glyphicon, ButtonToolbar, DropdownButton, MenuItem} from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 class FilterBar extends Component {
     static propTypes = {
-        sortBy: React.PropTypes.string.isRequired,
-        addRecordAction: React.PropTypes.func.isRequired,
-        onSortAction: React.PropTypes.func.isRequired
+        sortBy: PropTypes.string.isRequired,
+        addRecordAction: PropTypes.func.isRequired,
+        onSortAction: PropTypes.func.isRequired
     };
 
     constructor(props) {

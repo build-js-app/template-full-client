@@ -1,14 +1,17 @@
 import React, {Component} from 'react';
-import {Navbar, Nav, NavItem, Glyphicon} from 'react-bootstrap';
+import {Navbar, Nav, NavItem, Glyphicon, Button} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
+import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 import * as userActions from '../actions/userActions';
 
 class Navigation extends Component {
-    onLogOut() {
-        this.props.actions.logOut();
+    async onLogOut() {
+        await this.props.actions.logOut();
+
+        this.props.history.push('/login');
     }
 
     render() {
@@ -26,7 +29,7 @@ class Navigation extends Component {
             <Navbar collapseOnSelect fluid>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <a href="#">Expense Manager</a>
+                        <Button bsStyle="link">Expense Manager</Button>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
@@ -69,4 +72,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navigation));

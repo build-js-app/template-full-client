@@ -41,7 +41,7 @@ export function saveCategory(category) {
 
         return dataService.saveCategory(category)
             .then((data) => {
-                if (category._id) {
+                if (category.id) {
                     dispatch(updateCategorySuccess(data));
                 } else {
                     dispatch(createCategorySuccess(data));
@@ -61,8 +61,14 @@ export function deleteCategory(id) {
         dispatch(beginAjaxCall());
 
         return dataService.deleteCategory(id)
-            .then(() => {
-                dispatch(deleteCategorySuccess(id));
+            .then((response) => {
+                if (response) {
+                    dispatch(deleteCategorySuccess(id));
+
+                    dispatch(endAjaxCall());
+                    
+                    return id;
+                }
 
                 dispatch(endAjaxCall());
             }).catch(error => {

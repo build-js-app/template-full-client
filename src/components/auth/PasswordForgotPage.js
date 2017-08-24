@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import autoBind from 'react-autobind';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Link} from 'react-router';
+import {Link, withRouter} from 'react-router-dom';
 
 import TextInput from '../common/TextInput';
 import * as userActions from '../../actions/userActions';
@@ -85,4 +85,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PasswordForgotPage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PasswordForgotPage));

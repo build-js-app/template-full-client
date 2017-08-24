@@ -4,6 +4,7 @@ import {Button} from 'react-bootstrap';
 import toastr from 'toastr';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {withRouter} from 'react-router-dom';
 
 import PageContent from '../common/PageContent';
 import CategoriesList from './CategoriesList';
@@ -57,7 +58,7 @@ class CategoriesPage extends Component {
     }
 
     async saveCategory() {
-        this.props.actions.saveCategory(this.state.categoryToEdit);
+        await this.props.actions.saveCategory(this.state.categoryToEdit);
 
         toastr.success(`Category was updated`);
 
@@ -66,10 +67,12 @@ class CategoriesPage extends Component {
         });
     }
 
-    deleteCategory() {
-        this.props.actions.deleteCategory(this.state.categoryToDeleteId);
+    async deleteCategory() {
+        let data = await this.props.actions.deleteCategory(this.state.categoryToDeleteId);
 
-        toastr.success('Category was deleted successfully!');
+        if (data) {
+            toastr.success('Category was deleted successfully!');
+        }
 
         this.setState({
             categoryToDeleteId: null
@@ -142,4 +145,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoriesPage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CategoriesPage));

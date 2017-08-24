@@ -1,5 +1,4 @@
 import httpHelper from '../helpers/httpHelper';
-import {browserHistory} from 'react-router';
 
 export default {
     signUp,
@@ -8,9 +7,7 @@ export default {
     activateAccount,
     passwordForgot,
     resetPasswordTokenCheck,
-    resetPassword,
-    redirectToLogin,
-    redirectToHome
+    resetPassword
 }
 
 function signUp(user) {
@@ -39,12 +36,4 @@ function resetPasswordTokenCheck(token) {
 
 function resetPassword(user) {
     return httpHelper.post('/api/password-reset', user);
-}
-
-function redirectToLogin() {
-    browserHistory.push('/login');
-}
-
-function redirectToHome() {
-    browserHistory.push('/');
 }

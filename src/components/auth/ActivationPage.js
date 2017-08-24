@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import autoBind from 'react-autobind';
 import classnames from 'classnames';
-import {Link} from 'react-router';
+import {Link, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -26,7 +26,7 @@ class ActivationPage extends Component {
     }
 
     async activateUserAccount() {
-        let token = this.props.params.token;
+        let token = this.props.match.params.token;
 
         let data = await this.props.actions.activateUserAccount(token);
 
@@ -77,4 +77,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ActivationPage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ActivationPage));

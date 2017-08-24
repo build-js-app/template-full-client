@@ -1,5 +1,5 @@
 import toastr from 'toastr';
-import authService from '../services/authService';
+import _ from 'lodash';
 
 export default {
     get: httpGet,
@@ -72,7 +72,10 @@ async function processRequest(fetchRequest) {
 
         if (!response.ok) {
             if (response.status === 401 || response.status === 403) {
-                return authService.redirectToLogin();
+                if (!_.endsWith(window.location, '/login')) {
+                    window.location = '/login';
+                }
+                return;
             }
 
             if (response.status === 400 || response.status === 500) {
@@ -90,8 +93,6 @@ async function processRequest(fetchRequest) {
         return result.data;
     } catch (err) {
         toastr.error(err);
-
-        throw new Error('API Request Error');
     }
 }
 

@@ -1,47 +1,43 @@
 import React, {Component} from 'react';
-import classnames from 'classnames';
-import Select from 'react-select';
+import {FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 class SelectInput extends Component {
     render() {
-        let {error, value, name, label, multi, onChange, options} = this.props;
+        let {error, value, name, label, onChange, options} = this.props;
 
-        let wrapperClass = classnames({
-            'form-group': true,
-            'has-error': error && error.length > 0
-        });
-
-        let inputOnChange = (val) => {
-            let newValue = val ? val.value : '';
-
-            onChange(name, newValue);
+        let inputOnChange = (event) => {
+            onChange(name, event.target.value);
         };
 
         return (
-            <div className={wrapperClass}>
-                <label htmlFor={name}>{label}</label>
-                <div className="field">
-                    <Select
-                        name={name}
-                        multi={multi}
-                        options={options}
-                        value={value}
-                        onChange={inputOnChange}
-                    />
-                    {error && <div className="alert alert-danger">{error}</div>}
-                </div>
+            <div>
+                <FormGroup controlId={name}>
+                    <ControlLabel>{label}</ControlLabel>
+
+                    <FormControl componentClass="select" onChange={inputOnChange} value={value}>
+                        {
+                            !value && <option value="select">Select Category</option>
+                        }
+
+                        {options.map(opt =>
+                            <option key={opt.value} value={opt.value}>{opt.label}</option>)
+                        }
+                    </FormControl>
+                </FormGroup>
+
+                {error && <div className="alert alert-danger">{error}</div>}
             </div>
         );
     }
 }
 
 SelectInput.propTypes = {
-    name: React.PropTypes.string.isRequired,
-    label: React.PropTypes.string.isRequired,
-    onChange: React.PropTypes.func.isRequired,
-    options: React.PropTypes.array,
-    multi: React.PropTypes.bool,
-    error: React.PropTypes.string
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    options: PropTypes.array,
+    error: PropTypes.string
 };
 
 export default SelectInput;

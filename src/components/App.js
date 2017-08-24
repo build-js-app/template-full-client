@@ -2,14 +2,15 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import autoBind from 'react-autobind';
+import {Switch, Route, withRouter} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import '../styles/App.css';
 import * as userActions from '../actions/userActions';
 
 class App extends React.Component {
     static propTypes = {
-        actions: React.PropTypes.object.isRequired,
-        children: React.PropTypes.object.isRequired
+        routes: PropTypes.array.isRequired
     };
 
     constructor(props) {
@@ -26,8 +27,14 @@ class App extends React.Component {
         return (
             <div>
                 {this.props.isAjaxLoad &&
-                    <div className="overlay-style"></div>
+                    <div className="overlay-style" />
                 }
+
+                <Switch>
+                    {this.props.routes.map((route, index) => (
+                        <Route key={index} exact={route.exact} path={route.path} component={route.main} />
+                    ))};
+                </Switch>
 
                 {this.props.children}
             </div>
@@ -47,4 +54,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

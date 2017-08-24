@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import autoBind from 'react-autobind';
-import {Link} from 'react-router';
+import {Link, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import toastr from 'toastr';
 
 import * as userActions from '../../actions/userActions';
 
@@ -74,10 +75,16 @@ class SignUpPage extends Component {
         return re.test(email);
     }
 
-    signUp() {
+    async signUp() {
         if (!this.signUpFormIsValid()) return;
 
-        this.props.actions.signUp(this.state.user);
+        let response = await this.props.actions.signUp(this.state.user);
+
+        if (response && response.message) {
+            toastr.success(response.message);
+
+            this.props.history.push('/login');
+        }
     }
 
     render() {
@@ -155,4 +162,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUpPage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignUpPage));

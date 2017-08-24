@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Modal, Button} from 'react-bootstrap';
 import autoBind from 'react-autobind';
+import PropTypes from 'prop-types';
 import Flatpickr from 'react-flatpickr';
 
 import NumberInput from '../common/NumbertInput';
@@ -11,12 +12,12 @@ let config = require('../../config/config.json');
 
 class SaveRecord extends Component {
     static propTypes = {
-        record: React.PropTypes.object,
-        categories: React.PropTypes.array.isRequired,
-        save: React.PropTypes.func.isRequired,
-        close: React.PropTypes.func.isRequired,
-        onChange: React.PropTypes.func.isRequired,
-        visible: React.PropTypes.bool
+        record: PropTypes.object,
+        categories: PropTypes.array.isRequired,
+        save: PropTypes.func.isRequired,
+        close: PropTypes.func.isRequired,
+        onChange: PropTypes.func.isRequired,
+        visible: PropTypes.bool
     };
 
     constructor(props) {
@@ -76,10 +77,10 @@ class SaveRecord extends Component {
 
         record.cost = record.cost ? parseFloat(record.cost) : 0;
 
-        let title = record._id ? 'Edit Record' : 'Add New Record';
+        let title = record.id ? 'Edit Record' : 'Add New Record';
 
         let categoryOptions = this.props.categories.map((category) => {
-            return {value: category._id, label: category.title};
+            return {value: category.id, label: category.title};
         });
 
         return (
@@ -110,9 +111,7 @@ class SaveRecord extends Component {
                         <SelectInput
                             name="categoryId"
                             label="Category"
-                            multi={false}
                             value={record.categoryId}
-                            defaultOption="Select Category"
                             options={categoryOptions}
                             onChange={this.props.onChange}
                             error={this.state.errors.categoryId}

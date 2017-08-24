@@ -2,13 +2,15 @@ import React from 'react';
 import * as _ from 'lodash';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import PropTypes from 'prop-types';
+import {withRouter} from 'react-router-dom';
 
 import Navigation from '../Navigation';
 import * as userActions from '../../actions/userActions';
 
 class PageContent extends React.Component {
     static propTypes = {
-        children: React.PropTypes.object.isRequired
+        children: PropTypes.object.isRequired
     };
 
     componentWillMount() {
@@ -40,4 +42,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PageContent);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PageContent));

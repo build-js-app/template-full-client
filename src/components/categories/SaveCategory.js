@@ -1,17 +1,18 @@
 import React, {Component} from 'react';
 import {Modal, Button} from 'react-bootstrap';
 import autoBind from 'react-autobind';
+import PropTypes from 'prop-types';
 
 import TextInput from '../common/TextInput';
 import TextAreaInput from '../common/TextAreaInput';
 
 class SaveCategory extends Component {
     static propTypes = {
-        category: React.PropTypes.object,
-        save: React.PropTypes.func.isRequired,
-        close: React.PropTypes.func.isRequired,
-        onChange: React.PropTypes.func.isRequired,
-        visible: React.PropTypes.bool
+        category: PropTypes.object,
+        save: PropTypes.func.isRequired,
+        close: PropTypes.func.isRequired,
+        onChange: PropTypes.func.isRequired,
+        visible: PropTypes.bool
     };
 
     constructor(props) {
@@ -58,7 +59,7 @@ class SaveCategory extends Component {
 
         if (!category) return null;
 
-        let title = category._id ? 'Edit Category' : 'Add New Category';
+        let title = category.id ? 'Edit Category' : 'Add New Category';
 
         return (
             <div>

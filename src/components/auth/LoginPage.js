@@ -2,11 +2,10 @@ import React, {Component} from 'react';
 import autoBind from 'react-autobind';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Link, browserHistory} from 'react-router';
+import {Link, withRouter} from 'react-router-dom';
 import * as _ from 'lodash';
 
 import TextInput from '../common/TextInput';
-import authService from '../../services/authService';
 import * as userActions from '../../actions/userActions';
 
 class LoginPage extends Component {
@@ -26,7 +25,7 @@ class LoginPage extends Component {
 
     componentWillMount() {
         if (!_.isEmpty(this.props.user)) {
-            authService.redirectToHome();
+            this.props.history.push('/');
         }
     }
 
@@ -69,7 +68,7 @@ class LoginPage extends Component {
 
         await this.props.actions.getCurrentUser();
 
-        if (!_.isEmpty(this.props.user)) browserHistory.push('/records');
+        if (!_.isEmpty(this.props.user)) this.props.history.push('/records');
     }
 
     render() {
@@ -125,4 +124,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginPage));

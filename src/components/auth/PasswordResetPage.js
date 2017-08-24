@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import autoBind from 'react-autobind';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Link} from 'react-router';
+import {Link, withRouter} from 'react-router-dom';
+import toastr from 'toastr';
 
 import TextInput from '../common/TextInput';
 import * as userActions from '../../actions/userActions';
@@ -69,7 +70,7 @@ class PasswordResetPage extends Component {
     }
 
     async checkResetToken() {
-        let token = this.props.params.token;
+        let token = this.props.match.params.token;
 
         let data = await this.props.actions.checkResetToken(token);
 
@@ -83,7 +84,13 @@ class PasswordResetPage extends Component {
     async resetPassword() {
         if (!this.resetFormIsValid()) return;
 
-        await this.props.actions.resetPassword(this.state.userData);
+        let response = await this.props.actions.resetPassword(this.state.userData);
+
+        if (response && response.message) {
+            toastr.success(response.message);
+
+            this.props.history.push('/login');
+        }
     }
 
     render() {
@@ -144,4 +151,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PasswordResetPage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PasswordResetPage));

@@ -4,6 +4,8 @@ import toastr from 'toastr';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as _ from 'lodash';
+import PropTypes from 'prop-types';
+import {withRouter} from 'react-router-dom';
 
 import PageContent from '../common/PageContent';
 import SaveRecord from './SaveRecord';
@@ -15,9 +17,9 @@ import * as categoryActions from '../../actions/categoryActions';
 
 class RecordsPage extends Component {
     static propTypes = {
-        actions: React.PropTypes.object.isRequired,
-        records: React.PropTypes.array.isRequired,
-        categories: React.PropTypes.array.isRequired
+        actions: PropTypes.object.isRequired,
+        records: PropTypes.array,
+        categories: PropTypes.array
     };
 
     constructor(props) {
@@ -172,4 +174,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RecordsPage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RecordsPage));

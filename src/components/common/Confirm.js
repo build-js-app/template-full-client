@@ -1,5 +1,6 @@
 import React from 'react';
 import {Modal, Button} from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 class Confirm extends React.Component {
     render() {
@@ -25,10 +26,10 @@ class Confirm extends React.Component {
 }
 
 Confirm.propTypes = {
-    title: React.PropTypes.string,
-    action: React.PropTypes.func.isRequired,
-    close: React.PropTypes.func.isRequired,
-    visible: React.PropTypes.bool
+    title: PropTypes.string,
+    action: PropTypes.func.isRequired,
+    close: PropTypes.func.isRequired,
+    visible: PropTypes.bool
 };
 
 export default Confirm;

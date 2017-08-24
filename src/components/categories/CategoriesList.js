@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
-import {Table} from 'react-bootstrap';
+import {Table, Button} from 'react-bootstrap';
 import autoBind from 'react-autobind';
+import PropTypes from 'prop-types';
 
 class CategoriesList extends Component {
     static propTypes = {
-        categories: React.PropTypes.array.isRequired,
-        editCategoryAction: React.PropTypes.func.isRequired,
-        deleteCategoryAction: React.PropTypes.func.isRequired
+        categories: PropTypes.array,
+        editCategoryAction: PropTypes.func.isRequired,
+        deleteCategoryAction: PropTypes.func.isRequired
     };
 
     constructor(props) {
@@ -56,18 +57,18 @@ class CategoriesList extends Component {
         };
 
         let deleteClick = () => {
-            this.props.deleteCategoryAction(category._id);
+            this.props.deleteCategoryAction(category.id);
         };
 
         return (
-            <tr key={category._id}>
+            <tr key={category.id}>
                 <td>{category.title}</td>
                 <td>{category.description}</td>
                 <td>
-                    <a href="#" onClick={editClick}>Edit</a>
+                    <Button bsStyle="link" onClick={editClick}>Edit</Button>
                 </td>
                 <td>
-                    <a href="#" onClick={deleteClick}>Delete</a>
+                    <Button bsStyle="link" onClick={deleteClick}>Delete</Button>
                 </td>
             </tr>
         );

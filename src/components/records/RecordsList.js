@@ -1,15 +1,16 @@
 import React, {Component} from 'react';
-import {Table} from 'react-bootstrap';
+import {Table, Button} from 'react-bootstrap';
 import * as _ from 'lodash';
+import PropTypes from 'prop-types';
 
 import dateHelper from '../../helpers/dateHelper';
 
 class RecordsList extends Component {
     static propTypes = {
-        records: React.PropTypes.array.isRequired,
-        categories: React.PropTypes.array.isRequired,
-        editRecordAction: React.PropTypes.func.isRequired,
-        deleteRecordAction: React.PropTypes.func.isRequired
+        records: PropTypes.array,
+        categories: PropTypes.array,
+        editRecordAction: PropTypes.func.isRequired,
+        deleteRecordAction: PropTypes.func.isRequired
     };
 
     get anyRecords() {
@@ -51,26 +52,28 @@ class RecordsList extends Component {
         };
 
         let deleteClick = () => {
-            this.props.deleteRecordAction(record._id);
+            this.props.deleteRecordAction(record.id);
         };
 
         let category = _.find(this.props.categories, (category) => {
-            return category._id === record.categoryId;
+            return category.id === record.categoryId;
         });
+
+        let categoryTitle = category ? category.title : '';
 
         let dateDisplay = dateHelper.displayDate(record.date);
 
         return (
-            <tr key={record._id}>
+            <tr key={record.id}>
                 <td>{dateDisplay}</td>
-                <td>{category.title}</td>
+                <td>{categoryTitle}</td>
                 <td>{record.cost}</td>
                 <td>{record.note}</td>
                 <td>
-                    <a href="#" onClick={editClick}>Edit</a>
+                    <Button bsStyle="link" onClick={editClick}>Edit</Button>
                 </td>
                 <td>
-                    <a href="#" onClick={deleteClick}>Delete</a>
+                    <Button bsStyle="link" onClick={deleteClick}>Delete</Button>
                 </td>
             </tr>
         );

@@ -41,7 +41,7 @@ export function saveRecord(record) {
 
         return dataService.saveRecord(record)
             .then((data) => {
-                if (record._id) {
+                if (record.id) {
                     dispatch(updateRecordSuccess(data))
                 } else {
                     dispatch(createRecordSuccess(data))
