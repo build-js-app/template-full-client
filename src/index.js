@@ -11,7 +11,7 @@ import 'flatpickr/dist/flatpickr.min.css';
 
 import {routes} from './routes';
 import App from './components/App';
-import configureStore from './store/configureStore';
+import configureStore from './store';
 
 const store = configureStore();
 

@@ -1,6 +1,7 @@
 export default {
     user: {
-        current: {}
+        current: {},
+        token: ''
     },
     record: {
         list: []

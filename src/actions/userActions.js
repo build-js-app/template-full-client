@@ -9,6 +9,10 @@ export function loadCurrentUserSuccess(user) {
     return {type: types.LOAD_CURRENT_USER_SUCCESS, user};
 }
 
+export function loadJsonWebTokenSuccess(token) {
+    return {type: types.LOAD_JSON_WEB_TOKEN, token};
+}
+
 export function getCurrentUser() {
     return dispatch => {
         dispatch(beginAjaxCall());
@@ -31,8 +35,11 @@ export function loginUser(user) {
         dispatch(beginAjaxCall());
 
         return authService.login(user)
-            .then(user => {
-                dispatch(loadCurrentUserSuccess(user));
+            .then(response => {
+                if (response && response.token) {
+                    dispatch(loadJsonWebTokenSuccess(response.token));
+                    authService.saveToken(response.token);
+                }
 
                 dispatch(endAjaxCall());
             }).catch(error => {
@@ -45,18 +52,9 @@ export function loginUser(user) {
 
 export function logOut() {
     return dispatch => {
-        dispatch(beginAjaxCall());
-
-        return authService.logOut()
-            .then(() => {
-                dispatch(loadCurrentUserSuccess(null));
-
-                dispatch(endAjaxCall());
-            }).catch(error => {
-                dispatch(endAjaxCall());
-
-                throw(error);
-            });
+        dispatch(loadCurrentUserSuccess(null));
+        dispatch(loadJsonWebTokenSuccess(null));
+        authService.saveToken(null);
     }
 }
 

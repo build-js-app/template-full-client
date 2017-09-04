@@ -13,13 +13,19 @@ class PageContent extends React.Component {
         children: PropTypes.object.isRequired
     };
 
+    isAuthenticated() {
+        return _.isEmpty(this.props.user) ? false : true;
+    }
+
     componentWillMount() {
-        if (_.isEmpty(this.props.user)) {
+        if (!this.isAuthenticated()) {
             this.props.actions.getCurrentUser();
         }
     }
 
     render() {
+        if (!this.isAuthenticated()) return null;
+
         return (
             <div>
                 <Navigation />
