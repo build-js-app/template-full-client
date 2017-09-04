@@ -8,68 +8,68 @@ import {bindActionCreators} from 'redux';
 import * as userActions from '../actions/userActions';
 
 class Navigation extends Component {
-    async onLogOut() {
-        await this.props.actions.logOut();
+  async onLogOut() {
+    await this.props.actions.logOut();
 
-        this.props.history.push('/login');
+    this.props.history.push('/login');
+  }
+
+  render() {
+    let user = this.props.user;
+
+    let userFullName = '';
+
+    if (user && user.profile && user.profile.local) {
+      let local = user.profile.local;
+
+      userFullName = `${local.firstName} ${local.lastName}`;
     }
 
-    render() {
-        let user = this.props.user;
+    return (
+      <Navbar collapseOnSelect fluid>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <Button bsStyle="link">Expense Manager</Button>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
 
-        let userFullName = '';
+        <Navbar.Collapse>
+          <Nav>
+            <LinkContainer key={1} to={'/records'}>
+              <NavItem>Records</NavItem>
+            </LinkContainer>
 
-        if (user && user.profile && user.profile.local) {
-            let local = user.profile.local;
+            <LinkContainer key={2} to={'/categories'}>
+              <NavItem>Categories</NavItem>
+            </LinkContainer>
+          </Nav>
 
-            userFullName = `${local.firstName} ${local.lastName}`;
-        }
+          <Nav pullRight>
+            <NavItem eventKey={1} href="#">
+              Logged as: <b>{userFullName}</b>
+            </NavItem>
 
-        return (
-            <Navbar collapseOnSelect fluid>
-                <Navbar.Header>
-                    <Navbar.Brand>
-                        <Button bsStyle="link">Expense Manager</Button>
-                    </Navbar.Brand>
-                    <Navbar.Toggle />
-                </Navbar.Header>
-
-                <Navbar.Collapse>
-                    <Nav>
-                        <LinkContainer key={1} to={'/records'}>
-                            <NavItem>Records</NavItem>
-                        </LinkContainer>
-
-                        <LinkContainer key={2} to={'/categories'}>
-                            <NavItem>Categories</NavItem>
-                        </LinkContainer>
-                    </Nav>
-
-                    <Nav pullRight>
-                        <NavItem eventKey={1} href="#">
-                            Logged as: <b>{userFullName}</b>
-                        </NavItem>
-
-                        <NavItem eventKey={2} onClick={() => this.onLogOut()}>
-                            LogOut <Glyphicon glyph="log-out" />
-                        </NavItem>
-                    </Nav>
-                </Navbar.Collapse>
-            </Navbar>
-        );
-    }
+            <NavItem eventKey={2} onClick={() => this.onLogOut()}>
+              LogOut <Glyphicon glyph="log-out" />
+            </NavItem>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    );
+  }
 }
 
 function mapStateToProps(state) {
-    return {
-        user: state.user.current
-    };
+  return {
+    user: state.user.current
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(userActions, dispatch)
-    };
+  return {
+    actions: bindActionCreators(userActions, dispatch)
+  };
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navigation));

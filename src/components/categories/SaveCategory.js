@@ -7,91 +7,95 @@ import TextInput from '../common/TextInput';
 import TextAreaInput from '../common/TextAreaInput';
 
 class SaveCategory extends Component {
-    static propTypes = {
-        category: PropTypes.object,
-        save: PropTypes.func.isRequired,
-        close: PropTypes.func.isRequired,
-        onChange: PropTypes.func.isRequired,
-        visible: PropTypes.bool
+  static propTypes = {
+    category: PropTypes.object,
+    save: PropTypes.func.isRequired,
+    close: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
+    visible: PropTypes.bool
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      errors: {}
     };
 
-    constructor(props) {
-        super(props);
+    autoBind(this);
+  }
 
-        this.state = {
-            errors: {}
-        };
+  componentWillReceiveProps() {
+    this.setState({
+      errors: {}
+    });
+  }
 
-        autoBind(this);
+  formIsValid() {
+    let errors = {};
+    let category = this.props.category;
+
+    if (!category.title) {
+      errors.title = 'Title field is required.';
     }
 
-    componentWillReceiveProps() {
-        this.setState({
-            errors: {}
-        });
+    if (!category.description) {
+      errors.description = 'Description field is required.';
     }
 
-    formIsValid() {
-        let errors = {};
-        let category = this.props.category;
+    this.setState({errors: errors});
 
-        if (!category.title) {
-            errors.title = 'Title field is required.';
-        }
+    return Object.keys(errors).length === 0;
+  }
 
-        if (!category.description) {
-            errors.description = 'Description field is required.';
-        }
+  save() {
+    if (!this.formIsValid()) return;
 
-        this.setState({errors: errors});
+    this.props.save();
+  }
 
-        return Object.keys(errors).length === 0;
-    }
+  render() {
+    let category = this.props.category;
 
-    save() {
-        if (!this.formIsValid()) return;
+    if (!category) return null;
 
-        this.props.save();
-    }
+    let title = category.id ? 'Edit Category' : 'Add New Category';
 
-    render() {
-        let category = this.props.category;
+    return (
+      <div>
+        <Modal show={this.props.visible} onHide={this.props.close}>
+          <Modal.Header closeButton onClick={this.props.close}>
+            <Modal.Title>{title}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <TextInput
+              name="title"
+              label="Title"
+              value={category.title}
+              onChange={this.props.onChange}
+              placeholder="Title"
+              error={this.state.errors.title}
+            />
 
-        if (!category) return null;
-
-        let title = category.id ? 'Edit Category' : 'Add New Category';
-
-        return (
-            <div>
-                <Modal show={this.props.visible} onHide={this.props.close}>
-                    <Modal.Header closeButton onClick={this.props.close}>
-                        <Modal.Title>{title}</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <TextInput name="title"
-                                   label="Title"
-                                   value={category.title}
-                                   onChange={this.props.onChange}
-                                   placeholder="Title"
-                                   error={this.state.errors.title}
-                        />
-
-                        <TextAreaInput name="description"
-                                       label="Description"
-                                       value={category.description}
-                                       onChange={this.props.onChange}
-                                       placeholder="Description"
-                                       error={this.state.errors.description}
-                        />
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button bsStyle="primary" onClick={this.save}>Save</Button>
-                        <Button onClick={this.props.close}>Cancel</Button>
-                    </Modal.Footer>
-                </Modal>
-            </div>
-        );
-    }
+            <TextAreaInput
+              name="description"
+              label="Description"
+              value={category.description}
+              onChange={this.props.onChange}
+              placeholder="Description"
+              error={this.state.errors.description}
+            />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button bsStyle="primary" onClick={this.save}>
+              Save
+            </Button>
+            <Button onClick={this.props.close}>Cancel</Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+    );
+  }
 }
 
 export default SaveCategory;

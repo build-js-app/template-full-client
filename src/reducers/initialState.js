@@ -1,14 +1,14 @@
 export default {
-    user: {
-        current: {},
-        token: ''
-    },
-    record: {
-        list: []
-    },
-    category: {
-        list: [],
-        current: {}
-    },
-    isAjaxLoad: false
+  user: {
+    current: {},
+    token: ''
+  },
+  record: {
+    list: []
+  },
+  category: {
+    list: [],
+    current: {}
+  },
+  isAjaxLoad: false
 };

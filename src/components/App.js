@@ -9,49 +9,47 @@ import '../styles/App.css';
 import * as userActions from '../actions/userActions';
 
 class App extends React.Component {
-    static propTypes = {
-        routes: PropTypes.array.isRequired
+  static propTypes = {
+    routes: PropTypes.array.isRequired
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isAjaxLoad: props.isAjaxLoad
     };
 
-    constructor(props) {
-        super(props);
+    autoBind(this);
+  }
 
-        this.state = {
-            isAjaxLoad: props.isAjaxLoad
-        };
+  render() {
+    return (
+      <div>
+        {this.props.isAjaxLoad && <div className="overlay-style" />}
 
-        autoBind(this);
-    }
+        <Switch>
+          {this.props.routes.map((route, index) => (
+            <Route key={index} exact={route.exact} path={route.path} component={route.main} />
+          ))};
+        </Switch>
 
-    render() {
-        return (
-            <div>
-                {this.props.isAjaxLoad &&
-                    <div className="overlay-style" />
-                }
-
-                <Switch>
-                    {this.props.routes.map((route, index) => (
-                        <Route key={index} exact={route.exact} path={route.path} component={route.main} />
-                    ))};
-                </Switch>
-
-                {this.props.children}
-            </div>
-        );
-    }
+        {this.props.children}
+      </div>
+    );
+  }
 }
 
 function mapStateToProps(state) {
-    return {
-        isAjaxLoad: state.ajaxCallsInProgress
-    };
+  return {
+    isAjaxLoad: state.ajaxCallsInProgress
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(userActions, dispatch)
-    };
+  return {
+    actions: bindActionCreators(userActions, dispatch)
+  };
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

@@ -9,119 +9,125 @@ import TextInput from '../common/TextInput';
 import * as userActions from '../../actions/userActions';
 
 class LoginPage extends Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            user: {
-                email: '',
-                password: ''
-            },
-            errors: {}
-        };
+    this.state = {
+      user: {
+        email: '',
+        password: ''
+      },
+      errors: {}
+    };
 
-        autoBind(this);
+    autoBind(this);
+  }
+
+  componentWillMount() {
+    if (!_.isEmpty(this.props.user)) {
+      this.props.history.push('/');
+    }
+  }
+
+  onChange(field, value) {
+    let user = this.state.user;
+
+    user[field] = value;
+
+    return this.setState({user: user});
+  }
+
+  loginFormIsValid() {
+    let user = this.state.user;
+    let errors = {};
+
+    if (!user.email) {
+      errors.email = 'Email field is required.';
+    } else if (!this.isValidEmail(user.email)) {
+      errors.email = 'Email is not valid.';
     }
 
-    componentWillMount() {
-        if (!_.isEmpty(this.props.user)) {
-            this.props.history.push('/');
-        }
+    if (!user.password) {
+      errors.password = 'Password field is required.';
     }
 
-    onChange(field, value) {
-        let user = this.state.user;
+    this.setState({errors: errors});
 
-        user[field] = value;
+    return Object.keys(errors).length === 0;
+  }
 
-        return this.setState({user: user});
-    }
+  isValidEmail(email) {
+    let re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    return re.test(email);
+  }
 
-    loginFormIsValid() {
-        let user = this.state.user;
-        let errors = {};
+  async login() {
+    if (!this.loginFormIsValid()) return;
 
-        if (!user.email) {
-            errors.email = 'Email field is required.';
-        } else if(!this.isValidEmail(user.email)) {
-            errors.email = 'Email is not valid.';
-        }
+    await this.props.actions.loginUser(this.state.user);
 
-        if (!user.password) {
-            errors.password = 'Password field is required.';
-        }
+    await this.props.actions.getCurrentUser();
 
-        this.setState({errors: errors});
+    if (!_.isEmpty(this.props.user)) this.props.history.push('/records');
+  }
 
-        return Object.keys(errors).length === 0;
-    }
+  render() {
+    return (
+      <div className="container">
+        <div className="col-xs-8 col-xs-offset-0 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+          <h1>
+            <span className="fa fa-sign-in" /> Login
+          </h1>
 
-    isValidEmail(email) {
-        let re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-        return re.test(email);
-    }
+          <TextInput
+            name="email"
+            label="Email"
+            type="email"
+            value={this.state.user.email}
+            onChange={this.onChange}
+            placeholder="Email"
+            error={this.state.errors.email}
+          />
 
-    async login() {
-        if (!this.loginFormIsValid()) return;
+          <TextInput
+            name="password"
+            label="Password"
+            type="password"
+            value={this.state.user.password}
+            onChange={this.onChange}
+            placeholder="Password"
+            error={this.state.errors.password}
+          />
 
-        await this.props.actions.loginUser(this.state.user);
+          <button className="btn btn-warning btn-lg" onClick={this.login}>
+            Login
+          </button>
 
-        await this.props.actions.getCurrentUser();
+          <hr />
 
-        if (!_.isEmpty(this.props.user)) this.props.history.push('/records');
-    }
+          <Link to="/password-forgot">Forgot your password?</Link>
 
-    render() {
-        return (
-            <div className="container">
-                <div className="col-xs-8 col-xs-offset-0 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
-                    <h1><span className="fa fa-sign-in"/> Login</h1>
+          <hr />
 
-                    <TextInput
-                        name="email"
-                        label="Email"
-                        type="email"
-                        value={this.state.user.email}
-                        onChange={this.onChange}
-                        placeholder="Email"
-                        error={this.state.errors.email}
-                    />
-
-                    <TextInput
-                        name="password"
-                        label="Password"
-                        type="password"
-                        value={this.state.user.password}
-                        onChange={this.onChange}
-                        placeholder="Password"
-                        error={this.state.errors.password}
-                    />
-
-                    <button className="btn btn-warning btn-lg" onClick={this.login}>Login</button>
-
-                    <hr/>
-
-                    <Link to="/password-forgot">Forgot your password?</Link>
-
-                    <hr />
-
-                    <p>Need an account? <Link to="/signup">Signup</Link></p>
-                </div>
-            </div>
-        );
-    }
+          <p>
+            Need an account? <Link to="/signup">Signup</Link>
+          </p>
+        </div>
+      </div>
+    );
+  }
 }
 
 function mapStateToProps(state) {
-    return {
-        user: state.user.current
-    };
+  return {
+    user: state.user.current
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(userActions, dispatch)
-    };
+  return {
+    actions: bindActionCreators(userActions, dispatch)
+  };
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginPage));

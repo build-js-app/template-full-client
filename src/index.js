@@ -16,10 +16,10 @@ import configureStore from './store';
 const store = configureStore();
 
 ReactDOM.render(
-    <Provider store={store}>
-        <BrowserRouter basename="/">
-            <App routes={routes} />
-        </BrowserRouter>
-    </Provider>,
-    document.getElementById('root')
+  <Provider store={store}>
+    <BrowserRouter basename="/">
+      <App routes={routes} />
+    </BrowserRouter>
+  </Provider>,
+  document.getElementById('root')
 );

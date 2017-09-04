@@ -8,81 +8,85 @@ import TextInput from '../common/TextInput';
 import * as userActions from '../../actions/userActions';
 
 class PasswordForgotPage extends Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            email: '',
-            errors: {}
-        };
+    this.state = {
+      email: '',
+      errors: {}
+    };
 
-        autoBind(this);
+    autoBind(this);
+  }
+
+  onChange(field, value) {
+    return this.setState({email: value});
+  }
+
+  forgotFormIsValid() {
+    let errors = {};
+
+    if (!this.state.email) {
+      errors.email = 'Email field is required.';
+    } else if (!this.isValidEmail(this.state.email)) {
+      errors.email = 'Email is not valid.';
     }
 
-    onChange(field, value) {
-        return this.setState({email: value});
-    }
+    this.setState({errors: errors});
 
-    forgotFormIsValid() {
-        let errors = {};
+    return Object.keys(errors).length === 0;
+  }
 
-        if (!this.state.email) {
-            errors.email = 'Email field is required.';
-        } else if(!this.isValidEmail(this.state.email)) {
-            errors.email = 'Email is not valid.';
-        }
+  isValidEmail(email) {
+    let re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    return re.test(email);
+  }
 
-        this.setState({errors: errors});
+  async resetPassword() {
+    if (!this.forgotFormIsValid()) return;
 
-        return Object.keys(errors).length === 0;
-    }
+    await this.props.actions.forgotPassword(this.state.email);
+  }
 
-    isValidEmail(email) {
-        let re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-        return re.test(email);
-    }
+  render() {
+    return (
+      <div className="container">
+        <div className="col-xs-8 col-xs-offset-0 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+          <h1>Reset Password</h1>
 
-    async resetPassword() {
-        if (!this.forgotFormIsValid()) return;
+          <TextInput
+            name="email"
+            label="Email"
+            type="email"
+            value={this.state.email}
+            onChange={this.onChange}
+            placeholder="Email"
+            error={this.state.errors.email}
+          />
 
-        await this.props.actions.forgotPassword(this.state.email);
-    }
+          <button className="btn btn-warning btn-lg" onClick={this.resetPassword}>
+            Reset Password
+          </button>
 
-    render() {
-        return (
-            <div className="container">
-                <div className="col-xs-8 col-xs-offset-0 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
-                    <h1>Reset Password</h1>
+          <hr />
 
-                    <TextInput
-                        name="email"
-                        label="Email"
-                        type="email"
-                        value={this.state.email}
-                        onChange={this.onChange}
-                        placeholder="Email"
-                        error={this.state.errors.email}
-                    />
-
-                    <button className="btn btn-warning btn-lg" onClick={this.resetPassword}>Reset Password</button>
-
-                    <hr/>
-
-                    <p>Already have an account? <Link to="/login">Login</Link></p>
-                </div>
-            </div>
-        )
-    }
+          <p>
+            Already have an account? <Link to="/login">Login</Link>
+          </p>
+        </div>
+      </div>
+    );
+  }
 }
 
 function mapStateToProps(state) {
-    return {};
+  return {};
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(userActions, dispatch)
-    };
+  return {
+    actions: bindActionCreators(userActions, dispatch)
+  };
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PasswordForgotPage));
