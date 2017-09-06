@@ -9,7 +9,7 @@
 
           <div class="field">
             <input type="email" id="email" name="email" class="form-control" placeholder="Email"
-                   v-validate:email="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }"
+                   v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }"
                    v-model="userData.email" />
 
             <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
@@ -21,7 +21,7 @@
 
           <div class="field">
             <input type="password" id="password" name="password" class="form-control" placeholder="Password"
-                   v-validate:password="'required'" :class="{'input': true, 'is-danger': errors.has('password') }"
+                   v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('password') }"
                    v-model="userData.password" />
 
             <span v-show="errors.has('password')" class="help is-danger">{{ errors.first('password') }}</span>

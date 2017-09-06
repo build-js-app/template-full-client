@@ -25,7 +25,9 @@ export default {
       }
     },
     validateBeforeSubmit() {
-      this.$validator.validateAll().then(() => {
+      this.$validator.validateAll().then((result) => {
+        if (!result) return false;
+
         this.$store.dispatch('resetPassword', this.userData);
       }).catch(() => {
         return false;

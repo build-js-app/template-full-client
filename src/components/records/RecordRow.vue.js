@@ -25,7 +25,7 @@ export default {
     },
     category() {
       let category = _.find(this.categories, (category) => {
-        return category._id === this.record.categoryId;
+        return category.id === this.record.categoryId;
       });
 
       return category ? category.title : '';
@@ -36,7 +36,7 @@ export default {
       if (this.onEdit) this.onEdit(this.record);
     },
     deleteRecord() {
-      if (this.onDelete) this.onDelete(this.record._id);
+      if (this.onDelete) this.onDelete(this.record.id);
     }
   }
 }

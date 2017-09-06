@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     title() {
-      return this.categoryToEdit._id ? 'Edit Category' : 'Add New Category';
+      return this.categoryToEdit.id ? 'Edit Category' : 'Add New Category';
     },
     showConfirmation() {
       return !!this.categoryToDeleteId;

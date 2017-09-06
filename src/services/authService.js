@@ -1,16 +1,19 @@
+import Cookies from 'js-cookie';
+
 import httpHelper from '../helpers/httpHelper';
 import {router} from '../index';
 
 export default {
   signUp,
   login,
-  logOut,
   activateAccount,
   passwordForgot,
   redirectToLogin,
   redirectToHome,
   resetPasswordTokenCheck,
-  resetPassword
+  resetPassword,
+  getToken,
+  saveToken
 }
 
 function signUp(user) {
@@ -19,10 +22,6 @@ function signUp(user) {
 
 function login(user) {
   return httpHelper.post('/api/login', user);
-}
-
-function logOut() {
-  return httpHelper.post('/api/logout');
 }
 
 function activateAccount(token) {
@@ -47,4 +46,13 @@ function redirectToLogin() {
 
 function redirectToHome() {
   router.push('/');
+}
+
+function getToken() {
+  let token = Cookies.get('jwt_token');
+  return token;
+}
+
+function saveToken(jwt) {
+  Cookies.set('jwt_token', jwt);
 }

@@ -22,10 +22,6 @@
           <li>
             <router-link to="/categories">Categories</router-link>
           </li>
-
-          <li>
-            <router-link to="/settings">Settings</router-link>
-          </li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">

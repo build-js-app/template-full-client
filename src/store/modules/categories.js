@@ -33,7 +33,7 @@ const actions = {
 
       let data = await dataService.saveCategory(category);
 
-      if (category._id) {
+      if (category.id) {
         commit(types.EDIT_CATEGORY, data);
       } else {
         commit(types.ADD_CATEGORY, data);
@@ -71,13 +71,13 @@ const mutations = {
 
   [types.EDIT_CATEGORY] (state, category) {
     state.list.map(cat => {
-      return cat._id === category._id ? Object.assign(cat, category) : cat;
+      return cat.id === category.id ? Object.assign(cat, category) : cat;
     });
   },
 
   [types.DELETE_CATEGORY] (state, id) {
     state.list = _.filter(state.list, (category) => {
-      return category._id !== id;
+      return category.id !== id;
     });
   }
 };

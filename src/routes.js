@@ -11,11 +11,6 @@ export const routes = [
     component: require('./components/categories/CategoriesPage.vue')
   },
   {
-    path: '/settings',
-    name: 'settings',
-    component: require('./components/settings/SettingsPage.vue')
-  },
-  {
     path: '/login',
     name: 'login',
     component: require('./components/auth/LoginPage.vue')

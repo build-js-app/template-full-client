@@ -40,7 +40,9 @@ export default {
   },
   methods: {
     onSaveClick() {
-      this.$validator.validateAll().then(() => {
+      this.$validator.validateAll().then((result) => {
+        if (!result) return false;
+
         if (this.onSave) return this.onSave();
       }).catch(() => {
         return false;

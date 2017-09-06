@@ -18,7 +18,9 @@ export default {
     ...mapActions(['login']),
 
     validateBeforeSubmit() {
-      this.$validator.validateAll().then(() => {
+      this.$validator.validateAll().then((result) => {
+        if (!result) return false;
+
         this.$store.dispatch('login', this.userData);
       }).catch(() => {
         return false;

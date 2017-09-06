@@ -21,7 +21,7 @@
 
         <select v-model="record.categoryId" class="form-control" name="category"
                 :class="{'select': true, 'is-danger': errors.has('category') }" v-validate="'required'">
-          <option v-for="category in categories" :value="category._id">{{category.title}}</option>
+          <option v-for="category in categories" :value="category.id">{{category.title}}</option>
         </select>
 
         <span v-show="errors.has('category')" class="help is-danger">{{ errors.first('category') }}</span>

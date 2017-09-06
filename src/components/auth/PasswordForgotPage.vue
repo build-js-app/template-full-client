@@ -9,7 +9,7 @@
 
           <div class="field">
             <input type="email" id="email" name="email" class="form-control" placeholder="Email"
-                   v-validate:email="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }"
+                   v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }"
                    v-model="email" />
 
             <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>

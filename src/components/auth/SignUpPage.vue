@@ -9,7 +9,7 @@
 
           <div class="field">
             <input type="text" id="first-name" name="firstName" class="form-control" placeholder="First Name"
-                   v-validate:firstName="'required'" :class="{'input': true, 'is-danger': errors.has('firstName') }"
+                   v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('firstName') }"
                    v-model="userData.firstName" />
 
             <span v-show="errors.has('firstName')" class="help is-danger">{{ errors.first('firstName') }}</span>
@@ -21,7 +21,7 @@
 
           <div class="field">
             <input type="text" id="last-name" name="lastName" class="form-control" placeholder="Last Name"
-                   v-validate:lastName="'required'" :class="{'input': true, 'is-danger': errors.has('lastName') }"
+                   v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lastName') }"
                    v-model="userData.lastName" />
 
             <span v-show="errors.has('lastName')" class="help is-danger">{{ errors.first('lastName') }}</span>
@@ -33,7 +33,7 @@
 
           <div class="field">
             <input type="email" id="email" name="email" class="form-control" placeholder="Email"
-                   v-validate:email="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }"
+                   v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }"
                    v-model="userData.email" />
 
             <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
@@ -45,7 +45,7 @@
 
           <div class="field">
             <input type="password" id="password" name="password" class="form-control" placeholder="Password"
-                   v-validate:password="'required'" :class="{'input': true, 'is-danger': errors.has('password') }"
+                   v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('password') }"
                    v-model="userData.password" />
 
             <span v-show="errors.has('password')" class="help is-danger">{{ errors.first('password') }}</span>
@@ -57,7 +57,7 @@
 
           <div class="field">
             <input type="password" id="confirm-password" name="confirmPassword" class="form-control" placeholder="Confirm Password"
-                   v-validate:confirmPassword="'required'" :class="{'input': true, 'is-danger': errors.has('confirmPassword') }"
+                   v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('confirmPassword') }"
                    v-model="userData.confirmPassword" />
 
             <span v-show="errors.has('confirmPassword')" class="help is-danger">{{ errors.first('confirmPassword') }}</span>

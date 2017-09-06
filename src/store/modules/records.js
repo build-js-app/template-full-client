@@ -41,7 +41,7 @@ const actions = {
 
       let data = await dataService.saveRecord(record);
 
-      if (record._id) {
+      if (record.id) {
         commit(types.EDIT_RECORD, data);
       } else {
         commit(types.ADD_RECORD, data);
@@ -83,13 +83,13 @@ const mutations = {
 
   [types.EDIT_RECORD] (state, record) {
     state.list.map(rec => {
-      return rec._id === record._id ? Object.assign(rec, record) : rec;
+      return rec.id === record.id ? Object.assign(rec, record) : rec;
     });
   },
 
   [types.DELETE_RECORD] (state, id) {
     state.list = _.filter(state.list, (record) => {
-      return record._id !== id;
+      return record.id !== id;
     });
   }
 };

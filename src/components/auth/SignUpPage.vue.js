@@ -18,7 +18,9 @@ export default {
   }),
   methods: {
     validateBeforeSubmit() {
-      this.$validator.validateAll().then(() => {
+      this.$validator.validateAll().then((result) => {
+        if (!result) return false;
+
         this.$store.dispatch('signup', this.userData);
       }).catch(() => {
         return false;

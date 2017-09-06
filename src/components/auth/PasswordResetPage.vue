@@ -17,7 +17,7 @@
 
           <div class="field">
             <input type="password" id="password" name="password" class="form-control" placeholder="New password"
-                   v-validate:password="'required'" :class="{'input': true, 'is-danger': errors.has('password') }"
+                   v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('password') }"
                    v-model="userData.password" />
 
             <span v-show="errors.has('password')" class="help is-danger">{{ errors.first('password') }}</span>
@@ -29,7 +29,7 @@
 
           <div class="field">
             <input type="password" id="confirm-password" name="confirmPassword" class="form-control" placeholder="Confirm Password"
-                   v-validate:confirmPassword="'required'" :class="{'input': true, 'is-danger': errors.has('confirmPassword') }"
+                   v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('confirmPassword') }"
                    v-model="userData.confirmPassword" />
 
             <span v-show="errors.has('confirmPassword')" class="help is-danger">{{ errors.first('confirmPassword') }}</span>

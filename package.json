@@ -6,26 +6,27 @@
   "license": "MIT",
   "repository": {},
   "scripts": {
-    "start": "vbuild dev",
+    "start": "poi",
     "test": "echo lol",
     "lint": "vbuild --eslint",
     "dev": "vbuild -d",
-    "build": "vbuild"
+    "build": "poi build"
   },
   "globalDependencies": {
     "vbuild": "7.0.6"
   },
   "dependencies": {
     "bootstrap": "3.3.7",
-    "date-fns": "1.28.4",
-    "flatpickr": "2.6.1",
+    "date-fns": "1.28.5",
+    "flatpickr": "3.0.7",
     "font-awesome": "4.7.0",
     "jquery": "3.2.1",
+    "js-cookie": "2.1.4",
     "lodash": "4.17.4",
     "toastr": "2.1.2",
-    "vee-validate": "2.0.0-rc.3",
-    "vue": "2.3.2",
-    "vue-router": "2.5.3",
-    "vuex": "2.3.1"
+    "vee-validate": "2.0.0-rc.14",
+    "vue": "2.4.2",
+    "vue-router": "2.7.0",
+    "vuex": "2.4.0"
   }
 }

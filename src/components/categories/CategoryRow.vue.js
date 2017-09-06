@@ -19,7 +19,7 @@ export default {
       if (this.onEdit) this.onEdit(this.category);
     },
     deleteCategory() {
-      if (this.onDelete) this.onDelete(this.category._id);
+      if (this.onDelete) this.onDelete(this.category.id);
     }
   }
 }

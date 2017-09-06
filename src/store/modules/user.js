@@ -32,9 +32,13 @@ const actions = {
     try {
       commit(types.BEGIN_AJAX_CALL);
 
-      let user = await authService.login(userData);
+      let response = await authService.login(userData);
 
-      commit(types.LOAD_CURRENT_USER, {user});
+      if (response && response.user) {
+        commit(types.LOAD_CURRENT_USER, {user: response.user});
+
+        authService.saveToken(response.token);
+      }
 
       commit(types.END_AJAX_CALL);
     } catch (err) {
@@ -46,11 +50,11 @@ const actions = {
     try {
       commit(types.BEGIN_AJAX_CALL);
 
-      await authService.logOut();
-
       authService.redirectToLogin();
 
-      commit(types.LOAD_CURRENT_USER, {null});
+      authService.saveToken(null);
+
+      commit(types.LOAD_CURRENT_USER, {undefined});
 
       commit(types.END_AJAX_CALL);
     } catch (err) {

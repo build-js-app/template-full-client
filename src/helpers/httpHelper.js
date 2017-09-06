@@ -14,7 +14,8 @@ function httpGet(url, queryParams) {
         credentials: 'same-origin',
         headers: new Headers({
             'pragma': 'no-cache',
-            'cache-control': 'no-cache'
+            'cache-control': 'no-cache',
+            'Authorization': getAuthHeader()
         }),
     });
 
@@ -24,7 +25,8 @@ function httpGet(url, queryParams) {
 function httpPost(url, data) {
     let request = new Request(url, {
         headers: new Headers({
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': getAuthHeader()
         }),
         credentials: 'same-origin',
         method: 'POST',
@@ -37,7 +39,8 @@ function httpPost(url, data) {
 function httpPut(url, data) {
     let request = new Request(url, {
         headers: new Headers({
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': getAuthHeader()
         }),
         credentials: 'same-origin',
         method: 'PUT',
@@ -50,7 +53,8 @@ function httpPut(url, data) {
 function httpPatch(url, data) {
     let request = new Request(url, {
         headers: new Headers({
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': getAuthHeader()
         }),
         credentials: 'same-origin',
         method: 'PATCH',
@@ -61,9 +65,16 @@ function httpPatch(url, data) {
 }
 
 async function httpDelete(url) {
-    let fetchData = fetch(url, {method: 'DELETE', credentials: 'same-origin'});
+    let request = new Request(url, {
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': getAuthHeader()
+        }),
+        credentials: 'same-origin',
+        method: 'DELETE'
+    });
 
-    return processRequest(fetchData);
+    return processRequest(fetch(request));
 }
 
 async function processRequest(fetchRequest) {
@@ -113,4 +124,10 @@ function getQueryString(params) {
         .join('&');
 
     return query;
+}
+
+function getAuthHeader() {
+    let jwt = authService.getToken();
+
+    return `Bearer ${jwt}`;
 }

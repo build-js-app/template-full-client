@@ -28,7 +28,7 @@ export default {
       categories: 'categories'
     }),
     title() {
-      return this.recordToEdit._id ? 'Edit Record' : 'Add New Record';
+      return this.recordToEdit.id ? 'Edit Record' : 'Add New Record';
     },
     showConfirmation() {
       return !!this.recordToDeleteId;

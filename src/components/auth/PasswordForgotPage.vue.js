@@ -7,7 +7,9 @@ export default {
   },
   methods: {
     validateBeforeSubmit() {
-      this.$validator.validateAll().then(() => {
+      this.$validator.validateAll().then((result) => {
+        if (!result) return false;
+
         this.$store.dispatch('forgotPassword', this.email);
       }).catch(() => {
         return false;
