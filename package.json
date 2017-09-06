@@ -12,9 +12,7 @@
     "dev": "vbuild -d",
     "build": "poi build"
   },
-  "globalDependencies": {
-    "vbuild": "7.0.6"
-  },
+  "globalDependencies": {},
   "dependencies": {
     "bootstrap": "3.3.7",
     "date-fns": "1.28.5",
