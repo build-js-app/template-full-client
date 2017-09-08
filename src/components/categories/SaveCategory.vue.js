@@ -2,7 +2,7 @@ import Modal from '../common/Modal.vue';
 
 export default {
   name: 'SaveCategory',
-  components: { Modal },
+  components: {Modal},
   props: {
     category: {
       type: Object
@@ -26,13 +26,16 @@ export default {
   },
   methods: {
     onSaveClick() {
-      this.$validator.validateAll().then((result) => {
-        if (!result) return false;
+      this.$validator
+        .validateAll()
+        .then(result => {
+          if (!result) return false;
 
-        if (this.onSave) return this.onSave();
-      }).catch(() => {
-        return false;
-      });
+          if (this.onSave) return this.onSave();
+        })
+        .catch(() => {
+          return false;
+        });
     },
     onCloseClick() {
       this.errors.clear();
@@ -40,4 +43,4 @@ export default {
       if (this.onClose) this.onClose();
     }
   }
-}
+};

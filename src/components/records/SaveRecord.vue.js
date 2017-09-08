@@ -5,7 +5,7 @@ let config = require('../../../config/config.json');
 
 export default {
   name: 'SaveRecord',
-  components: { Modal, DatePicker },
+  components: {Modal, DatePicker},
   props: {
     record: {
       type: Object
@@ -36,17 +36,20 @@ export default {
       dateOptions: {
         dateFormat: config.format.datePicker
       }
-    }
+    };
   },
   methods: {
     onSaveClick() {
-      this.$validator.validateAll().then((result) => {
-        if (!result) return false;
+      this.$validator
+        .validateAll()
+        .then(result => {
+          if (!result) return false;
 
-        if (this.onSave) return this.onSave();
-      }).catch(() => {
-        return false;
-      });
+          if (this.onSave) return this.onSave();
+        })
+        .catch(() => {
+          return false;
+        });
     },
     onCloseClick() {
       this.errors.clear();
@@ -54,4 +57,4 @@ export default {
       if (this.onClose) this.onClose();
     }
   }
-}
+};

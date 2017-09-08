@@ -11,13 +11,11 @@ export default {
     },
     options: {
       type: Object,
-      default: () => ({
-      })
+      default: () => ({})
     },
     plugins: {
       type: Array,
-      default: () => ([
-      ])
+      default: () => []
     },
     value: {
       type: Date,
@@ -27,18 +25,18 @@ export default {
       type: Function
     }
   },
-  data () {
+  data() {
     return {
       fp: null
-    }
+    };
   },
   computed: {
-    fpOptions () {
+    fpOptions() {
       return JSON.stringify(this.options);
     }
   },
   watch: {
-    fpOptions (newOpt) {
+    fpOptions(newOpt) {
       const option = JSON.parse(newOpt);
 
       for (let o of option) {
@@ -49,29 +47,36 @@ export default {
       this.fp.setDate(newVal);
     }
   },
-  mounted () {
-    let onChangeHandler = (value) => {
+  mounted() {
+    let onChangeHandler = value => {
       if (this.onChange) {
         this.onChange(value);
       }
     };
 
-    let onInputHandler = (value) => {
+    let onInputHandler = value => {
       this.$emit('input', value);
     };
 
-    this.fp = new Flatpickr(this.$el, Object.assign(this.options, {plugins: this.plugins}, {
-      onChange(value) {
-        var newVal = value[0];
-        onInputHandler(newVal);
-        onChangeHandler(newVal);
-      }
-    }));
+    this.fp = new Flatpickr(
+      this.$el,
+      Object.assign(
+        this.options,
+        {plugins: this.plugins},
+        {
+          onChange(value) {
+            var newVal = value[0];
+            onInputHandler(newVal);
+            onChangeHandler(newVal);
+          }
+        }
+      )
+    );
 
     this.fp.setDate(this.value);
   },
-  destroyed () {
+  destroyed() {
     this.fp.destroy();
     this.fp = null;
   }
-}
+};

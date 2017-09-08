@@ -6,7 +6,7 @@ export default {
         message: '',
         status: ''
       }
-    }
+    };
   },
   created() {
     this.activateUserAccount();
@@ -20,7 +20,7 @@ export default {
         'alert-danger': status === 'error',
         'alert-warning': status === 'warning',
         'alert-success': status === 'success'
-      }
+      };
     }
   },
   methods: {
@@ -34,4 +34,4 @@ export default {
       }
     }
   }
-}
+};

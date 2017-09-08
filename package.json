@@ -5,6 +5,12 @@
   "version": "0.0.1",
   "license": "MIT",
   "repository": {},
+  "prettier": {
+    "printWidth": 120,
+    "singleQuote": true,
+    "jsxBracketSameLine": true,
+    "bracketSpacing": false
+  },
   "scripts": {
     "start": "poi",
     "test": "echo lol",

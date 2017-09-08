@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     classObject() {
-      return { show: this.visible, 'in': this.visible}
+      return {show: this.visible, in: this.visible};
     },
     saveBtn() {
       return this.saveTitle ? this.saveTitle : 'Save';
@@ -43,10 +43,10 @@ export default {
   },
   methods: {
     close() {
-      if(this.onClose) this.onClose();
+      if (this.onClose) this.onClose();
     },
     save() {
-      if(this.onSave) this.onSave();
+      if (this.onSave) this.onSave();
     }
   }
-}
+};

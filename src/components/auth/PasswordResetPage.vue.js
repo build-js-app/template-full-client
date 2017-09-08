@@ -8,7 +8,7 @@ export default {
         confirmPassword: '',
         token: ''
       }
-    }
+    };
   },
   created() {
     this.checkResetToken();
@@ -25,13 +25,16 @@ export default {
       }
     },
     validateBeforeSubmit() {
-      this.$validator.validateAll().then((result) => {
-        if (!result) return false;
+      this.$validator
+        .validateAll()
+        .then(result => {
+          if (!result) return false;
 
-        this.$store.dispatch('resetPassword', this.userData);
-      }).catch(() => {
-        return false;
-      });
+          this.$store.dispatch('resetPassword', this.userData);
+        })
+        .catch(() => {
+          return false;
+        });
     }
   }
-}
+};

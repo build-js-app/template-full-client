@@ -13,7 +13,7 @@ const getters = {
 
 // actions
 const actions = {
-  async loadCategories ({ commit }) {
+  async loadCategories({commit}) {
     try {
       commit(types.BEGIN_AJAX_CALL);
 
@@ -27,7 +27,7 @@ const actions = {
     }
   },
 
-  async saveCategory ({commit}, category) {
+  async saveCategory({commit}, category) {
     try {
       commit(types.BEGIN_AJAX_CALL);
 
@@ -61,22 +61,22 @@ const actions = {
 };
 
 const mutations = {
-  [types.LOAD_CATEGORIES] (state, categories) {
+  [types.LOAD_CATEGORIES](state, categories) {
     state.list = categories;
   },
 
-  [types.ADD_CATEGORY] (state, category) {
+  [types.ADD_CATEGORY](state, category) {
     state.list.push(category);
   },
 
-  [types.EDIT_CATEGORY] (state, category) {
+  [types.EDIT_CATEGORY](state, category) {
     state.list.map(cat => {
       return cat.id === category.id ? Object.assign(cat, category) : cat;
     });
   },
 
-  [types.DELETE_CATEGORY] (state, id) {
-    state.list = _.filter(state.list, (category) => {
+  [types.DELETE_CATEGORY](state, id) {
+    state.list = _.filter(state.list, category => {
       return category.id !== id;
     });
   }
@@ -87,4 +87,4 @@ export default {
   getters,
   actions,
   mutations
-}
+};

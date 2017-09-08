@@ -1,8 +1,8 @@
-import { mapGetters } from 'vuex';
+import {mapGetters} from 'vuex';
 
 export default {
   name: 'app',
   computed: mapGetters({
     isAjaxLoad: 'isAjaxLoad'
   })
-}
+};

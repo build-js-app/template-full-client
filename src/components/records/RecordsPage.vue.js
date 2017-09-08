@@ -1,6 +1,6 @@
 import toastr from 'toastr';
 
-import { mapGetters } from 'vuex';
+import {mapGetters} from 'vuex';
 import FilterBar from './FilterBar.vue';
 import RecordsList from './RecordsList.vue';
 import SaveRecord from './SaveRecord.vue';
@@ -8,7 +8,7 @@ import Confirmation from '../common/Confirmation.vue';
 import PageContent from '../common/PageContent.vue';
 
 export default {
-  components: { FilterBar, RecordsList, SaveRecord, Confirmation, PageContent },
+  components: {FilterBar, RecordsList, SaveRecord, Confirmation, PageContent},
   name: 'RecordsPage',
   data() {
     return {
@@ -20,7 +20,7 @@ export default {
       },
       recordToDeleteId: null,
       showModal: false
-    }
+    };
   },
   computed: {
     ...mapGetters({
@@ -72,4 +72,4 @@ export default {
       this.$store.dispatch('changeSortOrder', sortBy);
     }
   }
-}
+};

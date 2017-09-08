@@ -20,11 +20,11 @@ export default {
     }
   },
   computed: {
-    dateDisplay () {
+    dateDisplay() {
       return dateHelper.displayDate(this.record.date);
     },
     category() {
-      let category = _.find(this.categories, (category) => {
+      let category = _.find(this.categories, category => {
         return category.id === this.record.categoryId;
       });
 
@@ -39,4 +39,4 @@ export default {
       if (this.onDelete) this.onDelete(this.record.id);
     }
   }
-}
+};

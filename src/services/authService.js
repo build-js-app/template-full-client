@@ -14,7 +14,7 @@ export default {
   resetPassword,
   getToken,
   saveToken
-}
+};
 
 function signUp(user) {
   return httpHelper.post('/api/sign-up', user);

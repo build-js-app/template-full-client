@@ -22,4 +22,4 @@ export default {
       if (this.onDelete) this.onDelete(this.category.id);
     }
   }
-}
+};

@@ -15,13 +15,13 @@ const getters = {
 
 // actions
 const actions = {
-  async loadRecords ({ commit }) {
+  async loadRecords({commit}) {
     try {
       commit(types.BEGIN_AJAX_CALL);
 
       let records = await dataService.getRecords(state.sortBy);
 
-      commit(types.LOAD_RECORDS, { records });
+      commit(types.LOAD_RECORDS, {records});
 
       commit(types.END_AJAX_CALL);
     } catch (err) {
@@ -29,13 +29,13 @@ const actions = {
     }
   },
 
-  changeSortOrder ({ dispatch, commit }, sortOrder) {
+  changeSortOrder({dispatch, commit}, sortOrder) {
     commit(types.CHANGE_SORT_ORDER, sortOrder);
 
     dispatch('loadRecords');
   },
 
-  async saveRecord ({commit}, record) {
+  async saveRecord({commit}, record) {
     try {
       commit(types.BEGIN_AJAX_CALL);
 
@@ -69,26 +69,26 @@ const actions = {
 };
 
 const mutations = {
-  [types.LOAD_RECORDS] (state, { records }) {
+  [types.LOAD_RECORDS](state, {records}) {
     state.list = records;
   },
 
-  [types.CHANGE_SORT_ORDER] (state, sortOrder) {
+  [types.CHANGE_SORT_ORDER](state, sortOrder) {
     state.sortBy = sortOrder;
   },
 
-  [types.ADD_RECORD] (state, record) {
+  [types.ADD_RECORD](state, record) {
     state.list.push(record);
   },
 
-  [types.EDIT_RECORD] (state, record) {
+  [types.EDIT_RECORD](state, record) {
     state.list.map(rec => {
       return rec.id === record.id ? Object.assign(rec, record) : rec;
     });
   },
 
-  [types.DELETE_RECORD] (state, id) {
-    state.list = _.filter(state.list, (record) => {
+  [types.DELETE_RECORD](state, id) {
+    state.list = _.filter(state.list, record => {
       return record.id !== id;
     });
   }
@@ -99,4 +99,4 @@ export default {
   getters,
   actions,
   mutations
-}
+};

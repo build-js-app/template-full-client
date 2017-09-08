@@ -1,5 +1,5 @@
 import {router} from '../../index';
-import { mapGetters, mapActions } from 'vuex';
+import {mapGetters, mapActions} from 'vuex';
 
 export default {
   name: 'LoginPage',
@@ -9,7 +9,7 @@ export default {
         email: '',
         password: ''
       }
-    }
+    };
   },
   computed: mapGetters({
     user: 'user'
@@ -18,13 +18,16 @@ export default {
     ...mapActions(['login']),
 
     validateBeforeSubmit() {
-      this.$validator.validateAll().then((result) => {
-        if (!result) return false;
+      this.$validator
+        .validateAll()
+        .then(result => {
+          if (!result) return false;
 
-        this.$store.dispatch('login', this.userData);
-      }).catch(() => {
-        return false;
-      });
+          this.$store.dispatch('login', this.userData);
+        })
+        .catch(() => {
+          return false;
+        });
     }
   },
   created() {
@@ -35,4 +38,4 @@ export default {
       if (val) router.push('/records');
     }
   }
-}
+};

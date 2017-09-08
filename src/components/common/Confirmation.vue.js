@@ -2,7 +2,7 @@ import Modal from './Modal.vue';
 
 export default {
   name: 'Confirmation',
-  components: { Modal },
+  components: {Modal},
   props: {
     visible: {
       type: Boolean,
@@ -28,7 +28,7 @@ export default {
       closeTitle: 'No',
       submitTitle: 'Yes',
       closeStyle: 'btn-danger'
-    }
+    };
   },
   computed: {
     displayHeader() {
@@ -38,4 +38,4 @@ export default {
       return this.title ? this.title : 'Are you sure?';
     }
   }
-}
+};

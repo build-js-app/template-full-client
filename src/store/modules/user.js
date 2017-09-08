@@ -14,7 +14,7 @@ const getters = {
 
 // actions
 const actions = {
-  async getCurrentUser ({ commit }) {
+  async getCurrentUser({commit}) {
     try {
       commit(types.BEGIN_AJAX_CALL);
 
@@ -28,7 +28,7 @@ const actions = {
     }
   },
 
-  async login ({commit}, userData) {
+  async login({commit}, userData) {
     try {
       commit(types.BEGIN_AJAX_CALL);
 
@@ -142,7 +142,7 @@ const actions = {
 };
 
 const mutations = {
-  [types.LOAD_CURRENT_USER] (state, { user }) {
+  [types.LOAD_CURRENT_USER](state, {user}) {
     state.user = user;
   }
 };
@@ -152,4 +152,4 @@ export default {
   getters,
   actions,
   mutations
-}
+};

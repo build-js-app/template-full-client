@@ -1,8 +1,8 @@
 import RecordRow from './RecordRow.vue';
-import { mapGetters } from 'vuex';
+import {mapGetters} from 'vuex';
 
 export default {
-  components: { RecordRow },
+  components: {RecordRow},
   name: 'RecordsList',
   props: {
     onEdit: {
@@ -18,8 +18,8 @@ export default {
     records: 'records',
     categories: 'categories'
   }),
-  created () {
+  created() {
     this.$store.dispatch('loadRecords');
     this.$store.dispatch('loadCategories');
   }
-}
+};

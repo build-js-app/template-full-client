@@ -22,7 +22,7 @@ export default {
         {value: 'categoryId', text: 'Category'},
         {value: 'cost', text: 'Cost'}
       ]
-    }
+    };
   },
   created() {
     this.getSortOrder();
@@ -38,4 +38,4 @@ export default {
       if (this.onSortChange) this.onSortChange(this.sortOrder);
     }
   }
-}
+};

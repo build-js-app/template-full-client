@@ -1,9 +1,9 @@
-import { mapGetters } from 'vuex';
+import {mapGetters} from 'vuex';
 
 import CategoryRow from './CategoryRow.vue';
 
 export default {
-  components: { CategoryRow },
+  components: {CategoryRow},
   name: 'CategoriesList',
   props: {
     onEdit: {
@@ -18,7 +18,7 @@ export default {
   computed: mapGetters({
     categories: 'categories'
   }),
-  created () {
+  created() {
     this.$store.dispatch('loadCategories');
   }
-}
+};

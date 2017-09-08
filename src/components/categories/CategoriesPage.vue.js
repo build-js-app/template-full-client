@@ -7,7 +7,7 @@ import PageContent from '../common/PageContent.vue';
 
 export default {
   name: 'CategoriesPage',
-  components: { CategoriesList, SaveCategory, Confirmation, PageContent },
+  components: {CategoriesList, SaveCategory, Confirmation, PageContent},
   data() {
     return {
       categoryToEdit: {
@@ -16,7 +16,7 @@ export default {
       },
       categoryToDeleteId: null,
       showModal: false
-    }
+    };
   },
   computed: {
     title() {
@@ -61,4 +61,4 @@ export default {
       this.closeConfirmation();
     }
   }
-}
+};

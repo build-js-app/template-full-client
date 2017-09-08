@@ -1,4 +1,4 @@
-import { mapGetters } from 'vuex';
+import {mapGetters} from 'vuex';
 
 export default {
   name: 'LoginPage',
@@ -11,20 +11,23 @@ export default {
         password: '',
         confirmPassword: ''
       }
-    }
+    };
   },
   computed: mapGetters({
     user: 'user'
   }),
   methods: {
     validateBeforeSubmit() {
-      this.$validator.validateAll().then((result) => {
-        if (!result) return false;
+      this.$validator
+        .validateAll()
+        .then(result => {
+          if (!result) return false;
 
-        this.$store.dispatch('signup', this.userData);
-      }).catch(() => {
-        return false;
-      });
+          this.$store.dispatch('signup', this.userData);
+        })
+        .catch(() => {
+          return false;
+        });
     }
   }
-}
+};
