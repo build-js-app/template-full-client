@@ -1,80 +1,54 @@
-import * as types from './actionTypes';
 import dataService from '../services/dataService';
-import {beginAjaxCall, endAjaxCall} from './ajaxStatusActions';
+import helper from './actionHelper';
+import {
+  LOAD_RECORDS_SUCCESS,
+  CREATE_RECORD_SUCCESS,
+  UPDATE_RECORD_SUCCESS,
+  DELETE_RECORD_SUCCESS
+} from '../actionTypes/recordActionTypes.js';
 
-export function loadRecordsSuccess(records) {
-  return {type: types.LOAD_RECORDS_SUCCESS, records};
-}
+export const loadRecordsSuccess = records => ({
+  type: LOAD_RECORDS_SUCCESS,
+  payload: {records}
+});
 
-export function createRecordSuccess(record) {
-  return {type: types.CREATE_RECORD_SUCCESS, record};
-}
+export const createRecordSuccess = record => ({
+  type: CREATE_RECORD_SUCCESS,
+  payload: {record}
+});
 
-export function updateRecordSuccess(record) {
-  return {type: types.UPDATE_RECORD_SUCCESS, record};
-}
+export const updateRecordSuccess = record => ({
+  type: UPDATE_RECORD_SUCCESS,
+  payload: {record}
+});
 
-export function deleteRecordSuccess(id) {
-  return {type: types.DELETE_RECORD_SUCCESS, id};
-}
+export const deleteRecordSuccess = id => ({
+  type: DELETE_RECORD_SUCCESS,
+  payload: {id}
+});
 
-export function loadRecords(sortBy) {
-  return dispatch => {
-    dispatch(beginAjaxCall());
+export const loadRecords = sortBy => {
+  return helper.dispatchAjaxAction(async dispatch => {
+    let records = await dataService.getRecords(sortBy);
+    dispatch(loadRecordsSuccess(records));
+  });
+};
 
-    return dataService
-      .getRecords(sortBy)
-      .then(records => {
-        dispatch(loadRecordsSuccess(records));
+export const saveRecord = record => {
+  return helper.dispatchAjaxAction(async dispatch => {
+    let response = await dataService.saveRecord(record);
 
-        dispatch(endAjaxCall());
-      })
-      .catch(error => {
-        dispatch(endAjaxCall());
+    if (record.id) {
+      dispatch(updateRecordSuccess(response));
+    } else {
+      dispatch(createRecordSuccess(response));
+    }
+  });
+};
 
-        throw error;
-      });
-  };
-}
-
-export function saveRecord(record) {
-  return dispatch => {
-    dispatch(beginAjaxCall());
-
-    return dataService
-      .saveRecord(record)
-      .then(data => {
-        if (record.id) {
-          dispatch(updateRecordSuccess(data));
-        } else {
-          dispatch(createRecordSuccess(data));
-        }
-
-        dispatch(endAjaxCall());
-      })
-      .catch(error => {
-        dispatch(endAjaxCall());
-
-        throw error;
-      });
-  };
-}
-
-export function deleteRecord(id) {
-  return dispatch => {
-    dispatch(beginAjaxCall());
-
-    return dataService
-      .deleteRecord(id)
-      .then(() => {
-        dispatch(deleteRecordSuccess(id));
-
-        dispatch(endAjaxCall());
-      })
-      .catch(error => {
-        dispatch(endAjaxCall());
-
-        throw error;
-      });
-  };
-}
+export const deleteRecord = id => {
+  return helper.dispatchAjaxAction(async dispatch => {
+    await dataService.deleteRecord(id);
+    dispatch(deleteRecordSuccess(id));
+  });
+};

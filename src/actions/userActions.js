@@ -1,158 +1,71 @@
 import toastr from 'toastr';
 
-import * as types from './actionTypes';
 import dataService from '../services/dataService';
 import authService from '../services/authService';
-import {beginAjaxCall, endAjaxCall} from './ajaxStatusActions';
+import helper from './actionHelper';
+import {LOAD_CURRENT_USER_SUCCESS} from '../actionTypes/userActionTypes.js';
 
-export function loadCurrentUserSuccess(user) {
-  return {type: types.LOAD_CURRENT_USER_SUCCESS, user};
-}
+export const loadCurrentUserSuccess = user => ({
+  type: LOAD_CURRENT_USER_SUCCESS,
+  payload: {user}
+});
 
-export function loadJsonWebTokenSuccess(token) {
-  return {type: types.LOAD_JSON_WEB_TOKEN, token};
-}
+export const getCurrentUser = () => {
+  return helper.dispatchAjaxAction(async dispatch => {
+    let user = await dataService.getCurrentUser();
+    dispatch(loadCurrentUserSuccess(user));
+  });
+};
 
-export function getCurrentUser() {
-  return dispatch => {
-    dispatch(beginAjaxCall());
+export const loginUser = user => {
+  return helper.dispatchAjaxAction(async dispatch => {
+    let response = await authService.login(user);
 
-    return dataService
-      .getCurrentUser()
-      .then(user => {
-        dispatch(loadCurrentUserSuccess(user));
+    if (response && response.token) {
+      authService.saveToken(response.token);
+    }
+  });
+};
 
-        dispatch(endAjaxCall());
-      })
-      .catch(error => {
-        dispatch(endAjaxCall());
-
-        throw error;
-      });
-  };
-}
-
-export function loginUser(user) {
-  return dispatch => {
-    dispatch(beginAjaxCall());
-
-    return authService
-      .login(user)
-      .then(response => {
-        if (response && response.token) {
-          dispatch(loadJsonWebTokenSuccess(response.token));
-          authService.saveToken(response.token);
-        }
-
-        dispatch(endAjaxCall());
-      })
-      .catch(error => {
-        dispatch(endAjaxCall());
-
-        throw error;
-      });
-  };
-}
-
-export function logOut() {
-  return dispatch => {
+export const logOut = () => {
+  return helper.dispatchAjaxAction(async dispatch => {
     dispatch(loadCurrentUserSuccess(null));
-    dispatch(loadJsonWebTokenSuccess(null));
     authService.saveToken(null);
-  };
-}
+  });
+};
 
-export function forgotPassword(email) {
-  return dispatch => {
-    dispatch(beginAjaxCall());
+export const forgotPassword = email => {
+  return helper.dispatchAjaxAction(async dispatch => {
+    let response = await authService.passwordForgot(email);
 
-    return authService
-      .passwordForgot(email)
-      .then(data => {
-        if (data && data.message) toastr.success(data.message);
+    if (response && response.message) toastr.success(response.message);
+  });
+};
 
-        dispatch(endAjaxCall());
-      })
-      .catch(error => {
-        dispatch(endAjaxCall());
+export const resetPassword = userData => {
+  return helper.dispatchAjaxAction(async dispatch => {
+    let response = await authService.resetPassword(userData);
+    return response;
+  });
+};
 
-        throw error;
-      });
-  };
-}
+export const activateUserAccount = token => {
+  return helper.dispatchAjaxAction(async dispatch => {
+    let response = await authService.activateAccount(token);
+    return response;
+  });
+};
 
-export function resetPassword(userData) {
-  return dispatch => {
-    dispatch(beginAjaxCall());
+export const signUp = user => {
+  return helper.dispatchAjaxAction(async dispatch => {
+    let response = await authService.signUp(user);
+    return response;
+  });
+};
 
-    return authService
-      .resetPassword(userData)
-      .then(data => {
-        dispatch(endAjaxCall());
-
-        return data;
-      })
-      .catch(error => {
-        dispatch(endAjaxCall());
-
-        throw error;
-      });
-  };
-}
-
-export function activateUserAccount(token) {
-  return dispatch => {
-    dispatch(beginAjaxCall());
-
-    return authService
-      .activateAccount(token)
-      .then(data => {
-        dispatch(endAjaxCall());
-
-        return data;
-      })
-      .catch(error => {
-        dispatch(endAjaxCall());
-
-        throw error;
-      });
-  };
-}
-
-export function signUp(user) {
-  return dispatch => {
-    dispatch(beginAjaxCall());
-
-    return authService
-      .signUp(user)
-      .then(data => {
-        dispatch(endAjaxCall());
-
-        return data;
-      })
-      .catch(error => {
-        dispatch(endAjaxCall());
-
-        throw error;
-      });
-  };
-}
-
-export function checkResetToken(token) {
-  return dispatch => {
-    dispatch(beginAjaxCall());
-
-    return authService
-      .resetPasswordTokenCheck(token)
-      .then(data => {
-        dispatch(endAjaxCall());
-
-        return data;
-      })
-      .catch(error => {
-        dispatch(endAjaxCall());
-
-        throw error;
-      });
-  };
-}
+export const checkResetToken = token => {
+  return helper.dispatchAjaxAction(async dispatch => {
+    let response = await authService.resetPasswordTokenCheck(token);
+    return response;
+  });
+};

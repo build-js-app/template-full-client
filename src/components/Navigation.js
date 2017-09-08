@@ -5,11 +5,11 @@ import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-import * as userActions from '../actions/userActions';
+import {logOut} from '../actions/userActions';
 
 class Navigation extends Component {
   async onLogOut() {
-    await this.props.actions.logOut();
+    await this.props.logOut();
 
     this.props.history.push('/login');
   }
@@ -60,16 +60,10 @@ class Navigation extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    user: state.user.current
-  };
-}
+const mapStateToProps = state => ({
+  user: state.user.current
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(userActions, dispatch)
-  };
-}
+const mapDispatchToProps = dispatch => bindActionCreators({logOut}, dispatch);
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navigation));

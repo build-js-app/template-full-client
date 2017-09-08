@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import autoBind from 'react-autobind';
@@ -6,9 +6,8 @@ import {Switch, Route, withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import '../styles/App.css';
-import * as userActions from '../actions/userActions';
 
-class App extends React.Component {
+class App extends Component {
   static propTypes = {
     routes: PropTypes.array.isRequired
   };
@@ -40,16 +39,10 @@ class App extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    isAjaxLoad: state.ajaxCallsInProgress
-  };
-}
+const mapStateToProps = state => ({
+  isAjaxLoad: state.common.ajaxCallsInProgress
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(userActions, dispatch)
-  };
-}
+const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

@@ -1,86 +1,58 @@
-import * as types from './actionTypes';
 import dataService from '../services/dataService';
-import {beginAjaxCall, endAjaxCall} from './ajaxStatusActions';
+import helper from './actionHelper';
+import {
+  LOAD_CATEGORIES_SUCCESS,
+  CREATE_CATEGORY_SUCCESS,
+  UPDATE_CATEGORY_SUCCESS,
+  DELETE_CATEGORY_SUCCESS
+} from '../actionTypes/categoryActionTypes';
 
-export function loadCategoriesSuccess(categories) {
-  return {type: types.LOAD_CATEGORIES_SUCCESS, categories};
-}
+export const loadCategoriesSuccess = categories => ({
+  type: LOAD_CATEGORIES_SUCCESS,
+  payload: {categories}
+});
 
-export function createCategorySuccess(category) {
-  return {type: types.CREATE_CATEGORY_SUCCESS, category};
-}
+export const createCategorySuccess = category => ({
+  type: CREATE_CATEGORY_SUCCESS,
+  payload: {category}
+});
 
-export function updateCategorySuccess(category) {
-  return {type: types.UPDATE_CATEGORY_SUCCESS, category};
-}
+export const updateCategorySuccess = category => ({
+  type: UPDATE_CATEGORY_SUCCESS,
+  payload: {category}
+});
 
-export function deleteCategorySuccess(id) {
-  return {type: types.DELETE_CATEGORY_SUCCESS, id};
-}
+export const deleteCategorySuccess = id => ({
+  type: DELETE_CATEGORY_SUCCESS,
+  payload: {id}
+});
 
-export function loadCategories() {
-  return dispatch => {
-    dispatch(beginAjaxCall());
+export const loadCategories = () => {
+  return helper.dispatchAjaxAction(async dispatch => {
+    let categories = await dataService.getCategories();
+    dispatch(loadCategoriesSuccess(categories));
+  });
+};
 
-    return dataService
-      .getCategories()
-      .then(categories => {
-        dispatch(loadCategoriesSuccess(categories));
+export const saveCategory = category => {
+  return helper.dispatchAjaxAction(async dispatch => {
+    let response = await dataService.saveCategory(category);
 
-        dispatch(endAjaxCall());
-      })
-      .catch(error => {
-        dispatch(endAjaxCall());
+    if (category.id) {
+      dispatch(updateCategorySuccess(response));
+    } else {
+      dispatch(createCategorySuccess(response));
+    }
+  });
+};
 
-        throw error;
-      });
-  };
-}
+export const deleteCategory = id => {
+  return helper.dispatchAjaxAction(async dispatch => {
+    let response = await dataService.deleteCategory(id);
 
-export function saveCategory(category) {
-  return dispatch => {
-    dispatch(beginAjaxCall());
-
-    return dataService
-      .saveCategory(category)
-      .then(data => {
-        if (category.id) {
-          dispatch(updateCategorySuccess(data));
-        } else {
-          dispatch(createCategorySuccess(data));
-        }
-
-        dispatch(endAjaxCall());
-      })
-      .catch(error => {
-        dispatch(endAjaxCall());
-
-        throw error;
-      });
-  };
-}
-
-export function deleteCategory(id) {
-  return dispatch => {
-    dispatch(beginAjaxCall());
-
-    return dataService
-      .deleteCategory(id)
-      .then(response => {
-        if (response) {
-          dispatch(deleteCategorySuccess(id));
-
-          dispatch(endAjaxCall());
-
-          return id;
-        }
-
-        dispatch(endAjaxCall());
-      })
-      .catch(error => {
-        dispatch(endAjaxCall());
-
-        throw error;
-      });
-  };
-}
+    if (response) {
+      dispatch(deleteCategorySuccess(id));
+      return id;
+    }
+  });
+};

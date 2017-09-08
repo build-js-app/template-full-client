@@ -1,4 +1,4 @@
-import * as types from '../actions/actionTypes';
+import * as types from '../actionTypes/userActionTypes';
 import initialState from './initialState';
 
 const userReducer = (state = initialState.user, action) => {
@@ -6,15 +6,8 @@ const userReducer = (state = initialState.user, action) => {
     case types.LOAD_CURRENT_USER_SUCCESS:
       return {
         ...state,
-        current: action.user
+        current: action.payload.user
       };
-
-    case types.LOAD_JSON_WEB_TOKEN: {
-      return {
-        ...state,
-        token: action.token
-      };
-    }
 
     default:
       return state;

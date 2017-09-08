@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import ajaxCallsInProgress from './ajaxStatusReducer';
+import common from './commonReducer';
 import user from './userReducer';
 import record from './recordReducer';
 import category from './categoryReducer';
@@ -8,7 +8,7 @@ const rootReducer = combineReducers({
   user,
   record,
   category,
-  ajaxCallsInProgress
+  common
 });
 
 export default rootReducer;

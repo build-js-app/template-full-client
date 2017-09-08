@@ -1,14 +1,15 @@
 export default {
   user: {
-    current: {},
-    token: ''
+    current: null
   },
   record: {
     list: []
   },
   category: {
     list: [],
-    current: {}
+    current: null
   },
-  isAjaxLoad: false
+  common: {
+    ajaxCallsInProgress: false
+  }
 };
