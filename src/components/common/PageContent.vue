@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-show="user">
     <Navigation />
 
     <slot></slot>
