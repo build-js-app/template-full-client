@@ -5,6 +5,7 @@ import toastr from 'toastr';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {withRouter} from 'react-router-dom';
+import _ from 'lodash';
 
 import PageContent from '../common/PageContent';
 import CategoriesList from './CategoriesList';
@@ -68,9 +69,9 @@ class CategoriesPage extends Component {
   }
 
   async deleteCategory() {
-    let data = await this.props.actions.deleteCategory(this.state.categoryToDeleteId);
+    let response = await this.props.actions.deleteCategory(this.state.categoryToDeleteId);
 
-    if (data) {
+    if (_.isNumber(response)) {
       toastr.success('Category was deleted successfully!');
     }
 
