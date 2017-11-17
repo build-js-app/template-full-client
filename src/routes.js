@@ -1,47 +1,56 @@
+import RecordsPage from './components/records/RecordsPage.vue';
+import CategoriesPage from './components/categories/CategoriesPage.vue';
+import LoginPage from './components/auth/LoginPage.vue';
+import SignUpPage from './components/auth/SignUpPage.vue';
+import PasswordForgotPage from './components/auth/PasswordForgotPage.vue';
+import PasswordResetPage from './components/auth/PasswordResetPage.vue';
+import ActivationPage from './components/auth/ActivationPage.vue';
+import NotFoundPage from './components/NotFoundPage.vue';
+
 export const routes = [
   {
     path: '/records',
     name: 'records',
-    component: require('./components/records/RecordsPage.vue')
+    component: RecordsPage
   },
   {
     path: '/categories',
     name: 'categories',
-    component: require('./components/categories/CategoriesPage.vue')
+    component: CategoriesPage
   },
   {
     path: '/login',
     name: 'login',
-    component: require('./components/auth/LoginPage.vue')
+    component: LoginPage
   },
   {
     path: '/signup',
     name: 'signup',
-    component: require('./components/auth/SignUpPage.vue')
+    component: SignUpPage
   },
   {
     path: '/password-forgot',
     name: 'password-forgot',
-    component: require('./components/auth/PasswordForgotPage.vue')
+    component: PasswordForgotPage
   },
   {
     path: '/password-reset/:token',
     name: 'password-reset',
-    component: require('./components/auth/PasswordResetPage.vue')
+    component: PasswordResetPage
   },
   {
     path: '/activate/:token',
     name: 'activate',
-    component: require('./components/auth/ActivationPage.vue')
+    component: ActivationPage
   },
   {
     path: '/',
     name: 'home',
-    component: require('./components/records/RecordsPage.vue')
+    component: RecordsPage
   },
   {
     path: '*',
     name: 'not-found',
-    component: require('./components/NotFoundPage.vue')
+    component: NotFoundPage
   }
 ];

@@ -4,7 +4,9 @@ const path = require('path');
 module.exports = options => ({
   entry: 'src/index.js',
   dist: 'build',
-  proxy: 'http://localhost:5000/api',
+  devServer: {
+    proxy: 'http://localhost:5000/api'
+  },
   webpack(config) {
     return config; // <-- Important, must return it
   }
