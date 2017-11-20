@@ -1,4 +1,5 @@
 import * as _ from 'lodash';
+import toastr from 'toastr';
 
 import dataService from '../../services/dataService';
 import * as types from '../mutationTypes';
@@ -49,9 +50,12 @@ const actions = {
     try {
       commit(types.BEGIN_AJAX_CALL);
 
-      await dataService.deleteCategory(id);
+      let response = await dataService.deleteCategory(id);
 
-      commit(types.DELETE_CATEGORY, id);
+      if (response) {
+        commit(types.DELETE_CATEGORY, id);
+        toastr.success('Category was deleted successfully!');
+      }
 
       commit(types.END_AJAX_CALL);
     } catch (err) {

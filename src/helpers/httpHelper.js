@@ -1,4 +1,7 @@
 import toastr from 'toastr';
+import axios from 'axios';
+import _ from 'lodash';
+
 import authService from '../services/authService';
 
 export default {
@@ -10,105 +13,63 @@ export default {
 };
 
 function httpGet(url, queryParams) {
-  let fetchData = fetch(`${url}${getQueryString(queryParams)}`, {
-    credentials: 'same-origin',
-    headers: new Headers({
-      pragma: 'no-cache',
-      'cache-control': 'no-cache',
-      Authorization: getAuthHeader()
-    })
-  });
+  let axiosData = axios.get(`${url}${getQueryString(queryParams)}`, getDefaultRequestOptions());
 
-  return processRequest(fetchData);
+  return processRequest(axiosData);
 }
 
 function httpPost(url, data) {
-  let request = new Request(url, {
-    headers: new Headers({
-      'Content-Type': 'application/json',
-      Authorization: getAuthHeader()
-    }),
-    credentials: 'same-origin',
-    method: 'POST',
-    body: JSON.stringify(data)
-  });
+  let request = axios.post(url, JSON.stringify(data), getDefaultRequestOptions());
 
-  return processRequest(fetch(request));
+  return processRequest(request);
 }
 
 function httpPut(url, data) {
-  let request = new Request(url, {
-    headers: new Headers({
-      'Content-Type': 'application/json',
-      Authorization: getAuthHeader()
-    }),
-    credentials: 'same-origin',
-    method: 'PUT',
-    body: JSON.stringify(data)
-  });
+  let request = axios.put(url, JSON.stringify(data), getDefaultRequestOptions());
 
-  return processRequest(fetch(request));
+  return processRequest(request);
 }
 
 function httpPatch(url, data) {
-  let request = new Request(url, {
-    headers: new Headers({
-      'Content-Type': 'application/json',
-      Authorization: getAuthHeader()
-    }),
-    credentials: 'same-origin',
-    method: 'PATCH',
-    body: JSON.stringify(data)
-  });
+  let request = axios.patch(url, JSON.stringify(data), getDefaultRequestOptions());
 
-  return processRequest(fetch(request));
+  return processRequest(request);
 }
 
 async function httpDelete(url) {
-  let request = new Request(url, {
-    headers: new Headers({
-      'Content-Type': 'application/json',
-      Authorization: getAuthHeader()
-    }),
-    credentials: 'same-origin',
-    method: 'DELETE'
-  });
+  let request = axios.delete(url, getDefaultRequestOptions());
 
-  return processRequest(fetch(request));
+  return processRequest(request);
 }
 
-async function processRequest(fetchRequest) {
+async function processRequest(axiosRequest) {
   try {
-    let response = await fetchRequest;
+    let response = await axiosRequest;
 
-    if (!response.ok) {
-      if (response.status === 401 || response.status === 403) {
-        return authService.redirectToLogin();
+    if (response.statusText !== 'OK') {
+      let status = response.status;
+
+      if (status === 401 || status === 403) {
+        if (!_.endsWith(window.location, '/login')) {
+          window.location = '/login';
+        }
+        return;
       }
 
-      if (response.status === 400 || response.status === 500) {
-        let responseJson = await response.json();
-        throw new Error(responseJson.message);
+      if (status === 400 || status === 500) {
+        let responseData = response.data;
+
+        if (responseData && responseData.message) {
+          throw new Error(responseData.message);
+        }
       }
 
-      throw new Error(`Invalid HTTP response status ${response.status}`);
+      throw new Error(`Invalid HTTP response status ${status}`);
     }
 
-    let result = await response.json();
-
-    checkResult(result);
-
-    return result.data;
+    return response.data.data;
   } catch (err) {
     toastr.error(err);
-
-    throw new Error('API Request Error');
-  }
-}
-
-function checkResult(result) {
-  if (result.status === 'error' || result.status === 'validation error') {
-    throw new Error(result.message);
   }
 }
 
@@ -124,6 +85,18 @@ function getQueryString(params) {
     .join('&');
 
   return query;
+}
+
+function getDefaultRequestOptions() {
+  return {
+    headers: {
+      'pragma': 'no-cache',
+      'Content-Type': 'application/json',
+      'Authorization': getAuthHeader()
+    },
+    validateStatus: (status) => true,
+    credentials: 'same-origin'
+  };
 }
 
 function getAuthHeader() {

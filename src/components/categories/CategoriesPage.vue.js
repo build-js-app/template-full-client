@@ -53,10 +53,8 @@ export default {
     confirmDeleteCategory(id) {
       this.categoryToDeleteId = id;
     },
-    deleteCategory() {
-      this.$store.dispatch('deleteCategory', this.categoryToDeleteId);
-
-      toastr.success('Category was deleted successfully!');
+    async deleteCategory() {
+      await this.$store.dispatch('deleteCategory', this.categoryToDeleteId);
 
       this.closeConfirmation();
     }
