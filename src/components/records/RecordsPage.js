@@ -7,7 +7,7 @@ import * as _ from 'lodash';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 
-import PageContent from '../common/PageContent';
+import AppPage from '../common/AppPage';
 import SaveRecord from './SaveRecord';
 import RecordsList from './RecordsList';
 import FilterBar from './FilterBar';
@@ -121,7 +121,7 @@ class RecordsPage extends Component {
     let deleteConfirmVisible = this.state.recordToDeleteId ? true : false;
 
     return (
-      <PageContent>
+      <AppPage title="Records">
         <section className="container-fluid">
           <div className="row">
             <aside className="col-xs-1" />
@@ -158,7 +158,7 @@ class RecordsPage extends Component {
             <aside className="col-xs-1" />
           </div>
         </section>
-      </PageContent>
+      </AppPage>
     );
   }
 }

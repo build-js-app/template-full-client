@@ -7,7 +7,7 @@ import {bindActionCreators} from 'redux';
 import {withRouter} from 'react-router-dom';
 import _ from 'lodash';
 
-import PageContent from '../common/PageContent';
+import AppPage from '../common/AppPage';
 import CategoriesList from './CategoriesList';
 import SaveCategory from './SaveCategory';
 import Confirm from '../common/Confirm';
@@ -97,7 +97,7 @@ class CategoriesPage extends Component {
     let deleteConfirmVisible = this.state.categoryToDeleteId ? true : false;
 
     return (
-      <PageContent>
+      <AppPage title="Categories">
         <section className="container-fluid">
           <div className="row">
             <aside className="col-xs-1" />
@@ -134,7 +134,7 @@ class CategoriesPage extends Component {
             <aside className="col-xs-1" />
           </div>
         </section>
-      </PageContent>
+      </AppPage>
     );
   }
 }

@@ -4,13 +4,15 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
+import Helmet from 'react-helmet';
 
 import Navigation from '../Navigation';
 import * as userActions from '../../actions/userActions';
 
-class PageContent extends React.Component {
+class AppPage extends React.Component {
   static propTypes = {
-    children: PropTypes.object.isRequired
+    children: PropTypes.object.isRequired,
+    title: PropTypes.string
   };
 
   isAuthenticated() {
@@ -23,11 +25,19 @@ class PageContent extends React.Component {
     }
   }
 
+  getTitle() {
+    return this.props.title ? `Expense Manager - ${this.props.title}` : 'Expense Manager';
+  }
+
   render() {
     if (!this.isAuthenticated()) return null;
 
+    let title = this.getTitle();
+
     return (
       <div>
+        <Helmet title={title} />
+
         <Navigation />
 
         {this.props.children}
@@ -48,4 +58,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PageContent));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AppPage));
