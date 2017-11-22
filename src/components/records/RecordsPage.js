@@ -6,6 +6,7 @@ import {bindActionCreators} from 'redux';
 import * as _ from 'lodash';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
+import {Row, Col} from 'react-bootstrap';
 
 import AppPage from '../common/AppPage';
 import SaveRecord from './SaveRecord';
@@ -122,11 +123,14 @@ class RecordsPage extends Component {
 
     return (
       <AppPage title="Records">
-        <section className="container-fluid">
-          <div className="row">
-            <aside className="col-xs-1" />
-            <section className="content-main col-xs-10">
-              <h1>Records Page</h1>
+        <div className="container-fluid">
+          <Row>
+            <Col sm={12} md={11} mdOffset={1}>
+              <Row>
+                <Col sm={12}>
+                  <h2>Records Page</h2>
+                </Col>
+              </Row>
 
               <br />
 
@@ -138,26 +142,25 @@ class RecordsPage extends Component {
                 editRecordAction={this.editRecord}
                 deleteRecordAction={this.confirmDeleteRecord}
               />
+            </Col>
+          </Row>
 
-              <SaveRecord
-                visible={editRecordVisible}
-                record={this.state.recordToEdit}
-                categories={this.props.categories}
-                save={this.saveRecord}
-                close={this.cancelEditRecord}
-                onChange={this.updateRecordState}
-              />
+          <SaveRecord
+            visible={editRecordVisible}
+            record={this.state.recordToEdit}
+            categories={this.props.categories}
+            save={this.saveRecord}
+            close={this.cancelEditRecord}
+            onChange={this.updateRecordState}
+          />
 
-              <Confirm
-                visible={deleteConfirmVisible}
-                action={this.deleteRecord}
-                title={'Delete record'}
-                close={this.cancelDeleteRecord}
-              />
-            </section>
-            <aside className="col-xs-1" />
-          </div>
-        </section>
+          <Confirm
+            visible={deleteConfirmVisible}
+            action={this.deleteRecord}
+            title={'Delete record'}
+            close={this.cancelDeleteRecord}
+          />
+        </div>
       </AppPage>
     );
   }

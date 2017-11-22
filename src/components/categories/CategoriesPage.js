@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import autoBind from 'react-autobind';
-import {Button} from 'react-bootstrap';
+import {Row, Col, Button} from 'react-bootstrap';
 import toastr from 'toastr';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -98,42 +98,48 @@ class CategoriesPage extends Component {
 
     return (
       <AppPage title="Categories">
-        <section className="container-fluid">
-          <div className="row">
-            <aside className="col-xs-1" />
-            <section className="content-main col-xs-10">
-              <h1>Categories Page</h1>
+        <div className="container-fluid">
+          <Row>
+            <Col sm={12} md={11} mdOffset={1}>
+              <Row>
+                <Col sm={12}>
+                  <h2>Categories Page</h2>
+                </Col>
+              </Row>
 
               <br />
 
-              <Button bsStyle="primary" onClick={this.addCategory}>
-                Add new category
-              </Button>
+              <Row>
+                <Col sm={12}>
+                  <Button bsStyle="primary" onClick={this.addCategory}>
+                    Add new category
+                  </Button>
+                </Col>
+              </Row>
 
               <CategoriesList
                 categories={this.props.categories}
                 editCategoryAction={this.editCategory}
                 deleteCategoryAction={this.confirmDeleteCategory}
               />
+            </Col>
+          </Row>
 
-              <SaveCategory
-                visible={editCategoryVisible}
-                category={this.state.categoryToEdit}
-                save={this.saveCategory}
-                close={this.cancelEditCategory}
-                onChange={this.updateCategoryState}
-              />
+          <SaveCategory
+            visible={editCategoryVisible}
+            category={this.state.categoryToEdit}
+            save={this.saveCategory}
+            close={this.cancelEditCategory}
+            onChange={this.updateCategoryState}
+          />
 
-              <Confirm
-                visible={deleteConfirmVisible}
-                action={this.deleteCategory}
-                title={'Delete category'}
-                close={this.cancelDeleteCategory}
-              />
-            </section>
-            <aside className="col-xs-1" />
-          </div>
-        </section>
+          <Confirm
+            visible={deleteConfirmVisible}
+            action={this.deleteCategory}
+            title={'Delete category'}
+            close={this.cancelDeleteCategory}
+          />
+        </div>
       </AppPage>
     );
   }

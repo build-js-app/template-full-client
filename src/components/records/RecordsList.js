@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Table, Button} from 'react-bootstrap';
+import {Row, Col, ControlLabel, Button} from 'react-bootstrap';
 import * as _ from 'lodash';
 import PropTypes from 'prop-types';
 
@@ -24,21 +24,28 @@ class RecordsList extends Component {
     if (!this.anyRecords) return <div style={style}>No Records.</div>;
 
     return (
-      <div>
-        <Table striped bordered style={style}>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Category</th>
-              <th>Cost</th>
-              <th>Note</th>
-              <th />
-              <th />
-            </tr>
-          </thead>
-          <tbody>{this.props.records.map(record => this.renderRecord(record))}</tbody>
-        </Table>
-      </div>
+      <Row style={style}>
+        <Col sm={12}>
+          <Row className="item-row">
+            <Col sm={2} xsHidden>
+              <ControlLabel>Date</ControlLabel>
+            </Col>
+            <Col sm={2} xsHidden>
+              <ControlLabel>Category</ControlLabel>
+            </Col>
+            <Col sm={1} xsHidden>
+              <ControlLabel>Cost</ControlLabel>
+            </Col>
+            <Col sm={3} xsHidden>
+              <ControlLabel>Note</ControlLabel>
+            </Col>
+            <Col sm={2} xsHidden />
+            <Col sm={2} xsHidden />
+          </Row>
+
+          {this.props.records.map(record => this.renderRecord(record))}
+        </Col>
+      </Row>
     );
   }
 
@@ -59,23 +66,57 @@ class RecordsList extends Component {
 
     let dateDisplay = dateHelper.displayDate(record.date);
 
+    let SubItem = props => (
+      <Col xs={12} smHidden mdHidden lgHidden>
+        <Row>
+          <Col xs={12}>
+            <ControlLabel>{props.title}:</ControlLabel>
+          </Col>
+          <Col xs={12} className="form-group">
+            {props.value}
+          </Col>
+        </Row>
+      </Col>
+    );
+
     return (
-      <tr key={record.id}>
-        <td>{dateDisplay}</td>
-        <td>{categoryTitle}</td>
-        <td>{record.cost}</td>
-        <td>{record.note}</td>
-        <td>
+      <Row key={record.id} className="item-row">
+        <Col sm={2} xsHidden>
+          {dateDisplay}
+        </Col>
+
+        <SubItem title="Date" value={dateDisplay} />
+
+        <Col sm={2} xsHidden>
+          {categoryTitle}
+        </Col>
+
+        <SubItem title="Category" value={categoryTitle} />
+
+        <Col sm={1} xsHidden>
+          {record.cost}
+        </Col>
+
+        <SubItem title="Cost" value={record.cost} />
+
+        <Col sm={3} xsHidden>
+          {record.note}
+        </Col>
+
+        <SubItem title="Note" value={record.note} />
+
+        <Col sm={1} xs={3}>
           <Button bsStyle="link" onClick={editClick}>
             Edit
           </Button>
-        </td>
-        <td>
+        </Col>
+
+        <Col sm={1} xs={3}>
           <Button bsStyle="link" onClick={deleteClick}>
             Delete
           </Button>
-        </td>
-      </tr>
+        </Col>
+      </Row>
     );
   }
 }

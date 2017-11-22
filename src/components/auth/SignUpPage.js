@@ -90,7 +90,7 @@ class SignUpPage extends Component {
   render() {
     return (
       <div className="container">
-        <div className="col-xs-8 col-xs-offset-0 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+        <div className="col-xs-12 col-sm-6 col-sm-offset-3">
           <h1>
             <span className="fa fa-sign-in" /> Signup
           </h1>
