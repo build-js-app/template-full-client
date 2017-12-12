@@ -1,34 +1,36 @@
 <template>
   <page-content>
-    <section class="container-fluid">
+    <div class="container-fluid">
       <div class="row">
-        <aside class="col-xs-1" />
-        <section class="content-main col-xs-10">
-          <h1>Records Page</h1>
+        <div class="col-sm-12 col-md-11 col-md-offset-1">
+          <div class="row">
+            <div class="col-sm-12">
+              <h2>Records Page</h2>
+            </div>
+          </div>
 
           <br/>
 
           <filter-bar :sortBy="sortBy" :onAddClick="addRecord" :onSortChange="sortChange"></filter-bar>
 
           <records-list :onEdit="editRecord" :onDelete="confirmDeleteRecord"></records-list>
-
-          <save-record :record="recordToEdit"
-                       :categories="categories"
-                       :showModal="showModal"
-                       :title="title"
-                       :onClose="closeModal"
-                       :onSave="saveRecord">
-          </save-record>
-
-          <confirmation :visible="showConfirmation"
-                        :header="'Delete record'"
-                        :onClose="closeConfirmation"
-                        :onSave="deleteRecord">
-          </confirmation>
-        </section>
-        <aside class="col-xs-1" />
+        </div>
       </div>
-    </section>
+
+      <save-record :record="recordToEdit"
+                   :categories="categories"
+                   :showModal="showModal"
+                   :title="title"
+                   :onClose="closeModal"
+                   :onSave="saveRecord">
+      </save-record>
+
+      <confirmation :visible="showConfirmation"
+                    :header="'Delete record'"
+                    :onClose="closeConfirmation"
+                    :onSave="deleteRecord">
+      </confirmation>
+    </div>
   </page-content>
 </template>
 

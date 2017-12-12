@@ -1,8 +1,10 @@
 <template>
   <div class="row">
     <div class="col-xs-1">
-      <select v-model="sortOrder" class="form-control" v-on:change="sortChange()">
-        <option v-for="sortOption in sortByOptions" :value="sortOption.value">{{sortOption.text}}</option>
+      <select v-model="sortOrder" class="form-control" id="filter-select" v-on:change="sortChange()">
+        <option v-for="sortOption in sortByOptions" v-bind:key="sortOption.value" :value="sortOption.value">
+          {{sortOption.text}}
+        </option>
       </select>
     </div>
 

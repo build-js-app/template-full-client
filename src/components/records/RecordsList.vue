@@ -1,24 +1,35 @@
 <template>
-  <div class="table-responsive" v-if="records && records.length">
-    <table class="table table-bordered table-striped">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Category</th>
-          <th>Cost</th>
-          <th>Note</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr is="record-row" v-for="record in records" :record="record" :categories="categories" :onEdit="onEdit" :onDelete="onDelete"></tr>
-      </tbody>
-    </table>
-  </div>
+  <div class="row" style="margin-top: 30px">
+    <div class="col-sm-12" v-if="records && records.length">
+      <div class="row item-row">
+        <div class="col-sm-2 hidden-xs">
+          <label>Date</label>
+        </div>
 
-  <div v-else class="message">
-    No Records.
+        <div class="col-sm-2 hidden-xs">
+          <label>Category</label>
+        </div>
+
+        <div class="col-sm-1 hidden-xs">
+          <label>Cost</label>
+        </div>
+
+        <div class="col-sm-3 hidden-xs">
+          <label>Note</label>
+        </div>
+
+        <div class="col-sm-2 hidden-xs" />
+        <div class="col-sm-2 hidden-xs" />
+      </div>
+
+      <record-row v-for="record in records" :key="record.id" :record="record" :categories="categories" :onEdit="onEdit" 
+                  :onDelete="onDelete">
+      </record-row>
+    </div>
+
+    <div v-else class="col-sm-12">
+      No Records.
+    </div>
   </div>
 </template>
 

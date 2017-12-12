@@ -1,22 +1,27 @@
 <template>
-  <div class="table-responsive" v-if="categories && categories.length">
-    <table class="table table-bordered table-striped">
-      <thead>
-      <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th></th>
-        <th></th>
-      </tr>
-      </thead>
-      <tbody>
-        <tr is="category-row" v-for="category in categories" :category="category" :onEdit="onEdit" :onDelete="onDelete"></tr>
-      </tbody>
-    </table>
-  </div>
+  <div class="row" style="margin-top: 30px">
+    <div class="col-sm-12" v-if="categories && categories.length">
+      <div class="row item-row">
+        <div class="col-sm-3 hidden-xs">
+          <label>Title</label>
+        </div>
 
-  <div v-else class="message">
-    No Categories.
+        <div class="col-sm-3 hidden-xs">
+          <label>Description</label>
+        </div>
+
+        <div class="col-sm-2 hidden-xs" />
+        <div class="col-sm-2 hidden-xs" />
+      </div>
+
+      <category-row v-for="category in categories" :key="category.id" :category="category" :onEdit="onEdit" 
+                    :onDelete="onDelete">
+      </category-row>
+    </div>
+
+    <div v-else class="col-sm-12">
+      No Categories.
+    </div>
   </div>
 </template>
 
