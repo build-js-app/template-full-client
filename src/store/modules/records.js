@@ -35,17 +35,13 @@ const actions = {
     dispatch('loadRecords');
   },
 
-  async saveRecord({commit}, record) {
+  async saveRecord({dispatch, commit}, record) {
     try {
       commit(types.BEGIN_AJAX_CALL);
 
-      let data = await dataService.saveRecord(record);
+      await dataService.saveRecord(record);
 
-      if (record.id) {
-        commit(types.EDIT_RECORD, data);
-      } else {
-        commit(types.ADD_RECORD, data);
-      }
+      dispatch('loadRecords');
 
       commit(types.END_AJAX_CALL);
     } catch (err) {
@@ -75,16 +71,6 @@ const mutations = {
 
   [types.CHANGE_SORT_ORDER](state, sortOrder) {
     state.sortBy = sortOrder;
-  },
-
-  [types.ADD_RECORD](state, record) {
-    state.list.push(record);
-  },
-
-  [types.EDIT_RECORD](state, record) {
-    state.list.map(rec => {
-      return rec.id === record.id ? Object.assign(rec, record) : rec;
-    });
   },
 
   [types.DELETE_RECORD](state, id) {
