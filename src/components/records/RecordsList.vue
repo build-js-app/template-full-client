@@ -6,11 +6,11 @@
           <label>Date</label>
         </div>
 
-        <div class="col-sm-2 hidden-xs">
+        <div class="col-sm-3 hidden-xs">
           <label>Category</label>
         </div>
 
-        <div class="col-sm-1 hidden-xs">
+        <div class="col-sm-2 hidden-xs">
           <label>Cost</label>
         </div>
 

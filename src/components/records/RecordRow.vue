@@ -13,7 +13,7 @@
       </div>
     </div>
 
-    <div class="col-sm-2 hidden-xs">{{category}}</div>
+    <div class="col-sm-3 hidden-xs">{{category}}</div>
 
     <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
       <div class="row">
@@ -26,7 +26,7 @@
       </div>
     </div>
 
-    <div class="col-sm-1 hidden-xs">{{record.cost}}</div>
+    <div class="col-sm-2 hidden-xs">{{record.cost}}</div>
 
     <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
       <div class="row">
