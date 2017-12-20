@@ -74,8 +74,10 @@ class RecordsPage extends Component {
     });
   }
 
-  saveRecord() {
-    this.props.actions.saveRecord(this.state.recordToEdit);
+  async saveRecord() {
+    await this.props.actions.saveRecord(this.state.recordToEdit);
+
+    await this.props.actions.loadRecords(this.state.sortBy);
 
     toastr.success(`Record was successfully saved`);
 
@@ -125,7 +127,7 @@ class RecordsPage extends Component {
       <AppPage title="Records">
         <div className="container-fluid">
           <Row>
-            <Col sm={12} md={11} mdOffset={1}>
+            <Col md={10} mdOffset={1}>
               <Row>
                 <Col sm={12}>
                   <h2>Records Page</h2>

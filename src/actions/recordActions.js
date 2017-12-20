@@ -1,25 +1,10 @@
 import dataService from '../services/dataService';
 import helper from './actionHelper';
-import {
-  LOAD_RECORDS_SUCCESS,
-  CREATE_RECORD_SUCCESS,
-  UPDATE_RECORD_SUCCESS,
-  DELETE_RECORD_SUCCESS
-} from '../actionTypes/recordActionTypes.js';
+import {LOAD_RECORDS_SUCCESS, DELETE_RECORD_SUCCESS} from '../actionTypes/recordActionTypes.js';
 
 export const loadRecordsSuccess = records => ({
   type: LOAD_RECORDS_SUCCESS,
   payload: {records}
-});
-
-export const createRecordSuccess = record => ({
-  type: CREATE_RECORD_SUCCESS,
-  payload: {record}
-});
-
-export const updateRecordSuccess = record => ({
-  type: UPDATE_RECORD_SUCCESS,
-  payload: {record}
 });
 
 export const deleteRecordSuccess = id => ({
@@ -36,13 +21,7 @@ export const loadRecords = sortBy => {
 
 export const saveRecord = record => {
   return helper.dispatchAjaxAction(async dispatch => {
-    let response = await dataService.saveRecord(record);
-
-    if (record.id) {
-      dispatch(updateRecordSuccess(response));
-    } else {
-      dispatch(createRecordSuccess(response));
-    }
+    await dataService.saveRecord(record);
   });
 };
 

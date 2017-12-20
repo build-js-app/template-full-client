@@ -30,10 +30,10 @@ class RecordsList extends Component {
             <Col sm={2} xsHidden>
               <ControlLabel>Date</ControlLabel>
             </Col>
-            <Col sm={2} xsHidden>
+            <Col sm={3} xsHidden>
               <ControlLabel>Category</ControlLabel>
             </Col>
-            <Col sm={1} xsHidden>
+            <Col sm={2} xsHidden>
               <ControlLabel>Cost</ControlLabel>
             </Col>
             <Col sm={3} xsHidden>
@@ -87,13 +87,13 @@ class RecordsList extends Component {
 
         <SubItem title="Date" value={dateDisplay} />
 
-        <Col sm={2} xsHidden>
+        <Col sm={3} xsHidden>
           {categoryTitle}
         </Col>
 
         <SubItem title="Category" value={categoryTitle} />
 
-        <Col sm={1} xsHidden>
+        <Col sm={2} xsHidden>
           {record.cost}
         </Col>
 

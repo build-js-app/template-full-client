@@ -27,7 +27,7 @@ class FilterBar extends Component {
 
     return (
       <div className="row">
-        <div className="col-xs-1">
+        <div className="col-xs-8">
           <ButtonToolbar>
             <DropdownButton bsSize="small" title="Sort By:" id="sort-by-dropdown">
               {this.state.sortByOptions.map(item => {
@@ -44,7 +44,7 @@ class FilterBar extends Component {
           </ButtonToolbar>
         </div>
 
-        <div className="col-xs-10 text-right">
+        <div className="col-xs-4 text-right">
           <Button bsStyle="success" onClick={addClick}>
             <Glyphicon glyph="plus" />
           </Button>

@@ -10,19 +10,6 @@ const recordReducer = (state = initialState.record, action) => {
         list: action.payload.records
       };
 
-    case types.CREATE_RECORD_SUCCESS:
-      return _.assign({}, state, {
-        list: [...state.list, _.assign({}, action.payload.record)]
-      });
-
-    case types.UPDATE_RECORD_SUCCESS:
-      return _.assign({}, state, {
-        list: [
-          ...state.list.filter(record => record.id !== action.payload.record.id),
-          _.assign({}, action.payload.record)
-        ]
-      });
-
     case types.DELETE_RECORD_SUCCESS:
       return _.assign({}, state, {
         list: [...state.list.filter(record => record.id !== action.payload.id)]
