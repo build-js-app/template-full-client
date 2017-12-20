@@ -1,6 +1,8 @@
 <template>
-  <div class="row">
-    <div class="col-xs-6">
+  <div class="row" id="filter-bar">
+    <div class="col-xs-8" id="sort-btn">
+      <label>Sort by:</label>
+
       <select v-model="sortOrder" class="form-control" id="filter-select" v-on:change="sortChange()">
         <option v-for="sortOption in sortByOptions" v-bind:key="sortOption.value" :value="sortOption.value">
           {{sortOption.text}}
@@ -8,7 +10,7 @@
       </select>
     </div>
 
-    <div class="col-xs-6 text-right">
+    <div class="col-xs-4 text-right">
       <button type="button" class="btn btn-success" @click="addRecord()">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
       </button>
