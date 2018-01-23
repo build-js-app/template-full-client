@@ -16,7 +16,16 @@ body {
   box-sizing: border-box;
 }
 
-#filter-select {
+#filter-bar #sort-btn {
+  display: flex;
+  align-items: center;
+}
+
+#filter-bar #sort-btn label {
+  margin-right: 8px;
+}
+
+#filter-bar #filter-select {
   width: auto;
 }
 
