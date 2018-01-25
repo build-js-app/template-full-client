@@ -46,28 +46,27 @@ async function processRequest(axiosRequest) {
   try {
     let response = await axiosRequest;
 
-    if (response.statusText !== 'OK') {
-      let status = response.status;
+    // if OK return
+    if (response.status === 200) return response.data.data;
 
-      if (status === 401 || status === 403) {
-        if (!_.endsWith(window.location, '/login')) {
-          window.location = '/login';
-        }
-        return;
+    let status = response.status;
+
+    if (status === 401 || status === 403) {
+      if (!_.endsWith(window.location, '/login')) {
+        window.location = '/login';
       }
-
-      if (status === 400 || status === 500) {
-        let responseData = response.data;
-
-        if (responseData && responseData.message) {
-          throw new Error(responseData.message);
-        }
-      }
-
-      throw new Error(`Invalid HTTP response status ${status}`);
+      return;
     }
 
-    return response.data.data;
+    if (status === 400 || status === 500) {
+      let responseData = response.data;
+
+      if (responseData && responseData.message) {
+        throw new Error(responseData.message);
+      }
+    }
+
+    throw new Error(`Invalid HTTP response status ${status}`);
   } catch (err) {
     toastr.error(err);
   }
@@ -90,11 +89,11 @@ function getQueryString(params) {
 function getDefaultRequestOptions() {
   return {
     headers: {
-      'pragma': 'no-cache',
+      pragma: 'no-cache',
       'Content-Type': 'application/json',
-      'Authorization': getAuthHeader()
+      Authorization: getAuthHeader()
     },
-    validateStatus: (status) => true,
+    validateStatus: status => true,
     credentials: 'same-origin'
   };
 }
