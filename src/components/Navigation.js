@@ -1,11 +1,18 @@
 import React, {Component} from 'react';
 import {Navbar, Nav, NavItem, Glyphicon, Button} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
-import {withRouter} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
 
-import {logOut} from '../actions/userActions';
+import helper from 'helpers/reactHelper';
+
+import {logOut} from 'actions/userActions';
+
+const stateMap = state => ({
+  user: state.user.current
+});
+
+const actions = {
+  logOut
+};
 
 class Navigation extends Component {
   async onLogOut() {
@@ -60,10 +67,4 @@ class Navigation extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  user: state.user.current
-});
-
-const mapDispatchToProps = dispatch => bindActionCreators({logOut}, dispatch);
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navigation));
+export default helper.connect(Navigation, stateMap, actions, {withRouter: true});

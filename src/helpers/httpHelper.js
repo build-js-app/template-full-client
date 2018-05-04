@@ -2,7 +2,7 @@ import toastr from 'toastr';
 import axios from 'axios';
 import _ from 'lodash';
 
-import authService from '../services/authService';
+import authService from 'services/authService';
 
 export default {
   get: httpGet,

@@ -1,49 +1,56 @@
 import React, {Component} from 'react';
-import autoBind from 'react-autobind';
 import toastr from 'toastr';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as _ from 'lodash';
 import PropTypes from 'prop-types';
-import {withRouter} from 'react-router-dom';
 import {Row, Col} from 'react-bootstrap';
 
-import AppPage from '../common/AppPage';
+import helper from '../../helpers/reactHelper';
+
+import {loadRecords, saveRecord, deleteRecord} from 'actions/recordActions';
+import {loadCategories} from 'actions/categoryActions';
+
+import AppPage from 'components/common/AppPage';
 import SaveRecord from './SaveRecord';
 import RecordsList from './RecordsList';
 import FilterBar from './FilterBar';
-import Confirm from '../common/Confirm';
-import * as recordActions from '../../actions/recordActions';
-import * as categoryActions from '../../actions/categoryActions';
+import Confirm from 'components/common/Confirm';
+
+const stateMap = state => ({
+  records: state.record.list,
+  sortBy: state.record.sortBy,
+  categories: state.category.list
+});
+
+const actions = {
+  loadCategories,
+  loadRecords,
+  saveRecord,
+  deleteRecord
+};
 
 class RecordsPage extends Component {
   static propTypes = {
-    actions: PropTypes.object.isRequired,
     records: PropTypes.array,
     categories: PropTypes.array
+  };
+
+  state = {
+    recordToDeleteId: null,
+    recordToEdit: null
   };
 
   constructor(props) {
     super(props);
 
-    this.state = {
-      records: props.records,
-      sortBy: 'date',
-      categories: props.categories,
-      recordToDeleteId: null,
-      recordToEdit: null
-    };
-
-    autoBind(this);
+    helper.autoBind(this);
   }
 
   componentDidMount() {
-    this.props.actions.loadCategories();
+    this.props.loadCategories();
     this.loadRecords();
   }
 
   async loadRecords() {
-    await this.props.actions.loadRecords(this.state.sortBy);
+    await this.props.loadRecords(this.props.sortBy);
   }
 
   addRecord() {
@@ -75,9 +82,9 @@ class RecordsPage extends Component {
   }
 
   async saveRecord() {
-    await this.props.actions.saveRecord(this.state.recordToEdit);
+    await this.props.action.saveRecord(this.state.recordToEdit);
 
-    await this.props.actions.loadRecords(this.state.sortBy);
+    await this.props.loadRecords(this.props.sortBy);
 
     toastr.success(`Record was successfully saved`);
 
@@ -87,7 +94,7 @@ class RecordsPage extends Component {
   }
 
   deleteRecord() {
-    this.props.actions.deleteRecord(this.state.recordToDeleteId);
+    this.props.deleteRecord(this.state.recordToDeleteId);
 
     toastr.success('Record was deleted successfully!');
 
@@ -109,17 +116,12 @@ class RecordsPage extends Component {
   }
 
   sortRecords(sortBy) {
-    this.setState(
-      {
-        sortBy: sortBy
-      },
-      () => {
-        this.loadRecords();
-      }
-    );
+    this.props.loadRecords(sortBy);
   }
 
   render() {
+    const {recordToEdit} = this.state;
+    const {records, categories, sortBy} = this.props;
     let editRecordVisible = this.state.recordToEdit ? true : false;
     let deleteConfirmVisible = this.state.recordToDeleteId ? true : false;
 
@@ -136,11 +138,11 @@ class RecordsPage extends Component {
 
               <br />
 
-              <FilterBar addRecordAction={this.addRecord} sortBy={this.state.sortBy} onSortAction={this.sortRecords} />
+              <FilterBar addRecordAction={this.addRecord} sortBy={sortBy} onSortAction={this.sortRecords} />
 
               <RecordsList
-                records={this.props.records}
-                categories={this.props.categories}
+                records={records}
+                categories={categories}
                 editRecordAction={this.editRecord}
                 deleteRecordAction={this.confirmDeleteRecord}
               />
@@ -149,8 +151,8 @@ class RecordsPage extends Component {
 
           <SaveRecord
             visible={editRecordVisible}
-            record={this.state.recordToEdit}
-            categories={this.props.categories}
+            record={recordToEdit}
+            categories={categories}
             save={this.saveRecord}
             close={this.cancelEditRecord}
             onChange={this.updateRecordState}
@@ -168,18 +170,4 @@ class RecordsPage extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    records: state.record.list,
-    sortBy: state.record.sortBy,
-    categories: state.category.list
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(_.assign({}, recordActions, categoryActions), dispatch)
-  };
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RecordsPage));
+export default helper.connect(RecordsPage, stateMap, actions);

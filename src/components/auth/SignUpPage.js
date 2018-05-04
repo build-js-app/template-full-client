@@ -1,30 +1,35 @@
 import React, {Component} from 'react';
-import autoBind from 'react-autobind';
-import {Link, withRouter} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import {Link} from 'react-router-dom';
 import toastr from 'toastr';
 
-import * as userActions from '../../actions/userActions';
+import {signUp} from 'actions/userActions';
 
-import TextInput from '../common/TextInput';
+import helper from 'helpers/reactHelper';
+
+import TextInput from 'components/common/TextInput';
+
+const stateMap = state => ({});
+
+const actions = {
+  signUp
+};
 
 class SignUpPage extends Component {
+  state = {
+    user: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      confirmPassword: ''
+    },
+    errors: {}
+  };
+
   constructor(props) {
     super(props);
 
-    this.state = {
-      user: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-        confirmPassword: ''
-      },
-      errors: {}
-    };
-
-    autoBind(this);
+    helper.autoBind(this);
   }
 
   onChange(field, value) {
@@ -78,7 +83,7 @@ class SignUpPage extends Component {
   async signUp() {
     if (!this.signUpFormIsValid()) return;
 
-    let response = await this.props.actions.signUp(this.state.user);
+    let response = await this.props.signUp(this.state.user);
 
     if (response && response.message) {
       toastr.success(response.message);
@@ -158,14 +163,4 @@ class SignUpPage extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {};
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(userActions, dispatch)
-  };
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignUpPage));
+export default helper.connect(SignUpPage, stateMap, actions, {withRouter: true});

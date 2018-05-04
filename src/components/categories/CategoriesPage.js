@@ -1,33 +1,40 @@
 import React, {Component} from 'react';
-import autoBind from 'react-autobind';
 import {Row, Col, Button} from 'react-bootstrap';
 import toastr from 'toastr';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {withRouter} from 'react-router-dom';
 import _ from 'lodash';
 
-import AppPage from '../common/AppPage';
+import helper from 'helpers/reactHelper';
+
+import AppPage from 'components/common/AppPage';
+import Confirm from 'components/common/Confirm';
 import CategoriesList from './CategoriesList';
 import SaveCategory from './SaveCategory';
-import Confirm from '../common/Confirm';
-import * as categoryActions from '../../actions/categoryActions';
+import {loadCategories, saveCategory, deleteCategory} from 'actions/categoryActions';
+
+const stateMap = state => ({
+  categories: state.category.list
+});
+
+const actions = {
+  loadCategories,
+  saveCategory,
+  deleteCategory
+};
 
 class CategoriesPage extends Component {
+  state = {
+    categoryToEdit: null,
+    categoryToDeleteId: null
+  };
+
   constructor(props) {
     super(props);
 
-    this.state = {
-      categories: props.categories,
-      categoryToEdit: null,
-      categoryToDeleteId: null
-    };
-
-    autoBind(this);
+    helper.autoBind(this);
   }
 
-  componentWillMount() {
-    this.props.actions.loadCategories();
+  componentDidMount() {
+    this.props.loadCategories();
   }
 
   addCategory() {
@@ -59,7 +66,7 @@ class CategoriesPage extends Component {
   }
 
   async saveCategory() {
-    await this.props.actions.saveCategory(this.state.categoryToEdit);
+    await this.props.saveCategory(this.state.categoryToEdit);
 
     toastr.success(`Category was updated`);
 
@@ -69,7 +76,7 @@ class CategoriesPage extends Component {
   }
 
   async deleteCategory() {
-    let response = await this.props.actions.deleteCategory(this.state.categoryToDeleteId);
+    let response = await this.props.deleteCategory(this.state.categoryToDeleteId);
 
     if (_.isNumber(response)) {
       toastr.success('Category was deleted successfully!');
@@ -145,16 +152,4 @@ class CategoriesPage extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    categories: state.category.list
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(categoryActions, dispatch)
-  };
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CategoriesPage));
+export default helper.connect(CategoriesPage, stateMap, actions);

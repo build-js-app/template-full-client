@@ -7,7 +7,8 @@ const recordReducer = (state = initialState.record, action) => {
     case types.LOAD_RECORDS_SUCCESS:
       return {
         ...state,
-        list: action.payload.records
+        list: action.payload.records,
+        sortBy: action.payload.sortBy
       };
 
     case types.DELETE_RECORD_SUCCESS:

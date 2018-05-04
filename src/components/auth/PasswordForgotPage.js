@@ -1,22 +1,27 @@
 import React, {Component} from 'react';
-import autoBind from 'react-autobind';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {Link, withRouter} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
-import TextInput from '../common/TextInput';
-import * as userActions from '../../actions/userActions';
+import helper from 'helpers/reactHelper';
+
+import TextInput from 'components/common/TextInput';
+import {forgotPassword} from 'actions/userActions';
+
+const stateMap = state => ({});
+
+const actions = {
+  forgotPassword
+};
 
 class PasswordForgotPage extends Component {
+  state = {
+    email: '',
+    errors: {}
+  };
+
   constructor(props) {
     super(props);
 
-    this.state = {
-      email: '',
-      errors: {}
-    };
-
-    autoBind(this);
+    helper.autoBind(this);
   }
 
   onChange(field, value) {
@@ -45,7 +50,7 @@ class PasswordForgotPage extends Component {
   async resetPassword() {
     if (!this.forgotFormIsValid()) return;
 
-    await this.props.actions.forgotPassword(this.state.email);
+    await this.props.forgotPassword(this.state.email);
   }
 
   render() {
@@ -79,14 +84,4 @@ class PasswordForgotPage extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {};
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(userActions, dispatch)
-  };
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PasswordForgotPage));
+export default helper.connect(PasswordForgotPage, stateMap, actions);

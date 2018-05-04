@@ -1,29 +1,37 @@
 import React, {Component} from 'react';
-import autoBind from 'react-autobind';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {Link, withRouter} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import * as _ from 'lodash';
 
-import TextInput from '../common/TextInput';
-import * as userActions from '../../actions/userActions';
+import helper from 'helpers/reactHelper';
+
+import TextInput from 'components/common/TextInput';
+import {loginUser, getCurrentUser} from 'actions/userActions';
+
+const stateMap = state => ({
+  user: state.user.current
+});
+
+const actions = {
+  loginUser,
+  getCurrentUser
+};
 
 class LoginPage extends Component {
+  state = {
+    user: {
+      email: '',
+      password: ''
+    },
+    errors: {}
+  };
+
   constructor(props) {
     super(props);
 
-    this.state = {
-      user: {
-        email: '',
-        password: ''
-      },
-      errors: {}
-    };
-
-    autoBind(this);
+    helper.autoBind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (!_.isEmpty(this.props.user)) {
       this.props.history.push('/');
     }
@@ -64,9 +72,9 @@ class LoginPage extends Component {
   async login() {
     if (!this.loginFormIsValid()) return;
 
-    await this.props.actions.loginUser(this.state.user);
+    await this.props.loginUser(this.state.user);
 
-    await this.props.actions.getCurrentUser();
+    await this.props.getCurrentUser();
 
     if (!_.isEmpty(this.props.user)) this.props.history.push('/records');
   }
@@ -118,16 +126,4 @@ class LoginPage extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    user: state.user.current
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(userActions, dispatch)
-  };
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginPage));
+export default helper.connect(LoginPage, stateMap, actions, {withRouter: true});

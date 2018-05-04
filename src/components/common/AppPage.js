@@ -1,13 +1,20 @@
 import React from 'react';
 import * as _ from 'lodash';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
-import {withRouter} from 'react-router-dom';
 import Helmet from 'react-helmet';
 
+import helper from 'helpers/reactHelper';
+
 import Navigation from '../Navigation';
-import * as userActions from '../../actions/userActions';
+import {getCurrentUser} from 'actions/userActions';
+
+const stateMap = state => ({
+  user: state.user.current
+});
+
+const actions = {
+  getCurrentUser
+};
 
 class AppPage extends React.Component {
   static propTypes = {
@@ -19,9 +26,9 @@ class AppPage extends React.Component {
     return _.isEmpty(this.props.user) ? false : true;
   }
 
-  componentWillMount() {
+  async componentDidMount() {
     if (!this.isAuthenticated()) {
-      this.props.actions.getCurrentUser();
+      await this.props.getCurrentUser();
     }
   }
 
@@ -46,16 +53,4 @@ class AppPage extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    user: state.user.current
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(userActions, dispatch)
-  };
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AppPage));
+export default helper.connect(AppPage, stateMap, actions, {withRouter: true});

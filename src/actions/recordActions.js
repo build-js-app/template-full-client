@@ -1,10 +1,10 @@
-import dataService from '../services/dataService';
+import dataService from 'services/dataService';
 import helper from './actionHelper';
 import {LOAD_RECORDS_SUCCESS, DELETE_RECORD_SUCCESS} from '../actionTypes/recordActionTypes.js';
 
-export const loadRecordsSuccess = records => ({
+export const loadRecordsSuccess = (records, sortBy) => ({
   type: LOAD_RECORDS_SUCCESS,
-  payload: {records}
+  payload: {records, sortBy}
 });
 
 export const deleteRecordSuccess = id => ({
@@ -15,7 +15,7 @@ export const deleteRecordSuccess = id => ({
 export const loadRecords = sortBy => {
   return helper.dispatchAjaxAction(async dispatch => {
     let records = await dataService.getRecords(sortBy);
-    dispatch(loadRecordsSuccess(records));
+    dispatch(loadRecordsSuccess(records, sortBy));
   });
 };
 

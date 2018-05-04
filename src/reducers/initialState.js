@@ -3,7 +3,8 @@ export default {
     current: null
   },
   record: {
-    list: []
+    list: [],
+    sortBy: 'date'
   },
   category: {
     list: [],

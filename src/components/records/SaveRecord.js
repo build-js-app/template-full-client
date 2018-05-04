@@ -4,9 +4,9 @@ import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
 import Flatpickr from 'react-flatpickr';
 
-import NumberInput from '../common/NumbertInput';
-import TextAreaInput from '../common/TextAreaInput';
-import SelectInput from '../common/SelectInput';
+import NumberInput from 'components/common/NumbertInput';
+import TextAreaInput from 'components/common/TextAreaInput';
+import SelectInput from 'components/common/SelectInput';
 
 let config = require('../../config/config.json');
 

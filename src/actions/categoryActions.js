@@ -1,4 +1,4 @@
-import dataService from '../services/dataService';
+import dataService from 'services/dataService';
 import helper from './actionHelper';
 import {
   LOAD_CATEGORIES_SUCCESS,

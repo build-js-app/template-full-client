@@ -1,31 +1,37 @@
 import React, {Component} from 'react';
-import autoBind from 'react-autobind';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {Link, withRouter} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import toastr from 'toastr';
 
-import TextInput from '../common/TextInput';
-import * as userActions from '../../actions/userActions';
+import helper from 'helpers/reactHelper';
+
+import TextInput from 'components/common/TextInput';
+import {resetPassword, checkResetToken} from 'actions/userActions';
+
+const stateMap = state => ({});
+
+const actions = {
+  resetPassword,
+  checkResetToken
+};
 
 class PasswordResetPage extends Component {
+  state = {
+    userData: {
+      email: '',
+      password: '',
+      confirmPassword: '',
+      token: ''
+    },
+    errors: {}
+  };
+
   constructor(props) {
     super(props);
 
-    this.state = {
-      userData: {
-        email: '',
-        password: '',
-        confirmPassword: '',
-        token: ''
-      },
-      errors: {}
-    };
-
-    autoBind(this);
+    helper.autoBind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.checkResetToken();
   }
 
@@ -72,7 +78,7 @@ class PasswordResetPage extends Component {
   async checkResetToken() {
     let token = this.props.match.params.token;
 
-    let data = await this.props.actions.checkResetToken(token);
+    let data = await this.props.checkResetToken(token);
 
     if (data) {
       this.setState({
@@ -84,7 +90,7 @@ class PasswordResetPage extends Component {
   async resetPassword() {
     if (!this.resetFormIsValid()) return;
 
-    let response = await this.props.actions.resetPassword(this.state.userData);
+    let response = await this.props.resetPassword(this.state.userData);
 
     if (response && response.message) {
       toastr.success(response.message);
@@ -145,14 +151,4 @@ class PasswordResetPage extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {};
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(userActions, dispatch)
-  };
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PasswordResetPage));
+export default helper.connect(PasswordResetPage, stateMap, actions, {withRouter: true});

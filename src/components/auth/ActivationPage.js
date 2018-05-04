@@ -1,34 +1,39 @@
 import React, {Component} from 'react';
-import autoBind from 'react-autobind';
 import classnames from 'classnames';
-import {Link, withRouter} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import {Link} from 'react-router-dom';
 
-import * as userActions from '../../actions/userActions';
+import {activateUserAccount} from 'actions/userActions';
+
+import helper from 'helpers/reactHelper';
+
+const stateMap = state => ({});
+
+const actions = {
+  activateUserAccount
+};
 
 class ActivationPage extends Component {
+  state = {
+    activationData: {
+      message: '',
+      status: ''
+    }
+  };
+
   constructor(props) {
     super(props);
 
-    this.state = {
-      activationData: {
-        message: '',
-        status: ''
-      }
-    };
-
-    autoBind(this);
+    helper.autoBind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.activateUserAccount();
   }
 
   async activateUserAccount() {
     let token = this.props.match.params.token;
 
-    let data = await this.props.actions.activateUserAccount(token);
+    let data = await this.props.activateUserAccount(token);
 
     if (data) {
       this.setState({
@@ -67,14 +72,4 @@ class ActivationPage extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {};
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(userActions, dispatch)
-  };
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ActivationPage));
+export default helper.connect(ActivationPage, stateMap, actions, {withRouter: true});

@@ -3,8 +3,8 @@ import {Modal, Button} from 'react-bootstrap';
 import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
 
-import TextInput from '../common/TextInput';
-import TextAreaInput from '../common/TextAreaInput';
+import TextInput from 'components/common/TextInput';
+import TextAreaInput from 'components/common/TextAreaInput';
 
 class SaveCategory extends Component {
   static propTypes = {
