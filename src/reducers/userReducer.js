@@ -1,4 +1,4 @@
-import * as types from '../actionTypes/userActionTypes';
+import * as types from 'action_types/userActionTypes';
 import initialState from './initialState';
 
 const userReducer = (state = initialState.user, action) => {

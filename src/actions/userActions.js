@@ -3,7 +3,7 @@ import toastr from 'toastr';
 import dataService from 'services/dataService';
 import authService from 'services/authService';
 import helper from './actionHelper';
-import {LOAD_CURRENT_USER_SUCCESS} from '../actionTypes/userActionTypes.js';
+import {LOAD_CURRENT_USER_SUCCESS} from 'action_types/userActionTypes';
 
 export const loadCurrentUserSuccess = user => ({
   type: LOAD_CURRENT_USER_SUCCESS,

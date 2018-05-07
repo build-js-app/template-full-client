@@ -1,4 +1,4 @@
-import * as types from '../actionTypes/commonActionTypes';
+import * as types from 'action_types/commonActionTypes';
 import initialState from './initialState';
 
 const commonReducer = (state = initialState.common, action) => {
@@ -13,6 +13,18 @@ const commonReducer = (state = initialState.common, action) => {
       return {
         ...state,
         ajaxCallsInProgress: false
+      };
+
+    case types.CONFIRM_ACTION:
+      return {
+        ...state,
+        confirmAction: action.payload
+      };
+
+    case types.CONFIRM_ACTION_CANCEL:
+      return {
+        ...state,
+        confirmAction: null
       };
 
     default:

@@ -1,4 +1,4 @@
-import * as types from '../actionTypes/recordActionTypes';
+import * as types from 'action_types/recordActionTypes';
 import initialState from './initialState';
 import _ from 'lodash';
 

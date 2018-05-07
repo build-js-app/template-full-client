@@ -5,13 +5,13 @@ import {Row, Col} from 'react-bootstrap';
 
 import helper from '../../helpers/reactHelper';
 
+import {confirmAction} from 'actions/commonActions';
 import {loadRecords, saveRecord, deleteRecord} from 'actions/recordActions';
 import {loadCategories} from 'actions/categoryActions';
 
 import SaveRecord from './SaveRecord';
 import RecordsList from './RecordsList';
 import FilterBar from './FilterBar';
-import Confirm from 'components/common/Confirm';
 
 const stateMap = state => ({
   records: state.record.list,
@@ -20,6 +20,7 @@ const stateMap = state => ({
 });
 
 const actions = {
+  confirmAction,
   loadCategories,
   loadRecords,
   saveRecord,
@@ -92,25 +93,14 @@ class RecordsPage extends Component {
     });
   }
 
-  deleteRecord() {
-    this.props.deleteRecord(this.state.recordToDeleteId);
+  deleteRecord(id) {
+    this.props.confirmAction({
+      title: 'Delete record',
+      action: async () => {
+        this.props.deleteRecord(id);
 
-    toastr.success('Record was deleted successfully!');
-
-    this.setState({
-      recordToDeleteId: null
-    });
-  }
-
-  confirmDeleteRecord(id) {
-    this.setState({
-      recordToDeleteId: id
-    });
-  }
-
-  cancelDeleteRecord() {
-    this.setState({
-      recordToDeleteId: null
+        toastr.success('Record was deleted successfully!');
+      }
     });
   }
 
@@ -122,7 +112,6 @@ class RecordsPage extends Component {
     const {recordToEdit} = this.state;
     const {records, categories, sortBy} = this.props;
     let editRecordVisible = this.state.recordToEdit ? true : false;
-    let deleteConfirmVisible = this.state.recordToDeleteId ? true : false;
 
     return (
       <div className="container-fluid">
@@ -142,7 +131,7 @@ class RecordsPage extends Component {
               records={records}
               categories={categories}
               editRecordAction={this.editRecord}
-              deleteRecordAction={this.confirmDeleteRecord}
+              deleteRecordAction={this.deleteRecord}
             />
           </Col>
         </Row>
@@ -154,13 +143,6 @@ class RecordsPage extends Component {
           save={this.saveRecord}
           close={this.cancelEditRecord}
           onChange={this.updateRecordState}
-        />
-
-        <Confirm
-          visible={deleteConfirmVisible}
-          action={this.deleteRecord}
-          title={'Delete record'}
-          close={this.cancelDeleteRecord}
         />
       </div>
     );

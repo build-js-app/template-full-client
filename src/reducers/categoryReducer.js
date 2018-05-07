@@ -1,4 +1,4 @@
-import * as types from '../actionTypes/categoryActionTypes';
+import * as types from 'action_types/categoryActionTypes';
 import initialState from './initialState';
 import _ from 'lodash';
 

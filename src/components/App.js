@@ -6,14 +6,20 @@ import _ from 'lodash';
 import helper from 'helpers/reactHelper';
 
 import AppPage from 'components/common/AppPage';
+import Confirm from 'components/common/Confirm';
+
+import {confirmActionCancel} from 'actions/commonActions';
 
 import '../styles/App.css';
 
 const stateMap = state => ({
-  isAjaxLoad: state.common.ajaxCallsInProgress
+  isAjaxLoad: state.common.ajaxCallsInProgress,
+  confirmAction: state.common.confirmAction
 });
 
-const actions = {};
+const actions = {
+  confirmActionCancel
+};
 
 class App extends Component {
   static propTypes = {
@@ -31,9 +37,24 @@ class App extends Component {
   }
 
   render() {
+    const {confirmAction} = this.props;
+
     return (
       <div>
         {this.props.isAjaxLoad && <div className="overlay-style" />}
+
+        {confirmAction && (
+          <Confirm
+            title={confirmAction.title}
+            text={confirmAction.text}
+            visible={true}
+            action={async () => {
+              this.props.confirmActionCancel();
+              await confirmAction.action();
+            }}
+            close={this.props.confirmActionCancel}
+          />
+        )}
 
         <Switch>{this.props.routes.map((route, index) => this.renderRoute(route, index))};</Switch>
 

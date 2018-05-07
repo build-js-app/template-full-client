@@ -5,7 +5,7 @@ import {
   CREATE_CATEGORY_SUCCESS,
   UPDATE_CATEGORY_SUCCESS,
   DELETE_CATEGORY_SUCCESS
-} from '../actionTypes/categoryActionTypes';
+} from 'action_types/categoryActionTypes';
 
 export const loadCategoriesSuccess = categories => ({
   type: LOAD_CATEGORIES_SUCCESS,

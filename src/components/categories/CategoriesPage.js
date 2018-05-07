@@ -5,9 +5,9 @@ import _ from 'lodash';
 
 import helper from 'helpers/reactHelper';
 
-import Confirm from 'components/common/Confirm';
 import CategoriesList from './CategoriesList';
 import SaveCategory from './SaveCategory';
+import {confirmAction} from 'actions/commonActions';
 import {loadCategories, saveCategory, deleteCategory} from 'actions/categoryActions';
 
 const stateMap = state => ({
@@ -15,6 +15,7 @@ const stateMap = state => ({
 });
 
 const actions = {
+  confirmAction,
   loadCategories,
   saveCategory,
   deleteCategory
@@ -22,8 +23,7 @@ const actions = {
 
 class CategoriesPage extends Component {
   state = {
-    categoryToEdit: null,
-    categoryToDeleteId: null
+    categoryToEdit: null
   };
 
   constructor(props) {
@@ -74,33 +74,21 @@ class CategoriesPage extends Component {
     });
   }
 
-  async deleteCategory() {
-    let response = await this.props.deleteCategory(this.state.categoryToDeleteId);
+  async deleteCategory(id) {
+    this.props.confirmAction({
+      title: 'Delete category',
+      action: async () => {
+        let response = await this.props.deleteCategory(id);
 
-    if (_.isNumber(response)) {
-      toastr.success('Category was deleted successfully!');
-    }
-
-    this.setState({
-      categoryToDeleteId: null
-    });
-  }
-
-  confirmDeleteCategory(id) {
-    this.setState({
-      categoryToDeleteId: id
-    });
-  }
-
-  cancelDeleteCategory() {
-    this.setState({
-      categoryToDeleteId: null
+        if (_.isNumber(response)) {
+          toastr.success('Category was deleted successfully!');
+        }
+      }
     });
   }
 
   render() {
     let editCategoryVisible = this.state.categoryToEdit ? true : false;
-    let deleteConfirmVisible = this.state.categoryToDeleteId ? true : false;
 
     return (
       <div className="container-fluid">
@@ -125,7 +113,7 @@ class CategoriesPage extends Component {
             <CategoriesList
               categories={this.props.categories}
               editCategoryAction={this.editCategory}
-              deleteCategoryAction={this.confirmDeleteCategory}
+              deleteCategoryAction={this.deleteCategory}
             />
           </Col>
         </Row>
@@ -136,13 +124,6 @@ class CategoriesPage extends Component {
           save={this.saveCategory}
           close={this.cancelEditCategory}
           onChange={this.updateCategoryState}
-        />
-
-        <Confirm
-          visible={deleteConfirmVisible}
-          action={this.deleteCategory}
-          title={'Delete category'}
-          close={this.cancelDeleteCategory}
         />
       </div>
     );
