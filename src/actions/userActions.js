@@ -1,8 +1,9 @@
-import toastr from 'toastr';
+import helper from './actionHelper';
+import uiHelper from 'helpers/uiHelper';
 
 import dataService from 'services/dataService';
 import authService from 'services/authService';
-import helper from './actionHelper';
+
 import {LOAD_CURRENT_USER_SUCCESS} from 'action_types/userActionTypes';
 
 export const loadCurrentUserSuccess = user => ({
@@ -38,7 +39,7 @@ export const forgotPassword = email => {
   return helper.dispatchAjaxAction(async dispatch => {
     let response = await authService.passwordForgot(email);
 
-    if (response && response.message) toastr.success(response.message);
+    if (response && response.message) uiHelper.showMessage(response.message);
   });
 };
 

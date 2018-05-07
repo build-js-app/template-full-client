@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {Row, Col, Button} from 'react-bootstrap';
-import toastr from 'toastr';
 import _ from 'lodash';
 
 import helper from 'helpers/reactHelper';
+import uiHelper from 'helpers/uiHelper';
 
 import CategoriesList from './CategoriesList';
 import SaveCategory from './SaveCategory';
@@ -67,7 +67,7 @@ class CategoriesPage extends Component {
   async saveCategory() {
     await this.props.saveCategory(this.state.categoryToEdit);
 
-    toastr.success(`Category was updated`);
+    uiHelper.showMessage(`Category was updated`);
 
     this.setState({
       categoryToEdit: null
@@ -81,7 +81,7 @@ class CategoriesPage extends Component {
         let response = await this.props.deleteCategory(id);
 
         if (_.isNumber(response)) {
-          toastr.success('Category was deleted successfully!');
+          uiHelper.showMessage('Category was deleted successfully!');
         }
       }
     });

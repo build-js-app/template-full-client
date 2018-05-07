@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import toastr from 'toastr';
 import PropTypes from 'prop-types';
 import {Row, Col} from 'react-bootstrap';
 
-import helper from '../../helpers/reactHelper';
+import helper from 'helpers/reactHelper';
+import uiHelper from 'helpers/uiHelper';
 
 import {confirmAction} from 'actions/commonActions';
 import {loadRecords, saveRecord, deleteRecord} from 'actions/recordActions';
@@ -82,11 +82,11 @@ class RecordsPage extends Component {
   }
 
   async saveRecord() {
-    await this.props.action.saveRecord(this.state.recordToEdit);
+    await this.props.saveRecord(this.state.recordToEdit);
 
     await this.props.loadRecords(this.props.sortBy);
 
-    toastr.success(`Record was successfully saved`);
+    uiHelper.showMessage(`Record was successfully saved`);
 
     this.setState({
       recordToEdit: null
@@ -99,7 +99,7 @@ class RecordsPage extends Component {
       action: async () => {
         this.props.deleteRecord(id);
 
-        toastr.success('Record was deleted successfully!');
+        uiHelper.showMessage('Record was deleted successfully!');
       }
     });
   }

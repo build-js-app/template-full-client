@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import toastr from 'toastr';
 
 import helper from 'helpers/reactHelper';
+import uiHelper from 'helpers/uiHelper';
 
 import TextInput from 'components/common/TextInput';
 import {resetPassword, checkResetToken} from 'actions/userActions';
@@ -93,7 +93,7 @@ class PasswordResetPage extends Component {
     let response = await this.props.resetPassword(this.state.userData);
 
     if (response && response.message) {
-      toastr.success(response.message);
+      uiHelper.showMessage(response.message);
 
       this.props.history.push('/login');
     }

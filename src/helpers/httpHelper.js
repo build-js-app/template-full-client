@@ -1,6 +1,7 @@
-import toastr from 'toastr';
 import axios from 'axios';
 import _ from 'lodash';
+
+import uiHelper from 'helpers/uiHelper';
 
 import authService from 'services/authService';
 
@@ -68,7 +69,7 @@ async function processRequest(axiosRequest) {
 
     throw new Error(`Invalid HTTP response status ${status}`);
   } catch (err) {
-    toastr.error(err);
+    uiHelper.error(err);
   }
 }
 

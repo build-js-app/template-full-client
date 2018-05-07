@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import toastr from 'toastr';
 
 import {signUp} from 'actions/userActions';
 
 import helper from 'helpers/reactHelper';
+import uiHelper from 'helpers/uiHelper';
 
 import TextInput from 'components/common/TextInput';
 
@@ -86,7 +86,7 @@ class SignUpPage extends Component {
     let response = await this.props.signUp(this.state.user);
 
     if (response && response.message) {
-      toastr.success(response.message);
+      uiHelper.showMessage(response.message);
 
       this.props.history.push('/login');
     }
