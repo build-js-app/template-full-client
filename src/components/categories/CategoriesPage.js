@@ -5,7 +5,6 @@ import _ from 'lodash';
 
 import helper from 'helpers/reactHelper';
 
-import AppPage from 'components/common/AppPage';
 import Confirm from 'components/common/Confirm';
 import CategoriesList from './CategoriesList';
 import SaveCategory from './SaveCategory';
@@ -104,50 +103,48 @@ class CategoriesPage extends Component {
     let deleteConfirmVisible = this.state.categoryToDeleteId ? true : false;
 
     return (
-      <AppPage title="Categories">
-        <div className="container-fluid">
-          <Row>
-            <Col sm={12} md={11} mdOffset={1}>
-              <Row>
-                <Col sm={12}>
-                  <h2>Categories Page</h2>
-                </Col>
-              </Row>
+      <div className="container-fluid">
+        <Row>
+          <Col sm={12} md={11} mdOffset={1}>
+            <Row>
+              <Col sm={12}>
+                <h2>Categories Page</h2>
+              </Col>
+            </Row>
 
-              <br />
+            <br />
 
-              <Row>
-                <Col sm={12}>
-                  <Button bsStyle="primary" onClick={this.addCategory}>
-                    Add new category
-                  </Button>
-                </Col>
-              </Row>
+            <Row>
+              <Col sm={12}>
+                <Button bsStyle="primary" onClick={this.addCategory}>
+                  Add new category
+                </Button>
+              </Col>
+            </Row>
 
-              <CategoriesList
-                categories={this.props.categories}
-                editCategoryAction={this.editCategory}
-                deleteCategoryAction={this.confirmDeleteCategory}
-              />
-            </Col>
-          </Row>
+            <CategoriesList
+              categories={this.props.categories}
+              editCategoryAction={this.editCategory}
+              deleteCategoryAction={this.confirmDeleteCategory}
+            />
+          </Col>
+        </Row>
 
-          <SaveCategory
-            visible={editCategoryVisible}
-            category={this.state.categoryToEdit}
-            save={this.saveCategory}
-            close={this.cancelEditCategory}
-            onChange={this.updateCategoryState}
-          />
+        <SaveCategory
+          visible={editCategoryVisible}
+          category={this.state.categoryToEdit}
+          save={this.saveCategory}
+          close={this.cancelEditCategory}
+          onChange={this.updateCategoryState}
+        />
 
-          <Confirm
-            visible={deleteConfirmVisible}
-            action={this.deleteCategory}
-            title={'Delete category'}
-            close={this.cancelDeleteCategory}
-          />
-        </div>
-      </AppPage>
+        <Confirm
+          visible={deleteConfirmVisible}
+          action={this.deleteCategory}
+          title={'Delete category'}
+          close={this.cancelDeleteCategory}
+        />
+      </div>
     );
   }
 }

@@ -8,7 +8,6 @@ import helper from '../../helpers/reactHelper';
 import {loadRecords, saveRecord, deleteRecord} from 'actions/recordActions';
 import {loadCategories} from 'actions/categoryActions';
 
-import AppPage from 'components/common/AppPage';
 import SaveRecord from './SaveRecord';
 import RecordsList from './RecordsList';
 import FilterBar from './FilterBar';
@@ -126,46 +125,44 @@ class RecordsPage extends Component {
     let deleteConfirmVisible = this.state.recordToDeleteId ? true : false;
 
     return (
-      <AppPage title="Records">
-        <div className="container-fluid">
-          <Row>
-            <Col md={10} mdOffset={1}>
-              <Row>
-                <Col sm={12}>
-                  <h2>Records Page</h2>
-                </Col>
-              </Row>
+      <div className="container-fluid">
+        <Row>
+          <Col md={10} mdOffset={1}>
+            <Row>
+              <Col sm={12}>
+                <h2>Records Page</h2>
+              </Col>
+            </Row>
 
-              <br />
+            <br />
 
-              <FilterBar addRecordAction={this.addRecord} sortBy={sortBy} onSortAction={this.sortRecords} />
+            <FilterBar addRecordAction={this.addRecord} sortBy={sortBy} onSortAction={this.sortRecords} />
 
-              <RecordsList
-                records={records}
-                categories={categories}
-                editRecordAction={this.editRecord}
-                deleteRecordAction={this.confirmDeleteRecord}
-              />
-            </Col>
-          </Row>
+            <RecordsList
+              records={records}
+              categories={categories}
+              editRecordAction={this.editRecord}
+              deleteRecordAction={this.confirmDeleteRecord}
+            />
+          </Col>
+        </Row>
 
-          <SaveRecord
-            visible={editRecordVisible}
-            record={recordToEdit}
-            categories={categories}
-            save={this.saveRecord}
-            close={this.cancelEditRecord}
-            onChange={this.updateRecordState}
-          />
+        <SaveRecord
+          visible={editRecordVisible}
+          record={recordToEdit}
+          categories={categories}
+          save={this.saveRecord}
+          close={this.cancelEditRecord}
+          onChange={this.updateRecordState}
+        />
 
-          <Confirm
-            visible={deleteConfirmVisible}
-            action={this.deleteRecord}
-            title={'Delete record'}
-            close={this.cancelDeleteRecord}
-          />
-        </div>
-      </AppPage>
+        <Confirm
+          visible={deleteConfirmVisible}
+          action={this.deleteRecord}
+          title={'Delete record'}
+          close={this.cancelDeleteRecord}
+        />
+      </div>
     );
   }
 }

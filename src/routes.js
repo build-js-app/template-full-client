@@ -1,5 +1,3 @@
-import React from 'react';
-
 import RecordsPage from './components/records/RecordsPage';
 import CategoriesPage from './components/categories/CategoriesPage';
 import LoginPage from './components/auth/LoginPage';
@@ -13,38 +11,80 @@ export const routes = [
   {
     path: '/',
     exact: true,
-    main: props => <RecordsPage {...props} />
+    component: RecordsPage,
+    pageProps: {
+      pageId: 'records',
+      title: 'Records'
+    }
   },
   {
     path: '/records',
-    main: props => <RecordsPage {...props} />
+    component: RecordsPage,
+    pageProps: {
+      pageId: 'records',
+      title: 'Records'
+    }
   },
   {
     path: '/categories',
-    main: props => <CategoriesPage {...props} />
+    component: CategoriesPage,
+    pageProps: {
+      pageId: 'categories',
+      title: 'Categories'
+    }
   },
   {
     path: '/login',
-    main: props => <LoginPage {...props} />
+    component: LoginPage,
+    pageProps: {
+      pageId: 'log_in',
+      title: 'Log In',
+      public: true
+    }
   },
   {
-    path: '/signup',
-    main: props => <SignUpPage {...props} />
+    path: '/sign-up',
+    component: SignUpPage,
+    pageProps: {
+      pageId: 'sign_up',
+      title: 'Log In',
+      public: true
+    }
   },
   {
     path: '/password-forgot',
-    main: props => <PasswordForgotPage {...props} />
+    component: PasswordForgotPage,
+    pageProps: {
+      pageId: 'password_forgot',
+      title: 'Forgot password',
+      public: true
+    }
   },
   {
     path: '/password-reset/:token',
-    main: props => <PasswordResetPage {...props} />
+    component: PasswordResetPage,
+    pageProps: {
+      pageId: 'password_reset',
+      title: 'Reset password',
+      public: true
+    }
   },
   {
     path: '/activate/:token',
-    main: props => <ActivationPage {...props} />
+    component: ActivationPage,
+    pageProps: {
+      pageId: 'activation',
+      title: 'Account activation',
+      public: true
+    }
   },
   {
     path: '/*',
-    main: props => <NotFountPage {...props} />
+    component: NotFountPage,
+    pageProps: {
+      pageId: 'not_found',
+      title: 'Page not found',
+      public: true
+    }
   }
 ];

@@ -23,6 +23,7 @@ class AppPage extends React.Component {
   };
 
   isAuthenticated() {
+    if (this.props.public) return true;
     return _.isEmpty(this.props.user) ? false : true;
   }
 
@@ -36,8 +37,14 @@ class AppPage extends React.Component {
     return this.props.title ? `Expense Manager - ${this.props.title}` : 'Expense Manager';
   }
 
+  isReady() {
+    return this.isAuthenticated();
+  }
+
   render() {
-    if (!this.isAuthenticated()) return null;
+    const {public: isPublic} = this.props;
+
+    if (!this.isReady()) return null;
 
     let title = this.getTitle();
 
@@ -45,7 +52,7 @@ class AppPage extends React.Component {
       <div>
         <Helmet title={title} />
 
-        <Navigation />
+        {!isPublic && <Navigation />}
 
         {this.props.children}
       </div>

@@ -14,7 +14,7 @@ function autoBind(self) {
   reactAutoBind(self);
 }
 
-function connect(component, stateMap, actions, options) {
+function connect(component, stateMap, actions, options = {}) {
   let mapStateToProps = stateMap;
   if (mapStateToProps && !_.isFunction(mapStateToProps)) {
     throw new Error('State Map should be a function');
@@ -31,7 +31,9 @@ function connect(component, stateMap, actions, options) {
 
   let result = reduxConnect(mapStateToProps, mapDispatchToProps)(component);
 
-  result = withRouter(result);
+  if (options.withRouter) {
+    result = withRouter(result);
+  }
 
   return result;
 }
