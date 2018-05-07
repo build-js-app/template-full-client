@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Modal, Button} from 'react-bootstrap';
-import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
+
+import helper from 'helpers/reactHelper';
 
 import TextInput from 'components/common/TextInput';
 import TextAreaInput from 'components/common/TextAreaInput';
@@ -15,14 +16,14 @@ class SaveCategory extends Component {
     visible: PropTypes.bool
   };
 
+  state = {
+    errors: {}
+  };
+
   constructor(props) {
     super(props);
 
-    this.state = {
-      errors: {}
-    };
-
-    autoBind(this);
+    helper.autoBind(this);
   }
 
   componentWillReceiveProps() {

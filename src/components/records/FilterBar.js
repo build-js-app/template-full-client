@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import autoBind from 'react-autobind';
 import {Button, Glyphicon, ButtonToolbar, DropdownButton, MenuItem} from 'react-bootstrap';
 import PropTypes from 'prop-types';
+
+import helper from 'helpers/reactHelper';
 
 class FilterBar extends Component {
   static propTypes = {
@@ -10,14 +11,14 @@ class FilterBar extends Component {
     onSortAction: PropTypes.func.isRequired
   };
 
+  state = {
+    sortByOptions: [{key: 'date', text: 'Date'}, {key: 'categoryId', text: 'Category'}, {key: 'cost', text: 'Cost'}]
+  };
+
   constructor(props) {
     super(props);
 
-    this.state = {
-      sortByOptions: [{key: 'date', text: 'Date'}, {key: 'categoryId', text: 'Category'}, {key: 'cost', text: 'Cost'}]
-    };
-
-    autoBind(this);
+    helper.autoBind(this);
   }
 
   render() {

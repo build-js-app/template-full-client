@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import {Modal, Button} from 'react-bootstrap';
-import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
 import Flatpickr from 'react-flatpickr';
+
+import helper from 'helpers/reactHelper';
+import config from 'helpers/configHelper';
 
 import NumberInput from 'components/common/NumbertInput';
 import TextAreaInput from 'components/common/TextAreaInput';
 import SelectInput from 'components/common/SelectInput';
-
-let config = require('../../config/config.json');
 
 class SaveRecord extends Component {
   static propTypes = {
@@ -20,17 +20,17 @@ class SaveRecord extends Component {
     visible: PropTypes.bool
   };
 
+  state = {
+    dateOptions: {
+      dateFormat: config.format.datePicker
+    },
+    errors: {}
+  };
+
   constructor(props) {
     super(props);
 
-    this.state = {
-      dateOptions: {
-        dateFormat: config.format.datePicker
-      },
-      errors: {}
-    };
-
-    autoBind(this);
+    helper.autoBind(this);
   }
 
   componentWillReceiveProps() {

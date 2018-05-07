@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Row, Col, ControlLabel, Button} from 'react-bootstrap';
-import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
+
+import helper from 'helpers/reactHelper';
 
 class CategoriesList extends Component {
   static propTypes = {
@@ -13,9 +14,7 @@ class CategoriesList extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
-
-    autoBind(this);
+    helper.autoBind(this);
   }
 
   get anyCategories() {
