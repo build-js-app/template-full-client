@@ -13,7 +13,7 @@ import {confirmActionCancel} from 'actions/commonActions';
 import '../styles/App.css';
 
 const stateMap = state => ({
-  isAjaxLoad: state.common.ajaxCallsInProgress,
+  isFetchingData: state.common.asyncActionInProgress,
   confirmAction: state.common.confirmAction
 });
 
@@ -27,7 +27,7 @@ class App extends Component {
   };
 
   state = {
-    isAjaxLoad: false
+    isFetchingData: false
   };
 
   constructor(props) {
@@ -41,7 +41,7 @@ class App extends Component {
 
     return (
       <div>
-        {this.props.isAjaxLoad && <div className="overlay-style" />}
+        {this.props.isFetchingData && <div className="overlay-style" />}
 
         {confirmAction && (
           <Confirm

@@ -1,18 +1,16 @@
-import {BEGIN_AJAX_CALL, END_AJAX_CALL, CONFIRM_ACTION, CONFIRM_ACTION_CANCEL} from 'action_types/commonActionTypes';
+import {
+  ASYNC_ACTION_START,
+  ASYNC_ACTION_END,
+  CONFIRM_ACTION,
+  CONFIRM_ACTION_CANCEL
+} from 'action_types/commonActionTypes';
 
-export const beginAjaxCall = () => ({
-  type: BEGIN_AJAX_CALL
-});
+import helper from './actionHelper';
 
-export const endAjaxCall = () => ({
-  type: END_AJAX_CALL
-});
+export const asyncActionStart = () => helper.getAction(ASYNC_ACTION_START);
 
-export const confirmAction = confirmInfo => ({
-  type: CONFIRM_ACTION,
-  payload: confirmInfo
-});
+export const asyncActionEnd = () => helper.getAction(ASYNC_ACTION_END);
 
-export const confirmActionCancel = () => ({
-  type: CONFIRM_ACTION_CANCEL
-});
+export const confirmAction = confirmInfo => helper.getAction(CONFIRM_ACTION, confirmInfo);
+
+export const confirmActionCancel = () => helper.getAction(CONFIRM_ACTION_CANCEL);

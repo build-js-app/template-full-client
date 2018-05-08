@@ -1,24 +1,34 @@
-import {beginAjaxCall, endAjaxCall} from './commonActions';
+import {asyncActionStart, asyncActionEnd} from './commonActions';
 
 export default {
-  dispatchAjaxAction
+  dispatchAsyncAction,
+  getAction
 };
 
-function dispatchAjaxAction(action) {
-  return async dispatch => {
+function dispatchAsyncAction(action) {
+  return async (dispatch, getState) => {
     try {
-      dispatch(beginAjaxCall());
+      dispatch(asyncActionStart());
 
-      let result = await action(dispatch);
+      let result = await action(dispatch, getState);
 
-      dispatch(endAjaxCall());
+      dispatch(asyncActionEnd());
 
-      if (!result) return {};
+      if (!result) return null;
 
       return result;
     } catch (error) {
-      dispatch(endAjaxCall());
+      dispatch(asyncActionEnd());
       throw error;
     }
+  };
+}
+
+function getAction(type, payload) {
+  if (!type) throw new Error('Specify action type');
+
+  return {
+    type,
+    payload
   };
 }

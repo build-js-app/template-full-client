@@ -13,9 +13,9 @@ function showMessage(message) {
 }
 
 function showWarning(warning) {
-  toastr.success(warning);
+  toastr.warning(warning);
 }
 
 function showError(error) {
-  toastr.success(error);
+  toastr.error(error);
 }

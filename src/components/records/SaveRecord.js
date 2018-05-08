@@ -6,7 +6,7 @@ import Flatpickr from 'react-flatpickr';
 import helper from 'helpers/reactHelper';
 import config from 'helpers/configHelper';
 
-import NumberInput from 'components/common/NumbertInput';
+import NumberInput from 'components/common/NumberInput';
 import TextAreaInput from 'components/common/TextAreaInput';
 import SelectInput from 'components/common/SelectInput';
 

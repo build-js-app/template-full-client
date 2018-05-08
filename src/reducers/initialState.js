@@ -11,6 +11,6 @@ export default {
     current: null
   },
   common: {
-    ajaxCallsInProgress: false
+    asyncActionInProgress: false
   }
 };

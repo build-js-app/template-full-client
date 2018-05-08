@@ -7,15 +7,9 @@ import {
   DELETE_CATEGORY_SUCCESS
 } from 'action_types/categoryActionTypes';
 
-export const loadCategoriesSuccess = categories => ({
-  type: LOAD_CATEGORIES_SUCCESS,
-  payload: {categories}
-});
+const loadCategoriesSuccess = categories => helper.getAction(LOAD_CATEGORIES_SUCCESS, {categories});
 
-export const createCategorySuccess = category => ({
-  type: CREATE_CATEGORY_SUCCESS,
-  payload: {category}
-});
+const createCategorySuccess = category => helper.getAction(CREATE_CATEGORY_SUCCESS, {category});
 
 export const updateCategorySuccess = category => ({
   type: UPDATE_CATEGORY_SUCCESS,
@@ -28,14 +22,14 @@ export const deleteCategorySuccess = id => ({
 });
 
 export const loadCategories = () => {
-  return helper.dispatchAjaxAction(async dispatch => {
+  return helper.dispatchAsyncAction(async dispatch => {
     let categories = await dataService.getCategories();
     dispatch(loadCategoriesSuccess(categories));
   });
 };
 
 export const saveCategory = category => {
-  return helper.dispatchAjaxAction(async dispatch => {
+  return helper.dispatchAsyncAction(async dispatch => {
     let response = await dataService.saveCategory(category);
 
     if (category.id) {
@@ -47,7 +41,7 @@ export const saveCategory = category => {
 };
 
 export const deleteCategory = id => {
-  return helper.dispatchAjaxAction(async dispatch => {
+  return helper.dispatchAsyncAction(async dispatch => {
     let response = await dataService.deleteCategory(id);
 
     if (response) {

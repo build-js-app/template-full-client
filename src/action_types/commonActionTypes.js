@@ -1,5 +1,5 @@
-export const BEGIN_AJAX_CALL = 'common/BEGIN_AJAX_CALL';
-export const END_AJAX_CALL = 'common/END_AJAX_CALL';
+export const ASYNC_ACTION_START = 'common/ASYNC_ACTION_START';
+export const ASYNC_ACTION_END = 'common/ASYNC_ACTION_END';
 
-export const CONFIRM_ACTION = 'CONFIRM_ACTION';
-export const CONFIRM_ACTION_CANCEL = 'CONFIRM_ACTION_CANCEL';
+export const CONFIRM_ACTION = 'common/CONFIRM_ACTION';
+export const CONFIRM_ACTION_CANCEL = 'common/CONFIRM_ACTION_CANCEL';

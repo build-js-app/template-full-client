@@ -3,16 +3,16 @@ import initialState from './initialState';
 
 const commonReducer = (state = initialState.common, action) => {
   switch (action.type) {
-    case types.BEGIN_AJAX_CALL:
+    case types.ASYNC_ACTION_START:
       return {
         ...state,
-        ajaxCallsInProgress: true
+        asyncActionInProgress: true
       };
 
-    case types.END_AJAX_CALL:
+    case types.ASYNC_ACTION_END:
       return {
         ...state,
-        ajaxCallsInProgress: false
+        asyncActionInProgress: false
       };
 
     case types.CONFIRM_ACTION:
