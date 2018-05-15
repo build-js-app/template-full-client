@@ -1,36 +1,31 @@
-import * as types from 'action_types/categoryActionTypes';
+import helper from './reducerHelper';
+
+import {
+  LOAD_CATEGORIES_SUCCESS,
+  CREATE_CATEGORY_SUCCESS,
+  UPDATE_CATEGORY_SUCCESS,
+  DELETE_CATEGORY_SUCCESS
+} from 'action_types/categoryActionTypes';
 import initialState from './initialState';
-import _ from 'lodash';
 
 const categoryReducer = (state = initialState.category, action) => {
-  switch (action.type) {
-    case types.LOAD_CATEGORIES_SUCCESS:
-      return {
-        ...state,
-        list: action.payload.categories
-      };
-
-    case types.CREATE_CATEGORY_SUCCESS:
-      return _.assign({}, state, {
-        list: [...state.list, _.assign({}, action.payload.category)]
-      });
-
-    case types.UPDATE_CATEGORY_SUCCESS:
-      return _.assign({}, state, {
-        list: [
-          ...state.list.filter(category => category.id !== action.payload.category.id),
-          _.assign({}, action.payload.category)
-        ]
-      });
-
-    case types.DELETE_CATEGORY_SUCCESS:
-      return _.assign({}, state, {
-        list: [...state.list.filter(category => category.id !== action.payload.id)]
-      });
-
-    default:
-      return state;
-  }
+  return helper.handleActions(state, action, {
+    [LOAD_CATEGORIES_SUCCESS](state, payload) {
+      state.list = payload.categories;
+    },
+    [CREATE_CATEGORY_SUCCESS](state, payload) {
+      let newList = [...state.list, {...payload.category}];
+      state.list = newList;
+    },
+    [UPDATE_CATEGORY_SUCCESS](state, payload) {
+      let newList = [...state.list.filter(category => category.id !== payload.category.id), {...payload.category}];
+      state.list = newList;
+    },
+    [DELETE_CATEGORY_SUCCESS](state, payload) {
+      let newList = [...state.list.filter(category => category.id !== payload.id)];
+      state.list = newList;
+    }
+  });
 };
 
 export default categoryReducer;

@@ -1,35 +1,28 @@
-import * as types from 'action_types/commonActionTypes';
+import helper from './reducerHelper';
+
+import {
+  ASYNC_ACTION_START,
+  ASYNC_ACTION_END,
+  CONFIRM_ACTION,
+  CONFIRM_ACTION_CANCEL
+} from 'action_types/commonActionTypes';
 import initialState from './initialState';
 
 const commonReducer = (state = initialState.common, action) => {
-  switch (action.type) {
-    case types.ASYNC_ACTION_START:
-      return {
-        ...state,
-        asyncActionInProgress: true
-      };
-
-    case types.ASYNC_ACTION_END:
-      return {
-        ...state,
-        asyncActionInProgress: false
-      };
-
-    case types.CONFIRM_ACTION:
-      return {
-        ...state,
-        confirmAction: action.payload
-      };
-
-    case types.CONFIRM_ACTION_CANCEL:
-      return {
-        ...state,
-        confirmAction: null
-      };
-
-    default:
-      return state;
-  }
+  return helper.handleActions(state, action, {
+    [ASYNC_ACTION_START](state) {
+      state.asyncActionInProgress = true;
+    },
+    [ASYNC_ACTION_END](state) {
+      state.asyncActionInProgress = false;
+    },
+    [CONFIRM_ACTION](state, payload) {
+      state.confirmAction = payload;
+    },
+    [CONFIRM_ACTION_CANCEL](state) {
+      state.confirmAction = null;
+    }
+  });
 };
 
 export default commonReducer;

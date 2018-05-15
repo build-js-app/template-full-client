@@ -1,11 +1,14 @@
 import {asyncActionStart, asyncActionEnd} from './commonActions';
 
 export default {
+  dispatchAction,
   dispatchAsyncAction,
   getAction
 };
 
-function dispatchAsyncAction(action) {
+//performes async action
+//action is function which has (dispatch, getState) arguments like redux thunk
+function dispatchAsyncAction(action, throwError = false) {
   return async (dispatch, getState) => {
     try {
       dispatch(asyncActionStart());
@@ -19,7 +22,22 @@ function dispatchAsyncAction(action) {
       return result;
     } catch (error) {
       dispatch(asyncActionEnd());
-      throw error;
+      if (throwError) throw error;
+    }
+  };
+}
+
+//performes sync action
+function dispatchAction(action, throwError = false) {
+  return async (dispatch, getState) => {
+    try {
+      let result = await action(dispatch, getState);
+
+      if (!result) return null;
+
+      return result;
+    } catch (error) {
+      if (throwError) throw error;
     }
   };
 }

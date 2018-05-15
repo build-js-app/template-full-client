@@ -1,24 +1,21 @@
-import * as types from 'action_types/recordActionTypes';
+import helper from './reducerHelper';
+
+import {LOAD_RECORDS_SUCCESS, DELETE_RECORD_SUCCESS} from 'action_types/recordActionTypes';
 import initialState from './initialState';
-import _ from 'lodash';
 
 const recordReducer = (state = initialState.record, action) => {
-  switch (action.type) {
-    case types.LOAD_RECORDS_SUCCESS:
-      return {
-        ...state,
-        list: action.payload.records,
-        sortBy: action.payload.sortBy
-      };
-
-    case types.DELETE_RECORD_SUCCESS:
-      return _.assign({}, state, {
-        list: [...state.list.filter(record => record.id !== action.payload.id)]
-      });
-
-    default:
-      return state;
-  }
+  return helper.handleActions(state, action, {
+    [LOAD_RECORDS_SUCCESS](state, payload) {
+      state.list = payload.records;
+      state.sortBy = payload.sortBy;
+    },
+    [DELETE_RECORD_SUCCESS]: deleteRecord
+  });
 };
+
+function deleteRecord(state, payload) {
+  let newList = [...state.list.filter(record => record.id !== payload.id)];
+  state.list = newList;
+}
 
 export default recordReducer;
