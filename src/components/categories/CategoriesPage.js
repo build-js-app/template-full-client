@@ -81,7 +81,7 @@ class CategoriesPage extends Component {
         let response = await this.props.deleteCategory(id);
 
         if (_.isNumber(response)) {
-          uiHelper.showMessage('Category was deleted successfully!');
+          uiHelper.showMessage('Category was successfully deleted');
         }
       }
     });

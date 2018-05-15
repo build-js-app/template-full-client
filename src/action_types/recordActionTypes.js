@@ -1,2 +1,2 @@
-export const LOAD_RECORDS_SUCCESS = 'record/LOAD_RECORDS_SUCCESS';
-export const DELETE_RECORD_SUCCESS = 'record/DELETE_RECORD_SUCCESS';
+export const LOAD_RECORDS = 'record/LOAD_RECORDS';
+export const DELETE_RECORD = 'record/DELETE_RECORD';

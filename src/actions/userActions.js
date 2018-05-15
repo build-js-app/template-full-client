@@ -4,9 +4,9 @@ import uiHelper from 'helpers/uiHelper';
 import dataService from 'services/dataService';
 import authService from 'services/authService';
 
-import {LOAD_CURRENT_USER_SUCCESS} from 'action_types/userActionTypes';
+import {LOAD_CURRENT_USER} from 'action_types/userActionTypes';
 
-export const loadCurrentUserSuccess = user => helper.getAction(LOAD_CURRENT_USER_SUCCESS, {user});
+export const loadCurrentUserSuccess = user => helper.getAction(LOAD_CURRENT_USER, {user});
 
 export const getCurrentUser = () => {
   return helper.dispatchAsyncAction(async dispatch => {

@@ -1,10 +1,10 @@
 import dataService from 'services/dataService';
 import helper from './actionHelper';
-import {LOAD_RECORDS_SUCCESS, DELETE_RECORD_SUCCESS} from 'action_types/recordActionTypes.js';
+import {LOAD_RECORDS, DELETE_RECORD} from 'action_types/recordActionTypes.js';
 
-const loadRecordsSuccess = (records, sortBy) => helper.getAction(LOAD_RECORDS_SUCCESS, {records, sortBy});
+const loadRecordsSuccess = (records, sortBy) => helper.getAction(LOAD_RECORDS, {records, sortBy});
 
-const deleteRecordSuccess = id => helper.getAction(DELETE_RECORD_SUCCESS, {id});
+const deleteRecordSuccess = id => helper.getAction(DELETE_RECORD, {id});
 
 export const loadRecords = sortBy => {
   return helper.dispatchAsyncAction(async dispatch => {

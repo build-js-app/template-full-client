@@ -99,7 +99,7 @@ class RecordsPage extends Component {
       action: async () => {
         this.props.deleteRecord(id);
 
-        uiHelper.showMessage('Record was deleted successfully!');
+        uiHelper.showMessage('Record was successfully deleted');
       }
     });
   }

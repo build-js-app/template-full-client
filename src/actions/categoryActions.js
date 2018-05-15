@@ -1,23 +1,18 @@
 import dataService from 'services/dataService';
 import helper from './actionHelper';
-import {
-  LOAD_CATEGORIES_SUCCESS,
-  CREATE_CATEGORY_SUCCESS,
-  UPDATE_CATEGORY_SUCCESS,
-  DELETE_CATEGORY_SUCCESS
-} from 'action_types/categoryActionTypes';
+import {LOAD_CATEGORIES, CREATE_CATEGORY, UPDATE_CATEGORY, DELETE_CATEGORY} from 'action_types/categoryActionTypes';
 
-const loadCategoriesSuccess = categories => helper.getAction(LOAD_CATEGORIES_SUCCESS, {categories});
+const loadCategoriesSuccess = categories => helper.getAction(LOAD_CATEGORIES, {categories});
 
-const createCategorySuccess = category => helper.getAction(CREATE_CATEGORY_SUCCESS, {category});
+const createCategorySuccess = category => helper.getAction(CREATE_CATEGORY, {category});
 
 export const updateCategorySuccess = category => ({
-  type: UPDATE_CATEGORY_SUCCESS,
+  type: UPDATE_CATEGORY,
   payload: {category}
 });
 
 export const deleteCategorySuccess = id => ({
-  type: DELETE_CATEGORY_SUCCESS,
+  type: DELETE_CATEGORY,
   payload: {id}
 });
 

@@ -1,15 +1,15 @@
 import helper from './reducerHelper';
 
-import {LOAD_RECORDS_SUCCESS, DELETE_RECORD_SUCCESS} from 'action_types/recordActionTypes';
+import {LOAD_RECORDS, DELETE_RECORD} from 'action_types/recordActionTypes';
 import initialState from './initialState';
 
 const recordReducer = (state = initialState.record, action) => {
   return helper.handleActions(state, action, {
-    [LOAD_RECORDS_SUCCESS](state, payload) {
+    [LOAD_RECORDS](state, payload) {
       state.list = payload.records;
       state.sortBy = payload.sortBy;
     },
-    [DELETE_RECORD_SUCCESS]: deleteRecord
+    [DELETE_RECORD]: deleteRecord
   });
 };
 
