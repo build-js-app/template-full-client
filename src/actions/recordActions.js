@@ -7,10 +7,13 @@ const loadRecordsSuccess = (records, sortBy) => helper.getAction(LOAD_RECORDS, {
 const deleteRecordSuccess = id => helper.getAction(DELETE_RECORD, {id});
 
 export const loadRecords = sortBy => {
-  return helper.dispatchAsyncAction(async dispatch => {
-    let records = await dataService.getRecords(sortBy);
-    dispatch(loadRecordsSuccess(records, sortBy));
-  });
+  return helper.dispatchAsyncAction(
+    async dispatch => {
+      let records = await dataService.getRecords(sortBy);
+      dispatch(loadRecordsSuccess(records, sortBy));
+    },
+    {showOverlay: false}
+  );
 };
 
 export const saveRecord = record => {

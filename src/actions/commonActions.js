@@ -7,7 +7,7 @@ import {
 
 import helper from './actionHelper';
 
-export const asyncActionStart = () => helper.getAction(ASYNC_ACTION_START);
+export const asyncActionStart = showOverlay => helper.getAction(ASYNC_ACTION_START, {showOverlay});
 
 export const asyncActionEnd = () => helper.getAction(ASYNC_ACTION_END);
 

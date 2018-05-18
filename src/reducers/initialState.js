@@ -11,6 +11,7 @@ export default {
     current: null
   },
   common: {
-    asyncActionInProgress: false
+    asyncAction: null,
+    confirmAction: null
   }
 };

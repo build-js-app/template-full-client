@@ -6,12 +6,27 @@ export default {
   getAction
 };
 
+const defaultOptions = {
+  throwError: false,
+  showOverlay: true
+};
+
+const getOptions = options => {
+  if (!options) return defaultOptions;
+
+  return {
+    ...defaultOptions,
+    ...options
+  };
+};
+
 //performes async action
 //action is function which has (dispatch, getState) arguments like redux thunk
-function dispatchAsyncAction(action, throwError = false) {
+function dispatchAsyncAction(action, options) {
+  options = getOptions(options);
   return async (dispatch, getState) => {
     try {
-      dispatch(asyncActionStart());
+      dispatch(asyncActionStart(options.showOverlay));
 
       let result = await action(dispatch, getState);
 
@@ -22,13 +37,14 @@ function dispatchAsyncAction(action, throwError = false) {
       return result;
     } catch (error) {
       dispatch(asyncActionEnd());
-      if (throwError) throw error;
+      if (options.throwError) throw error;
     }
   };
 }
 
 //performes sync action
-function dispatchAction(action, throwError = false) {
+function dispatchAction(action, options) {
+  options = getOptions(options);
   return async (dispatch, getState) => {
     try {
       let result = await action(dispatch, getState);
@@ -37,7 +53,7 @@ function dispatchAction(action, throwError = false) {
 
       return result;
     } catch (error) {
-      if (throwError) throw error;
+      if (options.throwError) throw error;
     }
   };
 }

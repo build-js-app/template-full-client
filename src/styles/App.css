@@ -10,7 +10,7 @@ body {
   font-size: 1.5rem;
 }
 
-.overlay-style {
+.ui-block {
   position: fixed;
   left: 0;
   top: 0;

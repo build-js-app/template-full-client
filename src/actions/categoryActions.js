@@ -17,10 +17,13 @@ export const deleteCategorySuccess = id => ({
 });
 
 export const loadCategories = () => {
-  return helper.dispatchAsyncAction(async dispatch => {
-    let categories = await dataService.getCategories();
-    dispatch(loadCategoriesSuccess(categories));
-  });
+  return helper.dispatchAsyncAction(
+    async dispatch => {
+      let categories = await dataService.getCategories();
+      dispatch(loadCategoriesSuccess(categories));
+    },
+    {showOverlay: false}
+  );
 };
 
 export const saveCategory = category => {

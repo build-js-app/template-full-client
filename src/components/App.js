@@ -13,7 +13,7 @@ import {confirmActionCancel} from 'actions/commonActions';
 import '../styles/App.css';
 
 const stateMap = state => ({
-  isFetchingData: state.common.asyncActionInProgress,
+  asyncAction: state.common.asyncAction,
   confirmAction: state.common.confirmAction
 });
 
@@ -26,10 +26,6 @@ class App extends Component {
     routes: PropTypes.array.isRequired
   };
 
-  state = {
-    isFetchingData: false
-  };
-
   constructor(props) {
     super(props);
 
@@ -38,10 +34,13 @@ class App extends Component {
 
   render() {
     const {confirmAction} = this.props;
+    const {asyncAction} = this.props;
+
+    let showOverlay = _.get(asyncAction, 'showOverlay', false);
 
     return (
       <div>
-        {this.props.isFetchingData && <div className="overlay-style" />}
+        {showOverlay && <div className="ui-block" />}
 
         {confirmAction && (
           <Confirm
