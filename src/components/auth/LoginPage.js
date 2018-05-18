@@ -118,7 +118,7 @@ class LoginPage extends Component {
           <hr />
 
           <p>
-            Need an account? <Link to="/signup">Signup</Link>
+            Need an account? <Link to="/sign-up">Sign Up</Link>
           </p>
         </div>
       </div>

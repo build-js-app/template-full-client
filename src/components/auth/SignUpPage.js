@@ -97,7 +97,7 @@ class SignUpPage extends Component {
       <div className="container">
         <div className="col-xs-12 col-sm-6 col-sm-offset-3">
           <h1>
-            <span className="fa fa-sign-in" /> Signup
+            <span className="fa fa-sign-in" /> Sign Up
           </h1>
 
           <TextInput
@@ -149,7 +149,7 @@ class SignUpPage extends Component {
           />
 
           <button className="btn btn-warning btn-lg" onClick={this.signUp}>
-            Signup
+            Sign Up
           </button>
 
           <hr />
