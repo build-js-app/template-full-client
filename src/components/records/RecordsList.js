@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 
 import dateHelper from '../../helpers/dateHelper';
 
+import './records.css';
+
 class RecordsList extends Component {
   static propTypes = {
     records: PropTypes.array,
@@ -19,12 +21,10 @@ class RecordsList extends Component {
   }
 
   render() {
-    let style = {marginTop: 30};
-
-    if (!this.anyRecords) return <div style={style}>No Records.</div>;
+    if (!this.anyRecords) return <div className="records-list">No Records.</div>;
 
     return (
-      <Row style={style}>
+      <Row className="records-list">
         <Col sm={12}>
           <Row className="item-row">
             <Col sm={2} xsHidden>

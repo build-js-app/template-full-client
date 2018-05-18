@@ -1,5 +1,7 @@
 build
 node_modules
 npm-debug.log
+package-lock.json
 shrinkwrap.yaml
 .env.local
+*.css

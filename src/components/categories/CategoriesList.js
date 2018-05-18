@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import helper from 'helpers/reactHelper';
 
+import './categories.css';
+
 class CategoriesList extends Component {
   static propTypes = {
     categories: PropTypes.array,
@@ -23,12 +25,10 @@ class CategoriesList extends Component {
   }
 
   render() {
-    let style = {marginTop: 30};
-
-    if (!this.anyCategories) return <div style={style}>No categories.</div>;
+    if (!this.anyCategories) return <div className="categories-list">No categories.</div>;
 
     return (
-      <Row style={style}>
+      <Row className="categories-list">
         <Col sm={12}>
           <Row className="item-row">
             <Col sm={3} xsHidden>
