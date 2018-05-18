@@ -25,7 +25,7 @@ class NumberInput extends React.Component {
           name={name}
           className="form-control"
           min="0"
-          step="0.01"
+          step="1"
           value={value ? value : 0.0}
           onChange={inputOnChange}
         />

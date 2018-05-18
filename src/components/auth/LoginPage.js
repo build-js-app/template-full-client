@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {Container, Row, Col} from 'components/bootstrap';
+import {Container, Row, Col, Button} from 'components/bootstrap';
 import * as _ from 'lodash';
 
 import helper from 'helpers/reactHelper';
@@ -70,7 +70,9 @@ class LoginPage extends Component {
     return re.test(email);
   }
 
-  async login() {
+  async login(e) {
+    if (e) e.preventDefault();
+
     if (!this.loginFormIsValid()) return;
 
     await this.props.loginUser(this.state.user);
@@ -89,29 +91,31 @@ class LoginPage extends Component {
               <span className="fa fa-sign-in" /> Login
             </h1>
 
-            <TextInput
-              name="email"
-              label="Email"
-              type="email"
-              value={this.state.user.email}
-              onChange={this.onChange}
-              placeholder="Email"
-              error={this.state.errors.email}
-            />
+            <form onSubmit={this.login}>
+              <TextInput
+                name="email"
+                label="Email"
+                type="email"
+                value={this.state.user.email}
+                onChange={this.onChange}
+                placeholder="Email"
+                error={this.state.errors.email}
+              />
 
-            <TextInput
-              name="password"
-              label="Password"
-              type="password"
-              value={this.state.user.password}
-              onChange={this.onChange}
-              placeholder="Password"
-              error={this.state.errors.password}
-            />
+              <TextInput
+                name="password"
+                label="Password"
+                type="password"
+                value={this.state.user.password}
+                onChange={this.onChange}
+                placeholder="Password"
+                error={this.state.errors.password}
+              />
 
-            <button className="btn btn-warning btn-lg" onClick={this.login}>
-              Login
-            </button>
+              <Button color="warning" size="lg" type="submit" onClick={this.login}>
+                Login
+              </Button>
+            </form>
 
             <hr />
 
