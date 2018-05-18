@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import {Container, Row, Col} from 'components/bootstrap';
 
 import helper from 'helpers/reactHelper';
 import uiHelper from 'helpers/uiHelper';
@@ -101,52 +102,54 @@ class PasswordResetPage extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="col-xs-12 col-sm-6 col-sm-offset-3">
-          <h1>Reset Password</h1>
+      <Container>
+        <Row>
+          <Col sm={{size: 6, offset: 3}}>
+            <h1>Reset Password</h1>
 
-          <TextInput
-            name="email"
-            label="Email"
-            type="email"
-            disabled={true}
-            value={this.state.userData.email}
-            onChange={this.onChange}
-            placeholder="Email"
-            error={this.state.errors.email}
-          />
+            <TextInput
+              name="email"
+              label="Email"
+              type="email"
+              disabled={true}
+              value={this.state.userData.email}
+              onChange={this.onChange}
+              placeholder="Email"
+              error={this.state.errors.email}
+            />
 
-          <TextInput
-            name="password"
-            label="New Password"
-            type="password"
-            value={this.state.userData.password}
-            onChange={this.onChange}
-            placeholder="New password"
-            error={this.state.errors.password}
-          />
+            <TextInput
+              name="password"
+              label="New Password"
+              type="password"
+              value={this.state.userData.password}
+              onChange={this.onChange}
+              placeholder="New password"
+              error={this.state.errors.password}
+            />
 
-          <TextInput
-            name="confirmPassword"
-            label="Confirm Password"
-            type="password"
-            value={this.state.userData.confirmPassword}
-            onChange={this.onChange}
-            placeholder="Confirm password"
-            error={this.state.errors.confirmPassword}
-          />
+            <TextInput
+              name="confirmPassword"
+              label="Confirm Password"
+              type="password"
+              value={this.state.userData.confirmPassword}
+              onChange={this.onChange}
+              placeholder="Confirm password"
+              error={this.state.errors.confirmPassword}
+            />
 
-          <button className="btn btn-warning btn-lg" onClick={this.resetPassword}>
-            Save Password
-          </button>
+            <button className="btn btn-warning btn-lg" onClick={this.resetPassword}>
+              Save Password
+            </button>
 
-          <hr />
+            <hr />
 
-          <p>
-            Redirect to login page: <Link to="/login">Login</Link>
-          </p>
-        </div>
-      </div>
+            <p>
+              Redirect to login page: <Link to="/login">Login</Link>
+            </p>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

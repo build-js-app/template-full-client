@@ -1,3 +1,5 @@
+@import 'styles/shared.scss';
+
 html,
 body {
   height: 100%;
@@ -7,7 +9,16 @@ body {
   font-family: 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, Arial, sans-serif;
   margin: 0;
   padding: 0;
-  font-size: 1.5rem;
+  font-size: 1rem;
+}
+
+.container,
+.container-fluid {
+  margin-top: 40px;
+}
+
+label {
+  font-weight: 500;
 }
 
 .ui-block {
@@ -22,12 +33,12 @@ body {
   z-index: 999;
 }
 
-.item-row {
+.list-item {
   margin-bottom: 40px;
 }
 
-@media screen and (min-width: 768px) {
-  .item-row {
+@media screen and (min-width: $desktop-screen-size) {
+  .list-item {
     margin-bottom: 15px;
   }
 }

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import {Container, Row, Col} from 'components/bootstrap';
 
 import {signUp} from 'actions/userActions';
 
@@ -94,71 +95,73 @@ class SignUpPage extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="col-xs-12 col-sm-6 col-sm-offset-3">
-          <h1>
-            <span className="fa fa-sign-in" /> Sign Up
-          </h1>
+      <Container>
+        <Row>
+          <Col sm={{size: 6, offset: 3}}>
+            <h1>
+              <span className="fa fa-sign-in" /> Sign Up
+            </h1>
 
-          <TextInput
-            name="firstName"
-            label="First Name"
-            value={this.state.user.firstName}
-            onChange={this.onChange}
-            placeholder="First Name"
-            error={this.state.errors.firstName}
-          />
+            <TextInput
+              name="firstName"
+              label="First Name"
+              value={this.state.user.firstName}
+              onChange={this.onChange}
+              placeholder="First Name"
+              error={this.state.errors.firstName}
+            />
 
-          <TextInput
-            name="lastName"
-            label="Last Name"
-            value={this.state.user.lastName}
-            onChange={this.onChange}
-            placeholder="Last Name"
-            error={this.state.errors.lastName}
-          />
+            <TextInput
+              name="lastName"
+              label="Last Name"
+              value={this.state.user.lastName}
+              onChange={this.onChange}
+              placeholder="Last Name"
+              error={this.state.errors.lastName}
+            />
 
-          <TextInput
-            name="email"
-            label="Email"
-            type="email"
-            value={this.state.user.email}
-            onChange={this.onChange}
-            placeholder="Email"
-            error={this.state.errors.email}
-          />
+            <TextInput
+              name="email"
+              label="Email"
+              type="email"
+              value={this.state.user.email}
+              onChange={this.onChange}
+              placeholder="Email"
+              error={this.state.errors.email}
+            />
 
-          <TextInput
-            name="password"
-            label="Password"
-            type="password"
-            value={this.state.user.password}
-            onChange={this.onChange}
-            placeholder="Password"
-            error={this.state.errors.password}
-          />
+            <TextInput
+              name="password"
+              label="Password"
+              type="password"
+              value={this.state.user.password}
+              onChange={this.onChange}
+              placeholder="Password"
+              error={this.state.errors.password}
+            />
 
-          <TextInput
-            name="confirmPassword"
-            label="Confirm Password"
-            type="password"
-            value={this.state.user.confirmPassword}
-            onChange={this.onChange}
-            placeholder="Confirm Password"
-            error={this.state.errors.confirmPassword}
-          />
+            <TextInput
+              name="confirmPassword"
+              label="Confirm Password"
+              type="password"
+              value={this.state.user.confirmPassword}
+              onChange={this.onChange}
+              placeholder="Confirm Password"
+              error={this.state.errors.confirmPassword}
+            />
 
-          <button className="btn btn-warning btn-lg" onClick={this.signUp}>
-            Sign Up
-          </button>
+            <button className="btn btn-warning btn-lg" onClick={this.signUp}>
+              Sign Up
+            </button>
 
-          <hr />
+            <hr />
 
-          <p>
-            Already have an account? <Link to="/login">Login</Link>
-          </p>
-        </div>
-      </div>
+            <p>
+              Already have an account? <Link to="/login">Login</Link>
+            </p>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

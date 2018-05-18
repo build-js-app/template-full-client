@@ -1,31 +1,31 @@
-import React from 'react';
-import {Modal, Button} from 'react-bootstrap';
+import React, {Component} from 'react';
+import {Modal, Button} from 'components/bootstrap';
 import PropTypes from 'prop-types';
 
-class Confirm extends React.Component {
+class Confirm extends Component {
   static propTypes = {
     title: PropTypes.string,
+    visible: PropTypes.bool,
     action: PropTypes.func.isRequired,
-    close: PropTypes.func.isRequired,
-    visible: PropTypes.bool
+    close: PropTypes.func.isRequired
   };
 
   render() {
-    let title = this.props.title ? this.props.title : 'Confirmation';
-    let message = this.props.message ? this.props.message : 'Are you sure?';
+    const {title, message, visible, action, close} = this.props;
+
+    let displayTitle = title ? title : 'Confirmation';
+    let displayMessage = message ? message : 'Are you sure?';
 
     return (
       <div>
-        <Modal show={this.props.visible} onHide={this.props.close}>
-          <Modal.Header closeButton onClick={this.props.close}>
-            <Modal.Title>{title}</Modal.Title>
-          </Modal.Header>
+        <Modal isOpen={visible} backdrop="static" toggle={close}>
+          <Modal.Header toggle={close}>{displayTitle}</Modal.Header>
           <Modal.Body>
-            <h4>{message}</h4>
+            <h4>{displayMessage}</h4>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.props.close}>No</Button>
-            <Button bsStyle="danger" onClick={this.props.action}>
+            <Button onClick={close}>No</Button>
+            <Button color="danger" onClick={action}>
               Yes
             </Button>
           </Modal.Footer>

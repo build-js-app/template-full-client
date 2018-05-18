@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Row, Col} from 'react-bootstrap';
+import {Container, Row, Col} from 'components/bootstrap';
 
 import helper from 'helpers/reactHelper';
 import uiHelper from 'helpers/uiHelper';
@@ -114,9 +114,9 @@ class RecordsPage extends Component {
     let editRecordVisible = this.state.recordToEdit ? true : false;
 
     return (
-      <div className="container-fluid">
+      <Container fluid>
         <Row>
-          <Col md={10} mdOffset={1}>
+          <Col md={{size: 10, offset: 1}}>
             <Row>
               <Col sm={12}>
                 <h2>Records Page</h2>
@@ -144,7 +144,7 @@ class RecordsPage extends Component {
           close={this.cancelEditRecord}
           onChange={this.updateRecordState}
         />
-      </div>
+      </Container>
     );
   }
 }

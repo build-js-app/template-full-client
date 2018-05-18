@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Row, Col, ControlLabel, Button} from 'react-bootstrap';
+import {Row, Col, Label, Button} from 'components/bootstrap';
 import * as _ from 'lodash';
 import PropTypes from 'prop-types';
 
@@ -26,21 +26,20 @@ class RecordsList extends Component {
     return (
       <Row className="records-list">
         <Col sm={12}>
-          <Row className="item-row">
-            <Col sm={2} xsHidden>
-              <ControlLabel>Date</ControlLabel>
+          <Row className="list-item d-none d-sm-flex">
+            <Col sm={2} className="d-none d-sm-block">
+              <Label>Date</Label>
             </Col>
-            <Col sm={3} xsHidden>
-              <ControlLabel>Category</ControlLabel>
+            <Col sm={3} className="d-none d-sm-block">
+              <Label>Category</Label>
             </Col>
-            <Col sm={2} xsHidden>
-              <ControlLabel>Cost</ControlLabel>
+            <Col sm={2} className="d-none d-sm-block">
+              <Label>Cost</Label>
             </Col>
-            <Col sm={3} xsHidden>
-              <ControlLabel>Note</ControlLabel>
+            <Col sm={3} className="d-none d-sm-block">
+              <Label>Note</Label>
             </Col>
-            <Col sm={2} xsHidden />
-            <Col sm={2} xsHidden />
+            <Col sm={2} className="d-none d-sm-block" />
           </Row>
 
           {this.props.records.map(record => this.renderRecord(record))}
@@ -67,10 +66,10 @@ class RecordsList extends Component {
     let dateDisplay = dateHelper.displayDate(record.date);
 
     let SubItem = props => (
-      <Col xs={12} smHidden mdHidden lgHidden>
+      <Col xs={12} className="d-sm-none d-md-none d-lg-none">
         <Row>
           <Col xs={12}>
-            <ControlLabel>{props.title}:</ControlLabel>
+            <Label>{props.title}:</Label>
           </Col>
           <Col xs={12} className="form-group">
             {props.value}
@@ -80,39 +79,39 @@ class RecordsList extends Component {
     );
 
     return (
-      <Row key={record.id} className="item-row">
-        <Col sm={2} xsHidden>
+      <Row key={record.id} className="list-item align-items-center">
+        <Col sm={2} className="d-none d-sm-block">
           {dateDisplay}
         </Col>
 
         <SubItem title="Date" value={dateDisplay} />
 
-        <Col sm={3} xsHidden>
+        <Col sm={3} className="d-none d-sm-block">
           {categoryTitle}
         </Col>
 
         <SubItem title="Category" value={categoryTitle} />
 
-        <Col sm={2} xsHidden>
+        <Col sm={2} className="d-none d-sm-block">
           {record.cost}
         </Col>
 
         <SubItem title="Cost" value={record.cost} />
 
-        <Col sm={3} xsHidden>
+        <Col sm={3} className="d-none d-sm-block">
           {record.note}
         </Col>
 
         <SubItem title="Note" value={record.note} />
 
         <Col sm={1} xs={3}>
-          <Button bsStyle="link" onClick={editClick}>
+          <Button color="link" onClick={editClick}>
             Edit
           </Button>
         </Col>
 
         <Col sm={1} xs={3}>
-          <Button bsStyle="link" onClick={deleteClick}>
+          <Button color="link" onClick={deleteClick}>
             Delete
           </Button>
         </Col>

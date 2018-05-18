@@ -1,6 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
+import {Label} from 'components/bootstrap';
 
 class TextInput extends React.Component {
   render() {
@@ -19,19 +20,18 @@ class TextInput extends React.Component {
 
     return (
       <div className={wrapperClass}>
-        <label htmlFor={name}>{label}</label>
-        <div className="field">
-          <textarea
-            type="text"
-            name={name}
-            rows={rows}
-            className="form-control"
-            placeholder={placeholder}
-            value={value ? value : ''}
-            onChange={inputOnChange}
-          />
-          {error && <div className="alert alert-danger">{error}</div>}
-        </div>
+        <Label htmlFor={name}>{label}</Label>
+
+        <textarea
+          type="text"
+          name={name}
+          rows={rows}
+          className="form-control"
+          placeholder={placeholder}
+          value={value ? value : ''}
+          onChange={inputOnChange}
+        />
+        {error && <div className="alert alert-danger">{error}</div>}
       </div>
     );
   }

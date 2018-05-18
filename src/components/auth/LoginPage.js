@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import {Container, Row, Col} from 'components/bootstrap';
 import * as _ from 'lodash';
 
 import helper from 'helpers/reactHelper';
@@ -81,47 +82,49 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="col-xs-12 col-sm-6 col-sm-offset-3">
-          <h1>
-            <span className="fa fa-sign-in" /> Login
-          </h1>
+      <Container>
+        <Row>
+          <Col sm={{size: 6, offset: 3}}>
+            <h1>
+              <span className="fa fa-sign-in" /> Login
+            </h1>
 
-          <TextInput
-            name="email"
-            label="Email"
-            type="email"
-            value={this.state.user.email}
-            onChange={this.onChange}
-            placeholder="Email"
-            error={this.state.errors.email}
-          />
+            <TextInput
+              name="email"
+              label="Email"
+              type="email"
+              value={this.state.user.email}
+              onChange={this.onChange}
+              placeholder="Email"
+              error={this.state.errors.email}
+            />
 
-          <TextInput
-            name="password"
-            label="Password"
-            type="password"
-            value={this.state.user.password}
-            onChange={this.onChange}
-            placeholder="Password"
-            error={this.state.errors.password}
-          />
+            <TextInput
+              name="password"
+              label="Password"
+              type="password"
+              value={this.state.user.password}
+              onChange={this.onChange}
+              placeholder="Password"
+              error={this.state.errors.password}
+            />
 
-          <button className="btn btn-warning btn-lg" onClick={this.login}>
-            Login
-          </button>
+            <button className="btn btn-warning btn-lg" onClick={this.login}>
+              Login
+            </button>
 
-          <hr />
+            <hr />
 
-          <Link to="/password-forgot">Forgot your password?</Link>
+            <Link to="/password-forgot">Forgot your password?</Link>
 
-          <hr />
+            <hr />
 
-          <p>
-            Need an account? <Link to="/sign-up">Sign Up</Link>
-          </p>
-        </div>
-      </div>
+            <p>
+              Need an account? <Link to="/sign-up">Sign Up</Link>
+            </p>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

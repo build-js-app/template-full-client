@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {Navbar, Nav, NavItem, Glyphicon, Button} from 'react-bootstrap';
-import {LinkContainer} from 'react-router-bootstrap';
+import {Navbar, Collapse, Nav, NavbarBrand, NavbarToggler, NavItem, NavLink, Glyphicon} from 'components/bootstrap';
+import {NavLink as RRNavLink} from 'react-router-dom';
 
 import helper from 'helpers/reactHelper';
 
@@ -15,10 +15,24 @@ const actions = {
 };
 
 class Navigation extends Component {
+  state = {
+    isOpen: false
+  };
+
+  constructor(props) {
+    super(props);
+
+    helper.autoBind(this);
+  }
+
   async onLogOut() {
     await this.props.logOut();
 
     this.props.history.push('/login');
+  }
+
+  toggle() {
+    this.setState({isOpen: !this.state.isOpen});
   }
 
   render() {
@@ -33,35 +47,35 @@ class Navigation extends Component {
     }
 
     return (
-      <Navbar collapseOnSelect fluid>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <Button bsStyle="link">Expense Manager</Button>
-          </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
-
-        <Navbar.Collapse>
-          <Nav>
-            <LinkContainer key={1} to={'/records'}>
-              <NavItem>Records</NavItem>
-            </LinkContainer>
-
-            <LinkContainer key={2} to={'/categories'}>
-              <NavItem>Categories</NavItem>
-            </LinkContainer>
-          </Nav>
-
-          <Nav pullRight>
-            <NavItem eventKey={1} href="#">
-              Logged as: <b>{userFullName}</b>
+      <Navbar color="light" light expand="md">
+        <NavbarBrand>Expense Manager</NavbarBrand>
+        <NavbarToggler onClick={this.toggle} />
+        <Collapse isOpen={this.state.isOpen} navbar>
+          <Nav navbar>
+            <NavItem>
+              <NavLink activeClassName="active" tag={RRNavLink} to="/records">
+                Records
+              </NavLink>
             </NavItem>
-
-            <NavItem eventKey={2} onClick={() => this.onLogOut()}>
-              LogOut <Glyphicon glyph="log-out" />
+            <NavItem>
+              <NavLink activeClassName="active" tag={RRNavLink} to="/categories">
+                Categories
+              </NavLink>
             </NavItem>
           </Nav>
-        </Navbar.Collapse>
+          <Nav navbar className="ml-auto">
+            <NavItem>
+              <span className="navbar-text" style={{marginRight: 20}}>
+                Logged as: <b>{userFullName}</b>
+              </span>
+            </NavItem>
+            <NavItem onClick={() => this.onLogOut()}>
+              <NavLink href="#">
+                LogOut <Glyphicon glyph="sign-out" />
+              </NavLink>
+            </NavItem>
+          </Nav>
+        </Collapse>
       </Navbar>
     );
   }

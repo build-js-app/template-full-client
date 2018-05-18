@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import classnames from 'classnames';
 import {Link} from 'react-router-dom';
+import {Container, Row, Col} from 'components/bootstrap';
 
 import {activateUserAccount} from 'actions/userActions';
 
@@ -53,21 +54,23 @@ class ActivationPage extends Component {
     });
 
     return (
-      <div className="container">
-        <div className="col-xs-12 col-sm-6 col-sm-offset-3">
-          <h1>Activation Page</h1>
+      <Container>
+        <Row>
+          <Col sm={{size: 6, offset: 3}}>
+            <h1>Activation Page</h1>
 
-          <br />
+            <br />
 
-          {this.state.activationData.message && <div className={alertClass}>{this.state.activationData.message}</div>}
+            {this.state.activationData.message && <div className={alertClass}>{this.state.activationData.message}</div>}
 
-          <hr />
+            <hr />
 
-          <p>
-            Redirect to login page: <Link to="/login">Login</Link>
-          </p>
-        </div>
-      </div>
+            <p>
+              Redirect to login page: <Link to="/login">Login</Link>
+            </p>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

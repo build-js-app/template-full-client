@@ -3,3 +3,9 @@
 .categories-list {
   margin-top: $list-top-margin;
 }
+
+@media screen and (min-width: $desktop-screen-size) {
+  .categories-list {
+    margin-top: $list-top-margin - 20;
+  }
+}

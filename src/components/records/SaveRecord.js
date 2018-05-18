@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Modal, Button} from 'react-bootstrap';
+import {Modal, Button, FormGroup} from 'components/bootstrap';
 import PropTypes from 'prop-types';
 import Flatpickr from 'react-flatpickr';
 
@@ -71,7 +71,8 @@ class SaveRecord extends Component {
   }
 
   render() {
-    let record = this.props.record;
+    const {record, categories, visible, close} = this.props;
+    const {errors, dateOptions} = this.state;
 
     if (!record) return null;
 
@@ -79,31 +80,29 @@ class SaveRecord extends Component {
 
     let title = record.id ? 'Edit Record' : 'Add New Record';
 
-    let categoryOptions = this.props.categories.map(category => {
+    let categoryOptions = categories.map(category => {
       return {value: category.id, label: category.title};
     });
 
     return (
       <div>
-        <Modal show={this.props.visible} onHide={this.props.close}>
-          <Modal.Header closeButton onClick={this.props.close}>
-            <Modal.Title>{title}</Modal.Title>
-          </Modal.Header>
+        <Modal isOpen={visible} backdrop="static" toggle={close}>
+          <Modal.Header toggle={close}>{title}</Modal.Header>
           <Modal.Body>
-            <div className="form-group">
+            <FormGroup>
               <label>Date:</label>
 
-              <div className="field">
-                <Flatpickr value={record.date} options={this.state.dateOptions} onChange={this.onDateChange} />
+              <div>
+                <Flatpickr value={record.date} options={dateOptions} onChange={this.onDateChange} />
               </div>
-            </div>
+            </FormGroup>
 
             <NumberInput
               name="cost"
               label="Cost"
               value={record.cost}
               onChange={this.props.onChange}
-              error={this.state.errors.cost}
+              error={errors.cost}
             />
 
             <SelectInput
@@ -112,7 +111,7 @@ class SaveRecord extends Component {
               value={record.categoryId}
               options={categoryOptions}
               onChange={this.props.onChange}
-              error={this.state.errors.categoryId}
+              error={errors.categoryId}
             />
 
             <TextAreaInput
@@ -121,14 +120,14 @@ class SaveRecord extends Component {
               value={record.note}
               onChange={this.props.onChange}
               placeholder="Note"
-              error={this.state.errors.note}
+              error={errors.note}
             />
           </Modal.Body>
           <Modal.Footer>
-            <Button bsStyle="primary" onClick={this.save}>
+            <Button color="primary" onClick={this.save}>
               Save
             </Button>
-            <Button onClick={this.props.close}>Cancel</Button>
+            <Button onClick={close}>Cancel</Button>
           </Modal.Footer>
         </Modal>
       </div>

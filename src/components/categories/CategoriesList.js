@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Row, Col, ControlLabel, Button} from 'react-bootstrap';
+import {Row, Col, Label, Button} from 'components/bootstrap';
 import PropTypes from 'prop-types';
 
 import helper from 'helpers/reactHelper';
@@ -30,15 +30,15 @@ class CategoriesList extends Component {
     return (
       <Row className="categories-list">
         <Col sm={12}>
-          <Row className="item-row">
-            <Col sm={3} xsHidden>
-              <ControlLabel>Title</ControlLabel>
+          <Row className="list-item d-none d-sm-flex">
+            <Col sm={4} className="d-none d-sm-block">
+              <Label>Title</Label>
             </Col>
-            <Col sm={3} xsHidden>
-              <ControlLabel>Description</ControlLabel>
+            <Col sm={6} className="d-none d-sm-block">
+              <Label>Description</Label>
             </Col>
-            <Col sm={2} xsHidden />
-            <Col sm={2} xsHidden />
+            <Col sm={1} className="d-none d-sm-block" />
+            <Col sm={1} className="d-none d-sm-block" />
           </Row>
 
           {this.props.categories.map(category => this.renderCategory(category))}
@@ -57,10 +57,10 @@ class CategoriesList extends Component {
     };
 
     let SubItem = props => (
-      <Col xs={12} smHidden mdHidden lgHidden>
+      <Col xs={12} className="d-sm-none d-md-none d-lg-none">
         <Row>
           <Col xs={12}>
-            <ControlLabel>{props.title}:</ControlLabel>
+            <Label>{props.title}:</Label>
           </Col>
           <Col xs={12} className="form-group">
             {props.value}
@@ -70,27 +70,27 @@ class CategoriesList extends Component {
     );
 
     return (
-      <Row key={category.id} className="item-row">
-        <Col sm={3} xsHidden>
+      <Row key={category.id} className="list-item align-items-center">
+        <Col sm={4} className="d-none d-sm-block">
           {category.title}
         </Col>
 
         <SubItem title="Title" value={category.title} />
 
-        <Col sm={3} xsHidden>
+        <Col sm={6} className="d-none d-sm-block">
           {category.description}
         </Col>
 
         <SubItem title="Description" value={category.description} />
 
         <Col sm={1} xs={3}>
-          <Button bsStyle="link" onClick={editClick}>
+          <Button color="link" onClick={editClick}>
             Edit
           </Button>
         </Col>
 
         <Col sm={1} xs={3}>
-          <Button bsStyle="link" onClick={deleteClick}>
+          <Button color="link" onClick={deleteClick}>
             Delete
           </Button>
         </Col>

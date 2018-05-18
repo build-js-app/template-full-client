@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Modal, Button} from 'react-bootstrap';
+import {Modal, Button} from 'components/bootstrap';
 import PropTypes from 'prop-types';
 
 import helper from 'helpers/reactHelper';
@@ -56,7 +56,8 @@ class SaveCategory extends Component {
   }
 
   render() {
-    let category = this.props.category;
+    const {category, visible, close, onChange} = this.props;
+    const {errors} = this.state;
 
     if (!category) return null;
 
@@ -64,34 +65,32 @@ class SaveCategory extends Component {
 
     return (
       <div>
-        <Modal show={this.props.visible} onHide={this.props.close}>
-          <Modal.Header closeButton onClick={this.props.close}>
-            <Modal.Title>{title}</Modal.Title>
-          </Modal.Header>
+        <Modal isOpen={visible} backdrop="static" toggle={close}>
+          <Modal.Header toggle={close}>{title}</Modal.Header>
           <Modal.Body>
             <TextInput
               name="title"
               label="Title"
               value={category.title}
-              onChange={this.props.onChange}
+              onChange={onChange}
               placeholder="Title"
-              error={this.state.errors.title}
+              error={errors.title}
             />
 
             <TextAreaInput
               name="description"
               label="Description"
               value={category.description}
-              onChange={this.props.onChange}
+              onChange={onChange}
               placeholder="Description"
-              error={this.state.errors.description}
+              error={errors.description}
             />
           </Modal.Body>
           <Modal.Footer>
-            <Button bsStyle="primary" onClick={this.save}>
+            <Button color="primary" onClick={this.save}>
               Save
             </Button>
-            <Button onClick={this.props.close}>Cancel</Button>
+            <Button onClick={close}>Cancel</Button>
           </Modal.Footer>
         </Modal>
       </div>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Glyphicon, ButtonToolbar, DropdownButton, MenuItem} from 'react-bootstrap';
+import {Row, Col, Button, Glyphicon, Dropdown, DropdownToggle, DropdownItem, DropdownMenu} from 'components/bootstrap';
 import PropTypes from 'prop-types';
 
 import helper from 'helpers/reactHelper';
@@ -12,6 +12,7 @@ class FilterBar extends Component {
   };
 
   state = {
+    isSortByOpen: false,
     sortByOptions: [{key: 'date', text: 'Date'}, {key: 'categoryId', text: 'Category'}, {key: 'cost', text: 'Cost'}]
   };
 
@@ -27,30 +28,34 @@ class FilterBar extends Component {
     };
 
     return (
-      <div className="row">
-        <div className="col-xs-8">
-          <ButtonToolbar>
-            <DropdownButton bsSize="small" title="Sort By:" id="sort-by-dropdown">
+      <Row>
+        <Col xs={8}>
+          <Dropdown
+            size="sm"
+            isOpen={this.state.isSortByOpen}
+            toggle={() => this.setState({isSortByOpen: !this.state.isSortByOpen})}>
+            <DropdownToggle caret>Sort By</DropdownToggle>
+            <DropdownMenu>
               {this.state.sortByOptions.map(item => {
                 return (
-                  <MenuItem
+                  <DropdownItem
                     key={item.key}
                     onClick={() => this.props.onSortAction(item.key)}
                     active={this.props.sortBy === item.key}>
                     {item.text}
-                  </MenuItem>
+                  </DropdownItem>
                 );
               })}
-            </DropdownButton>
-          </ButtonToolbar>
-        </div>
+            </DropdownMenu>
+          </Dropdown>
+        </Col>
 
-        <div className="col-xs-4 text-right">
-          <Button bsStyle="success" onClick={addClick}>
+        <Col xs={4} className="text-right">
+          <Button color="success" onClick={addClick}>
             <Glyphicon glyph="plus" />
           </Button>
-        </div>
-      </div>
+        </Col>
+      </Row>
     );
   }
 }

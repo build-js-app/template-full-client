@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import {Container, Row, Col} from 'components/bootstrap';
 
 import helper from 'helpers/reactHelper';
 
@@ -55,31 +56,33 @@ class PasswordForgotPage extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="col-xs-12 col-sm-6 col-sm-offset-3">
-          <h1>Reset Password</h1>
+      <Container>
+        <Row>
+          <Col sm={{size: 6, offset: 3}}>
+            <h1>Reset Password</h1>
 
-          <TextInput
-            name="email"
-            label="Email"
-            type="email"
-            value={this.state.email}
-            onChange={this.onChange}
-            placeholder="Email"
-            error={this.state.errors.email}
-          />
+            <TextInput
+              name="email"
+              label="Email"
+              type="email"
+              value={this.state.email}
+              onChange={this.onChange}
+              placeholder="Email"
+              error={this.state.errors.email}
+            />
 
-          <button className="btn btn-warning btn-lg" onClick={this.resetPassword}>
-            Reset Password
-          </button>
+            <button className="btn btn-warning btn-lg" onClick={this.resetPassword}>
+              Reset Password
+            </button>
 
-          <hr />
+            <hr />
 
-          <p>
-            Already have an account? <Link to="/login">Login</Link>
-          </p>
-        </div>
-      </div>
+            <p>
+              Already have an account? <Link to="/login">Login</Link>
+            </p>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

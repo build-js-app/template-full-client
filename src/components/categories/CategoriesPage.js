@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Row, Col, Button} from 'react-bootstrap';
+import {Container, Row, Col, Button, Glyphicon} from 'components/bootstrap';
 import _ from 'lodash';
 
 import helper from 'helpers/reactHelper';
@@ -91,9 +91,9 @@ class CategoriesPage extends Component {
     let editCategoryVisible = this.state.categoryToEdit ? true : false;
 
     return (
-      <div className="container-fluid">
+      <Container fluid>
         <Row>
-          <Col sm={12} md={11} mdOffset={1}>
+          <Col md={{size: 10, offset: 1}}>
             <Row>
               <Col sm={12}>
                 <h2>Categories Page</h2>
@@ -103,9 +103,9 @@ class CategoriesPage extends Component {
             <br />
 
             <Row>
-              <Col sm={12}>
-                <Button bsStyle="primary" onClick={this.addCategory}>
-                  Add new category
+              <Col sm={12} className="text-right">
+                <Button color="success" onClick={this.addCategory}>
+                  <Glyphicon glyph="plus" />
                 </Button>
               </Col>
             </Row>
@@ -125,7 +125,7 @@ class CategoriesPage extends Component {
           close={this.cancelEditCategory}
           onChange={this.updateCategoryState}
         />
-      </div>
+      </Container>
     );
   }
 }

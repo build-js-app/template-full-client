@@ -1,6 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
+import {Label} from 'components/bootstrap';
 
 class NumberInput extends React.Component {
   render() {
@@ -17,19 +18,18 @@ class NumberInput extends React.Component {
 
     return (
       <div className={wrapperClass}>
-        <label htmlFor={name}>{label}</label>
-        <div className="field">
-          <input
-            type="number"
-            name={name}
-            className="form-control"
-            min="0"
-            step="0.01"
-            value={value ? value : 0.0}
-            onChange={inputOnChange}
-          />
-          {error && <div className="alert alert-danger">{error}</div>}
-        </div>
+        <Label htmlFor={name}>{label}</Label>
+
+        <input
+          type="number"
+          name={name}
+          className="form-control"
+          min="0"
+          step="0.01"
+          value={value ? value : 0.0}
+          onChange={inputOnChange}
+        />
+        {error && <div className="alert alert-danger">{error}</div>}
       </div>
     );
   }
