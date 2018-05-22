@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Navbar, Collapse, Nav, NavbarBrand, NavbarToggler, NavItem, NavLink} from 'components/bootstrap';
+import {Nav, Navbar, Collapse} from 'components/bootstrap';
 import AppIcon from 'components/common/AppIcon';
 import {NavLink as RRNavLink} from 'react-router-dom';
 
@@ -49,32 +49,32 @@ class Navigation extends Component {
 
     return (
       <Navbar color="light" light expand="md">
-        <NavbarBrand>Expense Manager</NavbarBrand>
-        <NavbarToggler onClick={this.toggle} />
+        <Navbar.Brand>Expense Manager</Navbar.Brand>
+        <Navbar.Toggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav navbar>
-            <NavItem>
-              <NavLink activeClassName="active" tag={RRNavLink} to="/records">
+            <Nav.Item>
+              <Nav.Link activeClassName="active" tag={RRNavLink} to="/records">
                 Records
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink activeClassName="active" tag={RRNavLink} to="/categories">
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link activeClassName="active" tag={RRNavLink} to="/categories">
                 Categories
-              </NavLink>
-            </NavItem>
+              </Nav.Link>
+            </Nav.Item>
           </Nav>
           <Nav navbar className="ml-auto">
-            <NavItem>
+            <Nav.Item>
               <span className="navbar-text" style={{marginRight: 20}}>
                 Logged as: <b>{userFullName}</b>
               </span>
-            </NavItem>
-            <NavItem onClick={() => this.onLogOut()}>
-              <NavLink href="#">
+            </Nav.Item>
+            <Nav.Item onClick={() => this.onLogOut()}>
+              <Nav.Link href="#">
                 LogOut <AppIcon icon="sign-out" />
-              </NavLink>
-            </NavItem>
+              </Nav.Link>
+            </Nav.Item>
           </Nav>
         </Collapse>
       </Navbar>

@@ -28,6 +28,16 @@ Modal.Header = ModalHeader;
 Modal.Body = ModalBody;
 Modal.Footer = ModalFooter;
 
+Dropdown.Toggle = DropdownToggle;
+Dropdown.Item = DropdownItem;
+Dropdown.Menu = DropdownMenu;
+
+Nav.Item = NavItem;
+Nav.Link = NavLink;
+
+Navbar.Toggler = NavbarToggler;
+Navbar.Brand = NavbarBrand;
+
 export {
   Row,
   Col,
@@ -38,15 +48,8 @@ export {
   CustomInput,
   FormGroup,
   Nav,
-  NavItem,
   Navbar,
-  NavLink,
-  NavbarToggler,
-  NavbarBrand,
   ButtonToolbar,
   Dropdown,
-  DropdownToggle,
-  DropdownItem,
-  DropdownMenu,
   Modal
 };

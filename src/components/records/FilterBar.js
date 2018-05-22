@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Row, Col, Button, Dropdown, DropdownToggle, DropdownItem, DropdownMenu} from 'components/bootstrap';
+import {Row, Col, Button, Dropdown} from 'components/bootstrap';
 import AppIcon from 'components/common/AppIcon';
 import PropTypes from 'prop-types';
 
@@ -35,19 +35,19 @@ class FilterBar extends Component {
             size="sm"
             isOpen={this.state.isSortByOpen}
             toggle={() => this.setState({isSortByOpen: !this.state.isSortByOpen})}>
-            <DropdownToggle caret>Sort By</DropdownToggle>
-            <DropdownMenu>
+            <Dropdown.Toggle caret>Sort By</Dropdown.Toggle>
+            <Dropdown.Menu>
               {this.state.sortByOptions.map(item => {
                 return (
-                  <DropdownItem
+                  <Dropdown.Item
                     key={item.key}
                     onClick={() => this.props.onSortAction(item.key)}
                     active={this.props.sortBy === item.key}>
                     {item.text}
-                  </DropdownItem>
+                  </Dropdown.Item>
                 );
               })}
-            </DropdownMenu>
+            </Dropdown.Menu>
           </Dropdown>
         </Col>
 
