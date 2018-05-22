@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Navbar, Collapse, Nav, NavbarBrand, NavbarToggler, NavItem, NavLink, Glyphicon} from 'components/bootstrap';
+import {Navbar, Collapse, Nav, NavbarBrand, NavbarToggler, NavItem, NavLink} from 'components/bootstrap';
+import AppIcon from 'components/common/AppIcon';
 import {NavLink as RRNavLink} from 'react-router-dom';
 
 import helper from 'helpers/reactHelper';
@@ -71,7 +72,7 @@ class Navigation extends Component {
             </NavItem>
             <NavItem onClick={() => this.onLogOut()}>
               <NavLink href="#">
-                LogOut <Glyphicon glyph="sign-out" />
+                LogOut <AppIcon icon="sign-out" />
               </NavLink>
             </NavItem>
           </Nav>

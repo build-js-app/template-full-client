@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Container, Row, Col, Button, Glyphicon} from 'components/bootstrap';
+import {Container, Row, Col, Button} from 'components/bootstrap';
+import AppIcon from 'components/common/AppIcon';
 import _ from 'lodash';
 
 import helper from 'helpers/reactHelper';
@@ -105,7 +106,7 @@ class CategoriesPage extends Component {
             <Row>
               <Col sm={12} className="text-right">
                 <Button color="success" onClick={this.addCategory}>
-                  <Glyphicon glyph="plus" />
+                  <AppIcon icon="plus" />
                 </Button>
               </Col>
             </Row>

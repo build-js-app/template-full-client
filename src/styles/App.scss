@@ -37,8 +37,23 @@ label {
   margin-bottom: 40px;
 }
 
-@media screen and (min-width: $desktop-screen-size) {
+@media screen and (min-width: $desktop-min) {
   .list-item {
     margin-bottom: 15px;
+  }
+}
+
+.list-action {
+  svg {
+    display: none;
+  }
+}
+
+@media screen and (max-width: $mobile-max) {
+  .list-action {
+    svg {
+      display: inherit;
+      margin: 0 7px;
+    }
   }
 }

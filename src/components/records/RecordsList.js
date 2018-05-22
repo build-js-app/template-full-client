@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Row, Col, Label, Button} from 'components/bootstrap';
-import * as _ from 'lodash';
+import AppIcon from 'components/common/AppIcon';
+
+import _ from 'lodash';
 import PropTypes from 'prop-types';
 
 import dateHelper from '../../helpers/dateHelper';
@@ -25,21 +27,21 @@ class RecordsList extends Component {
 
     return (
       <Row className="records-list">
-        <Col sm={12}>
-          <Row className="list-item d-none d-sm-flex">
-            <Col sm={2} className="d-none d-sm-block">
+        <Col>
+          <Row className="list-item d-none d-md-flex">
+            <Col md={2} className="d-none d-md-block">
               <Label>Date</Label>
             </Col>
-            <Col sm={3} className="d-none d-sm-block">
+            <Col md={3} className="d-none d-md-block">
               <Label>Category</Label>
             </Col>
-            <Col sm={2} className="d-none d-sm-block">
+            <Col md={2} className="d-none d-md-block">
               <Label>Cost</Label>
             </Col>
-            <Col sm={3} className="d-none d-sm-block">
+            <Col md={3} className="d-none d-md-block">
               <Label>Note</Label>
             </Col>
-            <Col sm={2} className="d-none d-sm-block" />
+            <Col md={2} className="d-none d-md-block" />
           </Row>
 
           {this.props.records.map(record => this.renderRecord(record))}
@@ -66,12 +68,12 @@ class RecordsList extends Component {
     let dateDisplay = dateHelper.displayDate(record.date);
 
     let SubItem = props => (
-      <Col xs={12} className="d-sm-none d-md-none d-lg-none">
+      <Col sm={12} className="d-md-none d-lg-none">
         <Row>
-          <Col xs={12}>
+          <Col sm={12}>
             <Label>{props.title}:</Label>
           </Col>
-          <Col xs={12} className="form-group">
+          <Col sm={12} className="form-group">
             {props.value}
           </Col>
         </Row>
@@ -80,39 +82,41 @@ class RecordsList extends Component {
 
     return (
       <Row key={record.id} className="list-item align-items-center">
-        <Col sm={2} className="d-none d-sm-block">
+        <Col md={2} className="d-none d-md-block">
           {dateDisplay}
         </Col>
 
         <SubItem title="Date" value={dateDisplay} />
 
-        <Col sm={3} className="d-none d-sm-block">
+        <Col md={3} className="d-none d-md-block">
           {categoryTitle}
         </Col>
 
         <SubItem title="Category" value={categoryTitle} />
 
-        <Col sm={2} className="d-none d-sm-block">
+        <Col md={2} className="d-none d-md-block">
           {record.cost}
         </Col>
 
         <SubItem title="Cost" value={record.cost} />
 
-        <Col sm={3} className="d-none d-sm-block">
+        <Col md={3} className="d-none d-md-block">
           {record.note}
         </Col>
 
         <SubItem title="Note" value={record.note} />
 
-        <Col sm={1} xs={3}>
-          <Button color="link" onClick={editClick}>
+        <Col md={1} xs={3}>
+          <Button color="link" className="list-action" onClick={editClick}>
             Edit
+            <AppIcon icon="edit" />
           </Button>
         </Col>
 
-        <Col sm={1} xs={3}>
-          <Button color="link" onClick={deleteClick}>
+        <Col md={1} xs={3}>
+          <Button color="link" className="list-action" onClick={deleteClick}>
             Delete
+            <AppIcon icon="delete" />
           </Button>
         </Col>
       </Row>

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Row, Col, Button, Glyphicon, Dropdown, DropdownToggle, DropdownItem, DropdownMenu} from 'components/bootstrap';
+import {Row, Col, Button, Dropdown, DropdownToggle, DropdownItem, DropdownMenu} from 'components/bootstrap';
+import AppIcon from 'components/common/AppIcon';
 import PropTypes from 'prop-types';
 
 import helper from 'helpers/reactHelper';
@@ -52,7 +53,7 @@ class FilterBar extends Component {
 
         <Col xs={4} className="text-right">
           <Button color="success" onClick={addClick}>
-            <Glyphicon glyph="plus" />
+            <AppIcon icon="plus" />
           </Button>
         </Col>
       </Row>

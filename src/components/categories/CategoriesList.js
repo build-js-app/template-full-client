@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Row, Col, Label, Button} from 'components/bootstrap';
+import AppIcon from 'components/common/AppIcon';
 import PropTypes from 'prop-types';
 
 import helper from 'helpers/reactHelper';
@@ -29,16 +30,16 @@ class CategoriesList extends Component {
 
     return (
       <Row className="categories-list">
-        <Col sm={12}>
-          <Row className="list-item d-none d-sm-flex">
-            <Col sm={4} className="d-none d-sm-block">
+        <Col>
+          <Row className="list-item d-none d-md-flex">
+            <Col sm={4} className="d-none d-md-block">
               <Label>Title</Label>
             </Col>
-            <Col sm={6} className="d-none d-sm-block">
+            <Col sm={6} className="d-none d-md-block">
               <Label>Description</Label>
             </Col>
-            <Col sm={1} className="d-none d-sm-block" />
-            <Col sm={1} className="d-none d-sm-block" />
+            <Col sm={1} className="d-none d-md-block" />
+            <Col sm={1} className="d-none d-md-block" />
           </Row>
 
           {this.props.categories.map(category => this.renderCategory(category))}
@@ -57,12 +58,12 @@ class CategoriesList extends Component {
     };
 
     let SubItem = props => (
-      <Col xs={12} className="d-sm-none d-md-none d-lg-none">
+      <Col sm={12} className="d-md-none d-lg-none">
         <Row>
-          <Col xs={12}>
+          <Col sm={12}>
             <Label>{props.title}:</Label>
           </Col>
-          <Col xs={12} className="form-group">
+          <Col sm={12} className="form-group">
             {props.value}
           </Col>
         </Row>
@@ -71,27 +72,29 @@ class CategoriesList extends Component {
 
     return (
       <Row key={category.id} className="list-item align-items-center">
-        <Col sm={4} className="d-none d-sm-block">
+        <Col md={4} className="d-none d-md-block">
           {category.title}
         </Col>
 
         <SubItem title="Title" value={category.title} />
 
-        <Col sm={6} className="d-none d-sm-block">
+        <Col md={6} className="d-none d-md-block">
           {category.description}
         </Col>
 
         <SubItem title="Description" value={category.description} />
 
-        <Col sm={1} xs={3}>
-          <Button color="link" onClick={editClick}>
+        <Col md={1} xs={3}>
+          <Button color="link" className="list-action" onClick={editClick}>
             Edit
+            <AppIcon icon="edit" />
           </Button>
         </Col>
 
-        <Col sm={1} xs={3}>
-          <Button color="link" onClick={deleteClick}>
+        <Col md={1} xs={3}>
+          <Button color="link" className="list-action" onClick={deleteClick}>
             Delete
+            <AppIcon icon="delete" />
           </Button>
         </Col>
       </Row>

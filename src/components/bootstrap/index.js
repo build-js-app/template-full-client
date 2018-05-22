@@ -1,6 +1,3 @@
-import React from 'react';
-import classnames from 'classnames';
-
 import {
   Row,
   Col,
@@ -9,7 +6,6 @@ import {
   Label,
   Button,
   CustomInput,
-  //Glyphicon,
   FormGroup,
   Nav,
   NavItem,
@@ -18,7 +14,6 @@ import {
   NavbarBrand,
   NavLink,
   ButtonToolbar,
-  //DropdownButton,
   Dropdown,
   DropdownToggle,
   DropdownItem,
@@ -28,16 +23,6 @@ import {
   ModalBody,
   ModalFooter
 } from 'reactstrap';
-
-//TODO glyph should be marked as required
-let Glyphicon = props => {
-  let glyphClass = classnames({
-    fa: true,
-    [`fa-${props.glyph}`]: true
-  });
-
-  return <span className={glyphClass} />;
-};
 
 Modal.Header = ModalHeader;
 Modal.Body = ModalBody;
@@ -51,7 +36,6 @@ export {
   Collapse,
   Button,
   CustomInput,
-  Glyphicon,
   FormGroup,
   Nav,
   NavItem,

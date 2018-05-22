@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col} from 'components/bootstrap';
+import AppIcon from 'components/common/AppIcon';
 
 import {signUp} from 'actions/userActions';
 
@@ -99,7 +100,7 @@ class SignUpPage extends Component {
         <Row>
           <Col sm={{size: 6, offset: 3}}>
             <h1>
-              <span className="fa fa-sign-in" /> Sign Up
+              <AppIcon icon="sign-in" /> Sign Up
             </h1>
 
             <TextInput

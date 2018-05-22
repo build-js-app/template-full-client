@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col, Button} from 'components/bootstrap';
+import AppIcon from 'components/common/AppIcon';
 import * as _ from 'lodash';
 
 import helper from 'helpers/reactHelper';
@@ -88,7 +89,7 @@ class LoginPage extends Component {
         <Row>
           <Col sm={{size: 6, offset: 3}}>
             <h1>
-              <span className="fa fa-sign-in" /> Login
+              <AppIcon icon="sign-in" /> Login
             </h1>
 
             <form onSubmit={this.login}>

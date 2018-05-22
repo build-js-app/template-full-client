@@ -5,7 +5,6 @@ import {Provider} from 'react-redux';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'toastr/build/toastr.css';
-import 'font-awesome/css/font-awesome.min.css';
 import 'flatpickr/dist/flatpickr.min.css';
 
 import {routes} from './routes';
