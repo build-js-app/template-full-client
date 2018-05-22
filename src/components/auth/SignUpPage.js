@@ -6,6 +6,7 @@ import AppIcon from 'components/common/AppIcon';
 import {signUp} from 'actions/userActions';
 
 import helper from 'helpers/reactHelper';
+import validationHelper from 'helpers/validationHelper';
 import uiHelper from 'helpers/uiHelper';
 
 import TextInput from 'components/common/TextInput';
@@ -56,7 +57,7 @@ class SignUpPage extends Component {
 
     if (!user.email) {
       errors.email = 'Email field is required.';
-    } else if (!this.isValidEmail(user.email)) {
+    } else if (!validationHelper.isValidEmail(user.email)) {
       errors.email = 'Email is not valid.';
     }
 
@@ -75,11 +76,6 @@ class SignUpPage extends Component {
     this.setState({errors: errors});
 
     return Object.keys(errors).length === 0;
-  }
-
-  isValidEmail(email) {
-    let re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-    return re.test(email);
   }
 
   async signUp() {

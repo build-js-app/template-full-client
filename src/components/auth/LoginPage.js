@@ -5,6 +5,7 @@ import AppIcon from 'components/common/AppIcon';
 import * as _ from 'lodash';
 
 import helper from 'helpers/reactHelper';
+import validationHelper from 'helpers/validationHelper';
 
 import TextInput from 'components/common/TextInput';
 import {loginUser, getCurrentUser} from 'actions/userActions';
@@ -53,7 +54,7 @@ class LoginPage extends Component {
 
     if (!user.email) {
       errors.email = 'Email field is required.';
-    } else if (!this.isValidEmail(user.email)) {
+    } else if (!validationHelper.isValidEmail(user.email)) {
       errors.email = 'Email is not valid.';
     }
 
@@ -64,11 +65,6 @@ class LoginPage extends Component {
     this.setState({errors: errors});
 
     return Object.keys(errors).length === 0;
-  }
-
-  isValidEmail(email) {
-    let re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-    return re.test(email);
   }
 
   async login(e) {

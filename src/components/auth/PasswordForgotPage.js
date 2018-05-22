@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {Container, Row, Col} from 'components/bootstrap';
 
 import helper from 'helpers/reactHelper';
+import validationHelper from 'helpers/validationHelper';
 
 import TextInput from 'components/common/TextInput';
 import {forgotPassword} from 'actions/userActions';
@@ -34,18 +35,13 @@ class PasswordForgotPage extends Component {
 
     if (!this.state.email) {
       errors.email = 'Email field is required.';
-    } else if (!this.isValidEmail(this.state.email)) {
+    } else if (!validationHelper.isValidEmail(this.state.email)) {
       errors.email = 'Email is not valid.';
     }
 
     this.setState({errors: errors});
 
     return Object.keys(errors).length === 0;
-  }
-
-  isValidEmail(email) {
-    let re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-    return re.test(email);
   }
 
   async resetPassword() {
