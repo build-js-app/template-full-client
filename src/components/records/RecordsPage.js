@@ -82,11 +82,12 @@ class RecordsPage extends Component {
   }
 
   async saveRecord() {
-    await this.props.saveRecord(this.state.recordToEdit);
+    let completed = await this.props.saveRecord(this.state.recordToEdit);
 
-    await this.props.loadRecords(this.props.sortBy);
-
-    uiHelper.showMessage(`Record was successfully saved`);
+    if (completed) {
+      await this.props.loadRecords(this.props.sortBy);
+      uiHelper.showMessage(`Record was successfully saved`);
+    }
 
     this.setState({
       recordToEdit: null
@@ -97,9 +98,9 @@ class RecordsPage extends Component {
     this.props.confirmAction({
       title: 'Delete record',
       action: async () => {
-        this.props.deleteRecord(id);
+        let completed = await this.props.deleteRecord(id);
 
-        uiHelper.showMessage('Record was successfully deleted');
+        if (completed) uiHelper.showMessage('Record was successfully deleted');
       }
     });
   }
@@ -149,4 +150,8 @@ class RecordsPage extends Component {
   }
 }
 
-export default helper.connect(RecordsPage, stateMap, actions);
+export default helper.connect(
+  RecordsPage,
+  stateMap,
+  actions
+);

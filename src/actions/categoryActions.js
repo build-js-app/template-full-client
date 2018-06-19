@@ -28,23 +28,22 @@ export const loadCategories = () => {
 
 export const saveCategory = category => {
   return helper.dispatchAsyncAction(async dispatch => {
-    let response = await dataService.saveCategory(category);
+    let categoryResponse = await dataService.saveCategory(category);
 
     if (category.id) {
-      dispatch(updateCategorySuccess(response));
+      dispatch(updateCategorySuccess(categoryResponse));
     } else {
-      dispatch(createCategorySuccess(response));
+      dispatch(createCategorySuccess(categoryResponse));
     }
+
+    return categoryResponse;
   });
 };
 
 export const deleteCategory = id => {
   return helper.dispatchAsyncAction(async dispatch => {
-    let response = await dataService.deleteCategory(id);
-
-    if (response) {
-      dispatch(deleteCategorySuccess(id));
-      return id;
-    }
+    await dataService.deleteCategory(id);
+    dispatch(deleteCategorySuccess(id));
+    return true;
   });
 };

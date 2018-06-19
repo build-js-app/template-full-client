@@ -19,6 +19,7 @@ export const loadRecords = sortBy => {
 export const saveRecord = record => {
   return helper.dispatchAsyncAction(async dispatch => {
     await dataService.saveRecord(record);
+    return true;
   });
 };
 
@@ -26,5 +27,6 @@ export const deleteRecord = id => {
   return helper.dispatchAsyncAction(async dispatch => {
     await dataService.deleteRecord(id);
     dispatch(deleteRecordSuccess(id));
+    return true;
   });
 };

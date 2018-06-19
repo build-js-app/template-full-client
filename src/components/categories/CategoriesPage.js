@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Container, Row, Col, Button} from 'components/bootstrap';
 import AppIcon from 'components/common/AppIcon';
-import _ from 'lodash';
 
 import helper from 'helpers/reactHelper';
 import uiHelper from 'helpers/uiHelper';
@@ -66,9 +65,11 @@ class CategoriesPage extends Component {
   }
 
   async saveCategory() {
-    await this.props.saveCategory(this.state.categoryToEdit);
+    let category = await this.props.saveCategory(this.state.categoryToEdit);
 
-    uiHelper.showMessage(`Category was updated`);
+    if (category) {
+      uiHelper.showMessage(`Category was updated`);
+    }
 
     this.setState({
       categoryToEdit: null
@@ -79,9 +80,9 @@ class CategoriesPage extends Component {
     this.props.confirmAction({
       title: 'Delete category',
       action: async () => {
-        let response = await this.props.deleteCategory(id);
+        let completed = await this.props.deleteCategory(id);
 
-        if (_.isNumber(response)) {
+        if (completed) {
           uiHelper.showMessage('Category was successfully deleted');
         }
       }
@@ -131,4 +132,8 @@ class CategoriesPage extends Component {
   }
 }
 
-export default helper.connect(CategoriesPage, stateMap, actions);
+export default helper.connect(
+  CategoriesPage,
+  stateMap,
+  actions
+);
