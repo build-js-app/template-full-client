@@ -4,6 +4,16 @@ import PropTypes from 'prop-types';
 import {Label} from 'components/bootstrap';
 
 class TextInput extends React.Component {
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    placeholder: PropTypes.string,
+    value: PropTypes.string,
+    error: PropTypes.string,
+    rows: PropTypes.number
+  };
+
   render() {
     let {error, value, name, label, placeholder, rows} = this.props;
 
@@ -23,7 +33,6 @@ class TextInput extends React.Component {
         <Label htmlFor={name}>{label}</Label>
 
         <textarea
-          type="text"
           name={name}
           rows={rows}
           className="form-control"
@@ -36,15 +45,5 @@ class TextInput extends React.Component {
     );
   }
 }
-
-TextInput.propTypes = {
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  placeholder: PropTypes.string,
-  value: PropTypes.string,
-  error: PropTypes.string,
-  rows: PropTypes.number
-};
 
 export default TextInput;

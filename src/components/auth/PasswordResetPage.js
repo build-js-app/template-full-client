@@ -79,7 +79,7 @@ class PasswordResetPage extends Component {
 
     if (data) {
       this.setState({
-        userData: Object.assign({}, {email: data.email, token: data.token})
+        userData: {email: data.email, token: data.token}
       });
     }
   }
@@ -150,4 +150,9 @@ class PasswordResetPage extends Component {
   }
 }
 
-export default helper.connect(PasswordResetPage, stateMap, actions, {withRouter: true});
+export default helper.connect(
+  PasswordResetPage,
+  stateMap,
+  actions,
+  {withRouter: true}
+);

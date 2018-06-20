@@ -1,6 +1,6 @@
 import dataService from 'services/dataService';
 import helper from './actionHelper';
-import {LOAD_RECORDS, DELETE_RECORD} from 'action_types/recordActionTypes.js';
+import {LOAD_RECORDS, DELETE_RECORD} from 'action_types/recordActionTypes';
 
 const loadRecordsSuccess = (records, sortBy) => helper.getAction(LOAD_RECORDS, {records, sortBy});
 

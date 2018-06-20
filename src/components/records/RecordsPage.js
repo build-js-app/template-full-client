@@ -55,13 +55,13 @@ class RecordsPage extends Component {
 
   addRecord() {
     this.setState({
-      recordToEdit: Object.assign({}, {date: new Date()})
+      recordToEdit: {date: new Date()}
     });
   }
 
   editRecord(record) {
     this.setState({
-      recordToEdit: Object.assign({}, record)
+      recordToEdit: {...record}
     });
   }
 
@@ -73,6 +73,8 @@ class RecordsPage extends Component {
 
   updateRecordState(field, value) {
     let record = this.state.recordToEdit;
+
+    if (!record) return;
 
     record[field] = value;
 

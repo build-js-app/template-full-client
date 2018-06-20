@@ -4,6 +4,15 @@ import PropTypes from 'prop-types';
 import {Label} from 'components/bootstrap';
 
 class NumberInput extends React.Component {
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    placeholder: PropTypes.string,
+    value: PropTypes.number,
+    error: PropTypes.string
+  };
+
   render() {
     let {error, value, name, label} = this.props;
 
@@ -34,14 +43,5 @@ class NumberInput extends React.Component {
     );
   }
 }
-
-NumberInput.propTypes = {
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  placeholder: PropTypes.string,
-  value: PropTypes.number,
-  error: PropTypes.string
-};
 
 export default NumberInput;

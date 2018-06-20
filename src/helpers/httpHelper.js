@@ -54,7 +54,7 @@ async function processRequest(axiosRequest) {
 
     if (status === 401 || status === 403) {
       if (!_.endsWith(window.location, '/login')) {
-        window.location = '/login';
+        window.location.href = '/login';
       }
       return;
     }

@@ -4,6 +4,17 @@ import PropTypes from 'prop-types';
 import {Label} from 'components/bootstrap';
 
 class TextInput extends React.Component {
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    placeholder: PropTypes.string,
+    value: PropTypes.string,
+    error: PropTypes.string,
+    type: PropTypes.string,
+    disabled: PropTypes.bool
+  };
+
   render() {
     let {error, value, name, label, placeholder, type, disabled} = this.props;
 
@@ -36,16 +47,5 @@ class TextInput extends React.Component {
     );
   }
 }
-
-TextInput.propTypes = {
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  placeholder: PropTypes.string,
-  value: PropTypes.string,
-  error: PropTypes.string,
-  type: PropTypes.string,
-  disabled: PropTypes.bool
-};
 
 export default TextInput;

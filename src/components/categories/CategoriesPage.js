@@ -38,13 +38,13 @@ class CategoriesPage extends Component {
 
   addCategory() {
     this.setState({
-      categoryToEdit: Object.assign({}, {title: '', description: ''})
+      categoryToEdit: {title: '', description: ''}
     });
   }
 
   editCategory(category) {
     this.setState({
-      categoryToEdit: Object.assign({}, category)
+      categoryToEdit: {...category}
     });
   }
 
@@ -56,6 +56,8 @@ class CategoriesPage extends Component {
 
   updateCategoryState(field, value) {
     let category = this.state.categoryToEdit;
+
+    if (!category) return;
 
     category[field] = value;
 

@@ -3,6 +3,14 @@ import {FormGroup, Label, CustomInput} from 'components/bootstrap';
 import PropTypes from 'prop-types';
 
 class SelectInput extends Component {
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    options: PropTypes.array,
+    error: PropTypes.string
+  };
+
   render() {
     let {error, value, name, label, onChange, options} = this.props;
 
@@ -29,13 +37,5 @@ class SelectInput extends Component {
     );
   }
 }
-
-SelectInput.propTypes = {
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  options: PropTypes.array,
-  error: PropTypes.string
-};
 
 export default SelectInput;

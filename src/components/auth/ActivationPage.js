@@ -38,7 +38,7 @@ class ActivationPage extends Component {
 
     if (data) {
       this.setState({
-        activationData: Object.assign({}, data)
+        activationData: {...data}
       });
     }
   }
@@ -75,4 +75,9 @@ class ActivationPage extends Component {
   }
 }
 
-export default helper.connect(ActivationPage, stateMap, actions, {withRouter: true});
+export default helper.connect(
+  ActivationPage,
+  stateMap,
+  actions,
+  {withRouter: true}
+);
