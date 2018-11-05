@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 import dateHelper from '../../helpers/dateHelper';
 
-import './records.css';
+import './records.scss';
 
 class RecordsList extends Component {
   static propTypes = {

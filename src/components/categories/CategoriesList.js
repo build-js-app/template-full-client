@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import helper from 'helpers/reactHelper';
 
-import './categories.css';
+import './categories.scss';
 
 class CategoriesList extends Component {
   static propTypes = {

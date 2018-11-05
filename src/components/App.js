@@ -10,7 +10,7 @@ import Confirm from 'components/common/Confirm';
 
 import {confirmActionCancel} from 'actions/commonActions';
 
-import '../styles/App.css';
+import '../styles/App.scss';
 
 const stateMap = state => ({
   asyncAction: state.common.asyncAction,
@@ -81,4 +81,9 @@ class App extends Component {
   }
 }
 
-export default helper.connect(App, stateMap, actions, {withRouter: true});
+export default helper.connect(
+  App,
+  stateMap,
+  actions,
+  {withRouter: true}
+);
