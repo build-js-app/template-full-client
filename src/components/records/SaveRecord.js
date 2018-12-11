@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Modal, Button, FormGroup} from 'components/bootstrap';
+import {Modal, Button, Form} from 'components/bootstrap';
 import PropTypes from 'prop-types';
 import Flatpickr from 'react-flatpickr';
 
@@ -86,16 +86,16 @@ class SaveRecord extends Component {
 
     return (
       <div>
-        <Modal isOpen={visible} backdrop="static" toggle={close}>
-          <Modal.Header toggle={close}>{title}</Modal.Header>
+        <Modal show={visible} backdrop="static" onHide={close}>
+          <Modal.Header closeButton>{title}</Modal.Header>
           <Modal.Body>
-            <FormGroup>
-              <label>Date:</label>
+            <Form.Group>
+              <Form.Label>Date:</Form.Label>
 
               <div>
                 <Flatpickr value={record.date} options={dateOptions} onChange={this.onDateChange} />
               </div>
-            </FormGroup>
+            </Form.Group>
 
             <NumberInput
               name="cost"
@@ -124,10 +124,12 @@ class SaveRecord extends Component {
             />
           </Modal.Body>
           <Modal.Footer>
-            <Button color="primary" onClick={this.save}>
+            <Button variant="primary" onClick={this.save}>
               Save
             </Button>
-            <Button onClick={close}>Cancel</Button>
+            <Button variant="secondary" onClick={close}>
+              Cancel
+            </Button>
           </Modal.Footer>
         </Modal>
       </div>

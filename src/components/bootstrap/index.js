@@ -1,55 +1,11 @@
-import {
-  Row,
-  Col,
-  Container,
-  Collapse,
-  Label,
-  Button,
-  CustomInput,
-  FormGroup,
-  Nav,
-  NavItem,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  NavLink,
-  ButtonToolbar,
-  Dropdown,
-  DropdownToggle,
-  DropdownItem,
-  DropdownMenu,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter
-} from 'reactstrap';
+import Row from 'react-bootstrap/lib/Row';
+import Col from 'react-bootstrap/lib/Col';
+import Container from 'react-bootstrap/lib/Container';
+import Form from 'react-bootstrap/lib/Form';
+import Button from 'react-bootstrap/lib/Button';
+import Nav from 'react-bootstrap/lib/Nav';
+import Navbar from 'react-bootstrap/lib/Navbar';
+import Dropdown from 'react-bootstrap/lib/Dropdown';
+import Modal from 'react-bootstrap/lib/Modal';
 
-Modal.Header = ModalHeader;
-Modal.Body = ModalBody;
-Modal.Footer = ModalFooter;
-
-Dropdown.Toggle = DropdownToggle;
-Dropdown.Item = DropdownItem;
-Dropdown.Menu = DropdownMenu;
-
-Nav.Item = NavItem;
-Nav.Link = NavLink;
-
-Navbar.Toggler = NavbarToggler;
-Navbar.Brand = NavbarBrand;
-
-export {
-  Row,
-  Col,
-  Container,
-  Label,
-  Collapse,
-  Button,
-  CustomInput,
-  FormGroup,
-  Nav,
-  Navbar,
-  ButtonToolbar,
-  Dropdown,
-  Modal
-};
+export {Row, Col, Container, Form, Button, Nav, Navbar, Dropdown, Modal};

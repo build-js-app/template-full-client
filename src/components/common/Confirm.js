@@ -18,14 +18,16 @@ class Confirm extends Component {
 
     return (
       <div>
-        <Modal isOpen={visible} backdrop="static" toggle={close}>
-          <Modal.Header toggle={close}>{displayTitle}</Modal.Header>
+        <Modal show={visible} backdrop="static" onHide={close}>
+          <Modal.Header closeButton>{displayTitle}</Modal.Header>
           <Modal.Body>
             <h4>{displayMessage}</h4>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={close}>No</Button>
-            <Button color="danger" onClick={action}>
+            <Button variant="secondary" onClick={close}>
+              No
+            </Button>
+            <Button variant="danger" onClick={action}>
               Yes
             </Button>
           </Modal.Footer>

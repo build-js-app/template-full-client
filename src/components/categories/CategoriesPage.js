@@ -97,7 +97,7 @@ class CategoriesPage extends Component {
     return (
       <Container fluid>
         <Row>
-          <Col md={{size: 10, offset: 1}}>
+          <Col md={{span: 10, offset: 1}}>
             <Row>
               <Col sm={12}>
                 <h2>Categories Page</h2>
@@ -108,7 +108,7 @@ class CategoriesPage extends Component {
 
             <Row>
               <Col sm={12} className="text-right">
-                <Button color="success" onClick={this.addCategory}>
+                <Button variant="success" onClick={this.addCategory}>
                   <AppIcon icon="plus" />
                 </Button>
               </Col>

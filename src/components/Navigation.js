@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import {Nav, Navbar, Collapse} from 'components/bootstrap';
+import {Nav, Navbar} from 'components/bootstrap';
 import AppIcon from 'components/common/AppIcon';
-import {NavLink as RRNavLink} from 'react-router-dom';
 
 import helper from 'helpers/reactHelper';
 
@@ -16,9 +15,7 @@ const actions = {
 };
 
 class Navigation extends Component {
-  state = {
-    isOpen: false
-  };
+  state = {};
 
   constructor(props) {
     super(props);
@@ -32,12 +29,8 @@ class Navigation extends Component {
     this.props.history.push('/login');
   }
 
-  toggle() {
-    this.setState({isOpen: !this.state.isOpen});
-  }
-
   render() {
-    let user = this.props.user;
+    const {user, location} = this.props;
 
     let userFullName = '';
 
@@ -48,38 +41,37 @@ class Navigation extends Component {
     }
 
     return (
-      <Navbar color="light" light expand="md">
+      <Navbar bg="light" variant="light" expand="md">
         <Navbar.Brand>Expense Manager</Navbar.Brand>
-        <Navbar.Toggler onClick={this.toggle} />
-        <Collapse isOpen={this.state.isOpen} navbar>
-          <Nav navbar>
-            <Nav.Item>
-              <Nav.Link activeClassName="active" tag={RRNavLink} to="/records">
-                Records
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link activeClassName="active" tag={RRNavLink} to="/categories">
-                Categories
-              </Nav.Link>
-            </Nav.Item>
+        <Navbar.Toggle />
+        <Navbar.Collapse>
+          <Nav>
+            <Nav.Link href="/records" to="/records" active={location.pathname === '/records'}>
+              Records
+            </Nav.Link>
+
+            <Nav.Link href="/categories" to="/categories" active={location.pathname === '/categories'}>
+              Categories
+            </Nav.Link>
           </Nav>
-          <Nav navbar className="ml-auto">
-            <Nav.Item>
-              <span className="navbar-text" style={{marginRight: 20}}>
-                Logged as: <b>{userFullName}</b>
-              </span>
-            </Nav.Item>
-            <Nav.Item onClick={() => this.onLogOut()}>
-              <Nav.Link href="#">
-                LogOut <AppIcon icon="sign-out" />
-              </Nav.Link>
-            </Nav.Item>
+          <Nav className="ml-auto">
+            <span className="navbar-text" style={{marginRight: 20}}>
+              Logged as: <b>{userFullName}</b>
+            </span>
+
+            <Nav.Link href="#" onClick={() => this.onLogOut()}>
+              LogOut <AppIcon icon="sign-out" />
+            </Nav.Link>
           </Nav>
-        </Collapse>
+        </Navbar.Collapse>
       </Navbar>
     );
   }
 }
 
-export default helper.connect(Navigation, stateMap, actions, {withRouter: true});
+export default helper.connect(
+  Navigation,
+  stateMap,
+  actions,
+  {withRouter: true}
+);

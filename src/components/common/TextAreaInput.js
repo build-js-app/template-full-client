@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import {Label} from 'components/bootstrap';
+import {Form} from 'components/bootstrap';
 
 class TextInput extends React.Component {
   static propTypes = {
@@ -30,7 +30,7 @@ class TextInput extends React.Component {
 
     return (
       <div className={wrapperClass}>
-        <Label htmlFor={name}>{label}</Label>
+        <Form.Label htmlFor={name}>{label}</Form.Label>
 
         <textarea
           name={name}

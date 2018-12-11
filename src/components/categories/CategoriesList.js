@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Row, Col, Label, Button} from 'components/bootstrap';
+import {Row, Col, Form, Button} from 'components/bootstrap';
 import AppIcon from 'components/common/AppIcon';
 import PropTypes from 'prop-types';
 
@@ -33,10 +33,10 @@ class CategoriesList extends Component {
         <Col>
           <Row className="list-item d-none d-md-flex">
             <Col sm={4} className="d-none d-md-block">
-              <Label>Title</Label>
+              <Form.Label>Title</Form.Label>
             </Col>
             <Col sm={6} className="d-none d-md-block">
-              <Label>Description</Label>
+              <Form.Label>Description</Form.Label>
             </Col>
             <Col sm={1} className="d-none d-md-block" />
             <Col sm={1} className="d-none d-md-block" />
@@ -61,7 +61,7 @@ class CategoriesList extends Component {
       <Col sm={12} className="d-md-none d-lg-none">
         <Row>
           <Col sm={12}>
-            <Label>{props.title}:</Label>
+            <Form.Label>{props.title}:</Form.Label>
           </Col>
           <Col sm={12} className="form-group">
             {props.value}
@@ -85,14 +85,14 @@ class CategoriesList extends Component {
         <SubItem title="Description" value={category.description} />
 
         <Col md={1} xs={3}>
-          <Button color="link" className="list-action" onClick={editClick}>
+          <Button variant="link" className="list-action" onClick={editClick}>
             Edit
             <AppIcon icon="edit" />
           </Button>
         </Col>
 
         <Col md={1} xs={3}>
-          <Button color="link" className="list-action" onClick={deleteClick}>
+          <Button variant="link" className="list-action" onClick={deleteClick}>
             Delete
             <AppIcon icon="delete" />
           </Button>

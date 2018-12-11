@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {Container, Row, Col} from 'components/bootstrap';
+import {Container, Row, Col, Button} from 'components/bootstrap';
 
 import helper from 'helpers/reactHelper';
 import validationHelper from 'helpers/validationHelper';
@@ -100,7 +100,7 @@ class PasswordResetPage extends Component {
     return (
       <Container>
         <Row>
-          <Col sm={{size: 6, offset: 3}}>
+          <Col sm={{span: 6, offset: 3}}>
             <h1>Reset Password</h1>
 
             <TextInput
@@ -134,9 +134,9 @@ class PasswordResetPage extends Component {
               error={this.state.errors.confirmPassword}
             />
 
-            <button className="btn btn-warning btn-lg" onClick={this.resetPassword}>
+            <Button variant="warning" size="lg" onClick={this.resetPassword}>
               Save Password
-            </button>
+            </Button>
 
             <hr />
 

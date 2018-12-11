@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {FormGroup, Label, CustomInput} from 'components/bootstrap';
+import {Form} from 'components/bootstrap';
 import PropTypes from 'prop-types';
 
 class SelectInput extends Component {
@@ -19,10 +19,10 @@ class SelectInput extends Component {
     };
 
     return (
-      <FormGroup>
-        <Label>{label}</Label>
+      <Form.Group>
+        <Form.Label>{label}</Form.Label>
 
-        <CustomInput type="select" id={name} name={name} value={value} onChange={inputOnChange}>
+        <Form.Control as="select" id={name} name={name} value={value} onChange={inputOnChange}>
           {!value && <option value="select">Select Category</option>}
 
           {options.map(opt => (
@@ -30,10 +30,10 @@ class SelectInput extends Component {
               {opt.label}
             </option>
           ))}
-        </CustomInput>
+        </Form.Control>
 
         {error && <div className="alert alert-danger">{error}</div>}
-      </FormGroup>
+      </Form.Group>
     );
   }
 }

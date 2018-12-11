@@ -56,7 +56,7 @@ class ActivationPage extends Component {
     return (
       <Container>
         <Row>
-          <Col sm={{size: 6, offset: 3}}>
+          <Col sm={{span: 6, offset: 3}}>
             <h1>Activation Page</h1>
 
             <br />

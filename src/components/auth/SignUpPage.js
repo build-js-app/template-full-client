@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {Container, Row, Col} from 'components/bootstrap';
+import {Container, Row, Col, Button} from 'components/bootstrap';
 import AppIcon from 'components/common/AppIcon';
 
 import {signUp} from 'actions/userActions';
@@ -94,7 +94,7 @@ class SignUpPage extends Component {
     return (
       <Container>
         <Row>
-          <Col sm={{size: 6, offset: 3}}>
+          <Col sm={{span: 6, offset: 3}}>
             <h1>
               <AppIcon icon="sign-in" /> Sign Up
             </h1>
@@ -147,9 +147,9 @@ class SignUpPage extends Component {
               error={this.state.errors.confirmPassword}
             />
 
-            <button className="btn btn-warning btn-lg" onClick={this.signUp}>
+            <Button variant="warning" size="lg" onClick={this.signUp}>
               Sign Up
-            </button>
+            </Button>
 
             <hr />
 
@@ -163,4 +163,9 @@ class SignUpPage extends Component {
   }
 }
 
-export default helper.connect(SignUpPage, stateMap, actions, {withRouter: true});
+export default helper.connect(
+  SignUpPage,
+  stateMap,
+  actions,
+  {withRouter: true}
+);

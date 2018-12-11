@@ -119,7 +119,7 @@ class RecordsPage extends Component {
     return (
       <Container fluid>
         <Row>
-          <Col md={{size: 10, offset: 1}}>
+          <Col md={{span: 10, offset: 1}}>
             <Row>
               <Col sm={12}>
                 <h2>Records Page</h2>

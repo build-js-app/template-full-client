@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Row, Col, Label, Button} from 'components/bootstrap';
+import {Row, Col, Form, Button} from 'components/bootstrap';
 import AppIcon from 'components/common/AppIcon';
 
 import _ from 'lodash';
@@ -30,16 +30,16 @@ class RecordsList extends Component {
         <Col>
           <Row className="list-item d-none d-md-flex">
             <Col md={2} className="d-none d-md-block">
-              <Label>Date</Label>
+              <Form.Label>Date</Form.Label>
             </Col>
             <Col md={3} className="d-none d-md-block">
-              <Label>Category</Label>
+              <Form.Label>Category</Form.Label>
             </Col>
             <Col md={2} className="d-none d-md-block">
-              <Label>Cost</Label>
+              <Form.Label>Cost</Form.Label>
             </Col>
             <Col md={3} className="d-none d-md-block">
-              <Label>Note</Label>
+              <Form.Label>Note</Form.Label>
             </Col>
             <Col md={2} className="d-none d-md-block" />
           </Row>
@@ -71,7 +71,7 @@ class RecordsList extends Component {
       <Col sm={12} className="d-md-none d-lg-none">
         <Row>
           <Col sm={12}>
-            <Label>{props.title}:</Label>
+            <Form.Label>{props.title}:</Form.Label>
           </Col>
           <Col sm={12} className="form-group">
             {props.value}
@@ -107,14 +107,14 @@ class RecordsList extends Component {
         <SubItem title="Note" value={record.note} />
 
         <Col md={1} xs={3}>
-          <Button color="link" className="list-action" onClick={editClick}>
+          <Button variant="link" className="list-action" onClick={editClick}>
             Edit
             <AppIcon icon="edit" />
           </Button>
         </Col>
 
         <Col md={1} xs={3}>
-          <Button color="link" className="list-action" onClick={deleteClick}>
+          <Button variant="link" className="list-action" onClick={deleteClick}>
             Delete
             <AppIcon icon="delete" />
           </Button>

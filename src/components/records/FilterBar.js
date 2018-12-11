@@ -13,7 +13,6 @@ class FilterBar extends Component {
   };
 
   state = {
-    isSortByOpen: false,
     sortByOptions: [{key: 'date', text: 'Date'}, {key: 'categoryId', text: 'Category'}, {key: 'cost', text: 'Cost'}]
   };
 
@@ -24,6 +23,8 @@ class FilterBar extends Component {
   }
 
   render() {
+    const {sortByOptions} = this.state;
+
     let addClick = () => {
       this.props.addRecordAction();
     };
@@ -31,13 +32,10 @@ class FilterBar extends Component {
     return (
       <Row>
         <Col xs={8}>
-          <Dropdown
-            size="sm"
-            isOpen={this.state.isSortByOpen}
-            toggle={() => this.setState({isSortByOpen: !this.state.isSortByOpen})}>
-            <Dropdown.Toggle caret>Sort By</Dropdown.Toggle>
+          <Dropdown>
+            <Dropdown.Toggle>Sort By</Dropdown.Toggle>
             <Dropdown.Menu>
-              {this.state.sortByOptions.map(item => {
+              {sortByOptions.map(item => {
                 return (
                   <Dropdown.Item
                     key={item.key}
@@ -52,7 +50,7 @@ class FilterBar extends Component {
         </Col>
 
         <Col xs={4} className="text-right">
-          <Button color="success" onClick={addClick}>
+          <Button variant="success" onClick={addClick}>
             <AppIcon icon="plus" />
           </Button>
         </Col>

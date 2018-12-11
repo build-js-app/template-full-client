@@ -83,7 +83,7 @@ class LoginPage extends Component {
     return (
       <Container>
         <Row>
-          <Col sm={{size: 6, offset: 3}}>
+          <Col sm={{span: 6, offset: 3}}>
             <h1>
               <AppIcon icon="sign-in" /> Login
             </h1>
@@ -109,7 +109,7 @@ class LoginPage extends Component {
                 error={this.state.errors.password}
               />
 
-              <Button color="warning" size="lg" type="submit" onClick={this.login}>
+              <Button variant="warning" size="lg" type="submit" onClick={this.login}>
                 Login
               </Button>
             </form>
@@ -130,4 +130,9 @@ class LoginPage extends Component {
   }
 }
 
-export default helper.connect(LoginPage, stateMap, actions, {withRouter: true});
+export default helper.connect(
+  LoginPage,
+  stateMap,
+  actions,
+  {withRouter: true}
+);
