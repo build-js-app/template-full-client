@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Nav, Navbar} from 'components/bootstrap';
+import {Link} from 'react-router-dom';
 import AppIcon from 'components/common/AppIcon';
 
 import helper from 'helpers/reactHelper';
@@ -46,11 +47,11 @@ class Navigation extends Component {
         <Navbar.Toggle />
         <Navbar.Collapse>
           <Nav>
-            <Nav.Link href="/records" to="/records" active={location.pathname === '/records'}>
+            <Nav.Link as={Link} href="/records" to="/records" active={location.pathname === '/records'}>
               Records
             </Nav.Link>
 
-            <Nav.Link href="/categories" to="/categories" active={location.pathname === '/categories'}>
+            <Nav.Link as={Link} href="/categories" to="/categories" active={location.pathname === '/categories'}>
               Categories
             </Nav.Link>
           </Nav>
@@ -69,9 +70,4 @@ class Navigation extends Component {
   }
 }
 
-export default helper.connect(
-  Navigation,
-  stateMap,
-  actions,
-  {withRouter: true}
-);
+export default helper.connect(Navigation, stateMap, actions, {withRouter: true});
