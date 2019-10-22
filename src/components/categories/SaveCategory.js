@@ -26,7 +26,7 @@ class SaveCategory extends Component {
     helper.autoBind(this);
   }
 
-  componentWillReceiveProps() {
+  UNSAFE_componentWillReceiveProps() {
     this.setState({
       errors: {}
     });
@@ -90,7 +90,9 @@ class SaveCategory extends Component {
             <Button variant="primary" onClick={this.save}>
               Save
             </Button>
-            <Button variant="secondary" onClick={close}>Cancel</Button>
+            <Button variant="secondary" onClick={close}>
+              Cancel
+            </Button>
           </Modal.Footer>
         </Modal>
       </div>

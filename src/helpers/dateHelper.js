@@ -1,4 +1,4 @@
-import * as dateFns from 'date-fns';
+import {format, parseISO} from 'date-fns';
 
 import config from 'helpers/configHelper';
 
@@ -7,5 +7,5 @@ export default {
 };
 
 function displayDate(date) {
-  return dateFns.format(date, config.format.date);
+  return format(parseISO(date, 1), config.format.date);
 }

@@ -33,7 +33,7 @@ class SaveRecord extends Component {
     helper.autoBind(this);
   }
 
-  componentWillReceiveProps() {
+  UNSAFE_componentWillReceiveProps() {
     this.setState({
       errors: {}
     });
