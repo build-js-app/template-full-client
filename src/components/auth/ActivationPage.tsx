@@ -1,78 +1,57 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
+import {useDispatch} from 'react-redux';
 import classnames from 'classnames';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col} from './../bootstrap';
 
 import {activateUserAccount} from '../../actions/userActions';
 
-import helper from '../../helpers/reactHelper';
+function ActivationPage(props) {
+  const dispatch = useDispatch();
 
-const stateMap = state => ({});
+  const [activationData, setActivationData] = useState({message: '', status: ''});
 
-const actions = {
-  activateUserAccount
-};
+  useEffect(() => {
+    activateAccount();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-class ActivationPage extends Component<any, any> {
-  state = {
-    activationData: {
-      message: '',
-      status: ''
-    }
+  const activateAccount = async () => {
+    let token = props.match.params.token;
+
+    let data: any = await dispatch(activateUserAccount(token));
+
+    if (data) setActivationData(data);
   };
 
-  constructor(props) {
-    super(props);
+  let status = activationData.status;
 
-    helper.autoBind(this);
-  }
+  let alertClass = classnames({
+    alert: true,
+    'alert-danger': status === 'error',
+    'alert-success': status === 'success',
+    'alert-warning': status === 'warning'
+  });
 
-  componentDidMount() {
-    this.activateUserAccount();
-  }
+  return (
+    <Container>
+      <Row>
+        <Col sm={{span: 6, offset: 3}}>
+          <h1>Activation Page</h1>
 
-  async activateUserAccount() {
-    let token = this.props.match.params.token;
+          <br />
 
-    let data = await this.props.activateUserAccount(token);
+          {activationData.message && <div className={alertClass}>{activationData.message}</div>}
 
-    if (data) {
-      this.setState({
-        activationData: {...data}
-      });
-    }
-  }
+          <hr />
 
-  render() {
-    let status = this.state.activationData.status;
-
-    let alertClass = classnames({
-      alert: true,
-      'alert-danger': status === 'error',
-      'alert-success': status === 'success',
-      'alert-warning': status === 'warning'
-    });
-
-    return (
-      <Container>
-        <Row>
-          <Col sm={{span: 6, offset: 3}}>
-            <h1>Activation Page</h1>
-
-            <br />
-
-            {this.state.activationData.message && <div className={alertClass}>{this.state.activationData.message}</div>}
-
-            <hr />
-
-            <p>
-              Redirect to login page: <Link to="/login">Login</Link>
-            </p>
-          </Col>
-        </Row>
-      </Container>
-    );
-  }
+          <p>
+            Redirect to login page: <Link to="/login">Login</Link>
+          </p>
+        </Col>
+      </Row>
+    </Container>
+  );
 }
 
-export default helper.connect(ActivationPage, stateMap, actions, {withRouter: true});
+export default ActivationPage;

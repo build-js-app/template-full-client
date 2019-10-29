@@ -1,160 +1,131 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
+import {useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col, Button} from '../bootstrap';
 
 import {resetPassword, checkResetToken} from '../../actions/userActions';
 
-import helper from '../../helpers/reactHelper';
 import validationHelper from '../../helpers/validationHelper';
 import uiHelper from '../../helpers/uiHelper';
 
 import TextInput from '../common/TextInput';
 
-const stateMap = state => ({});
+function PasswordResetPage(props) {
+  const dispatch = useDispatch();
 
-const actions = {
-  resetPassword,
-  checkResetToken
-};
+  const [userData, setUserData] = useState({email: '', password: '', confirmPassword: '', token: ''});
 
-class PasswordResetPage extends Component<any, any> {
-  state = {
-    userData: {
-      email: '',
-      password: '',
-      confirmPassword: '',
-      token: ''
-    },
-    errors: {
-      email: '',
-      password: '',
-      confirmPassword: ''
-    }
+  const [errors, setErrors] = useState({email: '', password: '', confirmPassword: ''});
+
+  useEffect(() => {
+    onCheckResetToken();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const onCheckResetToken = async () => {
+    let token = props.match.params.token;
+
+    let data: any = await dispatch(checkResetToken(token));
+
+    if (data) setUserData({email: data.email, token: data.token, password: '', confirmPassword: ''});
   };
 
-  constructor(props) {
-    super(props);
-
-    helper.autoBind(this);
-  }
-
-  componentDidMount() {
-    this.checkResetToken();
-  }
-
-  onChange(field: string, value) {
-    let user = this.state.userData;
+  const onChange = (field: string, value) => {
+    let user = {...userData};
 
     user[field] = value;
 
-    return this.setState({userData: user});
-  }
+    setUserData(user);
+  };
 
-  resetFormIsValid() {
-    let user = this.state.userData;
+  const resetFormIsValid = () => {
     let errors: any = {};
 
-    if (!user.email) {
+    if (!userData.email) {
       errors.email = 'Email field is required.';
-    } else if (!validationHelper.isValidEmail(user.email)) {
+    } else if (!validationHelper.isValidEmail(userData.email)) {
       errors.email = 'Email is not valid.';
     }
 
-    if (!user.password) {
+    if (!userData.password) {
       errors.password = 'Password field is required.';
     }
 
-    if (!user.confirmPassword) {
+    if (!userData.confirmPassword) {
       errors.confirmPassword = 'Please confirm the password.';
     }
 
-    if (user.password && user.confirmPassword && user.password !== user.confirmPassword) {
+    if (userData.password && userData.confirmPassword && userData.password !== userData.confirmPassword) {
       errors.confirmPassword = 'Wrong password.';
     }
 
-    this.setState({errors: errors});
+    setErrors(errors);
 
     return Object.keys(errors).length === 0;
-  }
+  };
 
-  async checkResetToken() {
-    let token = this.props.match.params.token;
+  const onResetPassword = async () => {
+    if (!resetFormIsValid()) return;
 
-    let data = await this.props.checkResetToken(token);
-
-    if (data) {
-      this.setState({
-        userData: {email: data.email, token: data.token}
-      });
-    }
-  }
-
-  async resetPassword() {
-    if (!this.resetFormIsValid()) return;
-
-    let response = await this.props.resetPassword(this.state.userData);
+    let response: any = await dispatch(resetPassword(userData));
 
     if (response && response.message) {
       uiHelper.showMessage(response.message);
 
-      this.props.history.push('/login');
+      props.history.push('/login');
     }
-  }
+  };
 
-  render() {
-    const {userData, errors} = this.state;
+  return (
+    <Container>
+      <Row>
+        <Col sm={{span: 6, offset: 3}}>
+          <h1>Reset Password</h1>
 
-    return (
-      <Container>
-        <Row>
-          <Col sm={{span: 6, offset: 3}}>
-            <h1>Reset Password</h1>
+          <TextInput
+            name="email"
+            label="Email"
+            type="email"
+            disabled={true}
+            value={userData.email}
+            onChange={onChange}
+            placeholder="Email"
+            error={errors.email}
+          />
 
-            <TextInput
-              name="email"
-              label="Email"
-              type="email"
-              disabled={true}
-              value={userData.email}
-              onChange={this.onChange}
-              placeholder="Email"
-              error={errors.email}
-            />
+          <TextInput
+            name="password"
+            label="New Password"
+            type="password"
+            value={userData.password}
+            onChange={onChange}
+            placeholder="New password"
+            error={errors.password}
+          />
 
-            <TextInput
-              name="password"
-              label="New Password"
-              type="password"
-              value={userData.password}
-              onChange={this.onChange}
-              placeholder="New password"
-              error={errors.password}
-            />
+          <TextInput
+            name="confirmPassword"
+            label="Confirm Password"
+            type="password"
+            value={userData.confirmPassword}
+            onChange={onChange}
+            placeholder="Confirm password"
+            error={errors.confirmPassword}
+          />
 
-            <TextInput
-              name="confirmPassword"
-              label="Confirm Password"
-              type="password"
-              value={userData.confirmPassword}
-              onChange={this.onChange}
-              placeholder="Confirm password"
-              error={errors.confirmPassword}
-            />
+          <Button variant="warning" size="lg" onClick={onResetPassword}>
+            Save Password
+          </Button>
 
-            <Button variant="warning" size="lg" onClick={this.resetPassword}>
-              Save Password
-            </Button>
+          <hr />
 
-            <hr />
-
-            <p>
-              Redirect to login page: <Link to="/login">Login</Link>
-            </p>
-          </Col>
-        </Row>
-      </Container>
-    );
-  }
+          <p>
+            Redirect to login page: <Link to="/login">Login</Link>
+          </p>
+        </Col>
+      </Row>
+    </Container>
+  );
 }
 
-export default helper.connect(PasswordResetPage, stateMap, actions, {withRouter: true});
+export default PasswordResetPage;

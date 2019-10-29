@@ -1,56 +1,32 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
+import {useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col, Button} from '../bootstrap';
 
 import {signUp} from '../../actions/userActions';
 
-import helper from '../../helpers/reactHelper';
 import validationHelper from '../../helpers/validationHelper';
 import uiHelper from '../../helpers/uiHelper';
 
 import AppIcon from '../common/AppIcon';
 import TextInput from '../common/TextInput';
 
-const stateMap = state => ({});
+function SignUpPage(props) {
+  const dispatch = useDispatch();
 
-const actions = {
-  signUp
-};
+  const [user, setUser] = useState({firstName: '', lastName: '', email: '', password: '', confirmPassword: ''});
 
-class SignUpPage extends Component<any, any> {
-  state = {
-    user: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      confirmPassword: ''
-    },
-    errors: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      confirmPassword: ''
-    }
+  const [errors, setErrors] = useState({firstName: '', lastName: '', email: '', password: '', confirmPassword: ''});
+
+  const onChange = (field: string, value) => {
+    let newUser = {...user};
+
+    newUser[field] = value;
+
+    setUser(newUser);
   };
 
-  constructor(props) {
-    super(props);
-
-    helper.autoBind(this);
-  }
-
-  onChange(field: string, value) {
-    let user = this.state.user;
-
-    user[field] = value;
-
-    return this.setState({user: user});
-  }
-
-  signUpFormIsValid() {
-    let user = this.state.user;
+  const signUpFormIsValid = () => {
     let errors: any = {};
 
     if (!user.firstName) {
@@ -79,96 +55,92 @@ class SignUpPage extends Component<any, any> {
       errors.confirmPassword = 'Wrong password.';
     }
 
-    this.setState({errors: errors});
+    setErrors(errors);
 
     return Object.keys(errors).length === 0;
-  }
+  };
 
-  async signUp() {
-    if (!this.signUpFormIsValid()) return;
+  const onSignUp = async () => {
+    if (!signUpFormIsValid()) return;
 
-    let response = await this.props.signUp(this.state.user);
+    let response: any = await dispatch(signUp(user));
 
     if (response && response.message) {
       uiHelper.showMessage(response.message);
 
-      this.props.history.push('/login');
+      props.history.push('/login');
     }
-  }
+  };
 
-  render() {
-    const {user, errors} = this.state;
+  return (
+    <Container>
+      <Row>
+        <Col sm={{span: 6, offset: 3}}>
+          <h1>
+            <AppIcon icon="sign-in" /> Sign Up
+          </h1>
 
-    return (
-      <Container>
-        <Row>
-          <Col sm={{span: 6, offset: 3}}>
-            <h1>
-              <AppIcon icon="sign-in" /> Sign Up
-            </h1>
+          <TextInput
+            name="firstName"
+            label="First Name"
+            value={user.firstName}
+            onChange={onChange}
+            placeholder="First Name"
+            error={errors.firstName}
+          />
 
-            <TextInput
-              name="firstName"
-              label="First Name"
-              value={user.firstName}
-              onChange={this.onChange}
-              placeholder="First Name"
-              error={errors.firstName}
-            />
+          <TextInput
+            name="lastName"
+            label="Last Name"
+            value={user.lastName}
+            onChange={onChange}
+            placeholder="Last Name"
+            error={errors.lastName}
+          />
 
-            <TextInput
-              name="lastName"
-              label="Last Name"
-              value={user.lastName}
-              onChange={this.onChange}
-              placeholder="Last Name"
-              error={errors.lastName}
-            />
+          <TextInput
+            name="email"
+            label="Email"
+            type="email"
+            value={user.email}
+            onChange={onChange}
+            placeholder="Email"
+            error={errors.email}
+          />
 
-            <TextInput
-              name="email"
-              label="Email"
-              type="email"
-              value={user.email}
-              onChange={this.onChange}
-              placeholder="Email"
-              error={errors.email}
-            />
+          <TextInput
+            name="password"
+            label="Password"
+            type="password"
+            value={user.password}
+            onChange={onChange}
+            placeholder="Password"
+            error={errors.password}
+          />
 
-            <TextInput
-              name="password"
-              label="Password"
-              type="password"
-              value={user.password}
-              onChange={this.onChange}
-              placeholder="Password"
-              error={errors.password}
-            />
+          <TextInput
+            name="confirmPassword"
+            label="Confirm Password"
+            type="password"
+            value={user.confirmPassword}
+            onChange={onChange}
+            placeholder="Confirm Password"
+            error={errors.confirmPassword}
+          />
 
-            <TextInput
-              name="confirmPassword"
-              label="Confirm Password"
-              type="password"
-              value={user.confirmPassword}
-              onChange={this.onChange}
-              placeholder="Confirm Password"
-              error={errors.confirmPassword}
-            />
+          <Button variant="warning" size="lg" onClick={onSignUp}>
+            Sign Up
+          </Button>
 
-            <Button variant="warning" size="lg" onClick={this.signUp}>
-              Sign Up
-            </Button>
+          <hr />
 
-            <hr />
-
-            <p>
-              Already have an account? <Link to="/login">Login</Link>
-            </p>
-          </Col>
-        </Row>
-      </Container>
-    );
-  }
+          <p>
+            Already have an account? <Link to="/login">Login</Link>
+          </p>
+        </Col>
+      </Row>
+    </Container>
+  );
 }
 
-export default helper.connect(SignUpPage, stateMap, actions, {withRouter: true});
+export default SignUpPage;
