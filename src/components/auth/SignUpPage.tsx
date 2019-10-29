@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {Container, Row, Col, Button} from '../bootstrap';
 
 import {signUp} from '../../actions/userActions';
@@ -11,8 +11,9 @@ import uiHelper from '../../helpers/uiHelper';
 import AppIcon from '../common/AppIcon';
 import TextInput from '../common/TextInput';
 
-function SignUpPage(props) {
+function SignUpPage() {
   const dispatch = useDispatch();
+  let history = useHistory();
 
   const [user, setUser] = useState({firstName: '', lastName: '', email: '', password: '', confirmPassword: ''});
 
@@ -27,7 +28,13 @@ function SignUpPage(props) {
   };
 
   const signUpFormIsValid = () => {
-    let errors: any = {};
+    let errors = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      confirmPassword: ''
+    };
 
     if (!user.firstName) {
       errors.firstName = 'First Name field is required.';
@@ -68,7 +75,7 @@ function SignUpPage(props) {
     if (response && response.message) {
       uiHelper.showMessage(response.message);
 
-      props.history.push('/login');
+      history.push('/login');
     }
   };
 

@@ -47,7 +47,7 @@ export const resetPassword = userData => {
   }, null);
 };
 
-export const activateUserAccount = (token: string) => {
+export const activateUserAccount = token => {
   return helper.dispatchAsyncAction(async () => {
     let response = await authService.activateAccount(token);
     return response;
@@ -61,7 +61,7 @@ export const signUp = user => {
   }, null);
 };
 
-export const checkResetToken = (token: string) => {
+export const checkResetToken = token => {
   return helper.dispatchAsyncAction(async () => {
     let response = await authService.resetPasswordTokenCheck(token);
     return response;

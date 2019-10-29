@@ -19,7 +19,11 @@ function SaveRecord({record, categories, save, close, onChange, visible}) {
   }, [record]);
 
   const formIsValid = () => {
-    let errors: any = {};
+    let errors = {
+      categoryId: '',
+      cost: '',
+      note: ''
+    };
 
     if (!record.categoryId) {
       errors.categoryId = 'Category field is required.';

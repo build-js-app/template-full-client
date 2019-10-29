@@ -21,7 +21,9 @@ function PasswordForgotPage() {
   };
 
   const forgotFormIsValid = () => {
-    let errors: any = {};
+    let errors = {
+      email: ''
+    };
 
     if (!email) {
       errors.email = 'Email field is required.';

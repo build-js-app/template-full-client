@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link, useHistory, useParams} from 'react-router-dom';
 import {Container, Row, Col, Button} from '../bootstrap';
 
 import {resetPassword, checkResetToken} from '../../actions/userActions';
@@ -10,8 +10,10 @@ import uiHelper from '../../helpers/uiHelper';
 
 import TextInput from '../common/TextInput';
 
-function PasswordResetPage(props) {
+function PasswordResetPage() {
   const dispatch = useDispatch();
+  let history = useHistory();
+  let {token} = useParams();
 
   const [userData, setUserData] = useState({email: '', password: '', confirmPassword: '', token: ''});
 
@@ -23,8 +25,6 @@ function PasswordResetPage(props) {
   }, []);
 
   const onCheckResetToken = async () => {
-    let token = props.match.params.token;
-
     let data: any = await dispatch(checkResetToken(token));
 
     if (data) setUserData({email: data.email, token: data.token, password: '', confirmPassword: ''});
@@ -39,7 +39,11 @@ function PasswordResetPage(props) {
   };
 
   const resetFormIsValid = () => {
-    let errors: any = {};
+    let errors = {
+      email: '',
+      password: '',
+      confirmPassword: ''
+    };
 
     if (!userData.email) {
       errors.email = 'Email field is required.';
@@ -72,7 +76,7 @@ function PasswordResetPage(props) {
     if (response && response.message) {
       uiHelper.showMessage(response.message);
 
-      props.history.push('/login');
+      history.push('/login');
     }
   };
 

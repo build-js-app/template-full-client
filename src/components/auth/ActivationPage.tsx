@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import classnames from 'classnames';
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import {Container, Row, Col} from './../bootstrap';
 
 import {activateUserAccount} from '../../actions/userActions';
 
-function ActivationPage(props) {
+function ActivationPage() {
   const dispatch = useDispatch();
+  let {token} = useParams();
 
   const [activationData, setActivationData] = useState({message: '', status: ''});
 
@@ -17,8 +18,6 @@ function ActivationPage(props) {
   }, []);
 
   const activateAccount = async () => {
-    let token = props.match.params.token;
-
     let data: any = await dispatch(activateUserAccount(token));
 
     if (data) setActivationData(data);

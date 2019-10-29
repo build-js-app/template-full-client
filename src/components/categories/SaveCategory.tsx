@@ -13,7 +13,10 @@ function SaveCategory({category, save, close, onChange, visible}) {
   }, [category]);
 
   const formIsValid = () => {
-    let formErrors: any = {};
+    let formErrors = {
+      title: '',
+      description: ''
+    };
 
     if (!category.title) {
       formErrors.title = 'Title field is required.';

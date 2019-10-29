@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {Container, Row, Col, Button} from './../bootstrap';
 import _ from 'lodash';
 
@@ -11,17 +11,18 @@ import validationHelper from '../../helpers/validationHelper';
 import AppIcon from './../common/AppIcon';
 import TextInput from './../common/TextInput';
 
-function LoginPage(props) {
+function LoginPage() {
   const currentUser = useSelector((state: any) => state.user.current);
 
   const dispatch = useDispatch();
+  let history = useHistory();
 
   const [user, setUser] = useState({email: '', password: ''});
 
   const [errors, setErrors] = useState({email: '', password: ''});
 
   useEffect(() => {
-    if (!_.isEmpty(currentUser)) props.history.push('/');
+    if (!_.isEmpty(currentUser)) history.push('/');
   });
 
   const onChange = (field: string, value) => {
@@ -33,7 +34,10 @@ function LoginPage(props) {
   };
 
   const loginFormIsValid = () => {
-    let errors: any = {};
+    let errors = {
+      email: '',
+      password: ''
+    };
 
     if (!user.email) {
       errors.email = 'Email field is required.';
@@ -59,7 +63,7 @@ function LoginPage(props) {
 
     await dispatch(getCurrentUser());
 
-    if (!_.isEmpty(user)) props.history.push('/records');
+    if (!_.isEmpty(user)) history.push('/records');
   };
 
   return (

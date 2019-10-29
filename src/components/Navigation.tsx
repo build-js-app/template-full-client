@@ -1,74 +1,61 @@
-import React, {Component} from 'react';
+import React from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import {Nav, Navbar} from './bootstrap';
-import {Link} from 'react-router-dom';
+import {Link, useHistory, useLocation} from 'react-router-dom';
 
 import {logOut} from '../actions/userActions';
 
-import helper from '../helpers/reactHelper';
-
 import AppIcon from './common/AppIcon';
 
-const stateMap = state => ({
-  user: state.user.current
-});
+function Navigation() {
+  let dispatch = useDispatch();
+  let history = useHistory();
+  let location = useLocation();
 
-const actions = {
-  logOut
-};
+  const user = useSelector((state: any) => state.user.current);
 
-class Navigation extends Component<any, any> {
-  state = {};
+  const onLogOut = async () => {
+    await dispatch(logOut());
 
-  constructor(props) {
-    super(props);
+    history.push('/login');
+  };
 
-    helper.autoBind(this);
+  let userFullName = '';
+
+  if (user && user.profile && user.profile.local) {
+    let local = user.profile.local;
+
+    userFullName = `${local.firstName} ${local.lastName}`;
   }
 
-  async onLogOut() {
-    await this.props.logOut();
+  let pathName = location.pathname;
 
-    this.props.history.push('/login');
-  }
+  return (
+    <Navbar bg="light" variant="light" expand="md">
+      <Navbar.Brand>Expense Manager</Navbar.Brand>
+      <Navbar.Toggle />
+      <Navbar.Collapse>
+        <Nav>
+          <Nav.Link as={Link} href="/records" to="/records" active={pathName === '/records'}>
+            Records
+          </Nav.Link>
 
-  render() {
-    const {user, location} = this.props;
+          <Nav.Link as={Link} href="/categories" to="/categories" active={pathName === '/categories'}>
+            Categories
+          </Nav.Link>
+        </Nav>
+        <Nav className="ml-auto">
+          <span className="navbar-text" style={{marginRight: 20}}>
+            Logged as: <b>{userFullName}</b>
+          </span>
 
-    let userFullName = '';
-
-    if (user && user.profile && user.profile.local) {
-      let local = user.profile.local;
-
-      userFullName = `${local.firstName} ${local.lastName}`;
-    }
-
-    return (
-      <Navbar bg="light" variant="light" expand="md">
-        <Navbar.Brand>Expense Manager</Navbar.Brand>
-        <Navbar.Toggle />
-        <Navbar.Collapse>
-          <Nav>
-            <Nav.Link as={Link} href="/records" to="/records" active={location.pathname === '/records'}>
-              Records
-            </Nav.Link>
-
-            <Nav.Link as={Link} href="/categories" to="/categories" active={location.pathname === '/categories'}>
-              Categories
-            </Nav.Link>
-          </Nav>
-          <Nav className="ml-auto">
-            <span className="navbar-text" style={{marginRight: 20}}>
-              Logged as: <b>{userFullName}</b>
-            </span>
-
-            <Nav.Link href="#" onClick={() => this.onLogOut()}>
-              LogOut <AppIcon icon="sign-out" />
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-    );
-  }
+          <Nav.Link href="#" onClick={onLogOut}>
+            LogOut <AppIcon icon="sign-out" />
+          </Nav.Link>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+  );
 }
 
-export default helper.connect(Navigation, stateMap, actions, {withRouter: true});
+export default Navigation;
