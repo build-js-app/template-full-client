@@ -1,138 +1,110 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import {Container, Row, Col, Button} from '../bootstrap';
+import _ from 'lodash';
 
 import {confirmAction} from '../../actions/commonActions';
 import {loadCategories, saveCategory, deleteCategory} from '../../actions/categoryActions';
 
-import helper from '../../helpers/reactHelper';
 import uiHelper from '../../helpers/uiHelper';
 
 import AppIcon from '../common/AppIcon';
 import CategoriesList from './CategoriesList';
 import SaveCategory from './SaveCategory';
 
-const stateMap = state => ({
-  categories: state.category.list
-});
+function CategoriesPage() {
+  const categories = useSelector((state: any) => state.category.list);
 
-const actions = {
-  confirmAction,
-  loadCategories,
-  saveCategory,
-  deleteCategory
-};
+  const dispatch = useDispatch();
 
-class CategoriesPage extends Component<any, any> {
-  state = {
-    categoryToEdit: null
+  const [categoryToEdit, setCategoryToEdit] = useState({});
+
+  useEffect(() => {
+    if (_.isEmpty(categories)) dispatch(loadCategories());
+  });
+
+  const addCategory = () => {
+    setCategoryToEdit({title: '', description: ''});
   };
 
-  constructor(props) {
-    super(props);
+  const editCategory = category => {
+    setCategoryToEdit({...category});
+  };
 
-    helper.autoBind(this);
-  }
+  const cancelEditCategory = () => {
+    setCategoryToEdit({});
+  };
 
-  componentDidMount() {
-    this.props.loadCategories();
-  }
-
-  addCategory() {
-    this.setState({
-      categoryToEdit: {title: '', description: ''}
-    });
-  }
-
-  editCategory(category) {
-    this.setState({
-      categoryToEdit: {...category}
-    });
-  }
-
-  cancelEditCategory() {
-    this.setState({
-      categoryToEdit: null
-    });
-  }
-
-  updateCategoryState(field: string, value) {
-    let category: any = this.state.categoryToEdit;
+  const updateCategoryState = (field, value) => {
+    let category = {...categoryToEdit};
 
     if (!category) return;
 
     category[field] = value;
 
-    return this.setState({
-      categoryToEdit: category
-    });
-  }
+    setCategoryToEdit(category);
+  };
 
-  async saveCategory() {
-    let category = await this.props.saveCategory(this.state.categoryToEdit);
+  const onSaveCategory = async () => {
+    let category = await dispatch(saveCategory(categoryToEdit));
 
-    if (category) {
-      uiHelper.showMessage(`Category was updated`);
-    }
+    if (category) uiHelper.showMessage(`Category was updated`);
 
-    this.setState({
-      categoryToEdit: null
-    });
-  }
+    cancelEditCategory();
+  };
 
-  async deleteCategory(id: number) {
-    this.props.confirmAction({
-      title: 'Delete category',
-      action: async () => {
-        let completed = await this.props.deleteCategory(id);
+  const onDeleteCategory = async id => {
+    dispatch(
+      confirmAction({
+        title: 'Delete category',
+        action: async () => {
+          let completed = await dispatch(deleteCategory(id));
 
-        if (completed) {
-          uiHelper.showMessage('Category was successfully deleted');
+          if (completed) uiHelper.showMessage('Category was successfully deleted');
         }
-      }
-    });
-  }
-
-  render() {
-    let editCategoryVisible = this.state.categoryToEdit ? true : false;
-
-    return (
-      <Container fluid>
-        <Row>
-          <Col md={{span: 10, offset: 1}}>
-            <Row>
-              <Col sm={12}>
-                <h2>Categories Page</h2>
-              </Col>
-            </Row>
-
-            <br />
-
-            <Row>
-              <Col sm={12} className="text-right">
-                <Button variant="success" onClick={this.addCategory}>
-                  <AppIcon icon="plus" />
-                </Button>
-              </Col>
-            </Row>
-
-            <CategoriesList
-              categories={this.props.categories}
-              editCategoryAction={this.editCategory}
-              deleteCategoryAction={this.deleteCategory}
-            />
-          </Col>
-        </Row>
-
-        <SaveCategory
-          visible={editCategoryVisible}
-          category={this.state.categoryToEdit}
-          save={this.saveCategory}
-          close={this.cancelEditCategory}
-          onChange={this.updateCategoryState}
-        />
-      </Container>
+      })
     );
-  }
+  };
+
+  let editCategoryVisible = _.isEmpty(categoryToEdit) ? false : true;
+
+  return (
+    <Container fluid>
+      <Row>
+        <Col md={{span: 10, offset: 1}}>
+          <Row>
+            <Col sm={12}>
+              <h2>Categories Page</h2>
+            </Col>
+          </Row>
+
+          <br />
+
+          <Row>
+            <Col sm={12} className="text-right">
+              <Button variant="success" onClick={addCategory}>
+                <AppIcon icon="plus" />
+              </Button>
+            </Col>
+          </Row>
+
+          <CategoriesList
+            categories={categories}
+            editCategoryAction={editCategory}
+            deleteCategoryAction={onDeleteCategory}
+          />
+        </Col>
+      </Row>
+
+      <SaveCategory
+        visible={editCategoryVisible}
+        category={categoryToEdit}
+        save={onSaveCategory}
+        close={cancelEditCategory}
+        onChange={updateCategoryState}
+      />
+    </Container>
+  );
 }
 
-export default helper.connect(CategoriesPage, stateMap, actions);
+export default CategoriesPage;

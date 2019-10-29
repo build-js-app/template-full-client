@@ -1,106 +1,82 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Modal, Button} from '../bootstrap';
 import PropTypes from 'prop-types';
-
-import helper from '../../helpers/reactHelper';
 
 import TextInput from '../common/TextInput';
 import TextAreaInput from '../common/TextAreaInput';
 
-class SaveCategory extends Component<any, any> {
-  static propTypes = {
-    category: PropTypes.object,
-    save: PropTypes.func.isRequired,
-    close: PropTypes.func.isRequired,
-    onChange: PropTypes.func.isRequired,
-    visible: PropTypes.bool
-  };
+function SaveCategory({category, save, close, onChange, visible}) {
+  const [errors, setErrors] = useState({title: '', description: ''});
 
-  state = {
-    errors: {
-      title: '',
-      description: ''
-    }
-  };
+  useEffect(() => {
+    setErrors({title: '', description: ''});
+  }, [category]);
 
-  constructor(props) {
-    super(props);
-
-    helper.autoBind(this);
-  }
-
-  UNSAFE_componentWillReceiveProps() {
-    this.setState({
-      errors: {}
-    });
-  }
-
-  formIsValid() {
-    let errors: any = {};
-    let category = this.props.category;
+  const formIsValid = () => {
+    let formErrors: any = {};
 
     if (!category.title) {
-      errors.title = 'Title field is required.';
+      formErrors.title = 'Title field is required.';
     }
 
     if (!category.description) {
-      errors.description = 'Description field is required.';
+      formErrors.description = 'Description field is required.';
     }
 
-    this.setState({errors: errors});
+    setErrors(formErrors);
 
-    return Object.keys(errors).length === 0;
-  }
+    return Object.keys(formErrors).length === 0;
+  };
 
-  save() {
-    if (!this.formIsValid()) return;
+  const onSave = () => {
+    if (!formIsValid()) return;
+    save();
+  };
 
-    this.props.save();
-  }
+  if (!category) return null;
 
-  render() {
-    const {category, visible, close, onChange} = this.props;
-    const {errors} = this.state;
+  let title = category.id ? 'Edit Category' : 'Add New Category';
 
-    if (!category) return null;
+  return (
+    <Modal show={visible} backdrop="static" onHide={close}>
+      <Modal.Header closeButton>{title}</Modal.Header>
+      <Modal.Body>
+        <TextInput
+          name="title"
+          label="Title"
+          value={category.title}
+          onChange={onChange}
+          placeholder="Title"
+          error={errors.title}
+        />
 
-    let title = category.id ? 'Edit Category' : 'Add New Category';
-
-    return (
-      <div>
-        <Modal show={visible} backdrop="static" onHide={close}>
-          <Modal.Header closeButton>{title}</Modal.Header>
-          <Modal.Body>
-            <TextInput
-              name="title"
-              label="Title"
-              value={category.title}
-              onChange={onChange}
-              placeholder="Title"
-              error={errors.title}
-            />
-
-            <TextAreaInput
-              name="description"
-              label="Description"
-              value={category.description}
-              onChange={onChange}
-              placeholder="Description"
-              error={errors.description}
-            />
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="primary" onClick={this.save}>
-              Save
-            </Button>
-            <Button variant="secondary" onClick={close}>
-              Cancel
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </div>
-    );
-  }
+        <TextAreaInput
+          name="description"
+          label="Description"
+          value={category.description}
+          onChange={onChange}
+          placeholder="Description"
+          error={errors.description}
+        />
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="primary" onClick={onSave}>
+          Save
+        </Button>
+        <Button variant="secondary" onClick={close}>
+          Cancel
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
 }
+
+SaveCategory.propTypes = {
+  category: PropTypes.object,
+  save: PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  visible: PropTypes.bool
+};
 
 export default SaveCategory;
