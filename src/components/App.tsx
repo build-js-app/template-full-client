@@ -11,6 +11,10 @@ import {confirmActionCancel} from 'actions/commonActions';
 
 import 'styles/App.scss';
 
+App.propTypes = {
+  routes: PropTypes.array.isRequired
+};
+
 function App(props) {
   let dispatch = useDispatch();
 
@@ -64,9 +68,5 @@ function App(props) {
     </div>
   );
 }
-
-App.propTypes = {
-  routes: PropTypes.array.isRequired
-};
 
 export default App;

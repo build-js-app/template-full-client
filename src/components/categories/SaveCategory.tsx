@@ -5,6 +5,14 @@ import PropTypes from 'prop-types';
 import TextInput from 'components/common/TextInput';
 import TextAreaInput from 'components/common/TextAreaInput';
 
+SaveCategory.propTypes = {
+  category: PropTypes.object,
+  save: PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  visible: PropTypes.bool
+};
+
 function SaveCategory({category, save, close, onChange, visible}) {
   const [errors, setErrors] = useState({title: '', description: ''});
 
@@ -73,13 +81,5 @@ function SaveCategory({category, save, close, onChange, visible}) {
     </Modal>
   );
 }
-
-SaveCategory.propTypes = {
-  category: PropTypes.object,
-  save: PropTypes.func.isRequired,
-  close: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  visible: PropTypes.bool
-};
 
 export default SaveCategory;

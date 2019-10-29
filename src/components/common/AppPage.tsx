@@ -8,6 +8,11 @@ import {getCurrentUser} from 'actions/userActions';
 
 import Navigation from 'components/Navigation';
 
+AppPage.propTypes = {
+  children: PropTypes.object.isRequired,
+  title: PropTypes.string
+};
+
 function AppPage(props) {
   let dispatch = useDispatch();
 
@@ -44,10 +49,5 @@ function AppPage(props) {
     </div>
   );
 }
-
-AppPage.propTypes = {
-  children: PropTypes.object.isRequired,
-  title: PropTypes.string
-};
 
 export default AppPage;

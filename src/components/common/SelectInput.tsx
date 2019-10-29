@@ -2,6 +2,14 @@ import React from 'react';
 import {Form} from 'bootstrap';
 import PropTypes from 'prop-types';
 
+SelectInput.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  options: PropTypes.array,
+  error: PropTypes.string
+};
+
 function SelectInput({name, label, value, onChange, options, error}) {
   let inputOnChange = event => {
     onChange(name, event.target.value);
@@ -25,13 +33,5 @@ function SelectInput({name, label, value, onChange, options, error}) {
     </Form.Group>
   );
 }
-
-SelectInput.propTypes = {
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  options: PropTypes.array,
-  error: PropTypes.string
-};
 
 export default SelectInput;

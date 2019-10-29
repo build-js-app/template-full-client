@@ -6,6 +6,12 @@ import AppIcon from 'components/common/AppIcon';
 
 import './categories.scss';
 
+CategoriesList.propTypes = {
+  categories: PropTypes.array,
+  editCategoryAction: PropTypes.func.isRequired,
+  deleteCategoryAction: PropTypes.func.isRequired
+};
+
 function CategoriesList({categories, editCategoryAction, deleteCategoryAction}) {
   const anyCategories = () => {
     return categories && categories.length;
@@ -77,11 +83,5 @@ function CategoriesList({categories, editCategoryAction, deleteCategoryAction}) 
     </Row>
   );
 }
-
-CategoriesList.propTypes = {
-  categories: PropTypes.array,
-  editCategoryAction: PropTypes.func.isRequired,
-  deleteCategoryAction: PropTypes.func.isRequired
-};
 
 export default CategoriesList;

@@ -11,6 +11,15 @@ import SelectInput from 'components/common/SelectInput';
 
 const dateOptions = {dateFormat: config.format.datePicker};
 
+SaveRecord.propTypes = {
+  record: PropTypes.object,
+  categories: PropTypes.array.isRequired,
+  save: PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  visible: PropTypes.bool
+};
+
 function SaveRecord({record, categories, save, close, onChange, visible}) {
   const [errors, setErrors] = useState({categoryId: '', cost: '', note: ''});
 
@@ -105,14 +114,5 @@ function SaveRecord({record, categories, save, close, onChange, visible}) {
     </Modal>
   );
 }
-
-SaveRecord.propTypes = {
-  record: PropTypes.object,
-  categories: PropTypes.array.isRequired,
-  save: PropTypes.func.isRequired,
-  close: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  visible: PropTypes.bool
-};
 
 export default SaveRecord;

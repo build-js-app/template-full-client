@@ -6,6 +6,12 @@ import AppIcon from 'components/common/AppIcon';
 
 const sortByOptions = [{key: 'date', text: 'Date'}, {key: 'categoryId', text: 'Category'}, {key: 'cost', text: 'Cost'}];
 
+FilterBar.propTypes = {
+  sortBy: PropTypes.string.isRequired,
+  addRecordAction: PropTypes.func.isRequired,
+  onSortAction: PropTypes.func.isRequired
+};
+
 function FilterBar({sortBy, addRecordAction, onSortAction}) {
   return (
     <Row>
@@ -32,11 +38,5 @@ function FilterBar({sortBy, addRecordAction, onSortAction}) {
     </Row>
   );
 }
-
-FilterBar.propTypes = {
-  sortBy: PropTypes.string.isRequired,
-  addRecordAction: PropTypes.func.isRequired,
-  onSortAction: PropTypes.func.isRequired
-};
 
 export default FilterBar;

@@ -3,6 +3,17 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import {Form} from 'bootstrap';
 
+TextInput.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+  value: PropTypes.string,
+  error: PropTypes.string,
+  type: PropTypes.string,
+  disabled: PropTypes.bool
+};
+
 function TextInput({name, label, onChange, placeholder, value, error, type, disabled}) {
   let wrapperClass = classnames({
     'form-group': true,
@@ -32,16 +43,5 @@ function TextInput({name, label, onChange, placeholder, value, error, type, disa
     </div>
   );
 }
-
-TextInput.propTypes = {
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  placeholder: PropTypes.string,
-  value: PropTypes.string,
-  error: PropTypes.string,
-  type: PropTypes.string,
-  disabled: PropTypes.bool
-};
 
 export default TextInput;

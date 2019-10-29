@@ -3,6 +3,16 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import {Form} from 'bootstrap';
 
+TextAreaInput.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+  value: PropTypes.string,
+  error: PropTypes.string,
+  rows: PropTypes.number
+};
+
 function TextAreaInput({name, label, onChange, placeholder, value, error, rows}) {
   let wrapperClass = classnames({
     'form-group': true,
@@ -31,15 +41,5 @@ function TextAreaInput({name, label, onChange, placeholder, value, error, rows})
     </div>
   );
 }
-
-TextAreaInput.propTypes = {
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  placeholder: PropTypes.string,
-  value: PropTypes.string,
-  error: PropTypes.string,
-  rows: PropTypes.number
-};
 
 export default TextAreaInput;

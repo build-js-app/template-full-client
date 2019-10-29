@@ -17,6 +17,10 @@ let map = {
   'sign-in': faSignInAlt
 };
 
+AppIcon.propTypes = {
+  icon: PropTypes.string.isRequired
+};
+
 function AppIcon(props) {
   let icon = unknownIcon;
 
@@ -26,9 +30,5 @@ function AppIcon(props) {
 
   return <FaIcon {...props} icon={icon} />;
 }
-
-AppIcon.propTypes = {
-  icon: PropTypes.string.isRequired
-};
 
 export default AppIcon;

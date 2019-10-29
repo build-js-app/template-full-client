@@ -2,6 +2,14 @@ import React from 'react';
 import {Modal, Button} from 'bootstrap';
 import PropTypes from 'prop-types';
 
+Confirm.propTypes = {
+  title: PropTypes.string,
+  text: PropTypes.string,
+  visible: PropTypes.bool,
+  action: PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired
+};
+
 function Confirm({title, text, visible, action, close}) {
   let displayTitle = title ? title : 'Confirmation';
   let displayMessage = text ? text : 'Are you sure?';
@@ -23,13 +31,5 @@ function Confirm({title, text, visible, action, close}) {
     </Modal>
   );
 }
-
-Confirm.propTypes = {
-  title: PropTypes.string,
-  text: PropTypes.string,
-  visible: PropTypes.bool,
-  action: PropTypes.func.isRequired,
-  close: PropTypes.func.isRequired
-};
 
 export default Confirm;

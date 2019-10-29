@@ -3,6 +3,14 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import {Form} from 'bootstrap';
 
+NumberInput.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.number,
+  error: PropTypes.string
+};
+
 function NumberInput({name, label, onChange, value, error}) {
   let wrapperClass = classnames({
     'form-group': true,
@@ -30,13 +38,5 @@ function NumberInput({name, label, onChange, value, error}) {
     </div>
   );
 }
-
-NumberInput.propTypes = {
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.number,
-  error: PropTypes.string
-};
 
 export default NumberInput;

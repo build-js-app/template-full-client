@@ -9,6 +9,13 @@ import AppIcon from 'components/common/AppIcon';
 
 import './records.scss';
 
+RecordsList.propTypes = {
+  records: PropTypes.array,
+  categories: PropTypes.array,
+  editRecordAction: PropTypes.func.isRequired,
+  deleteRecordAction: PropTypes.func.isRequired
+};
+
 function RecordsList({records, categories, editRecordAction, deleteRecordAction}) {
   const anyRecords = () => {
     return records && records.length;
@@ -105,12 +112,5 @@ function RecordsList({records, categories, editRecordAction, deleteRecordAction}
     </Row>
   );
 }
-
-RecordsList.propTypes = {
-  records: PropTypes.array,
-  categories: PropTypes.array,
-  editRecordAction: PropTypes.func.isRequired,
-  deleteRecordAction: PropTypes.func.isRequired
-};
 
 export default RecordsList;
