@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Row, Col, Form, Button} from '../bootstrap';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
@@ -9,57 +9,15 @@ import AppIcon from '../common/AppIcon';
 
 import './records.scss';
 
-class RecordsList extends Component<any, any> {
-  static propTypes = {
-    records: PropTypes.array,
-    categories: PropTypes.array,
-    editRecordAction: PropTypes.func.isRequired,
-    deleteRecordAction: PropTypes.func.isRequired
+function RecordsList({records, categories, editRecordAction, deleteRecordAction}) {
+  const anyRecords = () => {
+    return records && records.length;
   };
 
-  get anyRecords() {
-    let records = this.props.records;
-    return records && records.length;
-  }
+  if (!anyRecords()) return <div className="records-list">No Records.</div>;
 
-  render() {
-    if (!this.anyRecords) return <div className="records-list">No Records.</div>;
-
-    return (
-      <Row className="records-list">
-        <Col>
-          <Row className="list-item d-none d-md-flex">
-            <Col md={2} className="d-none d-md-block">
-              <Form.Label>Date</Form.Label>
-            </Col>
-            <Col md={3} className="d-none d-md-block">
-              <Form.Label>Category</Form.Label>
-            </Col>
-            <Col md={2} className="d-none d-md-block">
-              <Form.Label>Cost</Form.Label>
-            </Col>
-            <Col md={3} className="d-none d-md-block">
-              <Form.Label>Note</Form.Label>
-            </Col>
-            <Col md={2} className="d-none d-md-block" />
-          </Row>
-
-          {this.props.records.map(record => this.renderRecord(record))}
-        </Col>
-      </Row>
-    );
-  }
-
-  renderRecord(record) {
-    let editClick = () => {
-      this.props.editRecordAction(record);
-    };
-
-    let deleteClick = () => {
-      this.props.deleteRecordAction(record.id);
-    };
-
-    let category = _.find(this.props.categories, category => {
+  const renderRecord = record => {
+    let category = _.find(categories, category => {
       return category.id === record.categoryId;
     });
 
@@ -107,21 +65,52 @@ class RecordsList extends Component<any, any> {
         <SubItem title="Note" value={record.note} />
 
         <Col md={1} xs={3}>
-          <Button variant="link" className="list-action" onClick={editClick}>
+          <Button variant="link" className="list-action" onClick={() => editRecordAction(record)}>
             Edit
             <AppIcon icon="edit" />
           </Button>
         </Col>
 
         <Col md={1} xs={3}>
-          <Button variant="link" className="list-action" onClick={deleteClick}>
+          <Button variant="link" className="list-action" onClick={() => deleteRecordAction(record.id)}>
             Delete
             <AppIcon icon="delete" />
           </Button>
         </Col>
       </Row>
     );
-  }
+  };
+
+  return (
+    <Row className="records-list">
+      <Col>
+        <Row className="list-item d-none d-md-flex">
+          <Col md={2} className="d-none d-md-block">
+            <Form.Label>Date</Form.Label>
+          </Col>
+          <Col md={3} className="d-none d-md-block">
+            <Form.Label>Category</Form.Label>
+          </Col>
+          <Col md={2} className="d-none d-md-block">
+            <Form.Label>Cost</Form.Label>
+          </Col>
+          <Col md={3} className="d-none d-md-block">
+            <Form.Label>Note</Form.Label>
+          </Col>
+          <Col md={2} className="d-none d-md-block" />
+        </Row>
+
+        {records.map(record => renderRecord(record))}
+      </Col>
+    </Row>
+  );
 }
+
+RecordsList.propTypes = {
+  records: PropTypes.array,
+  categories: PropTypes.array,
+  editRecordAction: PropTypes.func.isRequired,
+  deleteRecordAction: PropTypes.func.isRequired
+};
 
 export default RecordsList;
