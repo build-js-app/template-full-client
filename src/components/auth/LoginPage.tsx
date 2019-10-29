@@ -11,7 +11,7 @@ import validationHelper from '../../helpers/validationHelper';
 import AppIcon from './../common/AppIcon';
 import TextInput from './../common/TextInput';
 
-const stateMap = (state: any) => ({
+const stateMap = state => ({
   user: state.user.current
 });
 
@@ -32,7 +32,7 @@ class LoginPage extends Component<any, any> {
     }
   };
 
-  constructor(props: any) {
+  constructor(props) {
     super(props);
 
     helper.autoBind(this);
@@ -44,8 +44,8 @@ class LoginPage extends Component<any, any> {
     }
   }
 
-  onChange(field: string, value: any) {
-    let user: any = this.state.user;
+  onChange(field: string, value) {
+    let user = this.state.user;
 
     user[field] = value;
 
@@ -71,7 +71,7 @@ class LoginPage extends Component<any, any> {
     return Object.keys(errors).length === 0;
   }
 
-  async login(e: any) {
+  async login(e) {
     if (e) e.preventDefault();
 
     if (!this.loginFormIsValid()) return;

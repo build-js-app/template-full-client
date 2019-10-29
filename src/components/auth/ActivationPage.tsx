@@ -7,7 +7,7 @@ import {activateUserAccount} from '../../actions/userActions';
 
 import helper from '../../helpers/reactHelper';
 
-const stateMap = (state: any) => ({});
+const stateMap = state => ({});
 
 const actions = {
   activateUserAccount
@@ -21,7 +21,7 @@ class ActivationPage extends Component<any, any> {
     }
   };
 
-  constructor(props: any) {
+  constructor(props) {
     super(props);
 
     helper.autoBind(this);

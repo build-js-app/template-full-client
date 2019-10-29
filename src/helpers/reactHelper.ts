@@ -10,11 +10,11 @@ export default {
   getKey
 };
 
-function autoBind(self: any) {
+function autoBind(self) {
   reactAutoBind(self);
 }
 
-function connect(component: any, stateMap: any, actions: any, options: any = {}) {
+function connect(component, stateMap, actions, options: any = {}) {
   let mapStateToProps = stateMap;
   if (mapStateToProps && !_.isFunction(mapStateToProps)) {
     throw new Error('State Map should be a function');
@@ -22,7 +22,7 @@ function connect(component: any, stateMap: any, actions: any, options: any = {})
 
   let mapDispatchToProps: any = null;
   if (!_.isEmpty(actions)) {
-    mapDispatchToProps = (dispatch: any) => bindActionCreators(actions, dispatch);
+    mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
   }
 
   if (!mapStateToProps && !mapDispatchToProps) {

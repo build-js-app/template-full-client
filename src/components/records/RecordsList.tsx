@@ -44,13 +44,13 @@ class RecordsList extends Component<any, any> {
             <Col md={2} className="d-none d-md-block" />
           </Row>
 
-          {this.props.records.map((record: any) => this.renderRecord(record))}
+          {this.props.records.map(record => this.renderRecord(record))}
         </Col>
       </Row>
     );
   }
 
-  renderRecord(record: any) {
+  renderRecord(record) {
     let editClick = () => {
       this.props.editRecordAction(record);
     };
@@ -67,7 +67,7 @@ class RecordsList extends Component<any, any> {
 
     let dateDisplay = dateHelper.displayDate(record.date);
 
-    let SubItem = (props: any) => (
+    let SubItem = props => (
       <Col sm={12} className="d-md-none d-lg-none">
         <Row>
           <Col sm={12}>

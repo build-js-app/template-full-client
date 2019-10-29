@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
 import {ASYNC_ACTION_START, ASYNC_ACTION_END} from '../action_types/commonActionTypes';
 
-const enhancers = [];
+const enhancers: any = [];
 
 const middleware = [thunk];
 
@@ -24,6 +24,6 @@ const composedEnhancers = compose(
   ...enhancers
 );
 
-const configureStore = (persistedState?: any) => createStore(rootReducer, persistedState, composedEnhancers);
+const configureStore = (persistedState?) => createStore(rootReducer, persistedState, composedEnhancers);
 
 export default configureStore;

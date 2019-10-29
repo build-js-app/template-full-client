@@ -14,7 +14,7 @@ class SelectInput extends Component<any, any> {
   render() {
     let {error, value, name, label, onChange, options} = this.props;
 
-    let inputOnChange = (event: any) => {
+    let inputOnChange = event => {
       onChange(name, event.target.value);
     };
 
@@ -25,7 +25,7 @@ class SelectInput extends Component<any, any> {
         <Form.Control as="select" id={name} name={name} value={value} onChange={inputOnChange}>
           {!value && <option value="select">Select Category</option>}
 
-          {options.map((opt: any) => (
+          {options.map(opt => (
             <option key={opt.value} value={opt.value}>
               {opt.label}
             </option>

@@ -6,16 +6,16 @@ import authService from '../services/authService';
 
 import {LOAD_CURRENT_USER} from '../action_types/userActionTypes';
 
-export const loadCurrentUserSuccess = (user: any) => helper.getAction(LOAD_CURRENT_USER, {user});
+export const loadCurrentUserSuccess = user => helper.getAction(LOAD_CURRENT_USER, {user});
 
 export const getCurrentUser = () => {
-  return helper.dispatchAsyncAction(async (dispatch: any) => {
+  return helper.dispatchAsyncAction(async dispatch => {
     let user = await dataService.getCurrentUser();
     dispatch(loadCurrentUserSuccess(user));
   }, null);
 };
 
-export const loginUser = (user: any) => {
+export const loginUser = user => {
   return helper.dispatchAsyncAction(async () => {
     let response = await authService.login(user);
 
@@ -26,7 +26,7 @@ export const loginUser = (user: any) => {
 };
 
 export const logOut = () => {
-  return helper.dispatchAsyncAction(async (dispatch: any) => {
+  return helper.dispatchAsyncAction(async dispatch => {
     dispatch(loadCurrentUserSuccess(null));
     authService.saveToken(null);
   }, null);
@@ -40,7 +40,7 @@ export const forgotPassword = (email: string) => {
   }, null);
 };
 
-export const resetPassword = (userData: any) => {
+export const resetPassword = userData => {
   return helper.dispatchAsyncAction(async () => {
     let response = await authService.resetPassword(userData);
     return response;
@@ -54,7 +54,7 @@ export const activateUserAccount = (token: string) => {
   }, null);
 };
 
-export const signUp = (user: any) => {
+export const signUp = user => {
   return helper.dispatchAsyncAction(async () => {
     let response = await authService.signUp(user);
     return response;

@@ -11,6 +11,6 @@ export const asyncActionStart = (showOverlay: boolean) => helper.getAction(ASYNC
 
 export const asyncActionEnd = () => helper.getAction(ASYNC_ACTION_END, {});
 
-export const confirmAction = (confirmInfo: any) => helper.getAction(CONFIRM_ACTION, confirmInfo);
+export const confirmAction = confirmInfo => helper.getAction(CONFIRM_ACTION, confirmInfo);
 
 export const confirmActionCancel = () => helper.getAction(CONFIRM_ACTION_CANCEL, {});

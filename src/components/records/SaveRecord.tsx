@@ -31,7 +31,7 @@ class SaveRecord extends Component<any, any> {
     }
   };
 
-  constructor(props: any) {
+  constructor(props) {
     super(props);
 
     helper.autoBind(this);
@@ -70,7 +70,7 @@ class SaveRecord extends Component<any, any> {
     this.props.save();
   }
 
-  onDateChange(date: any) {
+  onDateChange(date) {
     this.props.onChange('date', new Date(date));
   }
 
@@ -84,7 +84,7 @@ class SaveRecord extends Component<any, any> {
 
     let title = record.id ? 'Edit Record' : 'Add New Record';
 
-    let categoryOptions = categories.map((category: any) => {
+    let categoryOptions = categories.map(category => {
       return {value: category.id, label: category.title};
     });
 

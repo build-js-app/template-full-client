@@ -12,7 +12,7 @@ export const deleteCategorySuccess = (id: number) => ({type: DELETE_CATEGORY, pa
 
 export const loadCategories = () => {
   return helper.dispatchAsyncAction(
-    async (dispatch: any) => {
+    async dispatch => {
       let categories = await dataService.getCategories();
       dispatch(loadCategoriesSuccess(categories));
     },
@@ -20,8 +20,8 @@ export const loadCategories = () => {
   );
 };
 
-export const saveCategory = (category: any) => {
-  return helper.dispatchAsyncAction(async (dispatch: any) => {
+export const saveCategory = category => {
+  return helper.dispatchAsyncAction(async dispatch => {
     let categoryResponse = await dataService.saveCategory(category);
 
     if (category.id) {
@@ -35,7 +35,7 @@ export const saveCategory = (category: any) => {
 };
 
 export const deleteCategory = (id: number) => {
-  return helper.dispatchAsyncAction(async (dispatch: any) => {
+  return helper.dispatchAsyncAction(async dispatch => {
     await dataService.deleteCategory(id);
     dispatch(deleteCategorySuccess(id));
     return true;

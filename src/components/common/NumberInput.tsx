@@ -21,7 +21,7 @@ class NumberInput extends Component<any, any> {
       'has-error': error && error.length > 0
     });
 
-    let inputOnChange = (event: any) => {
+    let inputOnChange = event => {
       this.props.onChange(event.target.name, event.target.value);
     };
 

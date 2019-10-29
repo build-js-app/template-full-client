@@ -11,7 +11,7 @@ import {routes} from './routes';
 import App from './components/App';
 import configureStore from './store';
 
-const store: any = configureStore();
+const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>

@@ -11,7 +11,7 @@ import AppIcon from '../common/AppIcon';
 import CategoriesList from './CategoriesList';
 import SaveCategory from './SaveCategory';
 
-const stateMap = (state: any) => ({
+const stateMap = state => ({
   categories: state.category.list
 });
 
@@ -27,7 +27,7 @@ class CategoriesPage extends Component<any, any> {
     categoryToEdit: null
   };
 
-  constructor(props: any) {
+  constructor(props) {
     super(props);
 
     helper.autoBind(this);
@@ -43,7 +43,7 @@ class CategoriesPage extends Component<any, any> {
     });
   }
 
-  editCategory(category: any) {
+  editCategory(category) {
     this.setState({
       categoryToEdit: {...category}
     });
@@ -55,7 +55,7 @@ class CategoriesPage extends Component<any, any> {
     });
   }
 
-  updateCategoryState(field: string, value: any) {
+  updateCategoryState(field: string, value) {
     let category: any = this.state.categoryToEdit;
 
     if (!category) return;

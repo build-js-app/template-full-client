@@ -2,7 +2,7 @@ export default {
   handleActions
 };
 
-function handleActions(state: any, action: any, handlers: any) {
+function handleActions(state, action, handlers) {
   if (!handlers) return state;
 
   let handler = handlers[action.type];

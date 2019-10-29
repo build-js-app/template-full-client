@@ -11,7 +11,7 @@ const defaultOptions = {
   showOverlay: true
 };
 
-const getOptions = (options: any) => {
+const getOptions = options => {
   if (!options) return defaultOptions;
 
   return {
@@ -22,10 +22,10 @@ const getOptions = (options: any) => {
 
 //performes async action
 //action is function which has (dispatch, getState) arguments like redux thunk
-function dispatchAsyncAction(action: any, options: any) {
+function dispatchAsyncAction(action, options) {
   options = getOptions(options);
 
-  return async (dispatch: any, getState: any) => {
+  return async (dispatch, getState) => {
     try {
       dispatch(asyncActionStart(options.showOverlay));
 
@@ -44,9 +44,9 @@ function dispatchAsyncAction(action: any, options: any) {
 }
 
 //performes sync action
-function dispatchAction(action: any, options: any) {
+function dispatchAction(action, options) {
   options = getOptions(options);
-  return async (dispatch: any, getState: any) => {
+  return async (dispatch, getState) => {
     try {
       let result = await action(dispatch, getState);
 

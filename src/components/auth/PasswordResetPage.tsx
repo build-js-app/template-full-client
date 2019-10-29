@@ -10,7 +10,7 @@ import uiHelper from '../../helpers/uiHelper';
 
 import TextInput from '../common/TextInput';
 
-const stateMap = (state: any) => ({});
+const stateMap = state => ({});
 
 const actions = {
   resetPassword,
@@ -32,7 +32,7 @@ class PasswordResetPage extends Component<any, any> {
     }
   };
 
-  constructor(props: any) {
+  constructor(props) {
     super(props);
 
     helper.autoBind(this);
@@ -42,8 +42,8 @@ class PasswordResetPage extends Component<any, any> {
     this.checkResetToken();
   }
 
-  onChange(field: string, value: any) {
-    let user: any = this.state.userData;
+  onChange(field: string, value) {
+    let user = this.state.userData;
 
     user[field] = value;
 

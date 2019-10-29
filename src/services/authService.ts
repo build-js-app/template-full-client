@@ -13,11 +13,11 @@ export default {
   saveToken
 };
 
-function signUp(user: any) {
+function signUp(user) {
   return httpHelper.post('/api/sign-up', user);
 }
 
-function login(user: any) {
+function login(user) {
   return httpHelper.post('/api/login', user);
 }
 
@@ -33,7 +33,7 @@ function resetPasswordTokenCheck(token: string) {
   return httpHelper.get(`/api/password-reset/${token}`, {});
 }
 
-function resetPassword(user: any) {
+function resetPassword(user) {
   return httpHelper.post('/api/password-reset', user);
 }
 
@@ -42,6 +42,6 @@ function getToken() {
   return token;
 }
 
-function saveToken(jwt: any) {
+function saveToken(jwt) {
   Cookies.set('jwt_token', jwt);
 }

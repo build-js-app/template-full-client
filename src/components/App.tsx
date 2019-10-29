@@ -12,7 +12,7 @@ import {confirmActionCancel} from '../actions/commonActions';
 
 import '../styles/App.scss';
 
-const stateMap = (state: any) => ({
+const stateMap = state => ({
   asyncAction: state.common.asyncAction,
   confirmAction: state.common.confirmAction
 });
@@ -26,7 +26,7 @@ class App extends Component<any, any> {
     routes: PropTypes.array.isRequired
   };
 
-  constructor(props: any) {
+  constructor(props) {
     super(props);
 
     helper.autoBind(this);
@@ -55,19 +55,19 @@ class App extends Component<any, any> {
           />
         )}
 
-        <Switch>{this.props.routes.map((route: any, index: number) => this.renderRoute(route, index))}</Switch>
+        <Switch>{this.props.routes.map((route, index: number) => this.renderRoute(route, index))}</Switch>
 
         {this.props.children}
       </div>
     );
   }
 
-  renderRoute(route: any, index: number) {
+  renderRoute(route, index: number) {
     const {pageProps, component: Component} = route;
 
     let wrapInAppPage = !_.isEmpty(pageProps);
 
-    let render = (props: any) => <Component {...props} />;
+    let render = props => <Component {...props} />;
 
     if (wrapInAppPage) {
       render = props => (

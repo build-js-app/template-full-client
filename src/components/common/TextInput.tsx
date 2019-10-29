@@ -25,7 +25,7 @@ class TextInput extends Component<any, any> {
 
     let inputType = type ? type : 'text';
 
-    let inputOnChange = (event: any) => {
+    let inputOnChange = event => {
       this.props.onChange(event.target.name, event.target.value);
     };
 

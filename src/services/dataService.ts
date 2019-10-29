@@ -22,7 +22,7 @@ function deleteCategory(id: number) {
   return httpHelper.delete(`/api/category/${id}`);
 }
 
-function saveCategory(category: any) {
+function saveCategory(category) {
   let data = {
     category
   };
@@ -42,7 +42,7 @@ function deleteRecord(id: number) {
   return httpHelper.delete(`/api/record/${id}`);
 }
 
-function saveRecord(record: any) {
+function saveRecord(record) {
   let data = {
     record
   };

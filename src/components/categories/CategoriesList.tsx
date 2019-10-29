@@ -15,7 +15,7 @@ class CategoriesList extends Component<any, any> {
     deleteCategoryAction: PropTypes.func.isRequired
   };
 
-  constructor(props: any) {
+  constructor(props) {
     super(props);
 
     helper.autoBind(this);
@@ -43,13 +43,13 @@ class CategoriesList extends Component<any, any> {
             <Col sm={1} className="d-none d-md-block" />
           </Row>
 
-          {this.props.categories.map((category: any) => this.renderCategory(category))}
+          {this.props.categories.map(category => this.renderCategory(category))}
         </Col>
       </Row>
     );
   }
 
-  renderCategory(category: any) {
+  renderCategory(category) {
     let editClick = () => {
       this.props.editCategoryAction(category);
     };
@@ -58,7 +58,7 @@ class CategoriesList extends Component<any, any> {
       this.props.deleteCategoryAction(category.id);
     };
 
-    let SubItem = (props: any) => (
+    let SubItem = props => (
       <Col sm={12} className="d-md-none d-lg-none">
         <Row>
           <Col sm={12}>

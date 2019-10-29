@@ -8,7 +8,7 @@ import helper from '../helpers/reactHelper';
 
 import AppIcon from './common/AppIcon';
 
-const stateMap = (state: any) => ({
+const stateMap = state => ({
   user: state.user.current
 });
 
@@ -19,7 +19,7 @@ const actions = {
 class Navigation extends Component<any, any> {
   state = {};
 
-  constructor(props: any) {
+  constructor(props) {
     super(props);
 
     helper.autoBind(this);

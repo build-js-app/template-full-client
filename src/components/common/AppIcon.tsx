@@ -9,7 +9,7 @@ import {faQuestionCircle} from '@fortawesome/free-regular-svg-icons';
 
 const unknownIcon = faQuestionCircle;
 
-let map: any = {
+let map = {
   plus: faPlus,
   delete: faTrashAlt,
   edit: faPencilAlt,

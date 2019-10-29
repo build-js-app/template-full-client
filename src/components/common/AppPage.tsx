@@ -9,7 +9,7 @@ import helper from '../../helpers/reactHelper';
 
 import Navigation from '../Navigation';
 
-const stateMap = (state: any) => ({
+const stateMap = state => ({
   user: state.user.current
 });
 

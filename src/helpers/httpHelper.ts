@@ -13,25 +13,25 @@ export default {
   delete: httpDelete
 };
 
-function httpGet(url: string, queryParams: any) {
+function httpGet(url: string, queryParams) {
   let axiosData = axios.get(`${url}${getQueryString(queryParams)}`, getDefaultRequestOptions());
 
   return processRequest(axiosData);
 }
 
-function httpPost(url: string, data: any) {
+function httpPost(url: string, data) {
   let request = axios.post(url, JSON.stringify(data), getDefaultRequestOptions());
 
   return processRequest(request);
 }
 
-function httpPut(url: string, data: any) {
+function httpPut(url: string, data) {
   let request = axios.put(url, JSON.stringify(data), getDefaultRequestOptions());
 
   return processRequest(request);
 }
 
-function httpPatch(url: string, data: any) {
+function httpPatch(url: string, data) {
   let request = axios.patch(url, JSON.stringify(data), getDefaultRequestOptions());
 
   return processRequest(request);
@@ -43,7 +43,7 @@ async function httpDelete(url: string) {
   return processRequest(request);
 }
 
-async function processRequest(axiosRequest: any) {
+async function processRequest(axiosRequest) {
   try {
     let response = await axiosRequest;
 
@@ -74,7 +74,7 @@ async function processRequest(axiosRequest: any) {
   }
 }
 
-function getQueryString(params: any) {
+function getQueryString(params) {
   if (!params || !Object.keys(params).length) return '';
 
   const esc = encodeURIComponent;
@@ -95,7 +95,7 @@ function getDefaultRequestOptions() {
       'Content-Type': 'application/json',
       Authorization: getAuthHeader()
     },
-    validateStatus: (status: any) => true,
+    validateStatus: status => true,
     credentials: 'same-origin'
   };
 }

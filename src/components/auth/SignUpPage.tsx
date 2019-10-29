@@ -11,7 +11,7 @@ import uiHelper from '../../helpers/uiHelper';
 import AppIcon from '../common/AppIcon';
 import TextInput from '../common/TextInput';
 
-const stateMap = (state: any) => ({});
+const stateMap = state => ({});
 
 const actions = {
   signUp
@@ -35,14 +35,14 @@ class SignUpPage extends Component<any, any> {
     }
   };
 
-  constructor(props: any) {
+  constructor(props) {
     super(props);
 
     helper.autoBind(this);
   }
 
-  onChange(field: string, value: any) {
-    let user: any = this.state.user;
+  onChange(field: string, value) {
+    let user = this.state.user;
 
     user[field] = value;
 

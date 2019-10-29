@@ -8,18 +8,18 @@ import {
 } from '../action_types/commonActionTypes';
 import initialState from './initialState';
 
-const commonReducer = (state = initialState.common, action: any) => {
+const commonReducer = (state = initialState.common, action) => {
   return helper.handleActions(state, action, {
-    [ASYNC_ACTION_START](state: any, payload: any) {
+    [ASYNC_ACTION_START](state, payload) {
       state.asyncAction = {showOverlay: payload.showOverlay};
     },
-    [ASYNC_ACTION_END](state: any) {
+    [ASYNC_ACTION_END](state) {
       state.asyncAction = null;
     },
-    [CONFIRM_ACTION](state: any, payload: any) {
+    [CONFIRM_ACTION](state, payload) {
       state.confirmAction = payload;
     },
-    [CONFIRM_ACTION_CANCEL](state: any) {
+    [CONFIRM_ACTION_CANCEL](state) {
       state.confirmAction = null;
     }
   });

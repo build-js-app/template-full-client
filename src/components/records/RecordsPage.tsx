@@ -13,7 +13,7 @@ import SaveRecord from './SaveRecord';
 import RecordsList from './RecordsList';
 import FilterBar from './FilterBar';
 
-const stateMap = (state: any) => ({
+const stateMap = state => ({
   records: state.record.list,
   sortBy: state.record.sortBy,
   categories: state.category.list
@@ -38,7 +38,7 @@ class RecordsPage extends Component<any, any> {
     recordToEdit: null
   };
 
-  constructor(props: any) {
+  constructor(props) {
     super(props);
 
     helper.autoBind(this);
@@ -59,7 +59,7 @@ class RecordsPage extends Component<any, any> {
     });
   }
 
-  editRecord(record: any) {
+  editRecord(record) {
     this.setState({
       recordToEdit: {...record}
     });
@@ -71,7 +71,7 @@ class RecordsPage extends Component<any, any> {
     });
   }
 
-  updateRecordState(field: string, value: any) {
+  updateRecordState(field: string, value) {
     let record: any = this.state.recordToEdit;
 
     if (!record) return;

@@ -9,7 +9,7 @@ import validationHelper from '../../helpers/validationHelper';
 
 import TextInput from '../common/TextInput';
 
-const stateMap = (state: any) => ({});
+const stateMap = state => ({});
 
 const actions = {
   forgotPassword
@@ -23,7 +23,7 @@ class PasswordForgotPage extends Component<any, any> {
     }
   };
 
-  constructor(props: any) {
+  constructor(props) {
     super(props);
 
     helper.autoBind(this);
