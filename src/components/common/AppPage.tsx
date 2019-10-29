@@ -1,64 +1,53 @@
-import React, {Component} from 'react';
+import React, {useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
 import {getCurrentUser} from '../../actions/userActions';
 
-import helper from '../../helpers/reactHelper';
-
 import Navigation from '../Navigation';
 
-const stateMap = state => ({
-  user: state.user.current
-});
+function AppPage(props) {
+  let dispatch = useDispatch();
 
-const actions = {
-  getCurrentUser
-};
+  const user = useSelector((state: any) => state.user.current);
 
-class AppPage extends Component<any, any> {
-  static propTypes = {
-    children: PropTypes.object.isRequired,
-    title: PropTypes.string
+  useEffect(() => {
+    if (!isAuthenticated()) dispatch(getCurrentUser());
+  });
+
+  const isAuthenticated = () => {
+    if (props.public) return true;
+    return !_.isEmpty(user);
   };
 
-  isAuthenticated() {
-    if (this.props.public) return true;
-    return _.isEmpty(this.props.user) ? false : true;
-  }
+  const getTitle = () => {
+    return props.title ? `Expense Manager - ${props.title}` : 'Expense Manager';
+  };
 
-  async componentDidMount() {
-    if (!this.isAuthenticated()) {
-      await this.props.getCurrentUser();
-    }
-  }
+  const isReady = () => {
+    return isAuthenticated();
+  };
 
-  getTitle() {
-    return this.props.title ? `Expense Manager - ${this.props.title}` : 'Expense Manager';
-  }
+  if (!isReady()) return null;
 
-  isReady() {
-    return this.isAuthenticated();
-  }
+  let title = getTitle();
 
-  render() {
-    const {public: isPublic} = this.props;
+  return (
+    <div>
+      <Helmet title={title} />
 
-    if (!this.isReady()) return null;
+      {!props.public && <Navigation />}
 
-    let title = this.getTitle();
-
-    return (
-      <div>
-        <Helmet title={title} />
-
-        {!isPublic && <Navigation />}
-
-        {this.props.children}
-      </div>
-    );
-  }
+      {props.children}
+    </div>
+  );
 }
 
-export default helper.connect(AppPage, stateMap, actions, {withRouter: true});
+AppPage.propTypes = {
+  children: PropTypes.object.isRequired,
+  title: PropTypes.string
+};
+
+export default AppPage;

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import {FontAwesomeIcon as FaIcon} from '@fortawesome/react-fontawesome';
@@ -17,21 +17,18 @@ let map = {
   'sign-in': faSignInAlt
 };
 
-class AppIcon extends Component<any, any> {
-  static propTypes = {
-    icon: PropTypes.string.isRequired
-  };
+function AppIcon(props) {
+  let icon = unknownIcon;
 
-  render() {
-    let icon = unknownIcon;
-    let props = this.props;
-
-    if (map[props.icon]) {
-      icon = map[props.icon];
-    }
-
-    return <FaIcon {...props} icon={icon} />;
+  if (map[props.icon]) {
+    icon = map[props.icon];
   }
+
+  return <FaIcon {...props} icon={icon} />;
 }
+
+AppIcon.propTypes = {
+  icon: PropTypes.string.isRequired
+};
 
 export default AppIcon;
