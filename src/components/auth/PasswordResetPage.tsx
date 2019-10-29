@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {Link, useHistory, useParams} from 'react-router-dom';
-import {Container, Row, Col, Button} from '../bootstrap';
+import {Container, Row, Col, Button} from 'bootstrap';
 
-import {resetPassword, checkResetToken} from '../../actions/userActions';
+import {resetPassword, checkResetToken} from 'actions/userActions';
 
-import validationHelper from '../../helpers/validationHelper';
-import uiHelper from '../../helpers/uiHelper';
+import validationHelper from 'helpers/validationHelper';
+import uiHelper from 'helpers/uiHelper';
 
-import TextInput from '../common/TextInput';
+import TextInput from 'components/common/TextInput';
 
 function PasswordResetPage() {
   const dispatch = useDispatch();

@@ -2,9 +2,9 @@ import React, {useState, useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import classnames from 'classnames';
 import {Link, useParams} from 'react-router-dom';
-import {Container, Row, Col} from './../bootstrap';
+import {Container, Row, Col} from 'bootstrap';
 
-import {activateUserAccount} from '../../actions/userActions';
+import {activateUserAccount} from 'actions/userActions';
 
 function ActivationPage() {
   const dispatch = useDispatch();

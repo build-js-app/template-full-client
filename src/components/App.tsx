@@ -4,12 +4,12 @@ import {Switch, Route} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 
-import AppPage from '../components/common/AppPage';
-import Confirm from '../components/common/Confirm';
+import AppPage from 'components/common/AppPage';
+import Confirm from 'components/common/Confirm';
 
-import {confirmActionCancel} from '../actions/commonActions';
+import {confirmActionCancel} from 'actions/commonActions';
 
-import '../styles/App.scss';
+import 'styles/App.scss';
 
 function App(props) {
   let dispatch = useDispatch();

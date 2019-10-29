@@ -1,7 +1,7 @@
 import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer from '../reducers';
-import {ASYNC_ACTION_START, ASYNC_ACTION_END} from '../action_types/commonActionTypes';
+import rootReducer from 'reducers';
+import {ASYNC_ACTION_START, ASYNC_ACTION_END} from 'action_types/commonActionTypes';
 
 const enhancers: any = [];
 

@@ -1,8 +1,8 @@
 import React from 'react';
-import {Row, Col, Form, Button} from '../bootstrap';
+import {Row, Col, Form, Button} from 'components/bootstrap';
 import PropTypes from 'prop-types';
 
-import AppIcon from '../common/AppIcon';
+import AppIcon from 'components/common/AppIcon';
 
 import './categories.scss';
 

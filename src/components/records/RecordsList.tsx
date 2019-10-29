@@ -1,11 +1,11 @@
 import React from 'react';
-import {Row, Col, Form, Button} from '../bootstrap';
+import {Row, Col, Form, Button} from 'bootstrap';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 
-import dateHelper from '../../helpers/dateHelper';
+import dateHelper from 'helpers/dateHelper';
 
-import AppIcon from '../common/AppIcon';
+import AppIcon from 'components/common/AppIcon';
 
 import './records.scss';
 

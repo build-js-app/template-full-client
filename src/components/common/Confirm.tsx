@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal, Button} from '../bootstrap';
+import {Modal, Button} from 'bootstrap';
 import PropTypes from 'prop-types';
 
 function Confirm({title, text, visible, action, close}) {

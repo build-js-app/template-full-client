@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {Container, Row, Col} from '../bootstrap';
+import {Container, Row, Col} from 'bootstrap';
 import _ from 'lodash';
 
-import {confirmAction} from '../../actions/commonActions';
-import {loadRecords, saveRecord, deleteRecord} from '../../actions/recordActions';
-import {loadCategories} from '../../actions/categoryActions';
+import {confirmAction} from 'actions/commonActions';
+import {loadRecords, saveRecord, deleteRecord} from 'actions/recordActions';
+import {loadCategories} from 'actions/categoryActions';
 
-import uiHelper from '../../helpers/uiHelper';
+import uiHelper from 'helpers/uiHelper';
 
 import SaveRecord from './SaveRecord';
 import RecordsList from './RecordsList';

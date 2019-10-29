@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import {Form} from '../bootstrap';
+import {Form} from 'bootstrap';
 
 function TextAreaInput({name, label, onChange, placeholder, value, error, rows}) {
   let wrapperClass = classnames({

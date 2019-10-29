@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {Container, Row, Col, Button} from '../bootstrap';
+import {Container, Row, Col, Button} from 'bootstrap';
 
-import {forgotPassword} from '../../actions/userActions';
+import {forgotPassword} from 'actions/userActions';
 
-import validationHelper from '../../helpers/validationHelper';
+import validationHelper from 'helpers/validationHelper';
 
-import TextInput from '../common/TextInput';
+import TextInput from 'components/common/TextInput';
 
 function PasswordForgotPage() {
   const dispatch = useDispatch();

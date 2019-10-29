@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {Modal, Button} from '../bootstrap';
+import {Modal, Button} from 'bootstrap';
 import PropTypes from 'prop-types';
 
-import TextInput from '../common/TextInput';
-import TextAreaInput from '../common/TextAreaInput';
+import TextInput from 'components/common/TextInput';
+import TextAreaInput from 'components/common/TextAreaInput';
 
 function SaveCategory({category, save, close, onChange, visible}) {
   const [errors, setErrors] = useState({title: '', description: ''});

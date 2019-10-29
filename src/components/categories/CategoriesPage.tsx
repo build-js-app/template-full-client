@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {Container, Row, Col, Button} from '../bootstrap';
+import {Container, Row, Col, Button} from 'bootstrap';
 import _ from 'lodash';
 
-import {confirmAction} from '../../actions/commonActions';
-import {loadCategories, saveCategory, deleteCategory} from '../../actions/categoryActions';
+import {confirmAction} from 'actions/commonActions';
+import {loadCategories, saveCategory, deleteCategory} from 'actions/categoryActions';
 
-import uiHelper from '../../helpers/uiHelper';
+import uiHelper from 'helpers/uiHelper';
 
-import AppIcon from '../common/AppIcon';
+import AppIcon from 'components/common/AppIcon';
 import CategoriesList from './CategoriesList';
 import SaveCategory from './SaveCategory';
 

@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import uiHelper from './uiHelper';
 
-import authService from '../services/authService';
+import authService from 'services/authService';
 
 export default {
   get: httpGet,

@@ -1,6 +1,6 @@
 import helper from './reducerHelper';
 
-import {LOAD_RECORDS, DELETE_RECORD} from '../action_types/recordActionTypes';
+import {LOAD_RECORDS, DELETE_RECORD} from 'action_types/recordActionTypes';
 import initialState from './initialState';
 
 const recordReducer = (state = initialState.record, action) => {

@@ -1,6 +1,6 @@
-import dataService from '../services/dataService';
+import dataService from 'services/dataService';
 import helper from './actionHelper';
-import {LOAD_CATEGORIES, CREATE_CATEGORY, UPDATE_CATEGORY, DELETE_CATEGORY} from '../action_types/categoryActionTypes';
+import {LOAD_CATEGORIES, CREATE_CATEGORY, UPDATE_CATEGORY, DELETE_CATEGORY} from 'action_types/categoryActionTypes';
 
 const loadCategoriesSuccess = (categories: Array<any>) => helper.getAction(LOAD_CATEGORIES, {categories});
 

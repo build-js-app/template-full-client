@@ -1,6 +1,6 @@
 import helper from './reducerHelper';
 
-import {LOAD_CATEGORIES, CREATE_CATEGORY, UPDATE_CATEGORY, DELETE_CATEGORY} from '../action_types/categoryActionTypes';
+import {LOAD_CATEGORIES, CREATE_CATEGORY, UPDATE_CATEGORY, DELETE_CATEGORY} from 'action_types/categoryActionTypes';
 import initialState from './initialState';
 
 const categoryReducer = (state = initialState.category, action) => {

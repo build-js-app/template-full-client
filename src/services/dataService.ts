@@ -1,4 +1,4 @@
-import httpHelper from '../helpers/httpHelper';
+import httpHelper from 'helpers/httpHelper';
 
 export default {
   getCurrentUser,

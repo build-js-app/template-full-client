@@ -3,9 +3,9 @@ import {useSelector, useDispatch} from 'react-redux';
 import {Nav, Navbar} from './bootstrap';
 import {Link, useHistory, useLocation} from 'react-router-dom';
 
-import {logOut} from '../actions/userActions';
+import {logOut} from 'actions/userActions';
 
-import AppIcon from './common/AppIcon';
+import AppIcon from 'components/common/AppIcon';
 
 function Navigation() {
   let dispatch = useDispatch();

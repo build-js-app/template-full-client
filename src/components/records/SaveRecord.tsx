@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {Modal, Button, Form} from '../bootstrap';
+import {Modal, Button, Form} from 'bootstrap';
 import PropTypes from 'prop-types';
 import Flatpickr from 'react-flatpickr';
 
-import config from '../../helpers/configHelper';
+import config from 'helpers/configHelper';
 
-import NumberInput from '../common/NumberInput';
-import TextAreaInput from '../common/TextAreaInput';
-import SelectInput from '../common/SelectInput';
+import NumberInput from 'components/common/NumberInput';
+import TextAreaInput from 'components/common/TextAreaInput';
+import SelectInput from 'components/common/SelectInput';
 
 const dateOptions = {dateFormat: config.format.datePicker};
 

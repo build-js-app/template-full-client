@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {Link, useHistory} from 'react-router-dom';
-import {Container, Row, Col, Button} from '../bootstrap';
+import {Container, Row, Col, Button} from 'bootstrap';
 
-import {signUp} from '../../actions/userActions';
+import {signUp} from 'actions/userActions';
 
-import validationHelper from '../../helpers/validationHelper';
-import uiHelper from '../../helpers/uiHelper';
+import validationHelper from 'helpers/validationHelper';
+import uiHelper from 'helpers/uiHelper';
 
-import AppIcon from '../common/AppIcon';
-import TextInput from '../common/TextInput';
+import AppIcon from 'components/common/AppIcon';
+import TextInput from 'components/common/TextInput';
 
 function SignUpPage() {
   const dispatch = useDispatch();

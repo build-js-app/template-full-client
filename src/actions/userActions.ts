@@ -1,10 +1,10 @@
 import helper from './actionHelper';
-import uiHelper from '../helpers/uiHelper';
+import uiHelper from 'helpers/uiHelper';
 
-import dataService from '../services/dataService';
-import authService from '../services/authService';
+import dataService from 'services/dataService';
+import authService from 'services/authService';
 
-import {LOAD_CURRENT_USER} from '../action_types/userActionTypes';
+import {LOAD_CURRENT_USER} from 'action_types/userActionTypes';
 
 export const loadCurrentUserSuccess = user => helper.getAction(LOAD_CURRENT_USER, {user});
 

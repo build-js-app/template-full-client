@@ -5,7 +5,7 @@ import {
   ASYNC_ACTION_END,
   CONFIRM_ACTION,
   CONFIRM_ACTION_CANCEL
-} from '../action_types/commonActionTypes';
+} from 'action_types/commonActionTypes';
 import initialState from './initialState';
 
 const commonReducer = (state = initialState.common, action) => {

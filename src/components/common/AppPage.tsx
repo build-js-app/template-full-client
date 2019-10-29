@@ -4,9 +4,9 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
-import {getCurrentUser} from '../../actions/userActions';
+import {getCurrentUser} from 'actions/userActions';
 
-import Navigation from '../Navigation';
+import Navigation from 'components/Navigation';
 
 function AppPage(props) {
   let dispatch = useDispatch();
