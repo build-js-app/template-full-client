@@ -1,5 +1,5 @@
 import React from 'react';
-import {Row, Col, Form, Button} from 'bootstrap';
+import {Row, Col, Form, Button} from 'components/bootstrap';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 

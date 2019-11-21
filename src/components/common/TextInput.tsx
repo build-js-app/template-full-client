@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import {Form} from 'bootstrap';
+import {Form} from 'components/bootstrap';
 
 TextInput.propTypes = {
   name: PropTypes.string.isRequired,

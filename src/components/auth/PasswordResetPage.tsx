@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {Link, useHistory, useParams} from 'react-router-dom';
-import {Container, Row, Col, Button} from 'bootstrap';
+import {Container, Row, Col, Button} from 'components/bootstrap';
 
 import {resetPassword, checkResetToken} from 'actions/userActions';
 

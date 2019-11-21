@@ -1,10 +1,14 @@
 import React from 'react';
-import {Row, Col, Button, Dropdown} from 'bootstrap';
+import {Row, Col, Button, Dropdown} from 'components/bootstrap';
 import PropTypes from 'prop-types';
 
 import AppIcon from 'components/common/AppIcon';
 
-const sortByOptions = [{key: 'date', text: 'Date'}, {key: 'categoryId', text: 'Category'}, {key: 'cost', text: 'Cost'}];
+const sortByOptions = [
+  {key: 'date', text: 'Date'},
+  {key: 'categoryId', text: 'Category'},
+  {key: 'cost', text: 'Cost'}
+];
 
 FilterBar.propTypes = {
   sortBy: PropTypes.string.isRequired,

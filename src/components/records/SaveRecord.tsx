@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Modal, Button, Form} from 'bootstrap';
+import {Modal, Button, Form} from 'components/bootstrap';
 import PropTypes from 'prop-types';
 import Flatpickr from 'react-flatpickr';
 

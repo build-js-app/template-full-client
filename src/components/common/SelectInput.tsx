@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form} from 'bootstrap';
+import {Form} from 'components/bootstrap';
 import PropTypes from 'prop-types';
 
 SelectInput.propTypes = {

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {Container, Row, Col} from 'bootstrap';
+import {Container, Row, Col} from 'components/bootstrap';
 import _ from 'lodash';
 
 import {confirmAction} from 'actions/commonActions';

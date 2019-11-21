@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {Link, useHistory} from 'react-router-dom';
-import {Container, Row, Col, Button} from 'bootstrap';
+import {Container, Row, Col, Button} from 'components/bootstrap';
 import _ from 'lodash';
 
 import {loginUser, getCurrentUser} from 'actions/userActions';
