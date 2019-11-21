@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Flatpickr from 'react-flatpickr';
 
 import config from 'helpers/configHelper';
+import validationHelper from 'helpers/validationHelper';
 
 import NumberInput from 'components/common/NumberInput';
 import TextAreaInput from 'components/common/TextAreaInput';
@@ -48,7 +49,7 @@ function SaveRecord({record, categories, save, close, onChange, visible}) {
 
     setErrors(errors);
 
-    return Object.keys(errors).length === 0;
+    return validationHelper.isEmptyErrorObject(errors);
   };
 
   const onSave = () => {

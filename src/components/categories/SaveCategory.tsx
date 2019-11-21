@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {Modal, Button} from 'components/bootstrap';
 import PropTypes from 'prop-types';
 
+import validationHelper from 'helpers/validationHelper';
+
 import TextInput from 'components/common/TextInput';
 import TextAreaInput from 'components/common/TextAreaInput';
 
@@ -36,7 +38,7 @@ function SaveCategory({category, save, close, onChange, visible}) {
 
     setErrors(formErrors);
 
-    return Object.keys(formErrors).length === 0;
+    return validationHelper.isEmptyErrorObject(formErrors);
   };
 
   const onSave = () => {

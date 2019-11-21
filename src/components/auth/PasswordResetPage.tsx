@@ -65,7 +65,7 @@ function PasswordResetPage() {
 
     setErrors(errors);
 
-    return Object.keys(errors).length === 0;
+    return validationHelper.isEmptyErrorObject(errors);
   };
 
   const onResetPassword = async () => {
