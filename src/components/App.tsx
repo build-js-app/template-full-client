@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {Switch, Route} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import styled from 'styled-components';
 
 import AppPage from 'components/common/AppPage';
 import Confirm from 'components/common/Confirm';
@@ -45,9 +46,21 @@ function App(props) {
     return <Route key={index} exact={route.exact} path={route.path} render={render} />;
   };
 
+  const UiBlock = styled.div`
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: #000;
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+    z-index: 999;
+  `;
+
   return (
     <div>
-      {showOverlay && <div className="ui-block" />}
+      {showOverlay && <UiBlock />}
 
       {confirmAction && (
         <Confirm

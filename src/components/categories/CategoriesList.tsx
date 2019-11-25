@@ -1,10 +1,11 @@
 import React from 'react';
 import {Row, Col, Form, Button} from 'components/bootstrap';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+import {listTopMargin, mediaQueries} from 'styles/shared';
 
 import AppIcon from 'components/common/AppIcon';
-
-import './categories.scss';
 
 CategoriesList.propTypes = {
   categories: PropTypes.array,
@@ -17,7 +18,15 @@ function CategoriesList({categories, editCategoryAction, deleteCategoryAction}) 
     return categories && categories.length;
   };
 
-  if (!anyCategories()) return <div className="categories-list">No categories.</div>;
+  const StyledList = styled(Row)`
+    margin-top: ${listTopMargin};
+
+    @media ${mediaQueries.desktopMin} {
+      margin-top: calc(${listTopMargin} - 2rem);
+    }
+  `;
+
+  if (!anyCategories()) return <StyledList>No categories.</StyledList>;
 
   const renderCategory = category => {
     let SubItem = props => (
@@ -65,7 +74,7 @@ function CategoriesList({categories, editCategoryAction, deleteCategoryAction}) 
   };
 
   return (
-    <Row className="categories-list">
+    <StyledList>
       <Col>
         <Row className="list-item d-none d-md-flex">
           <Col sm={4} className="d-none d-md-block">
@@ -80,7 +89,7 @@ function CategoriesList({categories, editCategoryAction, deleteCategoryAction}) 
 
         {categories.map(category => renderCategory(category))}
       </Col>
-    </Row>
+    </StyledList>
   );
 }
 

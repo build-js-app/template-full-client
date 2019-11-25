@@ -2,12 +2,13 @@ import React from 'react';
 import {Row, Col, Form, Button} from 'components/bootstrap';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+import {listTopMargin} from 'styles/shared';
 
 import dateHelper from 'helpers/dateHelper';
 
 import AppIcon from 'components/common/AppIcon';
-
-import './records.scss';
 
 RecordsList.propTypes = {
   records: PropTypes.array,
@@ -21,7 +22,11 @@ function RecordsList({records, categories, editRecordAction, deleteRecordAction}
     return records && records.length;
   };
 
-  if (!anyRecords()) return <div className="records-list">No Records.</div>;
+  const StyledList = styled(Row)`
+    margin-top: ${listTopMargin};
+  `;
+
+  if (!anyRecords()) return <StyledList>No Records.</StyledList>;
 
   const renderRecord = record => {
     let category = _.find(categories, category => {
@@ -89,7 +94,7 @@ function RecordsList({records, categories, editRecordAction, deleteRecordAction}
   };
 
   return (
-    <Row className="records-list">
+    <StyledList>
       <Col>
         <Row className="list-item d-none d-md-flex">
           <Col md={2} className="d-none d-md-block">
@@ -109,7 +114,7 @@ function RecordsList({records, categories, editRecordAction, deleteRecordAction}
 
         {records.map(record => renderRecord(record))}
       </Col>
-    </Row>
+    </StyledList>
   );
 }
 
