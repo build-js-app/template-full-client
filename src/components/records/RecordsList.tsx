@@ -10,6 +10,10 @@ import dateHelper from 'helpers/dateHelper';
 
 import AppIcon from 'components/common/AppIcon';
 
+const StyledList = styled(Row)`
+  margin-top: ${listTopMargin};
+`;
+
 RecordsList.propTypes = {
   records: PropTypes.array,
   categories: PropTypes.array,
@@ -21,10 +25,6 @@ function RecordsList({records, categories, editRecordAction, deleteRecordAction}
   const anyRecords = () => {
     return records && records.length;
   };
-
-  const StyledList = styled(Row)`
-    margin-top: ${listTopMargin};
-  `;
 
   if (!anyRecords()) return <StyledList>No Records.</StyledList>;
 

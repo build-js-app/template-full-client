@@ -7,6 +7,14 @@ import {listTopMargin, mediaQueries} from 'styles/shared';
 
 import AppIcon from 'components/common/AppIcon';
 
+const StyledList = styled(Row)`
+  margin-top: ${listTopMargin};
+
+  @media ${mediaQueries.desktopMin} {
+    margin-top: calc(${listTopMargin} - 2rem);
+  }
+`;
+
 CategoriesList.propTypes = {
   categories: PropTypes.array,
   editCategoryAction: PropTypes.func.isRequired,
@@ -17,14 +25,6 @@ function CategoriesList({categories, editCategoryAction, deleteCategoryAction}) 
   const anyCategories = () => {
     return categories && categories.length;
   };
-
-  const StyledList = styled(Row)`
-    margin-top: ${listTopMargin};
-
-    @media ${mediaQueries.desktopMin} {
-      margin-top: calc(${listTopMargin} - 2rem);
-    }
-  `;
 
   if (!anyCategories()) return <StyledList>No categories.</StyledList>;
 

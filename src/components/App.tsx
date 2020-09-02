@@ -12,6 +12,18 @@ import {confirmActionCancel} from 'actions/commonActions';
 
 import 'styles/App.scss';
 
+const UiBlock = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: #000;
+  opacity: 0.3;
+  filter: alpha(opacity=30);
+  z-index: 999;
+`;
+
 App.propTypes = {
   routes: PropTypes.array.isRequired
 };
@@ -45,18 +57,6 @@ function App(props) {
 
     return <Route key={index} exact={route.exact} path={route.path} render={render} />;
   };
-
-  const UiBlock = styled.div`
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    background: #000;
-    opacity: 0.3;
-    filter: alpha(opacity=30);
-    z-index: 999;
-  `;
 
   return (
     <div>
