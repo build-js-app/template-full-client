@@ -57,7 +57,7 @@ function RecordsPage() {
   const onSaveRecord = async () => {
     let completed = await dispatch(saveRecord(recordToEdit));
 
-    if (completed) {
+    if (completed !== undefined) {
       await onLoadRecords();
       uiHelper.showMessage(`Record was successfully saved`);
     }
@@ -72,7 +72,7 @@ function RecordsPage() {
         action: async () => {
           let completed = await dispatch(deleteRecord(id));
 
-          if (completed) uiHelper.showMessage('Record was successfully deleted');
+          if (completed !== undefined) uiHelper.showMessage('Record was successfully deleted');
         }
       })
     );

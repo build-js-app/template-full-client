@@ -48,7 +48,7 @@ function CategoriesPage() {
   const onSaveCategory = async () => {
     let category = await dispatch(saveCategory(categoryToEdit));
 
-    if (category) uiHelper.showMessage(`Category was updated`);
+    if (category !== undefined) uiHelper.showMessage(`Category was updated`);
 
     cancelEditCategory();
   };
@@ -60,7 +60,7 @@ function CategoriesPage() {
         action: async () => {
           let completed = await dispatch(deleteCategory(id));
 
-          if (completed) uiHelper.showMessage('Category was successfully deleted');
+          if (completed !== undefined) uiHelper.showMessage('Category was successfully deleted');
         }
       })
     );

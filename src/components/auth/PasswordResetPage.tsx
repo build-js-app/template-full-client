@@ -10,10 +10,16 @@ import uiHelper from 'helpers/uiHelper';
 
 import TextInput from 'components/common/TextInput';
 
+interface ParamTypes {
+  token: string
+}
+
 function PasswordResetPage() {
   const dispatch = useDispatch();
+
   let history = useHistory();
-  let {token} = useParams();
+  
+  let {token} = useParams<ParamTypes>();
 
   const [userData, setUserData] = useState({email: '', password: '', confirmPassword: '', token: ''});
 

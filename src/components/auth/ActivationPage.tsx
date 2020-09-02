@@ -6,9 +6,14 @@ import {Container, Row, Col} from 'components/bootstrap';
 
 import {activateUserAccount} from 'actions/userActions';
 
+interface ParamTypes {
+  token: string
+}
+
 function ActivationPage() {
   const dispatch = useDispatch();
-  let {token} = useParams();
+  
+  let {token} = useParams<ParamTypes>();
 
   const [activationData, setActivationData] = useState({message: '', status: ''});
 
