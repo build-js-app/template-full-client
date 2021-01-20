@@ -22,13 +22,11 @@ RecordsList.propTypes = {
 };
 
 function RecordsList({records, categories, editRecordAction, deleteRecordAction}) {
-  const anyRecords = () => {
+  function anyRecords() {
     return records && records.length;
-  };
+  }
 
-  if (!anyRecords()) return <StyledList>No Records.</StyledList>;
-
-  const renderRecord = record => {
+  function renderRecord(record) {
     let category = _.find(categories, category => {
       return category.id === record.categoryId;
     });
@@ -91,31 +89,37 @@ function RecordsList({records, categories, editRecordAction, deleteRecordAction}
         </Col>
       </Row>
     );
-  };
+  }
 
-  return (
-    <StyledList>
-      <Col>
-        <Row className="list-item d-none d-md-flex">
-          <Col md={2} className="d-none d-md-block">
-            <Form.Label>Date</Form.Label>
-          </Col>
-          <Col md={3} className="d-none d-md-block">
-            <Form.Label>Category</Form.Label>
-          </Col>
-          <Col md={2} className="d-none d-md-block">
-            <Form.Label>Cost</Form.Label>
-          </Col>
-          <Col md={3} className="d-none d-md-block">
-            <Form.Label>Note</Form.Label>
-          </Col>
-          <Col md={2} className="d-none d-md-block" />
-        </Row>
+  function render() {
+    if (!anyRecords()) return <StyledList>No Records.</StyledList>;
 
-        {records.map(record => renderRecord(record))}
-      </Col>
-    </StyledList>
-  );
+    return (
+      <StyledList>
+        <Col>
+          <Row className="list-item d-none d-md-flex">
+            <Col md={2} className="d-none d-md-block">
+              <Form.Label>Date</Form.Label>
+            </Col>
+            <Col md={3} className="d-none d-md-block">
+              <Form.Label>Category</Form.Label>
+            </Col>
+            <Col md={2} className="d-none d-md-block">
+              <Form.Label>Cost</Form.Label>
+            </Col>
+            <Col md={3} className="d-none d-md-block">
+              <Form.Label>Note</Form.Label>
+            </Col>
+            <Col md={2} className="d-none d-md-block" />
+          </Row>
+
+          {records.map(record => renderRecord(record))}
+        </Col>
+      </StyledList>
+    );
+  }
+
+  return render();
 }
 
 export default RecordsList;

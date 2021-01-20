@@ -22,9 +22,9 @@ function TextInput({name, label, onChange, placeholder, value, error, type, disa
 
   let inputType = type ? type : 'text';
 
-  let inputOnChange = event => {
+  function inputOnChange(event) {
     onChange(event.target.name, event.target.value);
-  };
+  }
 
   return (
     <div className={wrapperClass}>

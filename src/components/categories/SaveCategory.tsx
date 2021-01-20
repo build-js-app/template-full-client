@@ -22,7 +22,7 @@ function SaveCategory({category, save, close, onChange, visible}) {
     setErrors({title: '', description: ''});
   }, [category]);
 
-  const formIsValid = () => {
+  function formIsValid() {
     let formErrors = {
       title: '',
       description: ''
@@ -39,49 +39,53 @@ function SaveCategory({category, save, close, onChange, visible}) {
     setErrors(formErrors);
 
     return validationHelper.isEmptyErrorObject(formErrors);
-  };
+  }
 
-  const onSave = () => {
+  function onSave() {
     if (!formIsValid()) return;
     save();
-  };
+  }
 
-  if (!category) return null;
+  function render() {
+    if (!category) return null;
 
-  let title = category.id ? 'Edit Category' : 'Add New Category';
+    let title = category.id ? 'Edit Category' : 'Add New Category';
 
-  return (
-    <Modal show={visible} backdrop="static" onHide={close}>
-      <Modal.Header closeButton>{title}</Modal.Header>
-      <Modal.Body>
-        <TextInput
-          name="title"
-          label="Title"
-          value={category.title}
-          onChange={onChange}
-          placeholder="Title"
-          error={errors.title}
-        />
+    return (
+      <Modal show={visible} backdrop="static" onHide={close}>
+        <Modal.Header closeButton>{title}</Modal.Header>
+        <Modal.Body>
+          <TextInput
+            name="title"
+            label="Title"
+            value={category.title}
+            onChange={onChange}
+            placeholder="Title"
+            error={errors.title}
+          />
 
-        <TextAreaInput
-          name="description"
-          label="Description"
-          value={category.description}
-          onChange={onChange}
-          placeholder="Description"
-          error={errors.description}
-        />
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="primary" onClick={onSave}>
-          Save
-        </Button>
-        <Button variant="secondary" onClick={close}>
-          Cancel
-        </Button>
-      </Modal.Footer>
-    </Modal>
-  );
+          <TextAreaInput
+            name="description"
+            label="Description"
+            value={category.description}
+            onChange={onChange}
+            placeholder="Description"
+            error={errors.description}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={onSave}>
+            Save
+          </Button>
+          <Button variant="secondary" onClick={close}>
+            Cancel
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
+
+  return render();
 }
 
 export default SaveCategory;

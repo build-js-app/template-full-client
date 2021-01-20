@@ -11,14 +11,14 @@ import uiHelper from 'helpers/uiHelper';
 import TextInput from 'components/common/TextInput';
 
 interface ParamTypes {
-  token: string
+  token: string;
 }
 
 function PasswordResetPage() {
   const dispatch = useDispatch();
 
   let history = useHistory();
-  
+
   let {token} = useParams<ParamTypes>();
 
   const [userData, setUserData] = useState({email: '', password: '', confirmPassword: '', token: ''});
@@ -30,21 +30,21 @@ function PasswordResetPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onCheckResetToken = async () => {
+  async function onCheckResetToken() {
     let data: any = await dispatch(checkResetToken(token));
 
     if (data) setUserData({email: data.email, token: data.token, password: '', confirmPassword: ''});
-  };
+  }
 
-  const onChange = (field: string, value) => {
+  function onChange(field: string, value) {
     let user = {...userData};
 
     user[field] = value;
 
     setUserData(user);
-  };
+  }
 
-  const resetFormIsValid = () => {
+  function resetFormIsValid() {
     let errors = {
       email: '',
       password: '',
@@ -72,9 +72,9 @@ function PasswordResetPage() {
     setErrors(errors);
 
     return validationHelper.isEmptyErrorObject(errors);
-  };
+  }
 
-  const onResetPassword = async () => {
+  async function onResetPassword() {
     if (!resetFormIsValid()) return;
 
     let response: any = await dispatch(resetPassword(userData));
@@ -84,7 +84,7 @@ function PasswordResetPage() {
 
       history.push('/login');
     }
-  };
+  }
 
   return (
     <Container>

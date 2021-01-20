@@ -17,9 +17,9 @@ function NumberInput({name, label, onChange, value, error}) {
     'has-error': error && error.length > 0
   });
 
-  let inputOnChange = event => {
+  function inputOnChange(event) {
     onChange(event.target.name, event.target.value);
-  };
+  }
 
   return (
     <div className={wrapperClass}>

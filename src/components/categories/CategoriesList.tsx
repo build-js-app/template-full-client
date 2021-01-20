@@ -22,13 +22,11 @@ CategoriesList.propTypes = {
 };
 
 function CategoriesList({categories, editCategoryAction, deleteCategoryAction}) {
-  const anyCategories = () => {
+  function anyCategories() {
     return categories && categories.length;
-  };
+  }
 
-  if (!anyCategories()) return <StyledList>No categories.</StyledList>;
-
-  const renderCategory = category => {
+  function renderCategory(category) {
     let SubItem = props => (
       <Col sm={12} className="d-md-none d-lg-none">
         <Row>
@@ -71,26 +69,32 @@ function CategoriesList({categories, editCategoryAction, deleteCategoryAction}) 
         </Col>
       </Row>
     );
-  };
+  }
 
-  return (
-    <StyledList>
-      <Col>
-        <Row className="list-item d-none d-md-flex">
-          <Col sm={4} className="d-none d-md-block">
-            <Form.Label>Title</Form.Label>
-          </Col>
-          <Col sm={6} className="d-none d-md-block">
-            <Form.Label>Description</Form.Label>
-          </Col>
-          <Col sm={1} className="d-none d-md-block" />
-          <Col sm={1} className="d-none d-md-block" />
-        </Row>
+  function render() {
+    if (!anyCategories()) return <StyledList>No categories.</StyledList>;
 
-        {categories.map(category => renderCategory(category))}
-      </Col>
-    </StyledList>
-  );
+    return (
+      <StyledList>
+        <Col>
+          <Row className="list-item d-none d-md-flex">
+            <Col sm={4} className="d-none d-md-block">
+              <Form.Label>Title</Form.Label>
+            </Col>
+            <Col sm={6} className="d-none d-md-block">
+              <Form.Label>Description</Form.Label>
+            </Col>
+            <Col sm={1} className="d-none d-md-block" />
+            <Col sm={1} className="d-none d-md-block" />
+          </Row>
+
+          {categories.map(category => renderCategory(category))}
+        </Col>
+      </StyledList>
+    );
+  }
+
+  return render();
 }
 
 export default CategoriesList;

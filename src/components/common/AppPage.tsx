@@ -22,32 +22,36 @@ function AppPage(props) {
     if (!isAuthenticated()) dispatch(getCurrentUser());
   });
 
-  const isAuthenticated = () => {
+  function isAuthenticated() {
     if (props.public) return true;
     return !_.isEmpty(user);
-  };
+  }
 
-  const getTitle = () => {
+  function getTitle() {
     return props.title ? `Expense Manager - ${props.title}` : 'Expense Manager';
-  };
+  }
 
-  const isReady = () => {
+  function isReady() {
     return isAuthenticated();
-  };
+  }
 
-  if (!isReady()) return null;
+  function render() {
+    if (!isReady()) return null;
 
-  let title = getTitle();
+    let title = getTitle();
 
-  return (
-    <div>
-      <Helmet title={title} />
+    return (
+      <div>
+        <Helmet title={title} />
 
-      {!props.public && <Navigation />}
+        {!props.public && <Navigation />}
 
-      {props.children}
-    </div>
-  );
+        {props.children}
+      </div>
+    );
+  }
+
+  return render();
 }
 
 export default AppPage;

@@ -28,23 +28,23 @@ function RecordsPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onLoadRecords = async () => {
+  async function onLoadRecords() {
     await dispatch(loadRecords(sortBy));
-  };
+  }
 
-  const addRecord = () => {
+  function addRecord() {
     setRecordToEdit({date: new Date()});
-  };
+  }
 
-  const editRecord = record => {
+  function editRecord(record) {
     setRecordToEdit({...record});
-  };
+  }
 
-  const cancelEditRecord = () => {
+  function cancelEditRecord() {
     setRecordToEdit({});
-  };
+  }
 
-  const updateRecordState = (field: string, value) => {
+  function updateRecordState(field: string, value) {
     let record: any = {...recordToEdit};
 
     if (!record) return;
@@ -52,9 +52,9 @@ function RecordsPage() {
     record[field] = value;
 
     setRecordToEdit(record);
-  };
+  }
 
-  const onSaveRecord = async () => {
+  async function onSaveRecord() {
     let completed = await dispatch(saveRecord(recordToEdit));
 
     if (completed !== undefined) {
@@ -63,9 +63,9 @@ function RecordsPage() {
     }
 
     cancelEditRecord();
-  };
+  }
 
-  const onDeleteRecord = (id: number) => {
+  function onDeleteRecord(id: number) {
     dispatch(
       confirmAction({
         title: 'Delete record',
@@ -76,47 +76,51 @@ function RecordsPage() {
         }
       })
     );
-  };
+  }
 
-  const sortRecords = (sortBy: string) => {
+  function sortRecords(sortBy: string) {
     dispatch(loadRecords(sortBy));
-  };
+  }
 
-  let editRecordVisible = _.isEmpty(recordToEdit) ? false : true;
+  function render() {
+    let editRecordVisible = _.isEmpty(recordToEdit) ? false : true;
 
-  return (
-    <Container fluid>
-      <Row>
-        <Col md={{span: 10, offset: 1}}>
-          <Row>
-            <Col sm={12}>
-              <h2>Records Page</h2>
-            </Col>
-          </Row>
+    return (
+      <Container fluid>
+        <Row>
+          <Col md={{span: 10, offset: 1}}>
+            <Row>
+              <Col sm={12}>
+                <h2>Records Page</h2>
+              </Col>
+            </Row>
 
-          <br />
+            <br />
 
-          <FilterBar addRecordAction={addRecord} sortBy={sortBy} onSortAction={sortRecords} />
+            <FilterBar addRecordAction={addRecord} sortBy={sortBy} onSortAction={sortRecords} />
 
-          <RecordsList
-            records={records}
-            categories={categories}
-            editRecordAction={editRecord}
-            deleteRecordAction={onDeleteRecord}
-          />
-        </Col>
-      </Row>
+            <RecordsList
+              records={records}
+              categories={categories}
+              editRecordAction={editRecord}
+              deleteRecordAction={onDeleteRecord}
+            />
+          </Col>
+        </Row>
 
-      <SaveRecord
-        visible={editRecordVisible}
-        record={recordToEdit}
-        categories={categories}
-        save={onSaveRecord}
-        close={cancelEditRecord}
-        onChange={updateRecordState}
-      />
-    </Container>
-  );
+        <SaveRecord
+          visible={editRecordVisible}
+          record={recordToEdit}
+          categories={categories}
+          save={onSaveRecord}
+          close={cancelEditRecord}
+          onChange={updateRecordState}
+        />
+      </Container>
+    );
+  }
+
+  return render();
 }
 
 export default RecordsPage;

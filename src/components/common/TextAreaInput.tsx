@@ -19,9 +19,9 @@ function TextAreaInput({name, label, onChange, placeholder, value, error, rows})
     'has-error': error && error.length > 0
   });
 
-  let inputOnChange = event => {
+  function inputOnChange(event) {
     onChange(event.target.name, event.target.value);
-  };
+  }
 
   if (!rows) rows = 3;
 

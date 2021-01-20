@@ -16,11 +16,11 @@ function PasswordForgotPage() {
 
   const [errors, setErrors] = useState({email: ''});
 
-  const onChange = (field: string, value: string) => {
+  function onChange(field: string, value: string) {
     setEmail(value);
-  };
+  }
 
-  const forgotFormIsValid = () => {
+  function forgotFormIsValid() {
     let errors = {
       email: ''
     };
@@ -34,13 +34,13 @@ function PasswordForgotPage() {
     setErrors(errors);
 
     return validationHelper.isEmptyErrorObject(errors);
-  };
+  }
 
-  const resetPassword = async () => {
+  async function resetPassword() {
     if (!forgotFormIsValid()) return;
 
     await dispatch(forgotPassword(email));
-  };
+  }
 
   return (
     <Container>

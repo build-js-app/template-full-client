@@ -28,7 +28,7 @@ function SaveRecord({record, categories, save, close, onChange, visible}) {
     setErrors({categoryId: '', cost: '', note: ''});
   }, [record]);
 
-  const formIsValid = () => {
+  function formIsValid() {
     let errors = {
       categoryId: '',
       cost: '',
@@ -50,70 +50,74 @@ function SaveRecord({record, categories, save, close, onChange, visible}) {
     setErrors(errors);
 
     return validationHelper.isEmptyErrorObject(errors);
-  };
+  }
 
-  const onSave = () => {
+  function onSave() {
     if (!formIsValid()) return;
 
     save();
-  };
+  }
 
-  const onDateChange = date => {
+  function onDateChange(date) {
     onChange('date', new Date(date));
-  };
+  }
 
-  if (!record) return null;
+  function render() {
+    if (!record) return null;
 
-  let title = record.id ? 'Edit Record' : 'Add New Record';
+    let title = record.id ? 'Edit Record' : 'Add New Record';
 
-  let cost = record.cost ? parseFloat(record.cost) : 0;
+    let cost = record.cost ? parseFloat(record.cost) : 0;
 
-  let categoryOptions = categories.map(category => {
-    return {value: category.id, label: category.title};
-  });
+    let categoryOptions = categories.map(category => {
+      return {value: category.id, label: category.title};
+    });
 
-  return (
-    <Modal show={visible} backdrop="static" onHide={close}>
-      <Modal.Header closeButton>{title}</Modal.Header>
-      <Modal.Body>
-        <Form.Group>
-          <Form.Label>Date:</Form.Label>
+    return (
+      <Modal show={visible} backdrop="static" onHide={close}>
+        <Modal.Header closeButton>{title}</Modal.Header>
+        <Modal.Body>
+          <Form.Group>
+            <Form.Label>Date:</Form.Label>
 
-          <div>
-            <Flatpickr value={record.date} options={dateOptions} onChange={onDateChange} />
-          </div>
-        </Form.Group>
+            <div>
+              <Flatpickr value={record.date} options={dateOptions} onChange={onDateChange} />
+            </div>
+          </Form.Group>
 
-        <NumberInput name="cost" label="Cost" value={cost} onChange={onChange} error={errors.cost} />
+          <NumberInput name="cost" label="Cost" value={cost} onChange={onChange} error={errors.cost} />
 
-        <SelectInput
-          name="categoryId"
-          label="Category"
-          value={record.categoryId}
-          options={categoryOptions}
-          onChange={onChange}
-          error={errors.categoryId}
-        />
+          <SelectInput
+            name="categoryId"
+            label="Category"
+            value={record.categoryId}
+            options={categoryOptions}
+            onChange={onChange}
+            error={errors.categoryId}
+          />
 
-        <TextAreaInput
-          name="note"
-          label="Note:"
-          value={record.note}
-          onChange={onChange}
-          placeholder="Note"
-          error={errors.note}
-        />
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="primary" onClick={onSave}>
-          Save
-        </Button>
-        <Button variant="secondary" onClick={close}>
-          Cancel
-        </Button>
-      </Modal.Footer>
-    </Modal>
-  );
+          <TextAreaInput
+            name="note"
+            label="Note:"
+            value={record.note}
+            onChange={onChange}
+            placeholder="Note"
+            error={errors.note}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={onSave}>
+            Save
+          </Button>
+          <Button variant="secondary" onClick={close}>
+            Cancel
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
+
+  return render();
 }
 
 export default SaveRecord;

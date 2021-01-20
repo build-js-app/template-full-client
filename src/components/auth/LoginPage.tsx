@@ -25,15 +25,15 @@ function LoginPage() {
     if (!_.isEmpty(currentUser)) history.push('/');
   });
 
-  const onChange = (field: string, value) => {
+  function onChange(field: string, value) {
     let newUser = {...user};
 
     newUser[field] = value;
 
     setUser(newUser);
-  };
+  }
 
-  const loginFormIsValid = () => {
+  function loginFormIsValid() {
     let errors = {
       email: '',
       password: ''
@@ -52,9 +52,9 @@ function LoginPage() {
     setErrors(errors);
 
     return validationHelper.isEmptyErrorObject(errors);
-  };
+  }
 
-  const login = async e => {
+  async function login(e) {
     if (e) e.preventDefault();
 
     if (!loginFormIsValid()) return;
@@ -64,7 +64,7 @@ function LoginPage() {
     await dispatch(getCurrentUser());
 
     if (!_.isEmpty(user)) history.push('/records');
-  };
+  }
 
   return (
     <Container>

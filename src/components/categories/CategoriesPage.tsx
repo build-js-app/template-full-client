@@ -23,19 +23,19 @@ function CategoriesPage() {
     if (_.isEmpty(categories)) dispatch(loadCategories());
   });
 
-  const addCategory = () => {
+  function addCategory() {
     setCategoryToEdit({title: '', description: ''});
-  };
+  }
 
-  const editCategory = category => {
+  function editCategory(category) {
     setCategoryToEdit({...category});
-  };
+  }
 
-  const cancelEditCategory = () => {
+  function cancelEditCategory() {
     setCategoryToEdit({});
-  };
+  }
 
-  const updateCategoryState = (field, value) => {
+  function updateCategoryState(field, value) {
     let category = {...categoryToEdit};
 
     if (!category) return;
@@ -43,17 +43,17 @@ function CategoriesPage() {
     category[field] = value;
 
     setCategoryToEdit(category);
-  };
+  }
 
-  const onSaveCategory = async () => {
+  async function onSaveCategory() {
     let category = await dispatch(saveCategory(categoryToEdit));
 
     if (category !== undefined) uiHelper.showMessage(`Category was updated`);
 
     cancelEditCategory();
-  };
+  }
 
-  const onDeleteCategory = async id => {
+  async function onDeleteCategory(id) {
     dispatch(
       confirmAction({
         title: 'Delete category',
@@ -64,47 +64,51 @@ function CategoriesPage() {
         }
       })
     );
-  };
+  }
 
-  let editCategoryVisible = _.isEmpty(categoryToEdit) ? false : true;
+  function render() {
+    let editCategoryVisible = _.isEmpty(categoryToEdit) ? false : true;
 
-  return (
-    <Container fluid>
-      <Row>
-        <Col md={{span: 10, offset: 1}}>
-          <Row>
-            <Col sm={12}>
-              <h2>Categories Page</h2>
-            </Col>
-          </Row>
+    return (
+      <Container fluid>
+        <Row>
+          <Col md={{span: 10, offset: 1}}>
+            <Row>
+              <Col sm={12}>
+                <h2>Categories Page</h2>
+              </Col>
+            </Row>
 
-          <br />
+            <br />
 
-          <Row>
-            <Col sm={12} className="text-right">
-              <Button variant="success" onClick={addCategory}>
-                <AppIcon icon="plus" />
-              </Button>
-            </Col>
-          </Row>
+            <Row>
+              <Col sm={12} className="text-right">
+                <Button variant="success" onClick={addCategory}>
+                  <AppIcon icon="plus" />
+                </Button>
+              </Col>
+            </Row>
 
-          <CategoriesList
-            categories={categories}
-            editCategoryAction={editCategory}
-            deleteCategoryAction={onDeleteCategory}
-          />
-        </Col>
-      </Row>
+            <CategoriesList
+              categories={categories}
+              editCategoryAction={editCategory}
+              deleteCategoryAction={onDeleteCategory}
+            />
+          </Col>
+        </Row>
 
-      <SaveCategory
-        visible={editCategoryVisible}
-        category={categoryToEdit}
-        save={onSaveCategory}
-        close={cancelEditCategory}
-        onChange={updateCategoryState}
-      />
-    </Container>
-  );
+        <SaveCategory
+          visible={editCategoryVisible}
+          category={categoryToEdit}
+          save={onSaveCategory}
+          close={cancelEditCategory}
+          onChange={updateCategoryState}
+        />
+      </Container>
+    );
+  }
+
+  return render();
 }
 
 export default CategoriesPage;

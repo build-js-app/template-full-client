@@ -14,48 +14,52 @@ function Navigation() {
 
   const user = useSelector((state: any) => state.user.current);
 
-  const onLogOut = async () => {
+  async function onLogOut() {
     await dispatch(logOut());
 
     history.push('/login');
-  };
-
-  let userFullName = '';
-
-  if (user && user.profile && user.profile.local) {
-    let local = user.profile.local;
-
-    userFullName = `${local.firstName} ${local.lastName}`;
   }
 
-  let pathName = location.pathname;
+  function render() {
+    let userFullName = '';
 
-  return (
-    <Navbar bg="light" variant="light" expand="md">
-      <Navbar.Brand>Expense Manager</Navbar.Brand>
-      <Navbar.Toggle />
-      <Navbar.Collapse>
-        <Nav>
-          <Nav.Link as={Link} href="/records" to="/records" active={pathName === '/records'}>
-            Records
-          </Nav.Link>
+    if (user && user.profile && user.profile.local) {
+      let local = user.profile.local;
 
-          <Nav.Link as={Link} href="/categories" to="/categories" active={pathName === '/categories'}>
-            Categories
-          </Nav.Link>
-        </Nav>
-        <Nav className="ml-auto">
-          <span className="navbar-text" style={{marginRight: 20}}>
-            Logged as: <b>{userFullName}</b>
-          </span>
+      userFullName = `${local.firstName} ${local.lastName}`;
+    }
 
-          <Nav.Link href="#" onClick={onLogOut}>
-            LogOut <AppIcon icon="sign-out" />
-          </Nav.Link>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
-  );
+    let pathName = location.pathname;
+
+    return (
+      <Navbar bg="light" variant="light" expand="md">
+        <Navbar.Brand>Expense Manager</Navbar.Brand>
+        <Navbar.Toggle />
+        <Navbar.Collapse>
+          <Nav>
+            <Nav.Link as={Link} href="/records" to="/records" active={pathName === '/records'}>
+              Records
+            </Nav.Link>
+
+            <Nav.Link as={Link} href="/categories" to="/categories" active={pathName === '/categories'}>
+              Categories
+            </Nav.Link>
+          </Nav>
+          <Nav className="ml-auto">
+            <span className="navbar-text" style={{marginRight: 20}}>
+              Logged as: <b>{userFullName}</b>
+            </span>
+
+            <Nav.Link href="#" onClick={onLogOut}>
+              LogOut <AppIcon icon="sign-out" />
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    );
+  }
+
+  return render();
 }
 
 export default Navigation;

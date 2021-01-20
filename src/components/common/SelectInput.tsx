@@ -11,9 +11,9 @@ SelectInput.propTypes = {
 };
 
 function SelectInput({name, label, value, onChange, options, error}) {
-  let inputOnChange = event => {
+  function inputOnChange(event) {
     onChange(name, event.target.value);
-  };
+  }
 
   return (
     <Form.Group>

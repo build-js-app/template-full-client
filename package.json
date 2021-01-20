@@ -10,12 +10,6 @@
     "eject": "react-scripts eject",
     "format": "prettier \"src/**/*.{js,json,css,ts,tsx}\" --write"
   },
-  "prettier": {
-    "printWidth": 120,
-    "singleQuote": true,
-    "jsxBracketSameLine": true,
-    "bracketSpacing": false
-  },
   "eslintConfig": {
     "extends": "react-app"
   },

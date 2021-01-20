@@ -19,15 +19,15 @@ function SignUpPage() {
 
   const [errors, setErrors] = useState({firstName: '', lastName: '', email: '', password: '', confirmPassword: ''});
 
-  const onChange = (field: string, value) => {
+  function onChange(field: string, value) {
     let newUser = {...user};
 
     newUser[field] = value;
 
     setUser(newUser);
-  };
+  }
 
-  const signUpFormIsValid = () => {
+  function signUpFormIsValid() {
     let errors = {
       firstName: '',
       lastName: '',
@@ -65,9 +65,9 @@ function SignUpPage() {
     setErrors(errors);
 
     return validationHelper.isEmptyErrorObject(errors);
-  };
+  }
 
-  const onSignUp = async () => {
+  async function onSignUp() {
     if (!signUpFormIsValid()) return;
 
     let response: any = await dispatch(signUp(user));
@@ -77,7 +77,7 @@ function SignUpPage() {
 
       history.push('/login');
     }
-  };
+  }
 
   return (
     <Container>

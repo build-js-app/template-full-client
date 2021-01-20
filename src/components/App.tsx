@@ -34,13 +34,11 @@ function App(props) {
   const asyncAction = useSelector((state: any) => state.common.asyncAction);
   const confirmAction = useSelector((state: any) => state.common.confirmAction);
 
-  const cancelAction = () => {
+  function cancelAction() {
     dispatch(confirmActionCancel());
-  };
+  }
 
-  let showOverlay = _.get(asyncAction, 'showOverlay', false);
-
-  const renderRoute = (route, index: number) => {
+  function renderRoute(route, index: number) {
     const {pageProps, component: Component} = route;
 
     let wrapInAppPage = !_.isEmpty(pageProps);
@@ -56,30 +54,36 @@ function App(props) {
     }
 
     return <Route key={index} exact={route.exact} path={route.path} render={render} />;
-  };
+  }
 
-  return (
-    <div>
-      {showOverlay && <UiBlock />}
+  function render() {
+    let showOverlay = _.get(asyncAction, 'showOverlay', false);
 
-      {confirmAction && (
-        <Confirm
-          title={confirmAction.title}
-          text={confirmAction.text}
-          visible={true}
-          action={async () => {
-            cancelAction();
-            await confirmAction.action();
-          }}
-          close={cancelAction}
-        />
-      )}
+    return (
+      <div>
+        {showOverlay && <UiBlock />}
 
-      <Switch>{props.routes.map((route, index: number) => renderRoute(route, index))}</Switch>
+        {confirmAction && (
+          <Confirm
+            title={confirmAction.title}
+            text={confirmAction.text}
+            visible={true}
+            action={async () => {
+              cancelAction();
+              await confirmAction.action();
+            }}
+            close={cancelAction}
+          />
+        )}
 
-      {props.children}
-    </div>
-  );
+        <Switch>{props.routes.map((route, index: number) => renderRoute(route, index))}</Switch>
+
+        {props.children}
+      </div>
+    );
+  }
+
+  return render();
 }
 
 export default App;
