@@ -5,6 +5,7 @@ import {isEmpty} from 'lodash';
 
 import {confirmAction} from 'actions/commonActions';
 import {loadCategories, saveCategory, deleteCategory} from 'actions/categoryActions';
+import {AppState} from 'reducers';
 
 import uiHelper from 'helpers/uiHelper';
 
@@ -13,7 +14,7 @@ import CategoriesList from './CategoriesList';
 import SaveCategory from './SaveCategory';
 
 function CategoriesPage() {
-  const categories = useSelector((state: any) => state.category.list);
+  const categories = useSelector((state: AppState) => state.category.list);
 
   const dispatch = useDispatch();
 

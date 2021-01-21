@@ -6,6 +6,7 @@ import {isEmpty} from 'lodash';
 import {confirmAction} from 'actions/commonActions';
 import {loadRecords, saveRecord, deleteRecord} from 'actions/recordActions';
 import {loadCategories} from 'actions/categoryActions';
+import {AppState} from 'reducers';
 
 import uiHelper from 'helpers/uiHelper';
 
@@ -16,9 +17,9 @@ import FilterBar from './FilterBar';
 function RecordsPage() {
   let dispatch = useDispatch();
 
-  const records = useSelector((state: any) => state.record.list);
-  const categories = useSelector((state: any) => state.category.list);
-  const sortBy = useSelector((state: any) => state.record.sortBy);
+  const records = useSelector((state: AppState) => state.record.list);
+  const categories = useSelector((state: AppState) => state.category.list);
+  const sortBy = useSelector((state: AppState) => state.record.sortBy);
 
   const [recordToEdit, setRecordToEdit] = useState({});
 

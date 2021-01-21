@@ -3,7 +3,12 @@ import helper from './reducerHelper';
 import {LOAD_RECORDS, DELETE_RECORD} from 'action_types/recordActionTypes';
 import initialState from './initialState';
 
-const recordReducer = (state = initialState.record, action) => {
+type RecordState = {
+  list: RecordItem[];
+  sortBy: string;
+};
+
+const recordReducer = (state: RecordState = initialState.record, action) => {
   return helper.handleActions(state, action, {
     [LOAD_RECORDS](state, payload) {
       state.list = payload.records;

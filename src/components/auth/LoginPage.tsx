@@ -5,6 +5,7 @@ import {Container, Row, Col, Button} from 'components/bootstrap';
 import {isEmpty} from 'lodash';
 
 import {loginUser, getCurrentUser} from 'actions/userActions';
+import {AppState} from 'reducers';
 
 import validationHelper from 'helpers/validationHelper';
 
@@ -12,7 +13,7 @@ import AppIcon from 'components/common/AppIcon';
 import TextInput from 'components/common/TextInput';
 
 function LoginPage() {
-  const currentUser = useSelector((state: any) => state.user.current);
+  const currentUser = useSelector((state: AppState) => state.user.current);
 
   const dispatch = useDispatch();
   let history = useHistory();

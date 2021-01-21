@@ -4,6 +4,7 @@ import {Nav, Navbar} from './bootstrap';
 import {Link, useHistory, useLocation} from 'react-router-dom';
 
 import {logOut} from 'actions/userActions';
+import {AppState} from 'reducers';
 
 import AppIcon from 'components/common/AppIcon';
 
@@ -12,7 +13,7 @@ function Navigation() {
   let history = useHistory();
   let location = useLocation();
 
-  const user = useSelector((state: any) => state.user.current);
+  const user = useSelector((state: AppState) => state.user.current);
 
   async function onLogOut() {
     await dispatch(logOut());

@@ -11,4 +11,6 @@ const rootReducer = combineReducers({
   common
 });
 
+export type AppState = ReturnType<typeof rootReducer>;
+
 export default rootReducer;

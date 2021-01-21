@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import {isEmpty, get} from 'lodash';
 import styled from 'styled-components';
 
+import {AppState} from 'reducers';
+
 import AppPage from 'components/common/AppPage';
 import Confirm from 'components/common/Confirm';
 
@@ -31,8 +33,8 @@ App.propTypes = {
 function App(props) {
   let dispatch = useDispatch();
 
-  const asyncAction = useSelector((state: any) => state.common.asyncAction);
-  const confirmAction = useSelector((state: any) => state.common.confirmAction);
+  const asyncAction = useSelector((state: AppState) => state.common.asyncAction);
+  const confirmAction = useSelector((state: AppState) => state.common.confirmAction);
 
   function cancelAction() {
     dispatch(confirmActionCancel());

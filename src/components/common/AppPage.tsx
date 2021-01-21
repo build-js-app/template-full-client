@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
 import {getCurrentUser} from 'actions/userActions';
+import {AppState} from 'reducers';
 
 import Navigation from 'components/Navigation';
 
@@ -16,7 +17,7 @@ AppPage.propTypes = {
 function AppPage(props) {
   let dispatch = useDispatch();
 
-  const user = useSelector((state: any) => state.user.current);
+  const user = useSelector((state: AppState) => state.user.current);
 
   useEffect(() => {
     if (!isAuthenticated()) dispatch(getCurrentUser());
