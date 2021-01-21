@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import _ from 'lodash';
+import {isEmpty} from 'lodash';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
@@ -24,7 +24,7 @@ function AppPage(props) {
 
   function isAuthenticated() {
     if (props.public) return true;
-    return !_.isEmpty(user);
+    return !isEmpty(user);
   }
 
   function getTitle() {

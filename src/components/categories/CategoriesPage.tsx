@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {Container, Row, Col, Button} from 'components/bootstrap';
-import _ from 'lodash';
+import {isEmpty} from 'lodash';
 
 import {confirmAction} from 'actions/commonActions';
 import {loadCategories, saveCategory, deleteCategory} from 'actions/categoryActions';
@@ -20,7 +20,7 @@ function CategoriesPage() {
   const [categoryToEdit, setCategoryToEdit] = useState({});
 
   useEffect(() => {
-    if (_.isEmpty(categories)) dispatch(loadCategories());
+    if (isEmpty(categories)) dispatch(loadCategories());
   });
 
   function addCategory() {
@@ -67,7 +67,7 @@ function CategoriesPage() {
   }
 
   function render() {
-    let editCategoryVisible = _.isEmpty(categoryToEdit) ? false : true;
+    let editCategoryVisible = isEmpty(categoryToEdit) ? false : true;
 
     return (
       <Container fluid>

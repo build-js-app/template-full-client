@@ -1,5 +1,5 @@
 import axios from 'axios';
-import _ from 'lodash';
+import {endsWith} from 'lodash';
 
 import uiHelper from './uiHelper';
 
@@ -53,7 +53,7 @@ async function processRequest(axiosRequest) {
     let status = response.status;
 
     if (status === 401 || status === 403) {
-      if (!_.endsWith(window.location.href, '/login')) {
+      if (!endsWith(window.location.href, '/login')) {
         window.location.href = '/login';
       }
       return;

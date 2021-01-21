@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {Link, useHistory} from 'react-router-dom';
 import {Container, Row, Col, Button} from 'components/bootstrap';
-import _ from 'lodash';
+import {isEmpty} from 'lodash';
 
 import {loginUser, getCurrentUser} from 'actions/userActions';
 
@@ -22,7 +22,7 @@ function LoginPage() {
   const [errors, setErrors] = useState({email: '', password: ''});
 
   useEffect(() => {
-    if (!_.isEmpty(currentUser)) history.push('/');
+    if (!isEmpty(currentUser)) history.push('/');
   });
 
   function onChange(field: string, value) {
@@ -63,7 +63,7 @@ function LoginPage() {
 
     await dispatch(getCurrentUser());
 
-    if (!_.isEmpty(user)) history.push('/records');
+    if (!isEmpty(user)) history.push('/records');
   }
 
   return (

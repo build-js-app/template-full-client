@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import {isEmpty} from 'lodash';
 
 export default {
   isValidEmail,
@@ -17,7 +17,7 @@ function isEmptyErrorObject(obj) {
   for (let key of Object.keys(obj)) {
     let value = obj[key];
 
-    if (!_.isEmpty(value)) {
+    if (!isEmpty(value)) {
       isEmptyObject = false;
       break;
     }

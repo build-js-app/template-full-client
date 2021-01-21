@@ -1,6 +1,5 @@
 import React from 'react';
 import {Row, Col, Form, Button} from 'components/bootstrap';
-import _ from 'lodash';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -27,7 +26,7 @@ function RecordsList({records, categories, editRecordAction, deleteRecordAction}
   }
 
   function renderRecord(record) {
-    let category = _.find(categories, category => {
+    let category = categories.find(category => {
       return category.id === record.categoryId;
     });
 

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {Container, Row, Col} from 'components/bootstrap';
-import _ from 'lodash';
+import {isEmpty} from 'lodash';
 
 import {confirmAction} from 'actions/commonActions';
 import {loadRecords, saveRecord, deleteRecord} from 'actions/recordActions';
@@ -83,7 +83,7 @@ function RecordsPage() {
   }
 
   function render() {
-    let editRecordVisible = _.isEmpty(recordToEdit) ? false : true;
+    let editRecordVisible = isEmpty(recordToEdit) ? false : true;
 
     return (
       <Container fluid>

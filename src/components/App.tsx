@@ -2,7 +2,7 @@ import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {Switch, Route} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import {isEmpty, get} from 'lodash';
 import styled from 'styled-components';
 
 import AppPage from 'components/common/AppPage';
@@ -12,7 +12,7 @@ import {confirmActionCancel} from 'actions/commonActions';
 
 import 'styles/App.scss';
 
-const UiBlock = styled.div`
+const StyledUiBlock = styled.div`
   position: fixed;
   left: 0;
   top: 0;
@@ -41,7 +41,7 @@ function App(props) {
   function renderRoute(route, index: number) {
     const {pageProps, component: Component} = route;
 
-    let wrapInAppPage = !_.isEmpty(pageProps);
+    let wrapInAppPage = !isEmpty(pageProps);
 
     let render = props => <Component {...props} />;
 
@@ -57,11 +57,11 @@ function App(props) {
   }
 
   function render() {
-    let showOverlay = _.get(asyncAction, 'showOverlay', false);
+    let showOverlay = get(asyncAction, 'showOverlay', false);
 
     return (
       <div>
-        {showOverlay && <UiBlock />}
+        {showOverlay && <StyledUiBlock />}
 
         {confirmAction && (
           <Confirm
