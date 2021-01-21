@@ -9,6 +9,7 @@ import {AppState} from 'reducers';
 
 import AppPage from 'components/common/AppPage';
 import Confirm from 'components/common/Confirm';
+import ErrorBoundary from 'components/ErrorBoundary';
 
 import {confirmActionCancel} from 'actions/commonActions';
 
@@ -62,7 +63,7 @@ function App(props) {
     let showOverlay = get(asyncAction, 'showOverlay', false);
 
     return (
-      <div>
+      <ErrorBoundary>
         {showOverlay && <StyledUiBlock />}
 
         {confirmAction && (
@@ -81,7 +82,7 @@ function App(props) {
         <Switch>{props.routes.map((route, index: number) => renderRoute(route, index))}</Switch>
 
         {props.children}
-      </div>
+      </ErrorBoundary>
     );
   }
 
