@@ -7,7 +7,7 @@ import {forgotPassword} from 'actions/userActions';
 
 import validationHelper from 'helpers/validationHelper';
 
-import TextInput from 'components/common/TextInput';
+import {TextInput} from 'components/common/TextInput';
 
 function PasswordForgotPage() {
   const dispatch = useDispatch();

@@ -14,7 +14,7 @@ TextInput.propTypes = {
   disabled: PropTypes.bool
 };
 
-function TextInput({name, label, onChange, placeholder, value, error, type, disabled}) {
+export function TextInput({name, label, onChange, placeholder, value, error, type, disabled}) {
   let wrapperClass = classnames({
     'form-group': true,
     'has-error': error && error.length > 0
@@ -43,5 +43,24 @@ function TextInput({name, label, onChange, placeholder, value, error, type, disa
     </div>
   );
 }
+export function TextInputReactHookForm({name, label, onChange, placeholder, defaultValue, type, register, required}) {
+  function inputOnChange(event) {
+    onChange(event.target.name, event.target.value);
+  }
 
-export default TextInput;
+  return (
+    <div className="form-group">
+      <Form.Label htmlFor={name}>{label}</Form.Label>
+
+      <input
+        type={type}
+        name={name}
+        className="form-control"
+        placeholder={placeholder}
+        defaultValue={defaultValue ? defaultValue : ''}
+        onChange={inputOnChange}
+        ref={register({required})}
+      />
+    </div>
+  );
+}

@@ -10,7 +10,7 @@ import {AppState} from 'reducers';
 import validationHelper from 'helpers/validationHelper';
 
 import AppIcon from 'components/common/AppIcon';
-import TextInput from 'components/common/TextInput';
+import {TextInput} from 'components/common/TextInput';
 
 function LoginPage() {
   const currentUser = useSelector((state: AppState) => state.user.current);

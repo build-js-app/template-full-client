@@ -8,7 +8,7 @@ import {resetPassword, checkResetToken} from 'actions/userActions';
 import validationHelper from 'helpers/validationHelper';
 import uiHelper from 'helpers/uiHelper';
 
-import TextInput from 'components/common/TextInput';
+import {TextInput} from 'components/common/TextInput';
 
 interface ParamTypes {
   token: string;

@@ -7,7 +7,7 @@ import config from 'helpers/configHelper';
 import validationHelper from 'helpers/validationHelper';
 
 import NumberInput from 'components/common/NumberInput';
-import TextAreaInput from 'components/common/TextAreaInput';
+import {TextAreaInput} from 'components/common/TextAreaInput';
 import SelectInput from 'components/common/SelectInput';
 
 const dateOptions = {dateFormat: config.format.datePicker};

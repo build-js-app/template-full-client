@@ -13,7 +13,7 @@ TextAreaInput.propTypes = {
   rows: PropTypes.number
 };
 
-function TextAreaInput({name, label, onChange, placeholder, value, error, rows}) {
+export function TextAreaInput({name, label, onChange, placeholder, value, error, rows}) {
   let wrapperClass = classnames({
     'form-group': true,
     'has-error': error && error.length > 0
@@ -42,4 +42,33 @@ function TextAreaInput({name, label, onChange, placeholder, value, error, rows})
   );
 }
 
-export default TextAreaInput;
+export function TextAreaInputReactHookForm({
+  name,
+  label,
+  onChange,
+  placeholder,
+  defaultValue,
+  rows,
+  register,
+  required
+}) {
+  function inputOnChange(event) {
+    onChange(event.target.name, event.target.value);
+  }
+
+  return (
+    <div className="form-group">
+      <Form.Label htmlFor={name}>{label}</Form.Label>
+
+      <textarea
+        name={name}
+        rows={rows}
+        className="form-control"
+        placeholder={placeholder}
+        defaultValue={defaultValue}
+        onChange={inputOnChange}
+        ref={register({required})}
+      />
+    </div>
+  );
+}

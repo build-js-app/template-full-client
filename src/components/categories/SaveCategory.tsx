@@ -1,11 +1,20 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {Modal, Button} from 'components/bootstrap';
 import PropTypes from 'prop-types';
+import {useForm} from 'react-hook-form';
 
-import validationHelper from 'helpers/validationHelper';
+import {TextInputReactHookForm} from 'components/common/TextInput';
+import {TextAreaInputReactHookForm} from 'components/common/TextAreaInput';
 
-import TextInput from 'components/common/TextInput';
-import TextAreaInput from 'components/common/TextAreaInput';
+import styled from 'styled-components';
+
+const ErrorMessage = styled.p`
+  color: #bf1650;
+  ::before {
+    display: inline;
+    content: '⚠ ';
+  }
+`;
 
 SaveCategory.propTypes = {
   category: PropTypes.object,
@@ -16,35 +25,8 @@ SaveCategory.propTypes = {
 };
 
 function SaveCategory({category, save, close, onChange, visible}) {
-  const [errors, setErrors] = useState({title: '', description: ''});
-
-  useEffect(() => {
-    setErrors({title: '', description: ''});
-  }, [category]);
-
-  function formIsValid() {
-    let formErrors = {
-      title: '',
-      description: ''
-    };
-
-    if (!category.title) {
-      formErrors.title = 'Title field is required.';
-    }
-
-    if (!category.description) {
-      formErrors.description = 'Description field is required.';
-    }
-
-    setErrors(formErrors);
-
-    return validationHelper.isEmptyErrorObject(formErrors);
-  }
-
-  function onSave() {
-    if (!formIsValid()) return;
-    save();
-  }
+  const {register, handleSubmit, errors} = useForm();
+  const errorMessage = 'This field is required.';
 
   function render() {
     if (!category) return null;
@@ -55,32 +37,39 @@ function SaveCategory({category, save, close, onChange, visible}) {
       <Modal show={visible} backdrop="static" onHide={close}>
         <Modal.Header closeButton>{title}</Modal.Header>
         <Modal.Body>
-          <TextInput
-            name="title"
-            label="Title"
-            value={category.title}
-            onChange={onChange}
-            placeholder="Title"
-            error={errors.title}
-          />
-
-          <TextAreaInput
-            name="description"
-            label="Description"
-            value={category.description}
-            onChange={onChange}
-            placeholder="Description"
-            error={errors.description}
-          />
+          <form onSubmit={handleSubmit(save)}>
+            <TextInputReactHookForm
+              name="title"
+              label="Title"
+              type="text"
+              defaultValue={category.title}
+              onChange={onChange}
+              placeholder="Title"
+              register={register}
+              required
+            />
+            {errors.title && <ErrorMessage>{errorMessage}</ErrorMessage>}
+            <TextAreaInputReactHookForm
+              name="description"
+              label="Description"
+              placeholder="Description"
+              defaultValue={category.description}
+              onChange={onChange}
+              rows="3"
+              register={register}
+              required
+            />
+            {errors.description && <ErrorMessage>{errorMessage}</ErrorMessage>}
+            <Modal.Footer>
+              <Button variant="primary" type="submit">
+                Save
+              </Button>
+              <Button variant="secondary" onClick={close}>
+                Cancel
+              </Button>
+            </Modal.Footer>
+          </form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={onSave}>
-            Save
-          </Button>
-          <Button variant="secondary" onClick={close}>
-            Cancel
-          </Button>
-        </Modal.Footer>
       </Modal>
     );
   }

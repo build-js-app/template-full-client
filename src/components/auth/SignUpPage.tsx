@@ -9,7 +9,7 @@ import validationHelper from 'helpers/validationHelper';
 import uiHelper from 'helpers/uiHelper';
 
 import AppIcon from 'components/common/AppIcon';
-import TextInput from 'components/common/TextInput';
+import {TextInput} from 'components/common/TextInput';
 
 function SignUpPage() {
   const dispatch = useDispatch();
