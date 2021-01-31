@@ -10,7 +10,7 @@ SelectInput.propTypes = {
   error: PropTypes.string
 };
 
-function SelectInput({name, label, value, onChange, options, error}) {
+export function SelectInput({name, label, value, onChange, options, error}) {
   function inputOnChange(event) {
     onChange(name, event.target.value);
   }
@@ -34,4 +34,24 @@ function SelectInput({name, label, value, onChange, options, error}) {
   );
 }
 
-export default SelectInput;
+export function SelectInputReactHookForm({name, label, value, onChange, options, register, required}) {
+  function inputOnChange(event) {
+    onChange(name, event.target.value);
+  }
+
+  return (
+    <Form.Group>
+      <Form.Label>{label}</Form.Label>
+
+      <Form.Control as="select" id={name} name={name} value={value} onChange={inputOnChange} ref={register({required})}>
+        {!value && <option value="">Select Category</option>}
+
+        {options.map(opt => (
+          <option key={opt.value} value={opt.value}>
+            {opt.label}
+          </option>
+        ))}
+      </Form.Control>
+    </Form.Group>
+  );
+}

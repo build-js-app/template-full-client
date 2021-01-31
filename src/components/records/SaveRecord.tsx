@@ -1,14 +1,24 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {Modal, Button, Form} from 'components/bootstrap';
 import PropTypes from 'prop-types';
 import Flatpickr from 'react-flatpickr';
+import {useForm} from 'react-hook-form';
 
 import config from 'helpers/configHelper';
-import validationHelper from 'helpers/validationHelper';
 
-import NumberInput from 'components/common/NumberInput';
-import {TextAreaInput} from 'components/common/TextAreaInput';
-import SelectInput from 'components/common/SelectInput';
+import {NumberInputReactHookForm} from 'components/common/NumberInput';
+import {TextAreaInputReactHookForm} from 'components/common/TextAreaInput';
+import {SelectInputReactHookForm} from 'components/common/SelectInput';
+
+import styled from 'styled-components';
+
+const ErrorMessage = styled.p`
+  color: #bf1650;
+  ::before {
+    display: inline;
+    content: '⚠ ';
+  }
+`;
 
 const dateOptions = {dateFormat: config.format.datePicker};
 
@@ -22,41 +32,8 @@ SaveRecord.propTypes = {
 };
 
 function SaveRecord({record, categories, save, close, onChange, visible}) {
-  const [errors, setErrors] = useState({categoryId: '', cost: '', note: ''});
-
-  useEffect(() => {
-    setErrors({categoryId: '', cost: '', note: ''});
-  }, [record]);
-
-  function formIsValid() {
-    let errors = {
-      categoryId: '',
-      cost: '',
-      note: ''
-    };
-
-    if (!record.categoryId) {
-      errors.categoryId = 'Category field is required.';
-    }
-
-    if (!record.cost) {
-      errors.cost = 'Cost field is required.';
-    }
-
-    if (!record.note) {
-      errors.note = 'Note field is required.';
-    }
-
-    setErrors(errors);
-
-    return validationHelper.isEmptyErrorObject(errors);
-  }
-
-  function onSave() {
-    if (!formIsValid()) return;
-
-    save();
-  }
+  const {register, handleSubmit, errors} = useForm();
+  const errorMessage = 'This field is required.';
 
   function onDateChange(date) {
     onChange('date', new Date(date));
@@ -77,42 +54,54 @@ function SaveRecord({record, categories, save, close, onChange, visible}) {
       <Modal show={visible} backdrop="static" onHide={close}>
         <Modal.Header closeButton>{title}</Modal.Header>
         <Modal.Body>
-          <Form.Group>
-            <Form.Label>Date:</Form.Label>
-
-            <div>
-              <Flatpickr value={record.date} options={dateOptions} onChange={onDateChange} />
-            </div>
-          </Form.Group>
-
-          <NumberInput name="cost" label="Cost" value={cost} onChange={onChange} error={errors.cost} />
-
-          <SelectInput
-            name="categoryId"
-            label="Category"
-            value={record.categoryId}
-            options={categoryOptions}
-            onChange={onChange}
-            error={errors.categoryId}
-          />
-
-          <TextAreaInput
-            name="note"
-            label="Note:"
-            value={record.note}
-            onChange={onChange}
-            placeholder="Note"
-            error={errors.note}
-          />
+          <form onSubmit={handleSubmit(save)}>
+            <Form.Group>
+              <Form.Label>Date:</Form.Label>
+              <div>
+                <Flatpickr value={record.date} options={dateOptions} onChange={onDateChange} ref={register} />
+              </div>
+            </Form.Group>
+            {errors.date && <ErrorMessage>{errorMessage}</ErrorMessage>}
+            <NumberInputReactHookForm
+              name="cost"
+              label="Cost"
+              defaultValue={cost}
+              onChange={onChange}
+              register={register}
+              required
+            />
+            {errors.cost && <ErrorMessage>{errorMessage}</ErrorMessage>}
+            <SelectInputReactHookForm
+              name="categoryId"
+              label="Category"
+              value={record.categoryId}
+              options={categoryOptions}
+              onChange={onChange}
+              register={register}
+              required
+            />
+            {errors.categoryId && <ErrorMessage>{errorMessage}</ErrorMessage>}
+            <TextAreaInputReactHookForm
+              name="note"
+              label="Note:"
+              defaultValue={record.note}
+              onChange={onChange}
+              placeholder="Note"
+              rows="3"
+              register={register}
+              required
+            />
+            {errors.note && <ErrorMessage>{errorMessage}</ErrorMessage>}
+            <Modal.Footer>
+              <Button variant="primary" type="submit">
+                Save
+              </Button>
+              <Button variant="secondary" onClick={close}>
+                Cancel
+              </Button>
+            </Modal.Footer>
+          </form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={onSave}>
-            Save
-          </Button>
-          <Button variant="secondary" onClick={close}>
-            Cancel
-          </Button>
-        </Modal.Footer>
       </Modal>
     );
   }

@@ -11,7 +11,7 @@ NumberInput.propTypes = {
   error: PropTypes.string
 };
 
-function NumberInput({name, label, onChange, value, error}) {
+export function NumberInput({name, label, onChange, value, error}) {
   let wrapperClass = classnames({
     'form-group': true,
     'has-error': error && error.length > 0
@@ -39,4 +39,26 @@ function NumberInput({name, label, onChange, value, error}) {
   );
 }
 
-export default NumberInput;
+export function NumberInputReactHookForm({name, label, onChange, defaultValue, register, required}) {
+  function inputOnChange(event) {
+    onChange(event.target.name, event.target.value);
+  }
+  const value = defaultValue ? defaultValue : '';
+
+  return (
+    <div className="form-group">
+      <Form.Label htmlFor={name}>{label}</Form.Label>
+
+      <input
+        type="number"
+        name={name}
+        className="form-control"
+        min="0"
+        step="0.1"
+        defaultValue={value}
+        onChange={inputOnChange}
+        ref={register({required})}
+      />
+    </div>
+  );
+}
