@@ -1,0 +1,5 @@
+export const ASYNC_ACTION_START = 'common/ASYNC_ACTION_START';
+export const ASYNC_ACTION_END = 'common/ASYNC_ACTION_END';
+
+export const CONFIRM_ACTION = 'common/CONFIRM_ACTION';
+export const CONFIRM_ACTION_CANCEL = 'common/CONFIRM_ACTION_CANCEL';

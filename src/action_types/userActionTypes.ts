@@ -1,0 +1,1 @@
+export const LOAD_CURRENT_USER = 'user/LOAD_CURRENT_USER';
