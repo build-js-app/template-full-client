@@ -1,5 +1,4 @@
 import React from 'react';
-import classnames from 'classnames';
 import {Form} from 'components/bootstrap';
 
 interface Props {
@@ -14,11 +13,6 @@ interface Props {
 }
 
 function TextInput({name, label, onChange, placeholder, value, error, type, disabled}: Props) {
-  let wrapperClass = classnames({
-    'form-group': true,
-    'has-error': error && error.length > 0
-  });
-
   let inputType = type ? type : 'text';
 
   function inputOnChange(event) {
@@ -26,7 +20,7 @@ function TextInput({name, label, onChange, placeholder, value, error, type, disa
   }
 
   return (
-    <div className={wrapperClass}>
+    <Form.Group>
       <Form.Label htmlFor={name}>{label}</Form.Label>
 
       <input
@@ -39,7 +33,7 @@ function TextInput({name, label, onChange, placeholder, value, error, type, disa
         onChange={inputOnChange}
       />
       {error && <div className="alert alert-danger">{error}</div>}
-    </div>
+    </Form.Group>
   );
 }
 
