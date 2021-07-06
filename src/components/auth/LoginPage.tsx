@@ -16,7 +16,7 @@ function LoginPage() {
   const currentUser = useSelector((state: AppState) => state.user.current);
 
   const dispatch = useDispatch();
-  let history = useHistory();
+  const history = useHistory();
 
   const [user, setUser] = useState({email: '', password: ''});
 
@@ -27,7 +27,7 @@ function LoginPage() {
   });
 
   function onChange(field: string, value) {
-    let newUser = {...user};
+    const newUser = {...user};
 
     newUser[field] = value;
 
@@ -35,7 +35,7 @@ function LoginPage() {
   }
 
   function loginFormIsValid() {
-    let errors = {
+    const errors = {
       email: '',
       password: ''
     };

@@ -19,7 +19,7 @@ const recordReducer = (state: RecordState = initialState.record, action) => {
 };
 
 function deleteRecord(state, payload) {
-  let newList = [...state.list.filter(record => record.id !== payload.id)];
+  const newList = [...state.list.filter(record => record.id !== payload.id)];
   state.list = newList;
 }
 

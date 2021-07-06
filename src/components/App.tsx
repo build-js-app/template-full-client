@@ -32,7 +32,7 @@ interface Props {
 }
 
 function App(props: Props) {
-  let dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const asyncAction = useSelector((state: AppState) => state.common.asyncAction);
   const confirmAction = useSelector((state: AppState) => state.common.confirmAction);
@@ -44,7 +44,7 @@ function App(props: Props) {
   function renderRoute(route, index: number) {
     const {pageProps, component: Component} = route;
 
-    let wrapInAppPage = !isEmpty(pageProps);
+    const wrapInAppPage = !isEmpty(pageProps);
 
     let render = props => <Component {...props} />;
 
@@ -60,7 +60,7 @@ function App(props: Props) {
   }
 
   function render() {
-    let showOverlay = asyncAction?.showOverlay ? true : false;
+    const showOverlay = asyncAction?.showOverlay ? true : false;
 
     return (
       <ErrorBoundary>

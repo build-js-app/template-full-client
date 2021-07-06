@@ -26,7 +26,7 @@ function CategoriesList({categories, editCategoryAction, deleteCategoryAction}: 
   }
 
   function renderCategory(category) {
-    let SubItem = props => (
+    const SubItem = props => (
       <Col sm={12} className="d-md-none d-lg-none">
         <Row>
           <Col sm={12}>

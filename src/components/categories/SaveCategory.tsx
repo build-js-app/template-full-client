@@ -22,7 +22,7 @@ function SaveCategory({category, save, close, onChange, visible}: Props) {
   }, [category]);
 
   function formIsValid() {
-    let formErrors = {
+    const formErrors = {
       title: '',
       description: ''
     };
@@ -48,7 +48,7 @@ function SaveCategory({category, save, close, onChange, visible}: Props) {
   function render() {
     if (!category) return null;
 
-    let title = category.id ? 'Edit Category' : 'Add New Category';
+    const title = category.id ? 'Edit Category' : 'Add New Category';
 
     return (
       <Modal show={visible} backdrop="static" onHide={close}>

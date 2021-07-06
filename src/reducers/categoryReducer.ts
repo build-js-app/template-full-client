@@ -14,15 +14,15 @@ const categoryReducer = (state: CategoryState = initialState.category, action) =
       state.list = payload.categories;
     },
     [CREATE_CATEGORY](state, payload) {
-      let newList = [...state.list, {...payload.category}];
+      const newList = [...state.list, {...payload.category}];
       state.list = newList;
     },
     [UPDATE_CATEGORY](state, payload) {
-      let newList = [...state.list.filter(category => category.id !== payload.category.id), {...payload.category}];
+      const newList = [...state.list.filter(category => category.id !== payload.category.id), {...payload.category}];
       state.list = newList;
     },
     [DELETE_CATEGORY](state, payload) {
-      let newList = [...state.list.filter(category => category.id !== payload.id)];
+      const newList = [...state.list.filter(category => category.id !== payload.id)];
       state.list = newList;
     }
   });

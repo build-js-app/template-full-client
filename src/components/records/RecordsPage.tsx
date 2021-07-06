@@ -15,7 +15,7 @@ import RecordsList from './RecordsList';
 import FilterBar from './FilterBar';
 
 function RecordsPage() {
-  let dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const records = useSelector((state: AppState) => state.record.list);
   const categories = useSelector((state: AppState) => state.category.list);
@@ -46,7 +46,7 @@ function RecordsPage() {
   }
 
   function updateRecordState(field: string, value) {
-    let record: any = {...recordToEdit};
+    const record: any = {...recordToEdit};
 
     if (!record) return;
 
@@ -56,7 +56,7 @@ function RecordsPage() {
   }
 
   async function onSaveRecord() {
-    let completed = await dispatch(recordActions.saveRecord(recordToEdit));
+    const completed = await dispatch(recordActions.saveRecord(recordToEdit));
 
     if (completed !== undefined) {
       await onLoadRecords();
@@ -71,7 +71,7 @@ function RecordsPage() {
       commonActions.confirmAction({
         title: 'Delete record',
         action: async () => {
-          let completed = await dispatch(recordActions.deleteRecord(id));
+          const completed = await dispatch(recordActions.deleteRecord(id));
 
           if (completed !== undefined) uiHelper.showMessage('Record was successfully deleted');
         }
@@ -84,7 +84,7 @@ function RecordsPage() {
   }
 
   function render() {
-    let editRecordVisible = isEmpty(recordToEdit) ? false : true;
+    const editRecordVisible = isEmpty(recordToEdit) ? false : true;
 
     return (
       <Container fluid>

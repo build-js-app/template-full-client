@@ -28,7 +28,7 @@ function SaveRecord({record, categories, save, close, onChange, visible}: Props)
   }, [record]);
 
   function formIsValid() {
-    let errors = {
+    const errors = {
       categoryId: '',
       cost: '',
       note: ''
@@ -64,11 +64,11 @@ function SaveRecord({record, categories, save, close, onChange, visible}: Props)
   function render() {
     if (!record) return null;
 
-    let title = record.id ? 'Edit Record' : 'Add New Record';
+    const title = record.id ? 'Edit Record' : 'Add New Record';
 
-    let cost = record.cost ? parseFloat(record.cost) : 0;
+    const cost = record.cost ? parseFloat(record.cost) : 0;
 
-    let categoryOptions = categories.map(category => {
+    const categoryOptions = categories.map(category => {
       return {value: category.id, label: category.title};
     });
 

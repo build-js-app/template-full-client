@@ -14,43 +14,43 @@ export default {
 };
 
 function httpGet(url: string, queryParams) {
-  let axiosData = axios.get(`${url}${getQueryString(queryParams)}`, getDefaultRequestOptions());
+  const axiosData = axios.get(`${url}${getQueryString(queryParams)}`, getDefaultRequestOptions());
 
   return processRequest(axiosData);
 }
 
 function httpPost(url: string, data) {
-  let request = axios.post(url, JSON.stringify(data), getDefaultRequestOptions());
+  const request = axios.post(url, JSON.stringify(data), getDefaultRequestOptions());
 
   return processRequest(request);
 }
 
 function httpPut(url: string, data) {
-  let request = axios.put(url, JSON.stringify(data), getDefaultRequestOptions());
+  const request = axios.put(url, JSON.stringify(data), getDefaultRequestOptions());
 
   return processRequest(request);
 }
 
 function httpPatch(url: string, data) {
-  let request = axios.patch(url, JSON.stringify(data), getDefaultRequestOptions());
+  const request = axios.patch(url, JSON.stringify(data), getDefaultRequestOptions());
 
   return processRequest(request);
 }
 
 async function httpDelete(url: string) {
-  let request = axios.delete(url, getDefaultRequestOptions());
+  const request = axios.delete(url, getDefaultRequestOptions());
 
   return processRequest(request);
 }
 
 async function processRequest(axiosRequest) {
   try {
-    let response = await axiosRequest;
+    const response = await axiosRequest;
 
     // if OK return
     if (response.status === 200) return response.data.data;
 
-    let status = response.status;
+    const status = response.status;
 
     if (status === 401 || status === 403) {
       if (!endsWith(window.location.href, '/login')) {
@@ -60,7 +60,7 @@ async function processRequest(axiosRequest) {
     }
 
     if (status === 400 || status === 500) {
-      let responseData = response.data;
+      const responseData = response.data;
 
       if (responseData && responseData.message) {
         throw new Error(responseData.message);
@@ -101,7 +101,7 @@ function getDefaultRequestOptions() {
 }
 
 function getAuthHeader() {
-  let jwt = authService.getToken();
+  const jwt = authService.getToken();
 
   return `Bearer ${jwt}`;
 }

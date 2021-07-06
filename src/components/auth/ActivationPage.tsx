@@ -41,7 +41,7 @@ interface ParamTypes {
 function ActivationPage() {
   const dispatch = useDispatch();
 
-  let {token} = useParams<ParamTypes>();
+  const {token} = useParams<ParamTypes>();
 
   const [activationData, setActivationData] = useState({message: '', status: ''});
 
@@ -51,12 +51,12 @@ function ActivationPage() {
   }, []);
 
   async function activateAccount() {
-    let data: any = await dispatch(userActions.activateUserAccount(token));
+    const data: any = await dispatch(userActions.activateUserAccount(token));
 
     if (data) setActivationData(data);
   }
 
-  let status = activationData.status;
+  const status = activationData.status;
 
   return (
     <Container>

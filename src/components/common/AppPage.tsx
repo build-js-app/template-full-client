@@ -15,7 +15,7 @@ interface Props {
 }
 
 function AppPage(props: Props) {
-  let dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const user = useSelector((state: AppState) => state.user.current);
 
@@ -39,7 +39,7 @@ function AppPage(props: Props) {
   function render() {
     if (!isReady()) return null;
 
-    let title = getTitle();
+    const title = getTitle();
 
     return (
       <div>

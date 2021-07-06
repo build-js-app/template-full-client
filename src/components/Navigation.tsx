@@ -9,9 +9,9 @@ import {AppState} from 'reducers';
 import AppIcon from 'components/common/AppIcon';
 
 function Navigation() {
-  let dispatch = useDispatch();
-  let history = useHistory();
-  let location = useLocation();
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const location = useLocation();
 
   const user = useSelector((state: AppState) => state.user.current);
 
@@ -25,12 +25,12 @@ function Navigation() {
     let userFullName = '';
 
     if (user && user.profile && user.profile.local) {
-      let local = user.profile.local;
+      const local = user.profile.local;
 
       userFullName = `${local.firstName} ${local.lastName}`;
     }
 
-    let pathName = location.pathname;
+    const pathName = location.pathname;
 
     return (
       <Navbar bg="light" variant="light" expand="md">

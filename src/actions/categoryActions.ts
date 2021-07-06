@@ -10,14 +10,14 @@ export default {
 
 function loadCategories() {
   return helper.dispatchAsyncAction(async dispatch => {
-    let categories = await dataService.getCategories();
+    const categories = await dataService.getCategories();
     dispatch(helper.getAction(LOAD_CATEGORIES, {categories}));
   }, false);
 }
 
 function saveCategory(category) {
   return helper.dispatchAsyncAction(async dispatch => {
-    let categoryResponse = await dataService.saveCategory(category);
+    const categoryResponse = await dataService.saveCategory(category);
 
     if (category.id) {
       dispatch(helper.getAction(UPDATE_CATEGORY, {category: categoryResponse}));

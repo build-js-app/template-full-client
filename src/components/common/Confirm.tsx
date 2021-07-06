@@ -10,8 +10,8 @@ interface Props {
 }
 
 function Confirm({title, text, visible, action, close}: Props) {
-  let displayTitle = title ? title : 'Confirmation';
-  let displayMessage = text ? text : 'Are you sure?';
+  const displayTitle = title ? title : 'Confirmation';
+  const displayMessage = text ? text : 'Are you sure?';
 
   return (
     <Modal show={visible} backdrop="static" onHide={close}>

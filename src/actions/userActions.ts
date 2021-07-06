@@ -19,15 +19,15 @@ export default {
 
 function getCurrentUser() {
   return helper.dispatchAsyncAction(async dispatch => {
-    let user = await dataService.getCurrentUser();
-    let action = helper.getAction(LOAD_CURRENT_USER, {user});
+    const user = await dataService.getCurrentUser();
+    const action = helper.getAction(LOAD_CURRENT_USER, {user});
     dispatch(action);
   });
 }
 
 function loginUser(user) {
   return helper.dispatchAsyncAction(async () => {
-    let response = await authService.login(user);
+    const response = await authService.login(user);
 
     if (response && response.token) {
       authService.saveToken(response.token);
@@ -37,7 +37,7 @@ function loginUser(user) {
 
 function logOut() {
   return helper.dispatchAsyncAction(async dispatch => {
-    let action = helper.getAction(LOAD_CURRENT_USER, {user: null});
+    const action = helper.getAction(LOAD_CURRENT_USER, {user: null});
     dispatch(action);
     authService.saveToken(null);
   });
@@ -45,7 +45,7 @@ function logOut() {
 
 function forgotPassword(email: string) {
   return helper.dispatchAsyncAction(async () => {
-    let response = await authService.passwordForgot(email);
+    const response = await authService.passwordForgot(email);
 
     if (response && response.message) uiHelper.showMessage(response.message);
   });
@@ -53,28 +53,28 @@ function forgotPassword(email: string) {
 
 function resetPassword(userData) {
   return helper.dispatchAsyncAction(async () => {
-    let response = await authService.resetPassword(userData);
+    const response = await authService.resetPassword(userData);
     return response;
   });
 }
 
 function activateUserAccount(token) {
   return helper.dispatchAsyncAction(async () => {
-    let response = await authService.activateAccount(token);
+    const response = await authService.activateAccount(token);
     return response;
   });
 }
 
 function signUp(user) {
   return helper.dispatchAsyncAction(async () => {
-    let response = await authService.signUp(user);
+    const response = await authService.signUp(user);
     return response;
   });
 }
 
 function checkResetToken(token) {
   return helper.dispatchAsyncAction(async () => {
-    let response = await authService.resetPasswordTokenCheck(token);
+    const response = await authService.resetPasswordTokenCheck(token);
     return response;
   });
 }

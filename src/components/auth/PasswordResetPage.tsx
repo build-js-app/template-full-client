@@ -17,9 +17,9 @@ interface ParamTypes {
 function PasswordResetPage() {
   const dispatch = useDispatch();
 
-  let history = useHistory();
+  const history = useHistory();
 
-  let {token} = useParams<ParamTypes>();
+  const {token} = useParams<ParamTypes>();
 
   const [userData, setUserData] = useState({email: '', password: '', confirmPassword: '', token: ''});
 
@@ -31,13 +31,13 @@ function PasswordResetPage() {
   }, []);
 
   async function onCheckResetToken() {
-    let data: any = await dispatch(userActions.checkResetToken(token));
+    const data: any = await dispatch(userActions.checkResetToken(token));
 
     if (data) setUserData({email: data.email, token: data.token, password: '', confirmPassword: ''});
   }
 
   function onChange(field: string, value) {
-    let user = {...userData};
+    const user = {...userData};
 
     user[field] = value;
 
@@ -45,7 +45,7 @@ function PasswordResetPage() {
   }
 
   function resetFormIsValid() {
-    let errors = {
+    const errors = {
       email: '',
       password: '',
       confirmPassword: ''
@@ -77,7 +77,7 @@ function PasswordResetPage() {
   async function onResetPassword() {
     if (!resetFormIsValid()) return;
 
-    let response: any = await dispatch(userActions.resetPassword(userData));
+    const response: any = await dispatch(userActions.resetPassword(userData));
 
     if (response && response.message) {
       uiHelper.showMessage(response.message);

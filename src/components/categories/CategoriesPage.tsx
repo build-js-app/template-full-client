@@ -37,7 +37,7 @@ function CategoriesPage() {
   }
 
   function updateCategoryState(field, value) {
-    let category = {...categoryToEdit};
+    const category = {...categoryToEdit};
 
     if (!category) return;
 
@@ -47,7 +47,7 @@ function CategoriesPage() {
   }
 
   async function onSaveCategory() {
-    let category = await dispatch(categoryActions.saveCategory(categoryToEdit));
+    const category = await dispatch(categoryActions.saveCategory(categoryToEdit));
 
     if (category !== undefined) uiHelper.showMessage(`Category was updated`);
 
@@ -59,7 +59,7 @@ function CategoriesPage() {
       commonActions.confirmAction({
         title: 'Delete category',
         action: async () => {
-          let completed = await dispatch(categoryActions.deleteCategory(id));
+          const completed = await dispatch(categoryActions.deleteCategory(id));
 
           if (completed !== undefined) uiHelper.showMessage('Category was successfully deleted');
         }
@@ -68,7 +68,7 @@ function CategoriesPage() {
   }
 
   function render() {
-    let editCategoryVisible = isEmpty(categoryToEdit) ? false : true;
+    const editCategoryVisible = isEmpty(categoryToEdit) ? false : true;
 
     return (
       <Container fluid>

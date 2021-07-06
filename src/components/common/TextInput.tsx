@@ -13,7 +13,7 @@ interface Props {
 }
 
 function TextInput({name, label, onChange, placeholder, value, error, type, disabled}: Props) {
-  let inputType = type ? type : 'text';
+  const inputType = type ? type : 'text';
 
   function inputOnChange(event) {
     onChange(event.target.name, event.target.value);

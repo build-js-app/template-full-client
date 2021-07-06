@@ -21,7 +21,7 @@ function PasswordForgotPage() {
   }
 
   function forgotFormIsValid() {
-    let errors = {
+    const errors = {
       email: ''
     };
 

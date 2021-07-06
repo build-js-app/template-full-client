@@ -23,7 +23,7 @@ function deleteCategory(id: number) {
 }
 
 function saveCategory(category) {
-  let data = {
+  const data = {
     category
   };
 
@@ -31,7 +31,7 @@ function saveCategory(category) {
 }
 
 function getRecords(sortBy: string) {
-  let data = {
+  const data = {
     sortBy
   };
 
@@ -43,7 +43,7 @@ function deleteRecord(id: number) {
 }
 
 function saveRecord(record) {
-  let data = {
+  const data = {
     record
   };
 

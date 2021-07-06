@@ -5,11 +5,11 @@ export default {
 function handleActions(state, action, handlers) {
   if (!handlers) return state;
 
-  let handler = handlers[action.type];
+  const handler = handlers[action.type];
 
   if (!handler) return state;
 
-  let newState = {...state};
+  const newState = {...state};
 
   handler(newState, action.payload);
 

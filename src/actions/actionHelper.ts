@@ -14,7 +14,7 @@ function dispatchAsyncAction(action, showOverlay = true) {
     try {
       if (!showOverlay) dispatch(commonActions.asyncActionStart(showOverlay));
 
-      let result = await action(dispatch, getState);
+      const result = await action(dispatch, getState);
 
       if (!showOverlay) dispatch(commonActions.asyncActionEnd());
 

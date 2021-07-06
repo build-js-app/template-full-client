@@ -14,8 +14,8 @@ function isValidEmail(email: string) {
 function isEmptyErrorObject(obj) {
   let isEmptyObject = true;
 
-  for (let key of Object.keys(obj)) {
-    let value = obj[key];
+  for (const key of Object.keys(obj)) {
+    const value = obj[key];
 
     if (!isEmpty(value)) {
       isEmptyObject = false;

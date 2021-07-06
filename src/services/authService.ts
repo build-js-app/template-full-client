@@ -38,7 +38,7 @@ function resetPassword(user) {
 }
 
 function getToken() {
-  let token = Cookies.get('jwt_token');
+  const token = Cookies.get('jwt_token');
   return token;
 }
 

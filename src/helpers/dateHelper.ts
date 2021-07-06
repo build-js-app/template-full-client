@@ -7,6 +7,6 @@ export default {
 };
 
 function displayDate(date) {
-  let num: any = 1;
+  const num: any = 1;
   return format(parseISO(date, num), config.format.date);
 }

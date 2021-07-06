@@ -1,4 +1,4 @@
-let isDevLocal = process.env.NODE_ENV !== 'production';
+const isDevLocal = process.env.NODE_ENV !== 'production';
 
 export default {
   isDevLocal,

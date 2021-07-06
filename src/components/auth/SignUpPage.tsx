@@ -13,14 +13,14 @@ import TextInput from 'components/common/TextInput';
 
 function SignUpPage() {
   const dispatch = useDispatch();
-  let history = useHistory();
+  const history = useHistory();
 
   const [user, setUser] = useState({firstName: '', lastName: '', email: '', password: '', confirmPassword: ''});
 
   const [errors, setErrors] = useState({firstName: '', lastName: '', email: '', password: '', confirmPassword: ''});
 
   function onChange(field: string, value) {
-    let newUser = {...user};
+    const newUser = {...user};
 
     newUser[field] = value;
 
@@ -28,7 +28,7 @@ function SignUpPage() {
   }
 
   function signUpFormIsValid() {
-    let errors = {
+    const errors = {
       firstName: '',
       lastName: '',
       email: '',
@@ -70,7 +70,7 @@ function SignUpPage() {
   async function onSignUp() {
     if (!signUpFormIsValid()) return;
 
-    let response: any = await dispatch(userActions.signUp(user));
+    const response: any = await dispatch(userActions.signUp(user));
 
     if (response && response.message) {
       uiHelper.showMessage(response.message);

@@ -10,8 +10,8 @@ export default {
 
 function loadRecords(sortBy: string) {
   return helper.dispatchAsyncAction(async dispatch => {
-    let records = await dataService.getRecords(sortBy);
-    let action = helper.getAction(LOAD_RECORDS, {records, sortBy});
+    const records = await dataService.getRecords(sortBy);
+    const action = helper.getAction(LOAD_RECORDS, {records, sortBy});
     dispatch(action);
   }, false);
 }
@@ -26,7 +26,7 @@ function saveRecord(record) {
 function deleteRecord(id: number) {
   return helper.dispatchAsyncAction(async dispatch => {
     await dataService.deleteRecord(id);
-    let action = helper.getAction(DELETE_RECORD, {id});
+    const action = helper.getAction(DELETE_RECORD, {id});
     dispatch(action);
     return true;
   });
