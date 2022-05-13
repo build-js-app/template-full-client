@@ -1,8 +1,8 @@
-import commonActions from './commonActions';
+import {asyncActionStart, asyncActionEnd} from 'reducers/commonSlice';
+import {AppDispatch} from 'store';
 
 export default {
-  dispatchAsyncAction,
-  getAction
+  dispatchAsyncAction
 };
 
 const throwError = false;
@@ -10,29 +10,20 @@ const throwError = false;
 //performes async action
 //action is function which has (dispatch, getState) arguments like redux thunk
 function dispatchAsyncAction(action, showOverlay = true) {
-  return async (dispatch, getState) => {
+  return async (dispatch: AppDispatch, getState) => {
     try {
-      if (!showOverlay) dispatch(commonActions.asyncActionStart(showOverlay));
+      if (showOverlay) dispatch(asyncActionStart(showOverlay));
 
       const result = await action(dispatch, getState);
 
-      if (!showOverlay) dispatch(commonActions.asyncActionEnd());
+      if (showOverlay) dispatch(asyncActionEnd());
 
       if (!result) return null;
 
       return result;
     } catch (error) {
-      if (!showOverlay) dispatch(commonActions.asyncActionEnd());
+      if (!showOverlay) dispatch(asyncActionEnd());
       if (throwError) throw error;
     }
-  };
-}
-
-function getAction(type: string, payload: object = {}) {
-  if (!type) throw new Error('Specify action type');
-
-  return {
-    type,
-    payload
   };
 }

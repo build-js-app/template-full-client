@@ -20,7 +20,7 @@ function TextInput({name, label, onChange, placeholder, value, error, type, disa
   }
 
   return (
-    <Form.Group>
+    <Form.Group className="mb-4">
       <Form.Label htmlFor={name}>{label}</Form.Label>
 
       <input

@@ -1,25 +1,20 @@
 import React, {useState, useEffect} from 'react';
-import {useDispatch} from 'react-redux';
-import {Link, useHistory, useParams} from 'react-router-dom';
+import {Link, useNavigate, useParams} from 'react-router-dom';
 import {Container, Row, Col, Button} from 'components/bootstrap';
 
 import userActions from 'actions/userActions';
+import {useAppDispatch} from 'hooks';
 
 import validationHelper from 'helpers/validationHelper';
 import uiHelper from 'helpers/uiHelper';
 
 import TextInput from 'components/common/TextInput';
 
-interface ParamTypes {
-  token: string;
-}
-
 function PasswordResetPage() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  const history = useHistory();
-
-  const {token} = useParams<ParamTypes>();
+  const {token} = useParams();
 
   const [userData, setUserData] = useState({email: '', password: '', confirmPassword: '', token: ''});
 
@@ -82,7 +77,7 @@ function PasswordResetPage() {
     if (response && response.message) {
       uiHelper.showMessage(response.message);
 
-      history.push('/login');
+      navigate('/login');
     }
   }
 
@@ -90,7 +85,7 @@ function PasswordResetPage() {
     <Container>
       <Row>
         <Col sm={{span: 6, offset: 3}}>
-          <h1>Reset Password</h1>
+          <h1 className="mb-3">Reset Password</h1>
 
           <TextInput
             name="email"

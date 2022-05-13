@@ -1,16 +1,14 @@
 import React from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {Switch, Route} from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
 import {isEmpty} from 'lodash';
 import styled from 'styled-components';
 
-import {AppState} from 'reducers';
+import {useAppSelector, useAppDispatch} from 'hooks';
+import {confirmActionCancel} from 'reducers/commonSlice';
 
 import AppPage from 'components/common/AppPage';
 import Confirm from 'components/common/Confirm';
 import ErrorBoundary from 'components/ErrorBoundary';
-
-import commonActions from 'actions/commonActions';
 
 import 'styles/App.scss';
 
@@ -32,13 +30,13 @@ interface Props {
 }
 
 function App(props: Props) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const asyncAction = useSelector((state: AppState) => state.common.asyncAction);
-  const confirmAction = useSelector((state: AppState) => state.common.confirmAction);
+  const asyncAction = useAppSelector(state => state.common.asyncAction);
+  const confirmAction = useAppSelector(state => state.common.confirmAction);
 
   function cancelAction() {
-    dispatch(commonActions.confirmActionCancel());
+    dispatch(confirmActionCancel());
   }
 
   function renderRoute(route, index: number) {
@@ -56,7 +54,7 @@ function App(props: Props) {
       );
     }
 
-    return <Route key={index} exact={route.exact} path={route.path} render={render} />;
+    return <Route key={index} path={route.path} element={render(props)} />;
   }
 
   function render() {
@@ -79,7 +77,7 @@ function App(props: Props) {
           />
         )}
 
-        <Switch>{props.routes.map((route, index: number) => renderRoute(route, index))}</Switch>
+        <Routes>{props.routes.map((route, index: number) => renderRoute(route, index))}</Routes>
 
         {props.children}
       </ErrorBoundary>

@@ -1,12 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
 import {Container, Row, Col} from 'components/bootstrap';
 import {isEmpty} from 'lodash';
 
-import commonActions from 'actions/commonActions';
 import recordActions from 'actions/recordActions';
 import categoryActions from 'actions/categoryActions';
-import {AppState} from 'reducers';
+import {useAppSelector, useAppDispatch} from 'hooks';
+import {confirmAction} from 'reducers/commonSlice';
 
 import uiHelper from 'helpers/uiHelper';
 
@@ -15,11 +14,11 @@ import RecordsList from './RecordsList';
 import FilterBar from './FilterBar';
 
 function RecordsPage() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const records = useSelector((state: AppState) => state.record.list);
-  const categories = useSelector((state: AppState) => state.category.list);
-  const sortBy = useSelector((state: AppState) => state.record.sortBy);
+  const records = useAppSelector(state => state.record.list);
+  const categories = useAppSelector(state => state.category.list);
+  const sortBy = useAppSelector(state => state.record.sortBy);
 
   const [recordToEdit, setRecordToEdit] = useState({});
 
@@ -68,7 +67,7 @@ function RecordsPage() {
 
   function onDeleteRecord(id: number) {
     dispatch(
-      commonActions.confirmAction({
+      confirmAction({
         title: 'Delete record',
         action: async () => {
           const completed = await dispatch(recordActions.deleteRecord(id));

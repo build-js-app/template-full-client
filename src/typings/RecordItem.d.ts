@@ -1,5 +1,5 @@
 interface RecordItem {
-  id: string;
+  id: number;
   date: Date;
   const: number;
   note: string;

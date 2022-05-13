@@ -1,26 +1,19 @@
-import {createStore, applyMiddleware, compose} from 'redux';
-import thunk from 'redux-thunk';
-import rootReducer from 'reducers';
-import {ASYNC_ACTION_START, ASYNC_ACTION_END} from 'action_types/commonActionTypes';
+import {configureStore, ThunkAction, Action} from '@reduxjs/toolkit';
 
-const enhancers: any = [];
+import categoryReducer from 'reducers/categorySlice';
+import commonReducer from 'reducers/commonSlice';
+import recordReducer from 'reducers/recordSlice';
+import userReducer from 'reducers/userSlice';
 
-const middleware = [thunk];
-
-if (process.env.NODE_ENV === 'development') {
-  const devToolsExtension = (window as any).__REDUX_DEVTOOLS_EXTENSION__;
-
-  if (typeof devToolsExtension === 'function') {
-    enhancers.push(
-      devToolsExtension({
-        actionsBlacklist: [ASYNC_ACTION_START, ASYNC_ACTION_END]
-      })
-    );
+export const store = configureStore({
+  reducer: {
+    user: userReducer,
+    record: recordReducer,
+    category: categoryReducer,
+    common: commonReducer
   }
-}
+});
 
-const composedEnhancers = compose(applyMiddleware(...middleware), ...enhancers);
-
-const configureStore = (persistedState?) => createStore(rootReducer, persistedState, composedEnhancers);
-
-export default configureStore;
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>;

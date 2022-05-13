@@ -1,10 +1,10 @@
+import {loadCurrentUser} from 'reducers/userSlice';
+
 import helper from './actionHelper';
 import uiHelper from 'helpers/uiHelper';
 
 import dataService from 'services/dataService';
 import authService from 'services/authService';
-
-import {LOAD_CURRENT_USER} from 'action_types/userActionTypes';
 
 export default {
   getCurrentUser,
@@ -20,8 +20,7 @@ export default {
 function getCurrentUser() {
   return helper.dispatchAsyncAction(async dispatch => {
     const user = await dataService.getCurrentUser();
-    const action = helper.getAction(LOAD_CURRENT_USER, {user});
-    dispatch(action);
+    dispatch(loadCurrentUser(user));
   });
 }
 
@@ -37,8 +36,7 @@ function loginUser(user) {
 
 function logOut() {
   return helper.dispatchAsyncAction(async dispatch => {
-    const action = helper.getAction(LOAD_CURRENT_USER, {user: null});
-    dispatch(action);
+    dispatch(loadCurrentUser(undefined));
     authService.saveToken(null);
   });
 }

@@ -35,7 +35,7 @@ function FilterBar({sortBy, addRecordAction, onSortAction}: Props) {
         </Dropdown>
       </Col>
 
-      <Col xs={4} className="text-right">
+      <Col xs={4} className="text-end">
         <Button variant="success" onClick={addRecordAction}>
           <AppIcon icon="plus" />
         </Button>

@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
 import {Container, Row, Col, Button} from 'components/bootstrap';
 import {isEmpty} from 'lodash';
 
-import commonActions from 'actions/commonActions';
 import categoryActions from 'actions/categoryActions';
-import {AppState} from 'reducers';
+import {useAppSelector, useAppDispatch} from 'hooks';
+import {confirmAction} from 'reducers/commonSlice';
 
 import uiHelper from 'helpers/uiHelper';
 
@@ -14,9 +13,9 @@ import CategoriesList from './CategoriesList';
 import SaveCategory from './SaveCategory';
 
 function CategoriesPage() {
-  const categories = useSelector((state: AppState) => state.category.list);
+  const categories = useAppSelector(state => state.category.list);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [categoryToEdit, setCategoryToEdit] = useState({});
 
@@ -56,7 +55,7 @@ function CategoriesPage() {
 
   async function onDeleteCategory(id) {
     dispatch(
-      commonActions.confirmAction({
+      confirmAction({
         title: 'Delete category',
         action: async () => {
           const completed = await dispatch(categoryActions.deleteCategory(id));
@@ -83,7 +82,7 @@ function CategoriesPage() {
             <br />
 
             <Row>
-              <Col sm={12} className="text-right">
+              <Col sm={12} className="text-end">
                 <Button variant="success" onClick={addCategory}>
                   <AppIcon icon="plus" />
                 </Button>

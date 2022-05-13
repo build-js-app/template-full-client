@@ -10,7 +10,6 @@ import NotFountPage from './components/NotFoundPage';
 export const routes = [
   {
     path: '/',
-    exact: true,
     component: RecordsPage,
     pageProps: {
       pageId: 'records',

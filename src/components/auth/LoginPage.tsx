@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {Link, useHistory} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {Container, Row, Col, Button} from 'components/bootstrap';
 import {isEmpty} from 'lodash';
 
 import userActions from 'actions/userActions';
-import {AppState} from 'reducers';
+import {useAppSelector, useAppDispatch} from 'hooks';
 
 import validationHelper from 'helpers/validationHelper';
 
@@ -13,17 +12,17 @@ import AppIcon from 'components/common/AppIcon';
 import TextInput from 'components/common/TextInput';
 
 function LoginPage() {
-  const currentUser = useSelector((state: AppState) => state.user.current);
+  const currentUser = useAppSelector(state => state.user.current);
 
-  const dispatch = useDispatch();
-  const history = useHistory();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const [user, setUser] = useState({email: '', password: ''});
 
   const [errors, setErrors] = useState({email: '', password: ''});
 
   useEffect(() => {
-    if (!isEmpty(currentUser)) history.push('/');
+    if (!isEmpty(currentUser)) navigate('/');
   });
 
   function onChange(field: string, value) {
@@ -64,14 +63,14 @@ function LoginPage() {
 
     await dispatch(userActions.getCurrentUser());
 
-    if (!isEmpty(user)) history.push('/records');
+    if (!isEmpty(user)) navigate('/records');
   }
 
   return (
     <Container>
       <Row>
         <Col sm={{span: 6, offset: 3}}>
-          <h1>
+          <h1 className="mb-5">
             <AppIcon icon="sign-in" /> Login
           </h1>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {createRoot} from 'react-dom/client';
 import {BrowserRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 
@@ -9,15 +9,17 @@ import 'flatpickr/dist/flatpickr.min.css';
 
 import {routes} from './routes';
 import App from './components/App';
-import configureStore from './store';
+import {store} from 'store';
 
-const store = configureStore();
+const container = document.getElementById('root')!;
+const root = createRoot(container);
 
-ReactDOM.render(
+root.render(
   <Provider store={store}>
     <BrowserRouter basename="/">
-      <App routes={routes} />
+      <React.StrictMode>
+        <App routes={routes} />
+      </React.StrictMode>
     </BrowserRouter>
-  </Provider>,
-  document.getElementById('root')
+  </Provider>
 );

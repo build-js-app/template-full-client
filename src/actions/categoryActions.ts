@@ -1,6 +1,12 @@
+import {
+  loadCategories as getCategories,
+  updateCategory,
+  createCategory,
+  deleteCategory as removeCategory
+} from 'reducers/categorySlice';
+
 import dataService from 'services/dataService';
 import helper from './actionHelper';
-import {LOAD_CATEGORIES, CREATE_CATEGORY, UPDATE_CATEGORY, DELETE_CATEGORY} from 'action_types/categoryActionTypes';
 
 export default {
   loadCategories,
@@ -11,7 +17,7 @@ export default {
 function loadCategories() {
   return helper.dispatchAsyncAction(async dispatch => {
     const categories = await dataService.getCategories();
-    dispatch(helper.getAction(LOAD_CATEGORIES, {categories}));
+    dispatch(getCategories(categories));
   }, false);
 }
 
@@ -20,9 +26,9 @@ function saveCategory(category) {
     const categoryResponse = await dataService.saveCategory(category);
 
     if (category.id) {
-      dispatch(helper.getAction(UPDATE_CATEGORY, {category: categoryResponse}));
+      dispatch(updateCategory(categoryResponse));
     } else {
-      dispatch(helper.getAction(CREATE_CATEGORY, {category: categoryResponse}));
+      dispatch(createCategory(categoryResponse));
     }
 
     return categoryResponse;
@@ -32,7 +38,7 @@ function saveCategory(category) {
 function deleteCategory(id: number) {
   return helper.dispatchAsyncAction(async dispatch => {
     await dataService.deleteCategory(id);
-    dispatch(helper.getAction(DELETE_CATEGORY, {id}));
+    dispatch(removeCategory(id));
     return true;
   });
 }

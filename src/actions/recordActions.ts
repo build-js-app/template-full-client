@@ -1,6 +1,7 @@
+import {loadRecords as getRecords, deleteRecord as removeRecord} from 'reducers/recordSlice';
+
 import dataService from 'services/dataService';
 import helper from './actionHelper';
-import {LOAD_RECORDS, DELETE_RECORD} from 'action_types/recordActionTypes';
 
 export default {
   loadRecords,
@@ -11,8 +12,7 @@ export default {
 function loadRecords(sortBy: string) {
   return helper.dispatchAsyncAction(async dispatch => {
     const records = await dataService.getRecords(sortBy);
-    const action = helper.getAction(LOAD_RECORDS, {records, sortBy});
-    dispatch(action);
+    dispatch(getRecords({records, sortBy}));
   }, false);
 }
 
@@ -26,8 +26,7 @@ function saveRecord(record) {
 function deleteRecord(id: number) {
   return helper.dispatchAsyncAction(async dispatch => {
     await dataService.deleteRecord(id);
-    const action = helper.getAction(DELETE_RECORD, {id});
-    dispatch(action);
+    dispatch(removeRecord(id));
     return true;
   });
 }

@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import {useDispatch} from 'react-redux';
-import {Link, useHistory} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {Container, Row, Col, Button} from 'components/bootstrap';
 
 import userActions from 'actions/userActions';
+import {useAppDispatch} from 'hooks';
 
 import validationHelper from 'helpers/validationHelper';
 import uiHelper from 'helpers/uiHelper';
@@ -12,8 +12,8 @@ import AppIcon from 'components/common/AppIcon';
 import TextInput from 'components/common/TextInput';
 
 function SignUpPage() {
-  const dispatch = useDispatch();
-  const history = useHistory();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const [user, setUser] = useState({firstName: '', lastName: '', email: '', password: '', confirmPassword: ''});
 
@@ -75,7 +75,7 @@ function SignUpPage() {
     if (response && response.message) {
       uiHelper.showMessage(response.message);
 
-      history.push('/login');
+      navigate('/login');
     }
   }
 
@@ -83,7 +83,7 @@ function SignUpPage() {
     <Container>
       <Row>
         <Col sm={{span: 6, offset: 3}}>
-          <h1>
+          <h1 className="mb-3">
             <AppIcon icon="sign-in" /> Sign Up
           </h1>
 

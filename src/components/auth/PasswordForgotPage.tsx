@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
-import {useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col, Button} from 'components/bootstrap';
 
 import userActions from 'actions/userActions';
+import {useAppDispatch} from 'hooks';
 
 import validationHelper from 'helpers/validationHelper';
 
 import TextInput from 'components/common/TextInput';
 
 function PasswordForgotPage() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [email, setEmail] = useState('');
 
@@ -46,7 +46,7 @@ function PasswordForgotPage() {
     <Container>
       <Row>
         <Col sm={{span: 6, offset: 3}}>
-          <h1>Reset Password</h1>
+          <h1 className="mb-3">Reset Password</h1>
 
           <TextInput
             name="email"

@@ -27,7 +27,7 @@ function CategoriesList({categories, editCategoryAction, deleteCategoryAction}: 
 
   function renderCategory(category) {
     const SubItem = props => (
-      <Col sm={12} className="d-md-none d-lg-none">
+      <Col sm={12} className="d-md-none d-lg-none mb-3">
         <Row>
           <Col sm={12}>
             <Form.Label>{props.title}:</Form.Label>
@@ -40,7 +40,7 @@ function CategoriesList({categories, editCategoryAction, deleteCategoryAction}: 
     );
 
     return (
-      <Row key={category.id} className="list-item align-items-center">
+      <Row key={category.id} className="list-item">
         <Col md={4} className="d-none d-md-block">
           {category.title}
         </Col>

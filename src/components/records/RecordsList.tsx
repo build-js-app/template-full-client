@@ -34,7 +34,7 @@ function RecordsList({records, categories, editRecordAction, deleteRecordAction}
     const dateDisplay = dateHelper.displayDate(record.date);
 
     const SubItem = props => (
-      <Col sm={12} className="d-md-none d-lg-none">
+      <Col sm={12} className="d-md-none d-lg-none mb-3">
         <Row>
           <Col sm={12}>
             <Form.Label>{props.title}:</Form.Label>
@@ -47,7 +47,7 @@ function RecordsList({records, categories, editRecordAction, deleteRecordAction}
     );
 
     return (
-      <Row key={record.id} className="list-item align-items-center">
+      <Row key={record.id} className="list-item">
         <Col md={2} className="d-none d-md-block">
           {dateDisplay}
         </Col>

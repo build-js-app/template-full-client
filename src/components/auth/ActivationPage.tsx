@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {useDispatch} from 'react-redux';
 import {Link, useParams} from 'react-router-dom';
 import {Container, Row, Col} from 'components/bootstrap';
 import styled, {css} from 'styled-components';
 
 import userActions from 'actions/userActions';
+import {useAppDispatch} from 'hooks';
 
 import {colors} from 'styles/shared';
 
@@ -34,14 +34,10 @@ const StyledAlert = styled.div`
     `}
 `;
 
-interface ParamTypes {
-  token: string;
-}
-
 function ActivationPage() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const {token} = useParams<ParamTypes>();
+  const {token} = useParams();
 
   const [activationData, setActivationData] = useState({message: '', status: ''});
 
@@ -62,7 +58,7 @@ function ActivationPage() {
     <Container>
       <Row>
         <Col sm={{span: 6, offset: 3}}>
-          <h1>Activation Page</h1>
+          <h1 className="mb-3">Activation Page</h1>
 
           <br />
 

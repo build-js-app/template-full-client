@@ -1,10 +1,9 @@
 import React, {useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
 import {isEmpty} from 'lodash';
 import Helmet from 'react-helmet';
 
 import userActions from 'actions/userActions';
-import {AppState} from 'reducers';
+import {useAppSelector, useAppDispatch} from 'hooks';
 
 import Navigation from 'components/Navigation';
 
@@ -15,13 +14,13 @@ interface Props {
 }
 
 function AppPage(props: Props) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const user = useSelector((state: AppState) => state.user.current);
+  const user = useAppSelector(state => state.user.current);
 
   useEffect(() => {
     if (!isAuthenticated()) dispatch(userActions.getCurrentUser());
-  });
+  }, [user]);
 
   function isAuthenticated() {
     if (props.public) return true;
