@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {FontAwesomeIcon as FaIcon} from '@fortawesome/react-fontawesome';
 
 //reduce bundle size by importing required icons only

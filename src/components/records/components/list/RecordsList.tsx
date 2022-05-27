@@ -1,16 +1,10 @@
-import React from 'react';
 import {Row, Col, Form, Button} from 'components/bootstrap';
-import styled from 'styled-components';
-
-import {listTopMargin} from 'styles/shared';
 
 import dateHelper from 'helpers/dateHelper';
 
 import AppIcon from 'components/common/AppIcon';
 
-const StyledList = styled(Row)`
-  margin-top: ${listTopMargin};
-`;
+import * as styled from './RecordsList.styled';
 
 interface Props {
   records: any[];
@@ -90,10 +84,10 @@ function RecordsList({records, categories, editRecordAction, deleteRecordAction}
   }
 
   function render() {
-    if (!anyRecords()) return <StyledList>No Records.</StyledList>;
+    if (!anyRecords()) return <styled.list>No Records.</styled.list>;
 
     return (
-      <StyledList>
+      <styled.list>
         <Col>
           <Row className="list-item d-none d-md-flex">
             <Col md={2} className="d-none d-md-block">
@@ -113,7 +107,7 @@ function RecordsList({records, categories, editRecordAction, deleteRecordAction}
 
           {records.map(record => renderRecord(record))}
         </Col>
-      </StyledList>
+      </styled.list>
     );
   }
 

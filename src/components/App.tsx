@@ -8,7 +8,7 @@ import {confirmActionCancel} from 'reducers/commonSlice';
 
 import AppPage from 'components/common/AppPage';
 import Confirm from 'components/common/Confirm';
-import ErrorBoundary from 'components/ErrorBoundary';
+import ErrorBoundary from 'components/error/ErrorBoundary';
 
 import 'styles/App.scss';
 

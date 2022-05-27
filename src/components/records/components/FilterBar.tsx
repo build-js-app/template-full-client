@@ -1,4 +1,3 @@
-import React from 'react';
 import {Row, Col, Button, Dropdown} from 'components/bootstrap';
 
 import SORT_OPTIONS from 'constants/sortOptions';

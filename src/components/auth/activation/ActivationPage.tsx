@@ -1,38 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {Link, useParams} from 'react-router-dom';
 import {Container, Row, Col} from 'components/bootstrap';
-import styled, {css} from 'styled-components';
 
 import userActions from 'actions/userActions';
 import {useAppDispatch} from 'hooks';
 
-import {colors} from 'styles/shared';
-
-const StyledAlert = styled.div`
-  ${props =>
-    props.isSuccess &&
-    css`
-      color: ${colors.green_main};
-      background-color: ${colors.green_light};
-      border-color: ${colors.green_lighter};
-    `}
-
-  ${props =>
-    props.isWarning &&
-    css`
-      color: ${colors.orange_main};
-      background-color: ${colors.orange_light};
-      border-color: ${colors.orange_lighter};
-    `}
-
-    ${props =>
-    props.isError &&
-    css`
-      color: ${colors.red_main};
-      background-color: ${colors.red_light};
-      border-color: ${colors.red_lighter};
-    `}
-`;
+import * as styled from './ActivationPage.styled';
 
 function ActivationPage() {
   const dispatch = useAppDispatch();
@@ -63,13 +36,13 @@ function ActivationPage() {
           <br />
 
           {activationData.message && (
-            <StyledAlert
+            <styled.alert
               className="alert"
               isSuccess={status === 'success'}
               isWarning={status === 'warning'}
               isError={status === 'error'}>
               {activationData.message}
-            </StyledAlert>
+            </styled.alert>
           )}
 
           <hr />

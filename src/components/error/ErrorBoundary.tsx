@@ -1,15 +1,6 @@
-import React, {Component} from 'react';
-import styled from 'styled-components';
+import {Component} from 'react';
 
-const StyledError = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -200px;
-  margin-left: -200px;
-  width: 400px;
-  height: 400px;
-`;
+import * as styled from './ErrorBoundary.styled';
 
 class ErrorBoundary extends Component<any, any> {
   constructor(props) {
@@ -29,9 +20,9 @@ class ErrorBoundary extends Component<any, any> {
     if (this.state.hasError) {
       // You can render any custom fallback UI
       return (
-        <StyledError>
+        <styled.error>
           <h3>Something went wrong.</h3>
-        </StyledError>
+        </styled.error>
       );
     }
     return this.props.children;

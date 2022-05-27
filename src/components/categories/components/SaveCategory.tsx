@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {Modal, Button} from 'components/bootstrap';
 
 import validationHelper from 'helpers/validationHelper';

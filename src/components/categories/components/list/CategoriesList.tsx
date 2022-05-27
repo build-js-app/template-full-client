@@ -1,18 +1,8 @@
-import React from 'react';
 import {Row, Col, Form, Button} from 'components/bootstrap';
-import styled from 'styled-components';
-
-import {listTopMargin, mediaQueries} from 'styles/shared';
 
 import AppIcon from 'components/common/AppIcon';
 
-const StyledList = styled(Row)`
-  margin-top: ${listTopMargin};
-
-  @media ${mediaQueries.desktopMin} {
-    margin-top: calc(${listTopMargin} - 2rem);
-  }
-`;
+import * as styled from './CategoriesList.styled';
 
 interface Props {
   categories: Category[];
@@ -71,10 +61,10 @@ function CategoriesList({categories, editCategoryAction, deleteCategoryAction}: 
   }
 
   function render() {
-    if (!anyCategories()) return <StyledList>No categories.</StyledList>;
+    if (!anyCategories()) return <styled.list>No categories.</styled.list>;
 
     return (
-      <StyledList>
+      <styled.list>
         <Col>
           <Row className="list-item d-none d-md-flex">
             <Col sm={4} className="d-none d-md-block">
@@ -89,7 +79,7 @@ function CategoriesList({categories, editCategoryAction, deleteCategoryAction}: 
 
           {categories.map(category => renderCategory(category))}
         </Col>
-      </StyledList>
+      </styled.list>
     );
   }
 

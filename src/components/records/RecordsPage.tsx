@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {Container, Row, Col} from 'components/bootstrap';
 import {isEmpty} from 'lodash';
 
@@ -9,9 +9,9 @@ import {confirmAction} from 'reducers/commonSlice';
 
 import uiHelper from 'helpers/uiHelper';
 
-import SaveRecord from './SaveRecord';
-import RecordsList from './RecordsList';
-import FilterBar from './FilterBar';
+import SaveRecord from './components/SaveRecord';
+import RecordsList from './components/list/RecordsList';
+import FilterBar from './components/FilterBar';
 
 function RecordsPage() {
   const dispatch = useAppDispatch();
