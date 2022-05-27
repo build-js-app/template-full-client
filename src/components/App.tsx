@@ -1,4 +1,3 @@
-import React from 'react';
 import {Routes, Route} from 'react-router-dom';
 import {isEmpty} from 'lodash';
 import styled from 'styled-components';
@@ -32,7 +31,7 @@ interface Props {
 function App(props: Props) {
   const dispatch = useAppDispatch();
 
-  const asyncAction = useAppSelector(state => state.common.asyncAction);
+  const asyncAction = useAppSelector(state => state.common.asyncActions);
   const confirmAction = useAppSelector(state => state.common.confirmAction);
 
   function cancelAction() {
@@ -58,7 +57,7 @@ function App(props: Props) {
   }
 
   function render() {
-    const showOverlay = asyncAction?.showOverlay ? true : false;
+    const showOverlay = isEmpty(asyncAction) ? false : true;
 
     return (
       <ErrorBoundary>

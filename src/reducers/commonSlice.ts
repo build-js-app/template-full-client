@@ -6,19 +6,19 @@ interface ConfirmAction {
   action: () => void;
 }
 
-interface AsyncAction {
-  showOverlay?: boolean;
+interface AsyncActions {
+  [key: string]: boolean;
 }
 
 // Define a type for the slice state
 interface CommonState {
-  asyncAction?: AsyncAction;
+  asyncActions: AsyncActions;
   confirmAction?: ConfirmAction;
 }
 
 // Define the initial state using that type
 const initialState: CommonState = {
-  asyncAction: undefined,
+  asyncActions: {},
   confirmAction: undefined
 };
 
@@ -28,11 +28,11 @@ export const commonSlice = createSlice({
   initialState,
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
-    asyncActionStart: (state, action: PayloadAction<boolean>) => {
-      state.asyncAction = {showOverlay: action.payload};
+    asyncActionStart: (state, action: PayloadAction<string>) => {
+      state.asyncActions[action.payload] = true;
     },
-    asyncActionEnd: state => {
-      state.asyncAction = undefined;
+    asyncActionEnd: (state, action: PayloadAction<string>) => {
+      delete state.asyncActions[action.payload];
     },
     confirmAction: (state, action: PayloadAction<ConfirmAction>) => {
       state.confirmAction = action.payload;

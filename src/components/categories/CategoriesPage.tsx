@@ -20,8 +20,14 @@ function CategoriesPage() {
   const [categoryToEdit, setCategoryToEdit] = useState({});
 
   useEffect(() => {
-    if (isEmpty(categories)) dispatch(categoryActions.loadCategories());
-  });
+    initData();
+  }, []);
+
+  async function initData() {
+    if (!isEmpty(categories)) return;
+
+    await dispatch(categoryActions.loadCategories());
+  }
 
   function addCategory() {
     setCategoryToEdit({title: '', description: ''});
