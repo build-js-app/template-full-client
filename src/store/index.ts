@@ -1,5 +1,7 @@
 import {configureStore, ThunkAction, Action} from '@reduxjs/toolkit';
 
+import {categoryApi} from 'services/categoryService';
+
 import categoryReducer from 'reducers/categorySlice';
 import commonReducer from 'reducers/commonSlice';
 import recordReducer from 'reducers/recordSlice';
@@ -10,8 +12,10 @@ export const store = configureStore({
     user: userReducer,
     record: recordReducer,
     category: categoryReducer,
-    common: commonReducer
-  }
+    common: commonReducer,
+    [categoryApi.reducerPath]: categoryApi.reducer
+  },
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(categoryApi.middleware)
 });
 
 export type AppDispatch = typeof store.dispatch;

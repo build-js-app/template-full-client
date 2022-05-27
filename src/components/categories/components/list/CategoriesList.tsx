@@ -5,7 +5,7 @@ import AppIcon from 'components/common/AppIcon';
 import * as styled from './CategoriesList.styled';
 
 interface Props {
-  categories: Category[];
+  categories?: Category[];
   editCategoryAction: (category: Category) => void;
   deleteCategoryAction: (categoryId: string) => void;
 }
@@ -77,7 +77,7 @@ function CategoriesList({categories, editCategoryAction, deleteCategoryAction}: 
             <Col sm={1} className="d-none d-md-block" />
           </Row>
 
-          {categories.map(category => renderCategory(category))}
+          {categories?.map(category => renderCategory(category))}
         </Col>
       </styled.list>
     );

@@ -1,10 +1,11 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import {Container, Row, Col, Button} from 'components/bootstrap';
 import {isEmpty} from 'lodash';
 
 import categoryActions from 'actions/categoryActions';
-import {useAppSelector, useAppDispatch} from 'hooks';
+import {useAppDispatch} from 'hooks';
 import {confirmAction} from 'reducers/commonSlice';
+import {useGetCategoriesQuery} from 'services/categoryService';
 
 import uiHelper from 'helpers/uiHelper';
 
@@ -13,15 +14,11 @@ import CategoriesList from './components/list/CategoriesList';
 import SaveCategory from './components/SaveCategory';
 
 function CategoriesPage() {
-  const categories = useAppSelector(state => state.category.list);
+  const {data: categories, error, isLoading} = useGetCategoriesQuery('');
 
   const dispatch = useAppDispatch();
 
   const [categoryToEdit, setCategoryToEdit] = useState({});
-
-  useEffect(() => {
-    if (isEmpty(categories)) dispatch(categoryActions.loadCategories());
-  });
 
   function addCategory() {
     setCategoryToEdit({title: '', description: ''});
