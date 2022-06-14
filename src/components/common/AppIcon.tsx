@@ -1,31 +1,35 @@
-import {FontAwesomeIcon as FaIcon} from '@fortawesome/react-fontawesome';
+type IconName = 'plus' | 'delete' | 'edit' | 'sign-out' | 'sign-in';
 
-//reduce bundle size by importing required icons only
-import {faPlus, faTrashAlt, faPencilAlt, faSignInAlt, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
-import {faQuestionCircle} from '@fortawesome/free-regular-svg-icons';
-
-const unknownIcon = faQuestionCircle;
-
-const map = {
-  plus: faPlus,
-  delete: faTrashAlt,
-  edit: faPencilAlt,
-  'sign-out': faSignOutAlt,
-  'sign-in': faSignInAlt
+const map: Record<IconName, string> = {
+  plus: 'bi-plus',
+  delete: 'bi-trash3-fill',
+  edit: 'bi-pencil-fill',
+  'sign-out': 'bi-box-arrow-right',
+  'sign-in': 'bi-box-arrow-in-right'
 };
 
 interface Props {
-  icon: string;
+  icon: IconName;
+  fontSize?: string;
+  color?: string;
 }
 
-function AppIcon(props: Props) {
-  let icon = unknownIcon;
+function AppIcon({icon, fontSize, color}: Props) {
+  let iconName: string = '';
 
-  if (map[props.icon]) {
-    icon = map[props.icon];
+  if (map[icon]) {
+    iconName = map[icon];
   }
 
-  return <FaIcon {...props} icon={icon} />;
+  const style = {};
+  if (fontSize) {
+    style['fontSize'] = fontSize;
+  }
+  if (color) {
+    style['color'] = color;
+  }
+
+  return <i className={`bi ${iconName}`} style={style} />;
 }
 
 export default AppIcon;

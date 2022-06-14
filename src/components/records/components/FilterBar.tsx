@@ -36,7 +36,7 @@ function FilterBar({sortBy, addRecordAction, onSortAction}: Props) {
 
       <Col xs={4} className="text-end">
         <Button variant="success" onClick={addRecordAction}>
-          <AppIcon icon="plus" />
+          <AppIcon icon="plus" fontSize="1.3rem" />
         </Button>
       </Col>
     </Row>

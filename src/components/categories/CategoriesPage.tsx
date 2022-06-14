@@ -90,7 +90,7 @@ function CategoriesPage() {
             <Row>
               <Col sm={12} className="text-end">
                 <Button variant="success" onClick={addCategory}>
-                  <AppIcon icon="plus" />
+                  <AppIcon icon="plus" fontSize="1.3rem" />
                 </Button>
               </Col>
             </Row>
