@@ -21,7 +21,9 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "types": [
-      "node"
+      "node",
+      "@types/jest",
+      "@testing-library/jest-dom"
     ],
     "typeRoots": [
       "./typings/typings.d.ts",
