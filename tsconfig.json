@@ -25,14 +25,9 @@
       "@types/jest",
       "@testing-library/jest-dom"
     ],
-    "typeRoots": [
-      "./typings/typings.d.ts",
-      "../node_modules/@types"
-    ],
     "noFallthroughCasesInSwitch": true
   },
   "include": [
-    "src",
-    "./typings/typings.d.ts"
+    "src"
   ]
 }
