@@ -29,16 +29,18 @@ function loginUser(user) {
   return helper.dispatchAsyncAction(async () => {
     const response = await authService.login(user);
 
-    if (response && response.token) {
+    if (response?.token) {
       authService.saveToken(response.token);
     }
+
+    return response?.token ? true : false;
   });
 }
 
 function logOut() {
   return helper.dispatchAsyncAction(async dispatch => {
     dispatch(loadCurrentUser(undefined));
-    authService.saveToken(null);
+    authService.saveToken(undefined);
   });
 }
 
@@ -46,7 +48,7 @@ function forgotPassword(email: string) {
   return helper.dispatchAsyncAction(async () => {
     const response = await authService.passwordForgot(email);
 
-    if (response && response.message) uiHelper.showMessage(response.message);
+    if (response?.message) uiHelper.showMessage(response.message);
   });
 }
 

@@ -13,35 +13,40 @@ export default {
   saveToken
 };
 
-function signUp(user) {
-  return httpHelper.post('/api/sign-up', user);
+async function signUp(user): Promise<AuthResponse> {
+  return await httpHelper.post('/api/sign-up', user);
 }
 
-function login(user) {
-  return httpHelper.post('/api/login', user);
+async function login(user): Promise<LoginResponse> {
+  return await httpHelper.post('/api/login', user);
 }
 
-function activateAccount(token: string) {
-  return httpHelper.get(`/api/activate/${token}`, {});
+async function activateAccount(token: string): Promise<ActivationResponse> {
+  return await httpHelper.get(`/api/activate/${token}`, {});
 }
 
-function passwordForgot(email: string) {
-  return httpHelper.post('/api/password-forgot', {email});
+async function passwordForgot(email: string): Promise<AuthResponse> {
+  return await httpHelper.post('/api/password-forgot', {email});
 }
 
-function resetPasswordTokenCheck(token: string) {
-  return httpHelper.get(`/api/password-reset/${token}`, {});
+async function resetPasswordTokenCheck(token: string): Promise<CheckResetTokenResponse> {
+  return await httpHelper.get(`/api/password-reset/${token}`, {});
 }
 
-function resetPassword(user) {
-  return httpHelper.post('/api/password-reset', user);
+async function resetPassword(user): Promise<AuthResponse> {
+  return await httpHelper.post('/api/password-reset', user);
 }
 
-function getToken() {
+function getToken(): string | undefined {
   const token = Cookies.get('jwt_token');
   return token;
 }
 
-function saveToken(jwt) {
+function saveToken(jwt?: string) {
+  if (!jwt) {
+    Cookies.remove('jwt_token');
+    return;
+  }
+
   Cookies.set('jwt_token', jwt);
 }

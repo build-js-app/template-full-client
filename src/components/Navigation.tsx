@@ -34,7 +34,9 @@ function Navigation() {
 
     return (
       <Navbar bg="light" variant="light" expand="md">
-        <Navbar.Brand className="ms-5">Expense Manager</Navbar.Brand>
+        <Navbar.Brand className="ms-5" href="/">
+          Expense Manager
+        </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="ms-5">
           <Nav className="me-auto">

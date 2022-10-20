@@ -68,8 +68,8 @@ async function processRequest(axiosRequest) {
     }
 
     throw new Error(`Invalid HTTP response status ${status}`);
-  } catch (err) {
-    uiHelper.showError(JSON.stringify(err));
+  } catch (err: any) {
+    uiHelper.showError(err?.message);
     throw err;
   }
 }

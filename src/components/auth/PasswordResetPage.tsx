@@ -28,9 +28,11 @@ function PasswordResetPage() {
   }, []);
 
   async function onCheckResetToken() {
-    const data: any = await dispatch(userActions.checkResetToken(token));
+    const response: CheckResetTokenResponse = await dispatch(userActions.checkResetToken(token));
 
-    if (data) setUserData({email: data.email, token: data.token, password: '', confirmPassword: ''});
+    if (response?.email && response?.token) {
+      setUserData({email: response.email, token: response.token, password: '', confirmPassword: ''});
+    }
   }
 
   function onChange(field: string, value) {
@@ -74,9 +76,9 @@ function PasswordResetPage() {
   async function onResetPassword() {
     if (!resetFormIsValid()) return;
 
-    const response: any = await dispatch(userActions.resetPassword(userData));
+    const response: AuthResponse = await dispatch(userActions.resetPassword(userData));
 
-    if (response && response.message) {
+    if (response?.message) {
       uiHelper.showMessage(response.message);
 
       navigate('/login');

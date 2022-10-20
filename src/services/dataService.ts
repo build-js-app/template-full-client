@@ -10,42 +10,42 @@ export default {
   saveRecord
 };
 
-function getCurrentUser() {
-  return httpHelper.get(`/api/current-user`, {});
+async function getCurrentUser(): Promise<User> {
+  return await httpHelper.get('/api/current-user', {});
 }
 
-function getCategories() {
-  return httpHelper.get('/api/categories', {});
+async function getCategories(): Promise<Category[]> {
+  return await httpHelper.get('/api/categories', {});
 }
 
-function deleteCategory(id: number) {
-  return httpHelper.delete(`/api/category/${id}`);
+async function deleteCategory(id: number): Promise<{}> {
+  return await httpHelper.delete(`/api/category/${id}`);
 }
 
-function saveCategory(category) {
+async function saveCategory(category: Category): Promise<Category> {
   const data = {
     category
   };
 
-  return httpHelper.post('/api/category', data);
+  return await httpHelper.post('/api/category', data);
 }
 
-function getRecords(sortBy: string) {
+async function getRecords(sortBy: string): Promise<RecordItem[]> {
   const data = {
     sortBy
   };
 
-  return httpHelper.get('/api/records', data);
+  return await httpHelper.get('/api/records', data);
 }
 
-function deleteRecord(id: number) {
-  return httpHelper.delete(`/api/record/${id}`);
+async function deleteRecord(id: number): Promise<{}> {
+  return await httpHelper.delete(`/api/record/${id}`);
 }
 
-function saveRecord(record) {
+async function saveRecord(record): Promise<RecordItem> {
   const data = {
     record
   };
 
-  return httpHelper.post('/api/record', data);
+  return await httpHelper.post('/api/record', data);
 }

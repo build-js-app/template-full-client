@@ -72,9 +72,9 @@ function SignUpPage() {
   async function onSignUp() {
     if (!signUpFormIsValid()) return;
 
-    const response: any = await dispatch(userActions.signUp(user));
+    const response: AuthResponse = await dispatch(userActions.signUp(user));
 
-    if (response && response.message) {
+    if (response?.message) {
       uiHelper.showMessage(response.message);
 
       navigate('/login');

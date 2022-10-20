@@ -60,7 +60,7 @@ function RecordsPage() {
   async function onSaveRecord() {
     const completed = await dispatch(recordActions.saveRecord(recordToEdit));
 
-    if (completed !== undefined) {
+    if (completed) {
       await onLoadRecords();
       uiHelper.showMessage(`Record was successfully saved`);
     }
