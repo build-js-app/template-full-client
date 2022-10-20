@@ -30,14 +30,14 @@ label {
 }
 
 .list-action {
-  i.bi {
+  svg {
     display: none;
   }
 }
 
 @media screen and (max-width: 767px) {
   .list-action {
-    i.bi {
+    svg {
       display: inherit;
       margin: 0 7px;
     }

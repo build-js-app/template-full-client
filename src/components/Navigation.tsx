@@ -50,7 +50,7 @@ function Navigation() {
             </span>
 
             <Nav.Link href="#" onClick={onLogOut}>
-              LogOut <AppIcon icon="sign-out" color="black" />
+              LogOut <AppIcon icon="sign-out" />
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
