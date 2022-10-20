@@ -1,15 +1,15 @@
 import React from 'react';
 import {createRoot} from 'react-dom/client';
-import {BrowserRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
+import {BrowserRouter} from 'react-router-dom';
+import {routes} from 'routes';
+import {store} from 'store';
+
+import App from 'components/App';
 
 import 'bootstrap/dist/css/bootstrap.css';
-import 'toastr/build/toastr.css';
 import 'flatpickr/dist/flatpickr.min.css';
-
-import {routes} from './routes';
-import App from './components/App';
-import {store} from 'store';
+import 'toastr/build/toastr.css';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);

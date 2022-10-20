@@ -1,5 +1,6 @@
-import {asyncActionStart, asyncActionEnd} from 'reducers/commonSlice';
 import {AppDispatch} from 'store';
+
+import {asyncActionEnd, asyncActionStart} from 'reducers/commonSlice';
 
 import utils from 'helpers/utils';
 

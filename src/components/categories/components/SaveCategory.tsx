@@ -1,10 +1,11 @@
-import {useState, useEffect} from 'react';
-import {Modal, Button} from 'components/bootstrap';
+import {useEffect, useState} from 'react';
+
+import {Button, Modal} from 'components/bootstrap';
 
 import validationHelper from 'helpers/validationHelper';
 
-import TextInput from 'components/common/TextInput';
 import TextAreaInput from 'components/common/TextAreaInput';
+import TextInput from 'components/common/TextInput';
 
 interface Props {
   category: any;

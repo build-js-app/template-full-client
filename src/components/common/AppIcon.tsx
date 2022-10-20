@@ -1,8 +1,7 @@
-import {FontAwesomeIcon as FaIcon} from '@fortawesome/react-fontawesome';
-
-//reduce bundle size by importing required icons only
-import {faPlus, faTrashAlt, faPencilAlt, faSignInAlt, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 import {faQuestionCircle} from '@fortawesome/free-regular-svg-icons';
+//reduce bundle size by importing required icons only
+import {faPencilAlt, faPlus, faSignInAlt, faSignOutAlt, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon as FaIcon} from '@fortawesome/react-fontawesome';
 
 const unknownIcon = faQuestionCircle;
 

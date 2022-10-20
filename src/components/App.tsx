@@ -1,12 +1,14 @@
-import {Routes, Route} from 'react-router-dom';
 import {isEmpty} from 'lodash';
+import {Route, Routes} from 'react-router-dom';
 import styled from 'styled-components';
 
-import {useAppSelector, useAppDispatch} from 'hooks';
+import {useAppDispatch, useAppSelector} from 'hooks';
+
 import {confirmActionCancel} from 'reducers/commonSlice';
 
 import AppPage from 'components/common/AppPage';
 import Confirm from 'components/common/Confirm';
+
 import ErrorBoundary from 'components/error/ErrorBoundary';
 
 import 'styles/App.scss';

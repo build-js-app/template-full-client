@@ -1,8 +1,10 @@
-import {useState, useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {Link, useParams} from 'react-router-dom';
-import {Container, Row, Col} from 'components/bootstrap';
+
+import {Col, Container, Row} from 'components/bootstrap';
 
 import userActions from 'actions/userActions';
+
 import {useAppDispatch} from 'hooks';
 
 import * as styled from './ActivationPage.styled';
@@ -40,7 +42,8 @@ function ActivationPage() {
               className="alert"
               isSuccess={status === 'success'}
               isWarning={status === 'warning'}
-              isError={status === 'error'}>
+              isError={status === 'error'}
+            >
               {activationData.message}
             </styled.alert>
           )}

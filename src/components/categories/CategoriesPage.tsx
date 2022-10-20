@@ -1,16 +1,20 @@
-import {useState, useEffect} from 'react';
-import {Container, Row, Col, Button} from 'components/bootstrap';
 import {isEmpty} from 'lodash';
+import {useEffect, useState} from 'react';
+
+import {Button, Col, Container, Row} from 'components/bootstrap';
 
 import categoryActions from 'actions/categoryActions';
-import {useAppSelector, useAppDispatch} from 'hooks';
+
+import {useAppDispatch, useAppSelector} from 'hooks';
+
 import {confirmAction} from 'reducers/commonSlice';
 
 import uiHelper from 'helpers/uiHelper';
 
 import AppIcon from 'components/common/AppIcon';
-import CategoriesList from './components/list/CategoriesList';
+
 import SaveCategory from './components/SaveCategory';
+import CategoriesList from './components/list/CategoriesList';
 
 function CategoriesPage() {
   const categories = useAppSelector(state => state.category.list);

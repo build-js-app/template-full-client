@@ -1,17 +1,20 @@
-import {useState, useEffect} from 'react';
-import {Container, Row, Col} from 'components/bootstrap';
 import {isEmpty} from 'lodash';
+import {useEffect, useState} from 'react';
 
-import recordActions from 'actions/recordActions';
+import {Col, Container, Row} from 'components/bootstrap';
+
 import categoryActions from 'actions/categoryActions';
-import {useAppSelector, useAppDispatch} from 'hooks';
+import recordActions from 'actions/recordActions';
+
+import {useAppDispatch, useAppSelector} from 'hooks';
+
 import {confirmAction} from 'reducers/commonSlice';
 
 import uiHelper from 'helpers/uiHelper';
 
+import FilterBar from './components/FilterBar';
 import SaveRecord from './components/SaveRecord';
 import RecordsList from './components/list/RecordsList';
-import FilterBar from './components/FilterBar';
 
 function RecordsPage() {
   const dispatch = useAppDispatch();

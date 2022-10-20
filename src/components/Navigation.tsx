@@ -1,8 +1,10 @@
-import {Nav, Navbar} from './bootstrap';
-import {Link, useNavigate, useLocation} from 'react-router-dom';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
+
+import {Nav, Navbar} from 'components/bootstrap';
 
 import userActions from 'actions/userActions';
-import {useAppSelector, useAppDispatch} from 'hooks';
+
+import {useAppDispatch, useAppSelector} from 'hooks';
 
 import AppIcon from 'components/common/AppIcon';
 

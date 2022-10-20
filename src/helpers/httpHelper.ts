@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {endsWith} from 'lodash';
 
-import uiHelper from './uiHelper';
+import uiHelper from 'helpers/uiHelper';
 
 import authService from 'services/authService';
 

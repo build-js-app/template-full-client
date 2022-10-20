@@ -1,4 +1,4 @@
-import {Modal, Button} from 'components/bootstrap';
+import {Button, Modal} from 'components/bootstrap';
 
 interface Props {
   title?: string;

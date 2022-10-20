@@ -1,10 +1,11 @@
 import {loadCurrentUser} from 'reducers/userSlice';
 
-import helper from './actionHelper';
 import uiHelper from 'helpers/uiHelper';
 
-import dataService from 'services/dataService';
 import authService from 'services/authService';
+import dataService from 'services/dataService';
+
+import helper from './actionHelper';
 
 export default {
   getCurrentUser,

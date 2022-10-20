@@ -1,4 +1,4 @@
-import {configureStore, ThunkAction, Action} from '@reduxjs/toolkit';
+import {Action, ThunkAction, configureStore} from '@reduxjs/toolkit';
 
 import categoryReducer from 'reducers/categorySlice';
 import commonReducer from 'reducers/commonSlice';

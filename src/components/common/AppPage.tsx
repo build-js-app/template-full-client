@@ -1,9 +1,10 @@
-import {useEffect} from 'react';
 import {isEmpty} from 'lodash';
+import {useEffect} from 'react';
 import Helmet from 'react-helmet';
 
 import userActions from 'actions/userActions';
-import {useAppSelector, useAppDispatch} from 'hooks';
+
+import {useAppDispatch, useAppSelector} from 'hooks';
 
 import Navigation from 'components/Navigation';
 

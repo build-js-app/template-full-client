@@ -1,4 +1,4 @@
-import {Row, Col, Button, Dropdown} from 'components/bootstrap';
+import {Button, Col, Dropdown, Row} from 'components/bootstrap';
 
 import SORT_OPTIONS from 'constants/sortOptions';
 

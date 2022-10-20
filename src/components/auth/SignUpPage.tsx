@@ -1,12 +1,14 @@
 import {useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
-import {Container, Row, Col, Button} from 'components/bootstrap';
+
+import {Button, Col, Container, Row} from 'components/bootstrap';
 
 import userActions from 'actions/userActions';
+
 import {useAppDispatch} from 'hooks';
 
-import validationHelper from 'helpers/validationHelper';
 import uiHelper from 'helpers/uiHelper';
+import validationHelper from 'helpers/validationHelper';
 
 import AppIcon from 'components/common/AppIcon';
 import TextInput from 'components/common/TextInput';

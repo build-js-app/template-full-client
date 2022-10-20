@@ -7,5 +7,23 @@
   "semi": true,
   "trailingComma": "none",
   "arrowParens": "avoid",
-  "endOfLine": "auto"
+  "endOfLine": "auto",
+  "importOrder": [
+    "components/bootstrap",
+    "^actions/(.*)$",
+    "hooks",
+    "^reducers/(.*)$",
+    "^constants/(.*)$",
+    "config",
+    "^helpers/(.*)$",
+    "^services/(.*)$",
+    "^components/common(.*)",
+    "^components/(.*)$",
+    "^(.*).styled$",
+    "styles/shared",
+    "^(.*).css$",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
 }

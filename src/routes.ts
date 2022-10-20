@@ -1,11 +1,11 @@
-import RecordsPage from './components/records/RecordsPage';
-import CategoriesPage from './components/categories/CategoriesPage';
-import LoginPage from './components/auth/LoginPage';
-import SignUpPage from './components/auth/SignUpPage';
-import PasswordForgotPage from './components/auth/PasswordForgotPage';
-import PasswordResetPage from './components/auth/PasswordResetPage';
-import ActivationPage from './components/auth/activation/ActivationPage';
-import NotFountPage from './components/NotFoundPage';
+import NotFountPage from 'components/NotFoundPage';
+import LoginPage from 'components/auth/LoginPage';
+import PasswordForgotPage from 'components/auth/PasswordForgotPage';
+import PasswordResetPage from 'components/auth/PasswordResetPage';
+import SignUpPage from 'components/auth/SignUpPage';
+import ActivationPage from 'components/auth/activation/ActivationPage';
+import CategoriesPage from 'components/categories/CategoriesPage';
+import RecordsPage from 'components/records/RecordsPage';
 
 export const routes = [
   {

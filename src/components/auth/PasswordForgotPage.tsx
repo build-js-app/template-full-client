@@ -1,8 +1,10 @@
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
-import {Container, Row, Col, Button} from 'components/bootstrap';
+
+import {Button, Col, Container, Row} from 'components/bootstrap';
 
 import userActions from 'actions/userActions';
+
 import {useAppDispatch} from 'hooks';
 
 import validationHelper from 'helpers/validationHelper';

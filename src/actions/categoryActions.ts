@@ -1,11 +1,12 @@
 import {
-  loadCategories as getCategories,
-  updateCategory,
   createCategory,
-  deleteCategory as removeCategory
+  loadCategories as getCategories,
+  deleteCategory as removeCategory,
+  updateCategory
 } from 'reducers/categorySlice';
 
 import dataService from 'services/dataService';
+
 import helper from './actionHelper';
 
 export default {

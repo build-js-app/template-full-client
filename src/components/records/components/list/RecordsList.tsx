@@ -1,4 +1,4 @@
-import {Row, Col, Form, Button} from 'components/bootstrap';
+import {Button, Col, Form, Row} from 'components/bootstrap';
 
 import dateHelper from 'helpers/dateHelper';
 
