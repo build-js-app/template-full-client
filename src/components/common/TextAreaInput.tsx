@@ -18,7 +18,7 @@ function TextAreaInput({name, label, onChange, placeholder, value, error, rows}:
   if (!rows) rows = 3;
 
   return (
-    <Form.Group>
+    <Form.Group className="mb-4">
       <Form.Label htmlFor={name}>{label}</Form.Label>
 
       <textarea

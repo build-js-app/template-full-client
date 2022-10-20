@@ -76,8 +76,8 @@ function SaveRecord({record, categories, save, close, onChange, visible}: Props)
       <Modal show={visible} backdrop="static" onHide={close}>
         <Modal.Header closeButton>{title}</Modal.Header>
         <Modal.Body>
-          <Form.Group>
-            <Form.Label>Date:</Form.Label>
+          <Form.Group className="mb-4">
+            <Form.Label>Date</Form.Label>
 
             <div>
               <Flatpickr value={record.date} options={dateOptions} onChange={onDateChange} />
@@ -97,7 +97,7 @@ function SaveRecord({record, categories, save, close, onChange, visible}: Props)
 
           <TextAreaInput
             name="note"
-            label="Note:"
+            label="Note"
             value={record.note}
             onChange={onChange}
             placeholder="Note"

@@ -14,7 +14,7 @@ function NumberInput({name, label, onChange, value, error}: Props) {
   }
 
   return (
-    <Form.Group>
+    <Form.Group className="mb-4">
       <Form.Label htmlFor={name}>{label}</Form.Label>
 
       <input

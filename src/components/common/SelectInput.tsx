@@ -15,7 +15,7 @@ function SelectInput({name, label, value, onChange, options, error}: Props) {
   }
 
   return (
-    <Form.Group>
+    <Form.Group className="mb-4">
       <Form.Label>{label}</Form.Label>
 
       <Form.Control as="select" id={name} name={name} value={value} onChange={inputOnChange}>
