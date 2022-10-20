@@ -18,8 +18,8 @@ function loadRecords(sortBy: string) {
 
 function saveRecord(record) {
   return helper.dispatchAsyncAction(async () => {
-    await dataService.saveRecord(record);
-    return true;
+    const response: RecordItem = await dataService.saveRecord(record);
+    return response?.id ? true : false;
   });
 }
 

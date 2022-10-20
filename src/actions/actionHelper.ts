@@ -28,6 +28,8 @@ function dispatchAsyncAction(action, showOverlay = true) {
     } catch (error) {
       if (!showOverlay) dispatch(asyncActionEnd(actionId));
       if (throwError) throw error;
+    } finally {
+      dispatch(asyncActionEnd(actionId));
     }
   };
 }

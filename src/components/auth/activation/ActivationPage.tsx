@@ -12,7 +12,7 @@ function ActivationPage() {
 
   const {token} = useParams();
 
-  const [activationData, setActivationData] = useState({message: '', status: ''});
+  const [activationData, setActivationData] = useState<ActivationResponse>({message: '', status: ''});
 
   useEffect(() => {
     activateAccount();
@@ -20,7 +20,7 @@ function ActivationPage() {
   }, []);
 
   async function activateAccount() {
-    const data: any = await dispatch(userActions.activateUserAccount(token));
+    const data: ActivationResponse = await dispatch(userActions.activateUserAccount(token));
 
     if (data) setActivationData(data);
   }

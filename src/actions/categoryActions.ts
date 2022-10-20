@@ -23,7 +23,7 @@ function loadCategories() {
 
 function saveCategory(category) {
   return helper.dispatchAsyncAction(async dispatch => {
-    const categoryResponse = await dataService.saveCategory(category);
+    const categoryResponse: Category = await dataService.saveCategory(category);
 
     if (category.id) {
       dispatch(updateCategory(categoryResponse));

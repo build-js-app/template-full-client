@@ -59,11 +59,13 @@ function LoginPage() {
 
     if (!loginFormIsValid()) return;
 
-    await dispatch(userActions.loginUser(user));
+    const isSuccess: boolean = await dispatch(userActions.loginUser(user));
 
-    await dispatch(userActions.getCurrentUser());
+    if (isSuccess) {
+      await dispatch(userActions.getCurrentUser());
 
-    if (!isEmpty(user)) navigate('/records');
+      if (!isEmpty(user)) navigate('/records');
+    }
   }
 
   return (
