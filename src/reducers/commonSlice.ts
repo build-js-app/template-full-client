@@ -1,5 +1,7 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 
+import {loadCategories} from './categorySlice';
+
 interface ConfirmAction {
   title: string;
   text?: string;
@@ -39,6 +41,17 @@ export const commonSlice = createSlice({
     },
     confirmActionCancel: state => {
       state.confirmAction = undefined;
+    }
+  },
+  extraReducers: {
+    [loadCategories.fulfilled.type]: state => {
+      state.asyncActions = {};
+    },
+    [loadCategories.pending.type]: state => {
+      state.asyncActions = {showOverlay: true};
+    },
+    [loadCategories.rejected.type]: state => {
+      state.asyncActions = {};
     }
   }
 });

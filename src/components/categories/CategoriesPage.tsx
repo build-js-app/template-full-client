@@ -7,6 +7,7 @@ import categoryActions from 'actions/categoryActions';
 
 import {useAppDispatch, useAppSelector} from 'hooks';
 
+import {loadCategories} from 'reducers/categorySlice';
 import {confirmAction} from 'reducers/commonSlice';
 
 import uiHelper from 'helpers/uiHelper';
@@ -30,7 +31,7 @@ function CategoriesPage() {
   async function initData() {
     if (!isEmpty(categories)) return;
 
-    await dispatch(categoryActions.loadCategories());
+    await dispatch(loadCategories());
   }
 
   function addCategory() {

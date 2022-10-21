@@ -3,11 +3,11 @@ import {useEffect, useState} from 'react';
 
 import {Col, Container, Row} from 'components/bootstrap';
 
-import categoryActions from 'actions/categoryActions';
 import recordActions from 'actions/recordActions';
 
 import {useAppDispatch, useAppSelector} from 'hooks';
 
+import {loadCategories} from 'reducers/categorySlice';
 import {confirmAction} from 'reducers/commonSlice';
 
 import uiHelper from 'helpers/uiHelper';
@@ -26,7 +26,7 @@ function RecordsPage() {
   const [recordToEdit, setRecordToEdit] = useState({});
 
   useEffect(() => {
-    dispatch(categoryActions.loadCategories());
+    dispatch(loadCategories());
     onLoadRecords();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
