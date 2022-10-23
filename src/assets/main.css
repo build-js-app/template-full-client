@@ -1,0 +1,52 @@
+@import './base.css';
+
+#app {
+  height: 100%;
+}
+
+.input.is-danger,
+.textarea.is-danger,
+.select.is-danger {
+  border-color: #ff3860 !important;
+}
+
+.page-container {
+  margin-top: 25px;
+}
+
+.help {
+  display: block;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.help.is-danger {
+  color: #ff3860;
+}
+
+.overlay-style {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: #000;
+  opacity: 0.3;
+  filter: alpha(opacity=30);
+  z-index: 999;
+}
+
+.item-row {
+  margin-bottom: 40px;
+}
+
+@media screen and (min-width: 768px) {
+  .page-container {
+    margin-top: 100px;
+  }
+
+  .item-row {
+    margin-bottom: 25px;
+  }
+
+}

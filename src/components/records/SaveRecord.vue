@@ -1,44 +1,157 @@
+<script lang="ts">
+import {defineComponent} from 'vue';
+import {Form as ValidateForm, Field, ErrorMessage} from 'vee-validate';
+
+import {useCategoryStore} from '@/stores/category';
+
+import ModalComponent from '@/components/common/ModalComponent.vue';
+
+export default defineComponent({
+  components: {ModalComponent, ValidateForm, Field, ErrorMessage},
+  setup() {
+    const categoryStore = useCategoryStore();
+
+    return {categoryStore};
+  },
+  props: {
+    recordProps: {
+      type: Object,
+      required: true
+    },
+    showModal: {
+      type: Boolean,
+      required: true
+    },
+    title: {
+      type: String,
+      required: true
+    },
+    onClose: {
+      type: Function,
+      required: true
+    },
+    onSave: {
+      type: Function,
+      required: true
+    }
+  },
+  data() {
+    return {
+      record: this.recordProps
+    };
+  },
+  methods: {
+    onSaveClick() {
+      if (!this.record.cost) {
+        const costElement = document.getElementById('record-cost');
+        if (costElement) {
+          costElement.focus();
+          costElement.blur();
+        }
+      }
+
+      if (!this.record.categoryId) {
+        const categoryElement = document.getElementById('record-category');
+        if (categoryElement) {
+          categoryElement.focus();
+          categoryElement.blur();
+        }
+      }
+
+      if (!this.record.note) {
+        const noteElement = document.getElementById('record-note');
+        if (noteElement) {
+          noteElement.focus();
+          noteElement.blur();
+        }
+      }
+
+      if (!this.record.cost || !this.record.categoryId || !this.record.note) return;
+
+      if (this.onSave) return this.onSave();
+    },
+    onCloseClick() {
+      if (this.onClose) this.onClose();
+    }
+  }
+});
+</script>
+
 <template>
-  <modal :visible="showModal" :title="title" :closeTitle="'Cancel'" :onClose="onCloseClick" :onSave="onSaveClick">
-    <div slot="body">
-      <div class="form-group">
-        <label>Date</label>
+  <modal-component
+    :visible="showModal"
+    :title="title"
+    :closeTitle="'Cancel'"
+    :onClose="onCloseClick"
+    :onSave="onSaveClick"
+  >
+    <template #body>
+      <ValidateForm>
+        <div class="form-group d-flex flex-column">
+          <label class="form-label">Date</label>
 
-        <date-picker v-model="record.date" :options="dateOptions"></date-picker>
-      </div>
+          <el-date-picker v-model="record.date" type="date" placeholder="Pick a day" format="DD/MM/YYYY" />
+        </div>
 
-      <div class="form-group">
-        <label for="record-title">Cost</label>
+        <br />
 
-        <input type="number" class="form-control" id="record-title" placeholder="Cost" name="cost"
-               :class="{'input': true, 'is-danger': errors.has('cost') }" v-validate="'required|min_value:0.01'" v-model="record.cost" />
+        <div class="form-group">
+          <label class="form-label" for="record-cost">Cost</label>
 
-        <span v-show="errors.has('cost')" class="help is-danger">{{ errors.first('cost') }}</span>
-      </div>
+          <Field
+            type="number"
+            class="form-control"
+            id="record-cost"
+            placeholder="Cost"
+            name="cost"
+            rules="min_value:0.1"
+            v-model="record.cost"
+          />
 
-      <div class="form-group">
-        <label>Category</label>
+          <ErrorMessage name="cost" class="help is-danger" />
+        </div>
 
-        <select v-model="record.categoryId" class="form-control" name="category"
-                :class="{'select': true, 'is-danger': errors.has('category') }" v-validate="'required'">
-          <option v-for="category in categories" :key="category.id" :value="category.id">{{category.title}}</option>
-        </select>
+        <br />
 
-        <span v-show="errors.has('category')" class="help is-danger">{{ errors.first('category') }}</span>
-      </div>
+        <div class="form-group">
+          <label class="form-label" for="record-category">Category</label>
 
-      <div class="form-group">
-        <label for="record-note">Note</label>
+          <Field
+            as="select"
+            id="record-category"
+            v-model="record.categoryId"
+            class="form-control"
+            name="category"
+            placeholder="Select Category"
+            rules="required"
+          >
+            <option v-for="category in categoryStore.list" :key="category.id" :value="category.id">
+              {{ category.title }}
+            </option>
+          </Field>
 
-        <textarea class="form-control" id="record-note" placeholder="Note" rows="4" name="note"
-                  :class="{'textarea': true, 'is-danger': errors.has('note') }" v-validate="'required'"
-                  v-model="record.note">
-        </textarea>
+          <ErrorMessage name="category" class="help is-danger" />
+        </div>
 
-        <span v-show="errors.has('note')" class="help is-danger">{{ errors.first('note') }}</span>
-      </div>
-    </div>
-  </modal>
+        <br />
+
+        <div class="form-group">
+          <label class="form-label" for="record-note">Note</label>
+
+          <Field
+            as="textarea"
+            class="form-control"
+            id="record-note"
+            placeholder="Note"
+            rows="4"
+            name="note"
+            v-model="record.note"
+            rules="required"
+          />
+
+          <ErrorMessage name="note" class="help is-danger" />
+        </div>
+      </ValidateForm>
+    </template>
+  </modal-component>
 </template>
-
-<script src="./SaveRecord.vue.js"></script>

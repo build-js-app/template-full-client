@@ -1,53 +1,100 @@
+<script lang="ts">
+import {defineComponent} from 'vue';
+
+import dateHelper from '@/helpers/dateHelper';
+
+export default defineComponent({
+  props: {
+    record: {
+      type: Object,
+      required: true
+    },
+    categories: {
+      type: Array,
+      required: true
+    },
+    onEdit: {
+      type: Function,
+      required: true
+    },
+    onDelete: {
+      type: Function,
+      required: true
+    }
+  },
+  computed: {
+    dateDisplay() {
+      return dateHelper.displayDate(this.record.date);
+    },
+    category() {
+      const category: any = this.categories.find((cat: any) => {
+        return cat.id === this.record.categoryId;
+      });
+
+      return category ? category.title : '';
+    }
+  },
+  methods: {
+    edit() {
+      if (this.onEdit) this.onEdit(this.record);
+    },
+    deleteRecord() {
+      if (this.onDelete) this.onDelete(this.record.id);
+    }
+  }
+});
+</script>
+
 <template>
   <div class="row item-row">
-    <div class="col-sm-2 hidden-xs">{{dateDisplay}}</div>
+    <div class="col-sm-2 d-none d-sm-block">{{ dateDisplay }}</div>
 
-    <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+    <div class="col-xs-12 d-block d-sm-none">
       <div class="row">
         <div class="col-xs-12">
-          <label>Date:</label>
+          <label class="form-label">Date:</label>
         </div>
         <div class="col-xs-12 form-group">
-          {{dateDisplay}}
+          {{ dateDisplay }}
         </div>
       </div>
     </div>
 
-    <div class="col-sm-3 hidden-xs">{{category}}</div>
+    <div class="col-sm-3 d-none d-sm-block">{{ category }}</div>
 
-    <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+    <div class="col-xs-12 d-block d-sm-none">
       <div class="row">
         <div class="col-xs-12">
-          <label>Category:</label>
+          <label class="form-label">Category:</label>
         </div>
         <div class="col-xs-12 form-group">
-          {{category}}
+          {{ category }}
         </div>
       </div>
     </div>
 
-    <div class="col-sm-2 hidden-xs">{{record.cost}}</div>
+    <div class="col-sm-2 d-none d-sm-block">{{ record.cost }}</div>
 
-    <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+    <div class="col-xs-12 d-block d-sm-none">
       <div class="row">
         <div class="col-xs-12">
-          <label>Cost:</label>
+          <label class="form-label">Cost:</label>
         </div>
         <div class="col-xs-12 form-group">
-          {{record.cost}}
+          {{ record.cost }}
         </div>
       </div>
     </div>
 
-    <div class="col-sm-3 hidden-xs">{{record.note}}</div>
+    <div class="col-sm-3 d-none d-sm-block">{{ record.note }}</div>
 
-    <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+    <div class="col-xs-12 d-block d-sm-none">
       <div class="row">
         <div class="col-xs-12">
-          <label>Note:</label>
+          <label class="form-label">Note:</label>
         </div>
         <div class="col-xs-12 form-group">
-          {{record.note}}
+          {{ record.note }}
         </div>
       </div>
     </div>
@@ -61,5 +108,3 @@
     </div>
   </div>
 </template>
-
-<script src="./RecordRow.vue.js"></script>
